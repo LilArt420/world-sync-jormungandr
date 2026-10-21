@@ -1,0 +1,148 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 20: what comes after the story.
+//= - The Branch of the World Tree: the Separated Sanctuary again,
+//=   once a day (12588, 12590, 12591).
+//= - The Rgans' mana absorption devices in the Ancient Ice Canyon.
+//= - Torr, the Iwin artificer: enchants for Glacier and Dim Glacier
+//=   armour (rAthena's item_enchant 89-98) and Dim Glaceon Armor
+//=   Enhancers for Snake God Scales.
+//============================================================
+
+jor_twig,113,146,3	script	Branch of the World Tree#wsj	4_EP20_DEVICE_BLUE,{
+	if (wsj_ep20 < 700) {
+		mes "^4d4dffA slender white branch, humming faintly. It feels like it's listening.^000000";
+		close;
+	}
+	if (isbegin_quest(12590) == 0) {
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "^0000FFThe snake bishop sleeps in the separated sanctuary. But he dreams, and his dreams grow strong again.^000000";
+		mes "^0000FFTouch this branch and I will open the way, once a day. Go in and make him weak again.^000000";
+		setquest 12590;
+		completequest 12590;
+		next;
+	}
+	if (isbegin_quest(12591) == 1) {
+		mes "^4d4dffThe branch hums. The way into the separated sanctuary is open.^000000";
+		next;
+		if (select("Enter the Separated Sanctuary.:Not now.") == 2)
+			close3;
+		cutin "",255;
+		callfunc "F_WSJ_EnterMd", "Separated Sanctuary";
+		end;
+	}
+	if (isbegin_quest(12588) == 1 && checkquest(12588,PLAYTIME) != 2) {
+		mes "^4d4dffThe branch is quiet. The sanctuary will open again after dawn.^000000";
+		close3;
+	}
+	if (isbegin_quest(12588) == 1)
+		erasequest 12588;
+	mes "^4d4dffThe branch hums. The way into the separated sanctuary opens.^000000";
+	next;
+	if (select("Enter the Separated Sanctuary.:Not now.") == 2)
+		close3;
+	setquest 12591;
+	setquest 12588;
+	cutin "",255;
+	callfunc "F_WSJ_EnterMd", "Separated Sanctuary";
+	end;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsj_ep20 >= 700 && isbegin_quest(12591) == 0 && (isbegin_quest(12588) == 0 || checkquest(12588,PLAYTIME) == 2)" );
+	end;
+}
+
+// The Rgans' mana absorption devices. Each can be broken once a day;
+// what's left of the core is Pure Magical Ore.
+function	script	F_WSJ_Device	{
+	.@n = getarg(0);
+	if (wsj_ep20 < 100) {
+		mes "^4d4dffA strange device driven into the ice, humming softly. Better not touch what you don't understand.^000000";
+		close;
+	}
+	.@today = gettime(DT_YYYYMMDD);
+	if (wsj_dev_day != .@today) {
+		wsj_dev_day = .@today;
+		wsj_dev = 0;
+	}
+	if (wsj_dev & (1 << .@n)) {
+		mes "^4d4dffThe device is still smashed. The Rgans will be back to fix it tomorrow.^000000";
+		close;
+	}
+	mes "^4d4dffA Rgan mana absorption device, draining the canyon. Its core glows with stolen mana.^000000";
+	next;
+	if (select("Smash it.:Leave it.") == 2)
+		close;
+	progressbar "ffffff", 3;
+	specialeffect EF_LORD;
+	wsj_dev |= (1 << .@n);
+	mes "^4d4dffThe core cracks and the hum dies. The snow around it starts to sparkle again.^000000";
+	if (rand(100) < 40)
+		getitem 1001248,1;	// EP20_D_P_Ore
+	close;
+}
+
+jor_back5,71,204,0	script	Magical Object#wsj01	4_EP20_DEVICE_BLACK,{ callfunc "F_WSJ_Device", 0; end; }
+jor_back5,365,187,0	script	Magical Object#wsj02	4_EP20_DEVICE_BLUE,{ callfunc "F_WSJ_Device", 1; end; }
+jor_back5,203,256,0	script	Magical Object#wsj03	4_EP20_DEVICE_RED,{ callfunc "F_WSJ_Device", 2; end; }
+jor_back5,245,38,0	script	Magical Object#wsj04	4_EP20_DEVICE_RED,{ callfunc "F_WSJ_Device", 3; end; }
+jor_back5,94,281,0	script	Magical Object#wsj05	4_EP20_DEVICE_BLUE,{ callfunc "F_WSJ_Device", 4; end; }
+jor_back5,170,362,0	script	Magical Object#wsj06	4_EP20_DEVICE_BLACK,{ callfunc "F_WSJ_Device", 5; end; }
+jor_back5,230,349,0	script	Magical Object#wsj07	4_EP20_DEVICE_RED,{ callfunc "F_WSJ_Device", 6; end; }
+jor_back6,214,80,0	script	Magical Object#wsj08	4_EP20_DEVICE_BLUE,{ callfunc "F_WSJ_Device", 7; end; }
+jor_back6,51,47,0	script	Magical Object#wsj09	4_EP20_DEVICE_BLACK,{ callfunc "F_WSJ_Device", 8; end; }
+jor_back6,122,180,0	script	Magical Object#wsj10	4_EP20_DEVICE_RED,{ callfunc "F_WSJ_Device", 9; end; }
+jor_back6,310,304,0	script	Magical Object#wsj11	4_EP20_DEVICE_BLUE,{ callfunc "F_WSJ_Device", 10; end; }
+jor_back6,45,38,0	script	Magical Object#wsj12	4_EP20_DEVICE_RED,{ callfunc "F_WSJ_Device", 11; end; }
+jor_back6,190,201,0	script	Magical Object#wsj13	4_EP20_DEVICE_BLACK,{ callfunc "F_WSJ_Device", 12; end; }
+jor_back6,330,22,0	script	Magical Object#wsj14	4_EP20_DEVICE_BLUE,{ callfunc "F_WSJ_Device", 13; end; }
+
+// Torr, the Iwin artificer, next to Forr in the Ice Castle workshop.
+icas_in,183,65,5	script	Torr#wsj	4_EP19_IWIN,{
+	cutin "ep19_iwin09.png",2;
+	mes "[Torr]";
+	mes "Forr does weapons. I do everything you wear.";
+	mes "The snake mana you brought back from the roots soaks into Glacier gear beautifully. Want me to work some into yours?";
+	next;
+	switch (select("Enchant Glacier armour.:Enchant Dim Glacier armour.:Trade Snake God Scales.:Nothing, thanks.")) {
+	case 1:
+		switch (select("Armour or robe:Manteau or muffler:Boots or shoes:Shield:Pendant or necklace:Ring or earring:Helm")) {
+		case 1: .@e = 89; break;
+		case 2: .@e = 90; break;
+		case 3: .@e = 91; break;
+		case 4: .@e = 92; break;
+		case 5: .@e = 93; break;
+		case 6: .@e = 94; break;
+		case 7: .@e = 98; break;
+		}
+		close2;
+		cutin "",255;
+		item_enchant(.@e);
+		end;
+	case 2:
+		if (wsj_ep20 < 700) {
+			mes "[Torr]";
+			mes "Dim Glacier takes the snake god's own blessing. I can't do that until the undying bishop is dealt with.";
+			close3;
+		}
+		switch (select("Armour or robe:Manteau or muffler:Boots or shoes")) {
+		case 1: .@e = 95; break;
+		case 2: .@e = 96; break;
+		case 3: .@e = 97; break;
+		}
+		close2;
+		cutin "",255;
+		item_enchant(.@e);
+		end;
+	case 3:
+		mes "[Torr]";
+		mes "Snake God Scales! I'll give you an Enhancer for them. It turns Glacier armour into Dim Glacier, with the right crystals.";
+		close2;
+		cutin "",255;
+		callshop "WSJ_ScaleShop",1;
+		end;
+	}
+	close3;
+}
+
+-	itemshop	WSJ_ScaleShop	-1,1001251,102228:10

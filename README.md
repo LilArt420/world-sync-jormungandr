@@ -14,7 +14,11 @@ release is **Episode 20, The Undying One**, start to finish.
 - 🧊 **The Frozen Zone** and the **Nest of Small Branches**, with Kororo, the Diving Iwin and Nyar.
 - ⚔️ **Separated Sanctuary** memorial dungeon: break the undying bishop.
 
-Full dialogue, the client's own quest log (83 quests), the official steps, kill goals and
+**Episode 21, Age of Heroes**: back in time to Lunaforma and Alberta of old, the Georborg resistance, the ghost ship, the cult's temple Gimle and the last battle against the giant serpent.
+
+After the stories: daily quests for both episodes, repeatable memorial dungeons, and the traders and enchanters of the Ice Castle and Lunaforma (Glacier, Dim Glacier, Georborg and Yorskalf gear, using rAthena's official enchant and refine tables; the Wigner ticket prices are estimates).
+
+Full dialogue, the client's own quest log, the official steps, kill goals and
 rewards, with cut-in portraits. 119 of the official NPCs that World Sync Extras placed as
 placeholders on these maps now play their part.
 
@@ -40,7 +44,7 @@ Settings → Mods.
   rewards and the boss's stats follow Episode 19 and the episode's other boss where the
   official numbers aren't published.
 - Character variables are `wsj_ep20`, `wsj_ep20b` and `wsj_ep20c`.
-- Coming next: the episode's dailies and exchangers, then Episode 21 (Lunaforma, Alberta of old).
+- Character variables for Episode 21: `wsj_ep21`, `wsj_ep21b`, `wsj_rg`, plus a few for the dailies.
 
 ## 📜 License
 

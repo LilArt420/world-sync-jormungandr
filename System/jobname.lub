@@ -20,5 +20,7 @@ JobNameTable = {
 	[10592] = "4_ep21_aurelie",
 	[10593] = "4_ep21_howell_s",
 	[10594] = "4_ep21_tan_s",
+	[22369] = "EP21_MD_SAILOR",
+	[22370] = "EP21_MD_CAPTAIN",
 	[22371] = "EP21_YOR_TAN",
 }

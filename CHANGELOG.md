@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.0
+- Episode 21 gains Alberta of old, between the mercenaries and the ghost ship: Epesto Walter Megas, John's odd jobs, the port clean-up and Iana's letters (16802-16815).
+- The Unidentified Ghost Ship (memorial dungeon, 1@wtgs): board the lost 'Walter' with Captain Maristella (16816-16819); Nillem sends you back to its memory once a day afterwards (16821-16826). Reward: Antiquity of Ghost Ship.
+- Episode 21's order now follows the client's: the ghost ship comes after the temple, and Heine's tablet repair after the ghost ship.
+- Episode 20 after the story: the Separated Sanctuary again every day through the Branch of the World Tree (Antiquity Issgard (Ultimate Lasgand)); the Rgans' job search every day; the 14 mana absorption devices in the canyons can be smashed daily (Pure Magical Ore).
+- Episode 21 dailies: Tris's escape routes, Mandel's seven supply lists, Counselor Ulus and four refugees in Alberta, Libra's messages at the cult camp, Balun Wok's food runs (fishing, grass, salt), Heine's Bright Eyes, Valdaris's six mercenary missions and the twenty applicants, Lee's Yorskalf dailies and weeklies, and the last battle remembered daily. Most pay in Wigner Premium Exchange Tickets.
+- Side stories: the Roegenburg brothers (17770-17776) and the mercenaries' odd jobs (24019-24023).
+- Traders: Torr in the Ice Castle (Glacier and Dim Glacier enchants, Dim Glaceon Armor Enhancers for Snake God Scales); in Lunaforma the Wigner Company Exchanger (Georborg gear, Yorskalf items), Blacksmith Sansan (hammers, magic stones), Mage Lobelia (Georborg and Yorskalf enchants) and Popo. The enchants and refines are rAthena's official tables; the ticket prices are estimates.
+
 ## 1.1.0
 - Episode 21, Age of Heroes, from start to finish (101 quests, with an English quest log written for this mod: the client only has these in Korean):
   - A rift on Scale Island, and Nyar takes you back in time.

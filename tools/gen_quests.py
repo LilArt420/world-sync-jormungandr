@@ -32,7 +32,10 @@ QUESTS = (list(range(16691, 16705)) + list(range(17690, 17710)) + list(range(177
           # Episode 21
           + [18334, 18335, 18336, 18337, 23240, 23241, 23242, 23243] + list(range(24000, 24019))
           + list(range(23244, 23256)) + list(range(8882, 8895))
-          + list(range(17752, 17770)) + list(range(18338, 18362)) + [8914, 8915, 8916, 12647, 12656])
+          + list(range(17752, 17770)) + list(range(18338, 18362)) + [8914, 8915, 8916, 12647, 12656]
+          # after the stories: EP20 extras, EP21 Alberta/ghost ship, side stories, dailies
+          + [8852, 8853, 12588, 12590, 12591] + list(range(16802, 16827))
+          + list(range(17770, 17790)) + list(range(19184, 19204)) + [23256, 23257] + list(range(24019, 24049)))
 
 # Kill counters (the client's text names the monsters, not the numbers).
 TARGETS = {
@@ -45,6 +48,25 @@ TARGETS = {
     23109: ['      - Mob: EP20_JORGAN_WARLOCK', '        Count: 5'],
     17710: ['      - Mob: EP20_JORMUNGUARD1', '        Count: 10', '      - Mob: EP20_JORMUNGUARD2', '        Count: 10'],
     23111: ['      - Mob: EP20_JORGAN_WARLOCK', '        Count: 15'],
+    17777: ['      - Id: 1', '        Count: 300', "        MapName: North of the Raised Land", '        Location: jor_raise1'],
+    17778: ['      - Id: 1', '        Count: 300', "        MapName: South of the Raised Land", '        Location: jor_raise2'],
+    17782: ['    Drops:', '      - Mob: EP21_YORMI_B', '        Item: aegis_1001629', '        Count: 1', '        Rate: 2500'],
+    17783: ['    Drops:', '      - Mob: EP21_ICESEAHORSE', '        Item: aegis_1001648', '        Count: 1', '        Rate: 2500'],
+    17784: ['    Drops:', '      - Mob: EP21_YORTUS_B', '        Item: aegis_1001639', '        Count: 1', '        Rate: 2500'],
+    17785: ['    Drops:', '      - Mob: EP21_YORDOS_C', '        Item: aegis_1001637', '        Count: 1', '        Rate: 2500'],
+    17786: ['    Drops:', '      - Mob: EP21_CLIOLIMA', '        Item: aegis_1001646', '        Count: 1', '        Rate: 2500'],
+    17787: ['    Drops:', '      - Mob: EP21_SEAWIND', '        Item: aegis_1001642', '        Count: 1', '        Rate: 2500'],
+    17788: ['    Drops:', '      - Mob: EP21_LETTERSTER', '        Item: aegis_1001645', '        Count: 1', '        Rate: 2500'],
+    23256: ['    Drops:', '      - Mob: EP21_SKIPSKIPPER', '        Item: aegis_1001641', '        Count: 1', '        Rate: 1000'],
+    24031: ['    Drops:', '      - Mob: EP21_ROCKSTRIKER', '        Item: aegis_1001647', '        Count: 1', '        Rate: 2500', '      - Mob: EP21_SKIPSKIPPER', '        Item: aegis_1001644', '        Count: 1', '        Rate: 2500'],
+    24033: ['      - Mob: EP21_SCALLEG', '        Count: 50'],
+    24035: ['      - Mob: EP21_VELELLING', '        Count: 50'],
+    24037: ['      - Id: 1', '        Count: 100', "        MapName: Gimle 1F", '        Location: jor_tmple1'],
+    24039: ['      - Id: 1', '        Count: 100', "        MapName: Gimle 2F", '        Location: jor_tmple2'],
+    24042: ['      - Id: 1', '        Count: 300', "        MapName: Yorskalf 1F", '        Location: jor_sklf1'],
+    24044: ['      - Id: 1', '        Count: 1500', "        MapName: Yorskalf 1F", '        Location: jor_sklf1'],
+    24046: ['      - Id: 1', '        Count: 300', "        MapName: Yorskalf 2F", '        Location: jor_sklf2'],
+    24048: ['      - Id: 1', '        Count: 1500', "        MapName: Yorskalf 2F", '        Location: jor_sklf2'],
     23247: ['      - Mob: EP21_SKIPSKIPPER', '        Count: 10',
             '    Drops:', '      - Mob: EP21_SKIPSKIPPER', '        Item: aegis_1001641', '        Count: 1', '        Rate: 1000'],
     18234: ['      - Id: 1', '        Count: 30', '        MapName: Deep Roots Cave', '        Location: jor_root3'],
@@ -55,7 +77,9 @@ TARGETS = {
 }
 
 # Standby quests: the daily reset.
-STANDBY = {17711, 17717, 8844, 18235, 18237, 18239, 23110, 12647}
+STANDBY = {17711, 17717, 8844, 18235, 18237, 18239, 23110, 12647, 8852, 12588, 16823, 17779, 17780, 17789,
+           19185, 19197, 19199, 23257, 24030, 24032, 24034, 24036, 24038, 24040, 24043, 24047}
+WEEKLY = {24045}
 
 # Summaries that should say how many.
 SUMMARY = {
@@ -84,7 +108,9 @@ NAMES = [
     ('Leo and', 'Leon and'), ('to Leo', 'to Leon'), ('Lord Naya', 'Lord Nyar'),
     ('Diving Awin', 'Diving Iwin'), ('Awin', 'Iwin'), ('Icesen', 'the Ice Castle'),
     ('Ice Angoos', 'Ice Gangus'), ('Snake Roots', 'Roots of the Serpent God'), ('Yormungand', 'Jormungandr'), ('Icy Zone', 'Frozen Zone'),
-    ('Icegard', 'Issgard'),
+    ('Icegard', 'Issgard'), ('Triss', 'Tris'), ('Nilem', 'Nillem'), ('Ephesus Walter Megas', 'Epesto Walter Megas'),
+    ('Hunter Sanguine', 'Hunter Sanguin'), ('Lalira Wigner', 'Lalaira Wigner'), ('Laraira', 'Lalaira'),
+    ('loss of Eiji', 'lost mind'), ('Lara told', 'Lalaira told'),
 ]
 
 
@@ -131,9 +157,13 @@ def main():
         yml.append('    Title: "%s"' % title.replace('"', "'"))
         if i in STANDBY:
             yml.append('    TimeLimit: 4h')
+        if i in WEEKLY:
+            yml.append('    TimeLimit: Friday 4h')
         if i in TARGETS:
-            yml.append('    Targets:')
-            yml += TARGETS[i]
+            t = TARGETS[i]
+            if not t[0].startswith('    Drops:'):
+                yml.append('    Targets:')
+            yml += t
         lub.append('\t[%d] = {' % i)
         lub.append('\t\tTitle = %s,' % lua(title))
         lub.append('\t\tIconName = "%s",' % ('ico_dq.bmp' if ('Standby' in title or i in STANDBY or i == 12656) else 'ico_ep.bmp'))

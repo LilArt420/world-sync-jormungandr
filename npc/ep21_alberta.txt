@@ -1,0 +1,445 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 21: Alberta of old and the ghost ship.
+//= Quests 16802-16826 (the client has them in English).
+//= Story steps 321-329 (errands in Alberta) and 681-683 (the
+//= Unidentified Ghost Ship, memorial dungeon 1@wtgs). The ship
+//= can be boarded again every day through Nillem (16821-16826).
+//============================================================
+
+// ------------------------------------------------------------
+// Honest work in Alberta (321-329)
+// ------------------------------------------------------------
+jor_albe,195,206,5	script(CLOAKED)	Epesto Walter Megas#wsj	10588,{
+	cutin "ep21_epesto01.png",2;
+	mes "[Epesto Walter Megas]";
+	if (wsj_ep21 < 328)
+		mes "John's on the <NAVI>[beach]<INFO>jor_albe,239,115,0,101,0</INFO></NAVI>. Work first, questions later.";
+	else
+		mes "Iana's letters went where they needed to. Good. You're more useful than you look.";
+	close3;
+}
+
+jor_albe,239,117,3	script(CLOAKED)	John#wsj	10578,{
+	cutin "ep21_yohan01.png",2;
+	if (wsj_ep21 == 321) {
+		mes "[John]";
+		mes "Epesto sent you? Great, I've got a mountain of luggage and two arms.";
+		mes "These crates got unloaded at the wrong dock. Take them to the Walter fleetman by the <NAVI>[market]<INFO>jor_albe,148,235,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 322, "16820", "16802";
+		close3;
+	}
+	if (wsj_ep21 == 324) {
+		mes "[John]";
+		mes "All delivered? You're quick.";
+		mes "Next: the nets need mending, the gulls need chasing off the fish racks, the...";
+		next;
+		select("Is this really all there is to do?");
+		mes "[John]";
+		mes "Ha! Too small for you, hero? Fine. Sit down, have some water. Rest a bit and talk to me again.";
+		callfunc "F_WSJ_Step21", 325, "16804", "16805";
+		wsj_ep21b = 0;
+		close3;
+	}
+	if (wsj_ep21 == 325 && isbegin_quest(16805) == 1) {
+		mes "[John]";
+		mes "Rested? Good, because the port is filthy. Rotten nets, broken crates, fish guts. The refugees sleep right next to it.";
+		mes "Clean up the worst spots: one by the <NAVI>[market stairs]<INFO>jor_albe,151,210,0,101,0</INFO></NAVI>, one by the <NAVI>[south quay]<INFO>jor_albe,211,136,0,101,0</INFO></NAVI>, one at the <NAVI>[fish racks]<INFO>jor_albe,167,139,0,101,0</INFO></NAVI> and one near the <NAVI>[pier]<INFO>jor_albe,190,175,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 325, "16805", "16806,16807,16808,16809";
+		close3;
+	}
+	if (wsj_ep21 == 326) {
+		mes "[John]";
+		mes "Look at that. You can see the stones of the quay again.";
+		mes "Thanks. Really. People will sleep better tonight.";
+		next;
+		mes "[John]";
+		mes "Oh, Iana at the Walter house asked for someone reliable. That's you now. The <NAVI>[room across from the warehouse]<INFO>jalbe_in,67,95,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 327, "16810", "16811";
+		close3;
+	}
+	mes "[John]";
+	mes "The sea gives, the sea takes, and the sea leaves a lot of mess on the beach.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 321 || wsj_ep21 == 324 || wsj_ep21 == 326" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 325 && isbegin_quest(16805) == 1" );
+	end;
+}
+
+jor_albe,148,233,5	script(CLOAKED)	Walter Fleetman#wsj_m	4_EP21_SOLDIER_B,{
+	if (wsj_ep21 == 322) {
+		mes "[Walter Fleetman]";
+		mes "Crates from the beach? Half of these go to the warehouse, half stay here.";
+		mes "Leave mine and take the rest to my mate at the <NAVI>[Walter warehouse]<INFO>jalbe_in,22,63,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 323, "16802", "16803";
+		close;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 322" );
+	end;
+}
+
+jalbe_in,22,61,3	script(CLOAKED)	Walter Fleetman#wsj_w	4_EP21_SOLDIER_A,{
+	if (wsj_ep21 == 323) {
+		mes "[Walter Fleetman]";
+		mes "Finally! I've been waiting for those all morning.";
+		mes "Tell John thanks. And that he owes me a drink.";
+		callfunc "F_WSJ_Step21", 324, "16803", "16804";
+		close;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 323" );
+	end;
+}
+
+// The four messy spots of the port (step 325, bits 1-8).
+function	script	F_WSJ_Mess	{
+	.@n = getarg(0);
+	if (wsj_ep21 != 325 || isbegin_quest(16805) == 1 || (wsj_ep21b & (1 << .@n))) {
+		mes "^4d4dffClean enough, for a port.^000000";
+		close;
+	}
+	mes "^4d4dffRotting nets, a broken crate and something that used to be a fish.^000000";
+	next;
+	if (select("Clean it up.:Leave it.") == 2)
+		close;
+	progressbar "ffffff", 3;
+	setarray .@q, 16806, 16807, 16808, 16809;
+	completequest .@q[.@n];
+	wsj_ep21b |= (1 << .@n);
+	mes "^4d4dffMuch better.^000000";
+	if ((wsj_ep21b & 15) == 15) {
+		mes "^4d4dffThat's all four. Back to <NAVI>[John]<INFO>jor_albe,239,115,0,101,0</INFO></NAVI>.^000000";
+		callfunc "F_WSJ_Step21", 326, "", "16810";
+	}
+	close;
+}
+jor_albe,151,210,0	script(CLOAKED)	Messy Spot#wsj1	4_POINT_BLACK,{
+	callfunc "F_WSJ_Mess", 0;
+	end;
+}
+jor_albe,211,136,0	script(CLOAKED)	Messy Spot#wsj2	4_POINT_BLACK,{
+	callfunc "F_WSJ_Mess", 1;
+	end;
+}
+jor_albe,167,139,0	script(CLOAKED)	Messy Spot#wsj3	4_POINT_BLACK,{
+	callfunc "F_WSJ_Mess", 2;
+	end;
+}
+jor_albe,190,175,0	script(CLOAKED)	Messy Spot#wsj4	4_POINT_BLACK,{
+	callfunc "F_WSJ_Mess", 3;
+	end;
+}
+
+jalbe_in,67,95,5	script(CLOAKED)	Iana Operta#wsj	10590,{
+	cutin "ep21_iana01.png",2;
+	if (wsj_ep21 == 327) {
+		mes "[Iana Operta]";
+		mes "You're the one John trusts? Then I trust you, a little.";
+		mes "Two letters. One for Pallieria Edel, one for the hunter Sanguin. Both live in Alberta. Bring me their answers.";
+		next;
+		mes "[Iana Operta]";
+		mes "And don't read them. They're very boring. Probably.";
+		callfunc "F_WSJ_Step21", 328, "16811", "16812,16813";
+		wsj_ep21b = 0;
+		close3;
+	}
+	if (wsj_ep21 == 328 && (wsj_ep21b & 3) == 3) {
+		mes "[Iana Operta]";
+		mes "Both answers. Thank you.";
+		next;
+		mes "^4d4dffIana reads them and smiles to herself.^000000";
+		next;
+		mes "[Iana Operta]";
+		mes "They were tests, you know. Epesto wanted to know if the stranger from nowhere could be trusted with a sealed letter. You can.";
+		mes "And there's news: a big group of people escaped the cult and reached Lunaforma. Ivan Wigner is asking for you. Go and hear what he has to say.";
+		callfunc "F_WSJ_Step21", 329, "16814", "16815";
+		close3;
+	}
+	mes "[Iana Operta]";
+	if (wsj_ep21 == 328)
+		mes "<NAVI>[Pallieria Edel]<INFO>jalbe_in,126,54,0,101,0</INFO></NAVI> and <NAVI>[Hunter Sanguin]<INFO>jalbe_in,29,28,0,101,0</INFO></NAVI>. Answers, please.";
+	else
+		mes "The Walter house keeps its books in order. Mostly.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 327" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 328 && (wsj_ep21b & 3) == 3" );
+	end;
+}
+
+jalbe_in,126,54,5	script(CLOAKED)	Pallieria Edel#wsj	4_EP21_F_WORKER_A,{
+	if (wsj_ep21 == 328 && !(wsj_ep21b & 1)) {
+		mes "[Pallieria Edel]";
+		mes "A letter from Iana? How unusual. Give me a moment.";
+		next;
+		progressbar "ffffff", 2;
+		mes "[Pallieria Edel]";
+		mes "Here's my answer. Tell her yes. She'll know what it means.";
+		completequest 16812;
+		wsj_ep21b |= 1;
+		if ((wsj_ep21b & 3) == 3) {
+			next;
+			mes "^4d4dffBoth answers. Back to <NAVI>[Iana]<INFO>jalbe_in,67,95,0,101,0</INFO></NAVI>.^000000";
+			setquest 16814;
+		}
+		close;
+	}
+	mes "[Pallieria Edel]";
+	mes "Alberta was a quiet town, once. I barely remember it.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 328 && (wsj_ep21b & 1) == 0" );
+	end;
+}
+
+jalbe_in,29,27,5	script(CLOAKED)	Hunter Sanguin#wsj	4_EP21_M_WORKER_A,{
+	if (wsj_ep21 == 328 && !(wsj_ep21b & 2)) {
+		mes "[Hunter Sanguin]";
+		mes "For me? From the Walter house? Hm.";
+		next;
+		progressbar "ffffff", 2;
+		mes "[Hunter Sanguin]";
+		mes "There. My answer. Short and sweet, like me.";
+		completequest 16813;
+		wsj_ep21b |= 2;
+		if ((wsj_ep21b & 3) == 3) {
+			next;
+			mes "^4d4dffBoth answers. Back to <NAVI>[Iana]<INFO>jalbe_in,67,95,0,101,0</INFO></NAVI>.^000000";
+			setquest 16814;
+		}
+		close;
+	}
+	mes "[Hunter Sanguin]";
+	mes "The seals are fat this year. The cultists are fatter.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 328 && (wsj_ep21b & 2) == 0" );
+	end;
+}
+
+jor_albe,190,180,0	script	#wsj_t_albe2	HIDDEN_WARP_NPC,60,70,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+jalbe_in,60,80,0	script	#wsj_t_jalbe3	HIDDEN_WARP_NPC,70,60,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// The Unidentified Ghost Ship (681-683)
+// ------------------------------------------------------------
+jor_albe,191,186,5	script(CLOAKED)	Maristella#wsj_port	10577,{
+	cutin "ep21_maristella02.png",2;
+	if (wsj_ep21 == 681) {
+		mes "[Maristella]";
+		mes "There. Do you see her? In the fog, past the breakwater.";
+		mes "Black sails. My ship. The Walter.";
+		next;
+		mes "[Maristella]";
+		mes "My boat will get us alongside. Whatever is on that deck, we face it together.";
+		next;
+		if (select("Board the ghost ship.:Not yet.") == 2)
+			close3;
+		cutin "",255;
+		callfunc "F_WSJ_EnterMd", "Unidentified Ghost Ship";
+		end;
+	}
+	if (wsj_ep21 == 682) {
+		cutin "ep21_maristella03.png",2;
+		mes "[Maristella]";
+		mes "My brother's crew. Every one of them. The cult raised them and set them to sail.";
+		mes "And the captain at the wheel... was him. He didn't know me.";
+		next;
+		mes "[Maristella]";
+		mes "They're at rest now. That's what matters.";
+		mes "I'll stay here a while. Someone from the Wigner Company has been waiting for you, behind me.";
+		callfunc "F_WSJ_Step21", 683, "16817", "16819";
+		close3;
+	}
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 681 || wsj_ep21 == 682" );
+	end;
+}
+
+jor_albe,193,189,3	script(CLOAKED)	Wigner Merchant#wsj_port	899,{
+	if (wsj_ep21 == 683) {
+		mes "[Wigner Merchant]";
+		mes "Message for the adventurer! From the wizard Heine, through the Lunaforma post.";
+		next;
+		mes "[Wigner Merchant]";
+		mes "'Tablet broken. Come back. Bring hands. -H.'";
+		mes "That's all it says. She pays well, so I came fast.";
+		next;
+		mes "^4d4dffTime to go back to <NAVI>[Tris]<INFO>mbase_in,92,123,0,101,0</INFO></NAVI> in Lunaforma. The Walter sailors at the pier go there.^000000";
+		callfunc "F_WSJ_Step21", 684, "16819", "16818,23249";
+		close;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 683" );
+	end;
+}
+
+jor_albe,191,184,0	script	#wsj_t_port	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// Nillem watches for the ship's echo afterwards (daily, 16821-16826).
+jor_albe,195,179,5	script	Nillem#wsj_ghost	4_M_NILLEM,{
+	cutin "ep172_nillem01.png",2;
+	if (wsj_ep21 < 684) {
+		mes "[Nillem]";
+		mes "The sea here has a strange shimmer at night. I'm keeping an eye on it.";
+		close3;
+	}
+	if (isbegin_quest(16822) == 0) {
+		if (isbegin_quest(16821) == 0) {
+			mes "[Nillem]";
+			mes "Something's wrong. You saw the Walter's last moments, and yet I still read her mana on the water. Every night, a little.";
+			mes "A memory of the ship, maybe, that hasn't let go. Would you board it again?";
+			next;
+			if (select("Board the memory of the Walter.:Not now.") == 2)
+				close3;
+			setquest 16821;
+			setquest 16825;
+			cutin "",255;
+			callfunc "F_WSJ_EnterMd", "Unidentified Ghost Ship";
+			end;
+		}
+		if (isbegin_quest(16825) == 1) {
+			mes "[Nillem]";
+			mes "The memory of the Walter is still out there. Board it and stop its captain.";
+			next;
+			if (select("Board it.:Not now.") == 2)
+				close3;
+			cutin "",255;
+			callfunc "F_WSJ_EnterMd", "Unidentified Ghost Ship";
+			end;
+		}
+		mes "[Nillem]";
+		mes "A captain who doesn't remember his own sister. That bothers me more than the ghosts.";
+		mes "I think the memory will come back, again and again, until the mana in it runs dry. Help me scatter it, now and then.";
+		completequest 16821;
+		completequest 16825;
+		setquest 16822;
+		completequest 16822;
+		close3;
+	}
+	switch (callfunc("F_WSJ_Daily", 16824, 16823)) {
+	case 0:
+		mes "[Nillem]";
+		mes "The Walter's memory is back on the water. Shall we scatter it again?";
+		next;
+		if (select("Board it.:Not today.") == 2)
+			close3;
+		setquest 16824;
+		if (isbegin_quest(16826))
+			erasequest 16826;
+		setquest 16826;
+		cutin "",255;
+		callfunc "F_WSJ_EnterMd", "Unidentified Ghost Ship";
+		end;
+	case 1:
+		if (isbegin_quest(16826) == 1) {
+			mes "[Nillem]";
+			mes "The memory is still there. Go on.";
+			next;
+			if (select("Board it.:Not now.") == 2)
+				close3;
+			cutin "",255;
+			callfunc "F_WSJ_EnterMd", "Unidentified Ghost Ship";
+			end;
+		}
+		mes "[Nillem]";
+		mes "Scattered again. Thank you. Here, for your trouble.";
+		erasequest 16824;
+		setquest 16823;
+		getexp2 30000000,0;
+		getitem 1001618,2;	// Ep21_Wigner_Ticket
+		close3;
+	case 2:
+		mes "[Nillem]";
+		mes "The water is quiet for now. Come back after dawn.";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 >= 684 && isbegin_quest(16822) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(16822) == 2 && isbegin_quest(16824) == 0 && (isbegin_quest(16823) == 0 || checkquest(16823,PLAYTIME) == 2)" );
+	end;
+}
+
+// Memorial dungeon: the Unidentified Ghost Ship (1@wtgs).
+1@wtgs	mapflag	nosave	SavePoint
+1@wtgs	mapflag	noteleport
+1@wtgs	mapflag	nomemo
+1@wtgs	mapflag	nowarpto
+1@wtgs	mapflag	nobranch
+1@wtgs	mapflag	monster_noteleport
+1@wtgs	mapflag	nopenalty
+
+1@wtgs,1,1,0	script	#wsj_mdgs	-1,{
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("Maristella#wsj_mdgs");
+	.@m$ = instance_mapname("1@wtgs");
+	setarray .@x, 80, 120, 160, 200, 240, 280, 320, 100, 220, 300;
+	for (.@i = 0; .@i < 10; .@i++)
+		monster .@m$, .@x[.@i], 240 + rand(25), "Drowned Sailor", 22369, 1;
+	monster .@m$, 370, 252, "Ghost Ship Captain", 22370, 1, instance_npcname("#wsj_mdgs") + "::OnCaptainDown";
+	end;
+OnCaptainDown:
+	mapannounce instance_mapname("1@wtgs"), "The captain falls to the deck. The fog over the ship begins to thin.", bc_map, "0x88CCFF";
+	killmonster instance_mapname("1@wtgs"), "All";
+	sleep 2000;
+	enablenpc instance_npcname("Maristella#wsj_mdgs");
+	end;
+}
+
+1@wtgs,365,252,5	script	Maristella#wsj_mdgs	10577,{
+	cutin "ep21_maristella03.png",2;
+	if (wsj_ep21 == 681) {
+		mes "[Maristella]";
+		mes "...Brother.";
+		next;
+		mes "^4d4dffMaristella kneels beside the fallen captain. For a heartbeat his eyes clear, and he looks at her as if from very far away. Then he is gone, and so is the cold.^000000";
+		next;
+		mes "[Maristella]";
+		mes "Let's go home. Back to <NAVI>[Alberta]<INFO>jor_albe,191,186,0,101,0</INFO></NAVI>. I have a lot to tell Ivan, and a lot to bury.";
+		callfunc "F_WSJ_Step21", 682, "16816", "16817";
+		getitem 102947,1;	// Antiquity of Ghost Ship (Ghost Ship Captain)
+		close2;
+		cutin "",255;
+		warp "jor_albe",189,183;
+		end;
+	}
+	// The ship's memory, boarded again.
+	if (isbegin_quest(16825) == 1) {
+		mes "[Maristella]";
+		mes "He fell again, the same way. It's only a memory... but it's his.";
+		completequest 16825;
+		getitem 102947,1;
+	} else if (isbegin_quest(16826) == 1) {
+		mes "[Maristella]";
+		mes "Scattered, for today. Tell Nillem.";
+		completequest 16826;
+		getitem 102947,1;
+	} else
+		mes "[Maristella]";
+	close2;
+	cutin "",255;
+	warp "jor_albe",193,177;
+	end;
+}

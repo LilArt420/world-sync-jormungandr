@@ -1,0 +1,902 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 21: dailies, side stories and the Lunaforma traders.
+//= Official quest ids; rewards aren't published: dailies give
+//= experience and Wigner Premium Exchange Tickets, the currency
+//= the Wigner Company Exchanger takes.
+//============================================================
+
+// Hands in an Episode 21 daily.
+// callfunc "F_WSJ_DailyDone21", <active quest>, <standby quest>, <base exp>, <tickets>;
+function	script	F_WSJ_DailyDone21	{
+	erasequest getarg(0);
+	setquest getarg(1);
+	getexp2 getarg(2), 0;
+	getexp 0, getarg(2) / 15;
+	if (getarg(3) > 0)
+		getitem 1001618, getarg(3);	// Ep21_Wigner_Ticket
+	return;
+}
+
+// A kill daily handed out by an Episode 21 NPC (as F_WSJ_DailyHunt).
+// callfunc "F_WSJ_Hunt21", "<npc>", <active>, <standby>, "<what>", "<offer>", <exp>, <tickets>;
+function	script	F_WSJ_Hunt21	{
+	.@npc$ = getarg(0);
+	.@q = getarg(1);
+	.@w = getarg(2);
+	switch (callfunc("F_WSJ_Daily", .@q, .@w)) {
+	case 0:
+		mes "[" + .@npc$ + "]";
+		mes getarg(4);
+		next;
+		if (select("I'll do it.:Not today.") == 2)
+			close;
+		setquest .@q;
+		mes "[" + .@npc$ + "]";
+		mes "^FF0000" + getarg(3) + "^000000. Come back to me when it's done.";
+		close;
+	case 1:
+		if (checkquest(.@q,HUNTING) != 2) {
+			mes "[" + .@npc$ + "]";
+			mes "Not done yet: ^FF0000" + getarg(3) + "^000000.";
+			close;
+		}
+		mes "[" + .@npc$ + "]";
+		mes "Done already? Good work. Here's your share.";
+		callfunc "F_WSJ_DailyDone21", .@q, .@w, getarg(5), getarg(6);
+		close;
+	case 2:
+		mes "[" + .@npc$ + "]";
+		mes "That's enough for today. Come back after dawn.";
+		close;
+	}
+	return;
+}
+
+// ------------------------------------------------------------
+// Tris: safe escape routes (17777-17780) and the Roegenburg
+// brothers (17770-17776)
+// ------------------------------------------------------------
+jor_mbase,140,201,5	script	Tris#wsj_daily	4_EP21_TRIS,{
+	cutin "ep21_tris01.png",2;
+	if (wsj_ep21 < 690) {
+		mes "[Tris]";
+		mes "Georborg holds. Whatever it takes.";
+		close3;
+	}
+	if (wsj_rg == 1) {
+		mes "[Tris]";
+		mes "Reinhardt wants the believers he freed to have a say in how Lunaforma is run? Hm.";
+		mes "He's right. I'll talk to him myself. Go back and tell him I'm coming.";
+		wsj_rg = 2;
+		completequest 17771;
+		setquest 17772;
+		close3;
+	}
+	mes "[Tris]";
+	mes "The people who escape the cult come over the Raised Land. Every monster we clear there is a life saved.";
+	next;
+	switch (select("Clear the north of the Raised Land.:Clear the south of the Raised Land.:Nothing, thanks.")) {
+	case 1:
+		callfunc "F_WSJ_Hunt21", "Tris", 17777, 17779, "300 monsters in the north of the Raised Land", "Clear the northern routes. Any monster, three hundred of them.", 40000000, 2;
+		end;
+	case 2:
+		callfunc "F_WSJ_Hunt21", "Tris", 17778, 17780, "300 monsters in the south of the Raised Land", "The southern routes, then. Three hundred, any kind.", 40000000, 2;
+		end;
+	}
+	close3;
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsj_ep21 >= 690 && ((isbegin_quest(17777) == 0 && (isbegin_quest(17779) == 0 || checkquest(17779,PLAYTIME) == 2)) || (isbegin_quest(17778) == 0 && (isbegin_quest(17780) == 0 || checkquest(17780,PLAYTIME) == 2)))" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_rg == 1" );
+	end;
+}
+
+mbase_in,120,188,3	script	Reinhardt#wsj_rg	4_EP21_REINHARDT,{
+	cutin "ep21_reinhardt01.png",2;
+	if (wsj_ep21 < 690) {
+		mes "[Reinhardt]";
+		mes "......";
+		close3;
+	}
+	if (wsj_rg == 0) {
+		mes "[Reinhardt]";
+		mes "The believers who came out of Gimle with me... they don't know how to live without someone telling them what to believe.";
+		mes "Tris runs Lunaforma well. But they need a voice here. Would you take that to Tris for me? I'd go myself, but my brother would follow me and stare.";
+		setquest 17770;
+		completequest 17770;
+		setquest 17771;
+		wsj_rg = 1;
+		close3;
+	}
+	if (wsj_rg == 2) {
+		mes "[Reinhardt]";
+		mes "Tris is coming? Good.";
+		next;
+		cutin "ep21_tris01.png",0;
+		mes "[Tris]";
+		mes "I'm here. You're right, Reinhardt, and I'll set up a council.";
+		mes "But first, come eat with us. At the <NAVI>[canteen]<INFO>jor_mbase,197,277,0,101,0</INFO></NAVI>. Your brother cooks there. You knew that.";
+		completequest 17772;
+		setquest 17773;
+		wsj_rg = 3;
+		close3;
+	}
+	mes "[Reinhardt]";
+	mes "Wilhelm makes terrible soup. It's the best soup in Lunaforma.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsj_ep21 >= 690 && wsj_rg == 0" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_rg == 2" );
+	end;
+}
+
+jor_mbase,194,279,5	script	Reinhardt#wsj_rg2	4_EP21_REINHARDT,{
+	cutin "ep21_reinhardt01.png",2;
+	if (wsj_rg == 3) {
+		mes "^4d4dffAs soon as Reinhardt sits down, believers from the temple crowd around him. Questions, thanks, a few tears.^000000";
+		next;
+		mes "[Reinhardt]";
+		mes "I'm not your priest anymore. I'm nobody's priest. Please...";
+		completequest 17773;
+		completequest 17774;
+		setquest 17775;
+		wsj_rg = 4;
+		close3;
+	}
+	mes "[Reinhardt]";
+	mes "It's good to sit at a table where nobody is praying.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_rg == 3" );
+	end;
+}
+
+jor_mbase,197,277,3	script	Tris#wsj_rg	4_EP21_TRIS,{
+	cutin "ep21_tris01.png",2;
+	if (wsj_rg == 5) {
+		mes "[Tris]";
+		mes "Did you see that? Wilhelm talked. Full sentences! To his brother!";
+		mes "Thank you for carrying messages. Small things hold Lunaforma together.";
+		completequest 17776;
+		wsj_rg = 6;
+		getexp2 20000000,0;
+		getitem 1001618,3;	// Ep21_Wigner_Ticket
+		close3;
+	}
+	mes "[Tris]";
+	mes "Eat something. That's an order.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_rg == 5" );
+	end;
+}
+
+// Wilhelm keeps the canteen.
+jor_mbase,196,280,3	script	Wilhelm#wsj_c2	10576,{
+	cutin "ep21_wilhelm01.png",2;
+	if (wsj_rg == 4) {
+		mes "^4d4dffWilhelm pushes through the crowd, plants a bowl in front of his brother and glares at everyone until they back off.^000000";
+		next;
+		cutin "ep21_wilhelm02.png",2;
+		mes "[Wilhelm]";
+		mes "He eats first. Questions after.";
+		next;
+		cutin "ep21_reinhardt01.png",0;
+		mes "[Reinhardt]";
+		mes "...Thank you, Wilhelm.";
+		next;
+		cutin "ep21_wilhelm03.png",2;
+		mes "[Wilhelm]";
+		mes "Hmph. Eat. You're too thin. Prison food is terrible.";
+		completequest 17775;
+		setquest 17776;
+		wsj_rg = 5;
+		close3;
+	}
+	mes "[Wilhelm]";
+	mes "......Soup?";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_rg == 4" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Mandel's supply requests (17781-17790)
+// ------------------------------------------------------------
+jor_mbase,217,172,3	script	Mandel#wsj	901,{
+	if (wsj_ep21 < 690) {
+		mes "[Mandel]";
+		mes "Supplies in, supplies out. That's my whole life.";
+		close;
+	}
+	if (isbegin_quest(17781) == 0) {
+		mes "[Mandel]";
+		mes "You're the new hand? Listen, then. Seven families back Georborg, and each one wants something from the cult's lands every day.";
+		mes "Geoborg, Nerius, Heine, Roegenburg, Walter, Wigner, Richard. Every morning I get one list. You bring what's on it.";
+		setquest 17781;
+		completequest 17781;
+		next;
+	}
+	setarray .@q, 17782, 17783, 17784, 17785, 17786, 17787, 17788;
+	setarray .@it, 1001629, 1001648, 1001639, 1001637, 1001646, 1001642, 1001645;
+	setarray .@who$, "the Yormi Evangelists in Gimle", "the Ice Seahorses on the Raised Land", "the Yortus Shamans in Gimle", "the Yordos Executors in Gimle", "the Cliolimas on the Raised Land", "the Seawinds on the Raised Land", "the Lettersters on the Raised Land";
+	for (.@i = 0; .@i < 7; .@i++) {
+		if (isbegin_quest(.@q[.@i]) == 1) {
+			if (countitem(.@it[.@i]) < 10) {
+				mes "[Mandel]";
+				mes "Today's list: ^0000FF10 " + getitemname(.@it[.@i]) + "^000000, from " + .@who$[.@i] + ".";
+				close;
+			}
+			delitem .@it[.@i],10;
+			mes "[Mandel]";
+			mes "All ten. Good. The family will be pleased, or at least quieter.";
+			callfunc "F_WSJ_DailyDone21", .@q[.@i], 17789, 30000000, 2;
+			close;
+		}
+	}
+	if (isbegin_quest(17789) == 1 && checkquest(17789,PLAYTIME) != 2) {
+		mes "[Mandel]";
+		mes "No more lists today. Come back after dawn.";
+		close;
+	}
+	if (isbegin_quest(17789) == 1)
+		erasequest 17789;
+	.@r = rand(7);
+	mes "[Mandel]";
+	mes "Today's list: ^0000FF10 " + getitemname(.@it[.@r]) + "^000000, from " + .@who$[.@r] + ".";
+	next;
+	if (select("I'll bring them.:Not today.") == 2)
+		close;
+	setquest .@q[.@r];
+	close;
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsj_ep21 >= 690 && isbegin_quest(17782) != 1 && isbegin_quest(17783) != 1 && isbegin_quest(17784) != 1 && isbegin_quest(17785) != 1 && isbegin_quest(17786) != 1 && isbegin_quest(17787) != 1 && isbegin_quest(17788) != 1 && (isbegin_quest(17789) == 0 || checkquest(17789,PLAYTIME) == 2)" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Counselor Ulus in Alberta (19184-19190)
+// ------------------------------------------------------------
+jor_albe,160,137,5	script	Counselor Ulus#wsj	83,{
+	mes "[Counselor Ulus]";
+	if (wsj_ep21 < 690) {
+		mes "So many people come here with nightmares. I listen. It's all I can do.";
+		close;
+	}
+	if (isbegin_quest(19184) == 0) {
+		mes "I'm Ulus. I counsel the refugees. They come with nightmares of the cult and the serpent.";
+		mes "Sometimes they don't need a counsellor. Just someone kind who listens. Would you help, now and then?";
+		setquest 19184;
+		completequest 19184;
+		next;
+		mes "[Counselor Ulus]";
+	}
+	setarray .@q, 19186, 19187, 19188, 19189;
+	for (.@i = 0; .@i < 4; .@i++) {
+		if (isbegin_quest(.@q[.@i]) == 1) {
+			mes "Did you see them yet? The request form says where.";
+			close;
+		}
+	}
+	if (isbegin_quest(19190) == 1) {
+		mes "They felt better? Thank you. Really.";
+		mes "Here, something from the Wigner Company for your time.";
+		callfunc "F_WSJ_DailyDone21", 19190, 19185, 20000000, 2;
+		close;
+	}
+	if (isbegin_quest(19185) == 1 && checkquest(19185,PLAYTIME) != 2) {
+		mes "No more appointments today. Come back tomorrow.";
+		close;
+	}
+	if (isbegin_quest(19185) == 1)
+		erasequest 19185;
+	.@r = rand(4);
+	mes "Here's today's request form. Read it carefully, it's personal.";
+	next;
+	if (select("I'll go and listen.:Not today.") == 2)
+		close;
+	if (isbegin_quest(.@q[.@r]))
+		erasequest .@q[.@r];
+	setquest .@q[.@r];
+	close;
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsj_ep21 >= 690 && isbegin_quest(19186) != 1 && isbegin_quest(19187) != 1 && isbegin_quest(19188) != 1 && isbegin_quest(19189) != 1 && isbegin_quest(19190) != 1 && (isbegin_quest(19185) == 0 || checkquest(19185,PLAYTIME) == 2)" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(19190) == 1" );
+	end;
+}
+
+// A refugee who needs someone to listen.
+// callfunc "F_WSJ_Counsel", <request quest>, <met quest>;
+function	script	F_WSJ_Counsel	{
+	.@q = getarg(0);
+	if (isbegin_quest(.@q) != 1) {
+		mes "[" + strnpcinfo(1) + "]";
+		mes "Hello there. Lovely day for not being in a cult.";
+		close;
+	}
+	mes "[" + strnpcinfo(1) + "]";
+	switch (.@q) {
+	case 19186:
+		mes "Ulus sent you? I'm fine. Fine! I don't miss the village at all.";
+		next;
+		select("Tell me about the village.");
+		mes "[" + strnpcinfo(1) + "]";
+		mes "...There was a well with sweet water. And apple trees. My mother's apple pie...";
+		mes "Hm. Maybe I miss it a little. Thank you for asking.";
+		break;
+	case 19187:
+		mes "Every night I see them. The boats, the people they carried off the ships, half-frozen. I see their faces.";
+		next;
+		select("You helped carry them, didn't you?");
+		mes "[" + strnpcinfo(1) + "]";
+		mes "...Yes. Yes, I did. I carried them. Maybe I'll try to remember that part instead.";
+		break;
+	case 19188:
+		mes "Counselling? Me? I'm tough. The cult couldn't break me, you can't either.";
+		next;
+		select("Sit with them a while, saying nothing.");
+		mes "[" + strnpcinfo(1) + "]";
+		mes "......";
+		mes "...They kept me in the dark for a month. Thanks. For not asking.";
+		break;
+	case 19189:
+		mes "I- I- I'm s-sorry. W-words are... slow. Since the t-temple.";
+		next;
+		select("Take your time. I'm not going anywhere.");
+		mes "[" + strnpcinfo(1) + "]";
+		mes "...Th-thank you. Most people f-finish my sentences for me. You w-waited.";
+		break;
+	}
+	completequest .@q;
+	if (isbegin_quest(getarg(1)) == 0) {
+		setquest getarg(1);
+		completequest getarg(1);
+	}
+	if (isbegin_quest(19190))
+		erasequest 19190;
+	setquest 19190;
+	next;
+	mes "^4d4dffTime to tell <NAVI>[Counselor Ulus]<INFO>jor_albe,160,137,0,101,0</INFO></NAVI>.^000000";
+	close;
+}
+
+jor_albe,89,103,3	script	Yukter Ppuppu#wsj	931,{
+	callfunc "F_WSJ_Counsel", 19186, 19191;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(19186) == 1" );
+	end;
+}
+jor_albe,136,196,3	script	Totor Amber#wsj	798,{
+	callfunc "F_WSJ_Counsel", 19187, 19192;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(19187) == 1" );
+	end;
+}
+jor_albe,49,244,3	script	Gaerju Sansha#wsj	841,{
+	callfunc "F_WSJ_Counsel", 19188, 19193;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(19188) == 1" );
+	end;
+}
+jor_albe,116,214,3	script	Mogaja Shield#wsj	583,{
+	callfunc "F_WSJ_Counsel", 19189, 19194;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(19189) == 1" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Libra at the cult's base camp (19195-19197)
+// ------------------------------------------------------------
+jor_base,314,138,3	script	Libra#wsj	4_EP21_WORKER_KID_A,{
+	mes "[Libra]";
+	if (wsj_ep21 < 690) {
+		mes "Shh! This is a secret place. Grown-ups don't come here.";
+		close;
+	}
+	if (isbegin_quest(19195) == 0) {
+		mes "You're from Lunaforma? I'm Libra. I sneak messages in and out of the camp.";
+		mes "Paper smells of whoever wrote it, so the believers inside know who's alive. Clever, right?";
+		setquest 19195;
+		completequest 19195;
+		next;
+		mes "[Libra]";
+	}
+	switch (callfunc("F_WSJ_Daily", 19196, 19197)) {
+	case 0:
+		mes "Can you take this to Parex, in the <NAVI>[middle of the camp]<INFO>jor_base,131,182,0,101,0</INFO></NAVI>? Don't let anyone see.";
+		next;
+		if (select("I'll take it.:Not today.") == 2)
+			close;
+		setquest 19196;
+		getitem 1001626,1;	// Ep21_Crumple_Paper
+		close;
+	case 1:
+		mes "Parex is in the middle of the camp. Hurry!";
+		close;
+	case 2:
+		mes "No more messages today. Too many guards.";
+		close;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsj_ep21 >= 690 && isbegin_quest(19196) == 0 && (isbegin_quest(19197) == 0 || checkquest(19197,PLAYTIME) == 2)" );
+	end;
+}
+
+jor_base,131,182,3	script	Parex#wsj	4_EP21_M_WORKER_A,{
+	mes "[Parex]";
+	if (isbegin_quest(19196) == 1 && countitem(1001626)) {
+		delitem 1001626,1;
+		mes "...Smells like my sister's hands. She's alive.";
+		mes "Thank you. Tell Libra: tomorrow, same time.";
+		callfunc "F_WSJ_DailyDone21", 19196, 19197, 20000000, 1;
+		close;
+	}
+	mes "I'm a good believer. Very good. Go away before someone notices.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(19196) == 1" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Volunteer Balun Wok's food runs (19198-19203)
+// ------------------------------------------------------------
+jor_mbase,213,280,3	script	Volunteer Balun Wok#wsj	964,{
+	mes "[Balun Wok]";
+	if (wsj_ep21 < 690) {
+		mes "More mouths every day, and less food. We'll manage. We always manage.";
+		close;
+	}
+	if (isbegin_quest(19198) == 0) {
+		mes "Balun Wok, volunteer cook. Can you fish? Pick grass? Scrape salt off rocks? Then you can help!";
+		setquest 19198;
+		completequest 19198;
+		next;
+		mes "[Balun Wok]";
+	}
+	if (isbegin_quest(19200) == 1) {
+		setarray .@it, 1001619, 1001620, 1001621, 1001622, 1001623;
+		for (.@i = 0; .@i < 5; .@i++)
+			if (countitem(.@it[.@i]) >= 10) break;
+		if (.@i == 5) {
+			mes "Ten of the same catch, please. Shrimp, calamari, seaweed, fish or oysters.";
+			mes "The fishing spots are all around the coast.";
+			close;
+		}
+		delitem .@it[.@i],10;
+		mes "Ten " + getitemname(.@it[.@i]) + "! Tonight's stew is saved.";
+		callfunc "F_WSJ_DailyDone21", 19200, 19199, 20000000, 1;
+		close;
+	}
+	if (isbegin_quest(19201) == 1) {
+		if (countitem(1001624) >= 10)
+			.@g = 1001624;
+		else if (countitem(1001625) >= 10)
+			.@g = 1001625;
+		else {
+			mes "Ten of the same kind of grass, please. It grows all over Lunaforma.";
+			close;
+		}
+		delitem .@g,10;
+		mes "Perfect. Grass soup isn't glamorous, but it's warm.";
+		callfunc "F_WSJ_DailyDone21", 19201, 19199, 20000000, 1;
+		close;
+	}
+	if (isbegin_quest(19203) == 1) {
+		mes "The beach salt! You found it. The children will finally eat something that tastes like something.";
+		erasequest 19202;
+		callfunc "F_WSJ_DailyDone21", 19203, 19199, 20000000, 1;
+		close;
+	}
+	if (isbegin_quest(19202) == 1) {
+		mes "The shiny salt crust is on the <NAVI>[beach]<INFO>jor_mbase,340,30,0,101,0</INFO></NAVI>, east of the docks.";
+		close;
+	}
+	if (isbegin_quest(19199) == 1 && checkquest(19199,PLAYTIME) != 2) {
+		mes "We have enough for today. Thank you! Come back tomorrow.";
+		close;
+	}
+	if (isbegin_quest(19199) == 1)
+		erasequest 19199;
+	mes "What can you bring today?";
+	next;
+	switch (select("Fish (10 of the same catch).:Grass (10 of the same kind).:Natural seasoning from the beach.:Nothing today.")) {
+	case 1: setquest 19200; break;
+	case 2: setquest 19201; break;
+	case 3: setquest 19202; break;
+	}
+	close;
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsj_ep21 >= 690 && isbegin_quest(19200) == 0 && isbegin_quest(19201) == 0 && isbegin_quest(19202) == 0 && (isbegin_quest(19199) == 0 || checkquest(19199,PLAYTIME) == 2)" );
+	end;
+}
+
+function	script	F_WSJ_Fish	{
+	if (isbegin_quest(19200) != 1) {
+		mes "^4d4dffGood water for fishing.^000000";
+		close;
+	}
+	mes "^4d4dffA calm spot where fish gather. Cast a line?^000000";
+	next;
+	if (select("Fish.:Leave.") == 2)
+		close;
+	progressbar "ffffff", 5;
+	setarray .@it, 1001619, 1001620, 1001621, 1001622, 1001623;
+	.@g = .@it[rand(5)];
+	getitem .@g,1;
+	end;
+}
+jor_mbase,295,288,0	script	Fishing Spot#wsj1	4_POINT_BLUE,{ callfunc "F_WSJ_Fish"; end; }
+jor_mbase,331,194,0	script	Fishing Spot#wsj2	4_POINT_BLUE,{ callfunc "F_WSJ_Fish"; end; }
+jor_mbase,189,26,0	script	Fishing Spot#wsj3	4_POINT_BLUE,{ callfunc "F_WSJ_Fish"; end; }
+jor_mbase,21,93,0	script	Fishing Spot#wsj4	4_POINT_BLUE,{ callfunc "F_WSJ_Fish"; end; }
+jor_mbase,23,151,0	script	Fishing Spot#wsj5	4_POINT_BLUE,{ callfunc "F_WSJ_Fish"; end; }
+
+function	script	F_WSJ_Grass	{
+	if (isbegin_quest(19201) != 1) {
+		mes "^4d4dffWild grass, tough and green even in the cold.^000000";
+		close;
+	}
+	progressbar "ffffff", 3;
+	getitem (rand(2) ? 1001624 : 1001625), 1 + rand(2);
+	end;
+}
+jor_mbase,100,203,0	script	Wild Grass#wsj1	4_POINT_YELLOW,{ callfunc "F_WSJ_Grass"; end; }
+jor_mbase,262,140,0	script	Wild Grass#wsj2	4_POINT_YELLOW,{ callfunc "F_WSJ_Grass"; end; }
+jor_mbase,310,260,0	script	Wild Grass#wsj3	4_POINT_YELLOW,{ callfunc "F_WSJ_Grass"; end; }
+jor_mbase,236,205,0	script	Wild Grass#wsj4	4_POINT_YELLOW,{ callfunc "F_WSJ_Grass"; end; }
+
+jor_mbase,340,30,0	script	Salt Crust#wsj	4_POINT_WHITE,{
+	if (isbegin_quest(19202) != 1) {
+		mes "^4d4dffA crust of salt on the rocks, glittering in the sun.^000000";
+		close;
+	}
+	progressbar "ffffff", 4;
+	mes "^4d4dffYou scrape a good handful of glittering salt into a cloth. Back to <NAVI>[Balun Wok]<INFO>jor_mbase,213,280,0,101,0</INFO></NAVI>.^000000";
+	completequest 19202;
+	setquest 19203;
+	close;
+}
+
+// ------------------------------------------------------------
+// Heine's daily (23256-23257)
+// ------------------------------------------------------------
+mbase_in,21,168,3	script(CLOAKED)	Heine's Tablet#wsj2	4_EP21_HEINE_TAB,{
+	cutin "ep21_ilse_heine01.png",1;
+	switch (callfunc("F_WSJ_Daily", 23256, 23257)) {
+	case 0:
+		mes "[Ilse el Heine]";
+		mes "I'm feeling strange mana around Lunaforma. I want to measure it outside Comodo too, which means more Bright Eyes. Three.";
+		next;
+		if (select("Three Bright Eyes, coming up.:Not today.") == 2)
+			close3;
+		setquest 23256;
+		close3;
+	case 1:
+		if (countitem(1001641) < 3) {
+			mes "[Ilse el Heine]";
+			mes "Three ^0000FFBright Eyes^000000. From the Skipskippers on the Raised Land. Don't cheat, I'll know.";
+			close3;
+		}
+		delitem 1001641,3;
+		mes "[Ilse el Heine]";
+		mes "Lovely. The readings will be beautiful.";
+		callfunc "F_WSJ_DailyDone21", 23256, 23257, 30000000, 2;
+		close3;
+	case 2:
+		mes "[Ilse el Heine]";
+		mes "I'm still crunching yesterday's numbers. Tomorrow.";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(23256) == 0 && (isbegin_quest(23257) == 0 || checkquest(23257,PLAYTIME) == 2)" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Richard's mercenaries: odd jobs (24019-24023) and the daily
+// missions Valdaris hands out (24024-24040)
+// ------------------------------------------------------------
+function	script	F_WSJ_MercHelp	{
+	.@n = getarg(0);
+	mes "[Mercenary]";
+	if (wsj_ep21 < 280 || isbegin_quest(24019) == 0 || (wsj_mh & (1 << .@n))) {
+		mes "Richard's mercenaries, at your service. For a price. A small one.";
+		close;
+	}
+	setarray .@t$, "We've got three boats with holes in them and nobody who can fix a boat.",
+		"People here need fresh food. Not salted, not dried. Fresh.",
+		"The healers are out of medicine. Bandages, too.",
+		"There's a warehouse full of supplies nobody's sorted. We can't find anything.";
+	mes .@t$[.@n];
+	wsj_mh |= (1 << .@n);
+	setarray .@q, 24019, 24020, 24021, 24022;
+	completequest .@q[.@n];
+	if (.@n < 3)
+		setquest .@q[.@n + 1];
+	if ((wsj_mh & 15) == 15) {
+		next;
+		mes "^4d4dffThat's everyone. Report to <NAVI>[Valdaris]<INFO>mbase_in,302,123,0,101,0</INFO></NAVI>.^000000";
+		setquest 24023;
+	}
+	close;
+}
+jor_mbase,300,151,3	script	Mercenary#wsj_h1	4_EP21_SOLDIER_A,{ callfunc "F_WSJ_MercHelp", 0; end; }
+jor_mbase,198,251,3	script	Mercenary#wsj_h2	4_EP21_SOLDIER_B,{ callfunc "F_WSJ_MercHelp", 1; end; }
+jor_mbase,133,128,3	script	Mercenary#wsj_h3	4_EP21_SOLDIER_A,{ callfunc "F_WSJ_MercHelp", 2; end; }
+jor_mbase,248,103,3	script	Mercenary#wsj_h4	4_EP21_SOLDIER_B,{ callfunc "F_WSJ_MercHelp", 3; end; }
+
+// The applicants (24024-24029): five a day get interviewed.
+function	script	F_WSJ_Applicant	{
+	.@n = getarg(0);
+	mes "[" + strnpcinfo(1) + "]";
+	.@cur = 0;
+	for (.@q = 24024; .@q <= 24028; .@q++)
+		if (isbegin_quest(.@q) == 1) .@cur = .@q;
+	if (!.@cur || (wsj_app & (1 << .@n))) {
+		mes "I want to join Richard's mercenaries! Are you hiring?";
+		close;
+	}
+	setarray .@line$, "I can carry two sacks of grain at once! Three if they're small!",
+		"I used to be a cultist. I know where they keep the good snacks.",
+		"I'm very good at running away. Is that a skill here?",
+		"My grandmother fought in the first war. She says I'm too soft. I'm not!",
+		"I can cook. Badly. But fast!",
+		"I've got my own sword. It's a stick, but it's mine.";
+	mes .@line$[.@n % 6];
+	next;
+	if (select("You'll do. Report to Valdaris.:Not yet. Train some more.") == 2) {
+		mes "[" + strnpcinfo(1) + "]";
+		mes "Aww.";
+		close;
+	}
+	wsj_app |= (1 << .@n);
+	completequest .@cur;
+	erasequest .@cur;
+	if (.@cur < 24028)
+		setquest .@cur + 1;
+	else
+		setquest 24029;
+	mes "[" + strnpcinfo(1) + "]";
+	mes "Yes! YES! I won't let you down!";
+	close;
+}
+jor_mbase,100,114,3	script	Mercenary Applicant#wsj01	59,{ callfunc "F_WSJ_Applicant", 0; end; }
+jor_mbase,128,186,3	script	Mercenary Applicant#wsj02	76,{ callfunc "F_WSJ_Applicant", 1; end; }
+jor_mbase,133,137,3	script	Mercenary Applicant#wsj03	570,{ callfunc "F_WSJ_Applicant", 2; end; }
+jor_mbase,137,258,3	script	Mercenary Applicant#wsj04	70,{ callfunc "F_WSJ_Applicant", 3; end; }
+jor_mbase,148,98,3	script	Mercenary Applicant#wsj05	101,{ callfunc "F_WSJ_Applicant", 4; end; }
+jor_mbase,159,129,3	script	Mercenary Applicant#wsj06	843,{ callfunc "F_WSJ_Applicant", 5; end; }
+jor_mbase,172,158,3	script	Mercenary Applicant#wsj07	713,{ callfunc "F_WSJ_Applicant", 6; end; }
+jor_mbase,183,197,3	script	Mercenary Applicant#wsj08	870,{ callfunc "F_WSJ_Applicant", 7; end; }
+jor_mbase,185,125,3	script	Mercenary Applicant#wsj09	754,{ callfunc "F_WSJ_Applicant", 8; end; }
+jor_mbase,202,70,3	script	Mercenary Applicant#wsj10	934,{ callfunc "F_WSJ_Applicant", 9; end; }
+jor_mbase,211,232,3	script	Mercenary Applicant#wsj11	701,{ callfunc "F_WSJ_Applicant", 10; end; }
+jor_mbase,217,133,3	script	Mercenary Applicant#wsj12	817,{ callfunc "F_WSJ_Applicant", 11; end; }
+jor_mbase,219,47,3	script	Mercenary Applicant#wsj13	570,{ callfunc "F_WSJ_Applicant", 12; end; }
+jor_mbase,228,98,3	script	Mercenary Applicant#wsj14	65,{ callfunc "F_WSJ_Applicant", 13; end; }
+jor_mbase,243,246,3	script	Mercenary Applicant#wsj15	99,{ callfunc "F_WSJ_Applicant", 14; end; }
+jor_mbase,268,197,3	script	Mercenary Applicant#wsj16	854,{ callfunc "F_WSJ_Applicant", 15; end; }
+jor_mbase,274,237,3	script	Mercenary Applicant#wsj17	930,{ callfunc "F_WSJ_Applicant", 16; end; }
+jor_mbase,278,52,3	script	Mercenary Applicant#wsj18	80,{ callfunc "F_WSJ_Applicant", 17; end; }
+jor_mbase,306,140,3	script	Mercenary Applicant#wsj19	10397,{ callfunc "F_WSJ_Applicant", 18; end; }
+jor_mbase,351,85,3	script	Mercenary Applicant#wsj20	862,{ callfunc "F_WSJ_Applicant", 19; end; }
+
+// Valdaris's missions. Called from Valdaris#wsj (ep21_ch1_lunaforma.txt).
+function	script	F_WSJ_Valdaris	{
+	cutin "ep21_valdaris01.png",2;
+	if (isbegin_quest(24023) == 1) {
+		mes "[Valdaris]";
+		mes "Boats, food, medicine and a warehouse nobody can find anything in. Yes. That's Lunaforma.";
+		mes "Thank you for asking around. Now you know what we really need. I'll have work for you every day, if you want it.";
+		completequest 24023;
+		getexp2 20000000,0;
+		getitem 1001618,3;	// Ep21_Wigner_Ticket
+		close3;
+	}
+	if (isbegin_quest(24019) == 0) {
+		mes "[Valdaris]";
+		mes "Want to make yourself useful? Ask the mercenaries around the base what they need. They won't tell me, I'm the one with the ledger.";
+		setquest 24019;
+		wsj_mh = 0;
+		close3;
+	}
+	if (isbegin_quest(24029) == 1) {
+		mes "[Valdaris]";
+		mes "Five applicants approved? I'll put them through their paces. Thank you.";
+		callfunc "F_WSJ_DailyDone21", 24029, 24030, 25000000, 2;
+		close3;
+	}
+	mes "[Valdaris]";
+	mes "Today's missions. Pick what you like.";
+	next;
+	switch (select("Check five applicants.:Fresh ingredients.:Shells for medicine (Scallegs).:Velellings for the children.:Clean Gimle's 1st floor.:Clean Gimle's 2nd floor.:Nothing today.")) {
+	case 1:
+		switch (callfunc("F_WSJ_Daily", 24024, 24030)) {
+		case 0:
+			for (.@q = 24025; .@q <= 24029; .@q++)
+				if (isbegin_quest(.@q) == 1) {
+					mes "[Valdaris]";
+					mes "You're already interviewing. Talk to the applicants around the base.";
+					close3;
+				}
+			setquest 24024;
+			wsj_app = 0;
+			mes "[Valdaris]";
+			mes "There are applicants all over Lunaforma. Talk to them and send me five who look like they'll survive.";
+			close3;
+		case 1:
+			mes "[Valdaris]";
+			mes "Five applicants. Keep going.";
+			close3;
+		case 2:
+			mes "[Valdaris]";
+			mes "No more interviews today.";
+			close3;
+		}
+	case 2:
+		switch (callfunc("F_WSJ_Daily", 24031, 24032)) {
+		case 0:
+			setquest 24031;
+			mes "[Valdaris]";
+			mes "Something hearty for the people: 10 " + getitemname(1001644) + "s and 10 " + getitemname(1001647) + "s. Skipskippers and Rockstrikers have them.";
+			close3;
+		case 1:
+			if (countitem(1001644) < 10 || countitem(1001647) < 10) {
+				mes "[Valdaris]";
+				mes "10 " + getitemname(1001644) + "s and 10 " + getitemname(1001647) + "s.";
+				close3;
+			}
+			delitem 1001644,10;
+			delitem 1001647,10;
+			mes "[Valdaris]";
+			mes "That'll make a fine stew.";
+			callfunc "F_WSJ_DailyDone21", 24031, 24032, 25000000, 2;
+			close3;
+		case 2:
+			mes "[Valdaris]";
+			mes "The pots are full for today.";
+			close3;
+		}
+	case 3:
+		callfunc "F_WSJ_Hunt21", "Valdaris", 24033, 24034, "50 Scallegs", "The healers grind Scalleg shells into salve. Fifty should do.", 25000000, 2;
+		end;
+	case 4:
+		callfunc "F_WSJ_Hunt21", "Valdaris", 24035, 24036, "50 Velellings", "The children love Velelling jelly. Fifty, please. For the children.", 25000000, 2;
+		end;
+	case 5:
+		callfunc "F_WSJ_Hunt21", "Valdaris", 24037, 24038, "100 monsters on Gimle's 1st floor", "Clean out the 1st floor of the cult's temple. A hundred of them.", 30000000, 3;
+		end;
+	case 6:
+		callfunc "F_WSJ_Hunt21", "Valdaris", 24039, 24040, "100 monsters on Gimle's 2nd floor", "The 2nd floor is worse. A hundred. Be careful.", 35000000, 3;
+		end;
+	}
+	close3;
+}
+
+// Lee and Yorskalf, the cult's temple annex (24041-24048).
+mbase_in,298,121,3	script	Lee#wsj	10591,{
+	cutin "ep21_lee01.png",2;
+	if (wsj_ep21 < 690) {
+		mes "[Lee]";
+		mes "I draw the maps for the mercenaries. Someday I'll draw the whole world.";
+		close3;
+	}
+	if (isbegin_quest(24041) == 0) {
+		mes "[Lee]";
+		mes "The scouts found something past Gimle: another temple. Older. Yorskalf, the cultists call it.";
+		mes "Richard wants it watched, and its monsters kept busy. Help me out there?";
+		setquest 24041;
+		completequest 24041;
+		next;
+	}
+	switch (select("Yorskalf 1st floor (daily, 300).:Yorskalf 1st floor (weekly, 1500).:Yorskalf 2nd floor (daily, 300).:Yorskalf 2nd floor (weekly, 1500).:Nothing.")) {
+	case 1:
+		callfunc "F_WSJ_Hunt21", "Lee", 24042, 24043, "300 monsters on Yorskalf's 1st floor", "Make some noise on the 1st floor. Three hundred should get their attention.", 40000000, 3;
+		end;
+	case 2:
+		callfunc "F_WSJ_Hunt21", "Lee", 24044, 24045, "1500 monsters on Yorskalf's 1st floor", "A whole week of trouble for the 1st floor. Fifteen hundred.", 150000000, 10;
+		end;
+	case 3:
+		callfunc "F_WSJ_Hunt21", "Lee", 24046, 24047, "300 monsters on Yorskalf's 2nd floor", "The 2nd floor. Three hundred. Don't die, I'd have to draw it.", 50000000, 4;
+		end;
+	case 4:
+		// No standby quest exists for the weekly 2nd floor: the week is kept
+		// in a character variable instead.
+		.@week = (gettimetick(2) + 3 * 86400 - 4 * 3600) / 604800;
+		if (isbegin_quest(24048) == 1) {
+			if (checkquest(24048,HUNTING) != 2) {
+				mes "[Lee]";
+				mes "Not done yet: ^FF00001500 monsters on Yorskalf's 2nd floor^000000.";
+				close3;
+			}
+			erasequest 24048;
+			wsj_y2w = .@week;
+			getexp2 180000000,0;
+			getitem 1001618,12;
+			mes "[Lee]";
+			mes "Fifteen hundred! I'm drawing you a medal.";
+			close3;
+		}
+		if (wsj_y2w == .@week) {
+			mes "[Lee]";
+			mes "That's this week's chaos done. Next week!";
+			close3;
+		}
+		setquest 24048;
+		mes "[Lee]";
+		mes "A week of rampaging on the 2nd floor. ^FF00001500 monsters^000000.";
+		close3;
+	}
+	close3;
+}
+
+// ------------------------------------------------------------
+// The Lunaforma traders (mbase_in, the Wigner store)
+// ------------------------------------------------------------
+mbase_in,232,122,3	script	Wigner Company Exchanger#wsj	68,{
+	mes "[Wigner Company Exchanger]";
+	mes "Wigner Premium Exchange Tickets accepted here! The resistance pays its helpers in tickets, and the tickets buy the best gear in the north.";
+	next;
+	switch (select("Georborg armour and accessories.:Yorskalf items.:Nothing.")) {
+	case 1:
+		close2;
+		callshop "WSJ_WignerGear",1;
+		end;
+	case 2:
+		close2;
+		callshop "WSJ_WignerYor",1;
+		end;
+	}
+	close;
+}
+-	itemshop	WSJ_WignerGear	-1,1001618,450350:60,450351:60,480415:45,480416:45,470260:45,470261:45,490507:40,490508:40,490509:40,490510:40
+
+-	itemshop	WSJ_WignerYor	-1,1001618,103503:40,103505:30,103501:2,103502:2
+
+mbase_in,232,125,3	script	Blacksmith Sansan#wsj	10504,{
+	mes "[Blacksmith Sansan]";
+	mes "Georborg gear takes refining like nothing else, if you have the right hammer and the right stones.";
+	mes "Hammers and magic stones, for tickets. Then use the hammer on the gear yourself.";
+	close2;
+	callshop "WSJ_Sansan",1;
+	end;
+}
+-	itemshop	WSJ_Sansan	-1,1001618,102881:5,102882:12,102883:25,1001653:2,1001654:5,1001655:10,1001656:2,1001657:5,1001658:10,1001659:2,1001660:5,1001661:10,1001662:2,1001663:5,1001664:10
+
+mbase_in,228,131,3	script	Mage Lobelia#wsj	10490,{
+	mes "[Mage Lobelia]";
+	mes "The forest's magic orbs, set into Georborg or Yorskalf gear. The serpent's land is full of old magic, if you know where to look.";
+	next;
+	switch (select("Georborg armour/robe:Georborg manteau/muffler:Georborg boots/shoes:Georborg accessory:Yorskalf armour/robe:Yorskalf manteau/muffler:Yorskalf boots/shoes:Yorskalf accessory:Nothing.")) {
+	case 1: .@e = 143; break;
+	case 2: .@e = 144; break;
+	case 3: .@e = 145; break;
+	case 4: .@e = 146; break;
+	case 5: .@e = 152; break;
+	case 6: .@e = 153; break;
+	case 7: .@e = 154; break;
+	case 8: .@e = 155; break;
+	default: close;
+	}
+	close2;
+	item_enchant(.@e);
+	end;
+}
+
+mbase_in,220,127,3	script	Wigner Company Member Popo#wsj	700,{
+	mes "[Popo]";
+	mes "Tickets! Everyone wants tickets. You get them from the resistance's jobs:";
+	mes "Tris's escape routes, Mandel's supply lists, Valdaris's missions, Lee's Yorskalf work, Heine's measurements, Balun Wok's kitchen, Counselor Ulus in Alberta and Nillem's ghost ship.";
+	next;
+	mes "[Popo]";
+	mes "Then spend them with the Exchanger and Sansan, and have Lobelia enchant the result. That's the Wigner way!";
+	close;
+}
