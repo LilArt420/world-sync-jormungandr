@@ -10,7 +10,7 @@ npcs = {}
 for m in re.finditer(r'^[a-z0-9_@]+,\d+,\d+,\d+\t(script\(CLOAKED\)|script|duplicate\([^)]*\))\t([^\t]+)\t', allt, re.M):
     npcs[m.group(2)] = m.group(1)
 common = txt[os.path.join(ROOT, 'npc', 'ep20_common.txt')]
-table = set(re.findall(r'"([^"]+#wsj[^"]*)","\d+","\d+"', common))
+table = set(re.findall(r'"([^"]+#wsj[^"]*)","-?\d+","\d+"', common))
 table |= {"Nyar's Clone#wsj%d" % i for i in range(1, 13)}
 bad = 0
 for n in sorted(table):
