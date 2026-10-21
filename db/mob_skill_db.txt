@@ -5,3 +5,7 @@
 21981,Rasgand@NPC_VENOMIMPRESS,attack,738,5,1000,500,10000,yes,target,always,0,,,,,,,
 21981,Rasgand@NPC_EARTHQUAKE,attack,653,3,500,1500,20000,no,self,always,0,,,,,,,
 21981,Rasgand@NPC_WIDECURSE,chase,677,3,500,1000,20000,yes,target,always,0,,,,,,,
+22371,Eroded Tan@NPC_POWERUP,attack,349,5,10000,1000,60000,no,self,myhpltmaxrate,50,,,,,,,
+22371,Eroded Tan@NPC_WATERATTACK,attack,184,5,1500,0,5000,yes,target,always,0,,,,,,,
+22371,Eroded Tan@NPC_VENOMIMPRESS,attack,738,5,1000,500,10000,yes,target,always,0,,,,,,,
+22371,Eroded Tan@NPC_EARTHQUAKE,attack,653,3,500,1500,20000,no,self,always,0,,,,,,,

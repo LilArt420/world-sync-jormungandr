@@ -1,0 +1,855 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 21, chapters 4-6: the giant serpent, Gimle's secret
+//= altar, and back to the present.
+//= Quests 18338-18361, 8914-8916; memorial dungeons Snake's
+//= Resting Place (1@ep21b), Secret Altar (1@ep21a) and Serene
+//= Sanctuary (1@mdtem). Steps 690-1000.
+//============================================================
+
+// ------------------------------------------------------------
+// Witnesses (690-709)
+// ------------------------------------------------------------
+function	script	F_WSJ_Witness	{
+	.@n = getarg(0);
+	if (wsj_ep21 != 690 || (wsj_ep21b & (1 << .@n))) {
+		if (.@n == 0) { mes "[Exhausted Soldier]"; mes "I just want to sleep. Without dreaming."; }
+		else if (.@n == 1) { mes "[Escaped Cultist]"; mes "I'm free. I keep telling myself that. I'm free."; }
+		else { mes "[Wounded Soldier]"; mes "The healers say it will scar. Good. I want to remember."; }
+		close;
+	}
+	if (.@n == 0) {
+		mes "[Exhausted Soldier]";
+		mes "The serpent? I saw it. At night, on the north shore of the Raised Land.";
+		mes "Long as a ship. Grey-white, slick, like it had never seen the sun. It slid into the temple's shadow and was gone.";
+		next;
+		mes "[Exhausted Soldier]";
+		mes "I haven't slept since. Every time I close my eyes, it's there.";
+	} else if (.@n == 1) {
+		mes "[Escaped Cultist]";
+		mes "They call it the Firstborn. The bishops lead the chosen down to the deep halls, and the Firstborn... eats.";
+		next;
+		mes "[Escaped Cultist]";
+		mes "I saw it take a man whole. He was singing. They're all singing when they go down.";
+	} else {
+		mes "[Wounded Soldier]";
+		mes "Want proof? Look at my back.";
+		next;
+		mes "^4d4dffAcross the soldier's back runs a band of scars, each one shaped like a scale the size of a shield.^000000";
+		next;
+		mes "[Wounded Soldier]";
+		mes "It brushed past me. Just brushed. I was lucky.";
+	}
+	setarray .@q, 18339, 18340, 18341;
+	setquest .@q[.@n];
+	completequest .@q[.@n];
+	wsj_ep21b |= (1 << .@n);
+	if ((wsj_ep21b & 7) == 7) {
+		next;
+		mes "^4d4dffThree witnesses. The serpent is real. Report to <NAVI>[Tris]<INFO>jor_mbase,204,193,0,101,0</INFO></NAVI>.^000000";
+		callfunc "F_WSJ_Step21", 700, "18338", "18342";
+	}
+	close;
+}
+
+jor_mbase,189,249,3	script	Exhausted Soldier#wsj	4_EP21_SOLDIER_B,{
+	callfunc "F_WSJ_Witness", 0;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 690 && (wsj_ep21b & 1) == 0" );
+	end;
+}
+jor_mbase,218,298,5	script	Escaped Cultist#wsj	4_EP21_M_WORKER_B,{
+	callfunc "F_WSJ_Witness", 1;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 690 && (wsj_ep21b & 2) == 0" );
+	end;
+}
+jor_mbase,60,196,5	script	Wounded Soldier#wsj	4_EP21_SOLDIER_A,{
+	callfunc "F_WSJ_Witness", 2;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 690 && (wsj_ep21b & 4) == 0" );
+	end;
+}
+
+jor_mbase,206,191,3	script(CLOAKED)	Tris#wsj_b	4_EP21_TRIS,{
+	if (wsj_ep21 == 700) {
+		cutin "ep21_tris02.png",2;
+		mes "[Tris]";
+		mes "A serpent the size of a ship, eating people under the temple. And the cult calls it the Firstborn.";
+		next;
+		mes "[Tris]";
+		mes "Tan and Nadoyo went to scout the north of the Raised Land two days ago. They should have been back yesterday.";
+		mes "Find them. Start at the <NAVI>[crack in the rocks]<INFO>jor_raise1,199,190,0,101,0</INFO></NAVI> north of the temple; that's where they camp.";
+		callfunc "F_WSJ_Step21", 710, "18342", "18343";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 700" );
+	end;
+}
+
+jor_mbase,206,191,0	script	#wsj_t_tris	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// The Raised Land (710-769)
+// ------------------------------------------------------------
+jor_raise1,197,188,3	script(CLOAKED)	Nadoyo#wsj_crack	10574,{
+	if (wsj_ep21 == 710) {
+		cutin "ep21_nadoyo02.png",2;
+		mes "[Nadoyo]";
+		mes "You came! Shh, keep down.";
+		next;
+		cutin "ep21_tan01.png",0;
+		mes "[Tan]";
+		mes "We're not lost. We're watching.";
+		mes "Every night, a line of believers walks out of Gimle to the cliff west of the temple. To an ornamented door in the rock. They go in. They don't come out.";
+		next;
+		cutin "ep21_reinhardt01.png",2;
+		mes "[Reinhardt]";
+		mes "I came along to help. That door is older than the temple. I've seen it in the bishops' scrolls.";
+		next;
+		cutin "ep21_tan01.png",0;
+		mes "[Tan]";
+		mes "We go now, while the line's inside. The <NAVI>[ornamental door]<INFO>jor_raise1,128,326,0,101,0</INFO></NAVI>. Quietly.";
+		callfunc "F_WSJ_Step21", 720, "18343", "18344";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 710" );
+	end;
+}
+jor_raise1,199,188,3	script(CLOAKED)	Tan#wsj_crack	4_EP21_TAN,{
+	cutin "ep21_tan01.png",0;
+	mes "[Tan]";
+	mes "Down. They'll see you.";
+	close3;
+}
+
+jor_raise1,197,186,0	script	#wsj_t_crack	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// The ornamental door: the hidden place behind it, and the Snake's
+// Resting Place (1@ep21b) for the last battle.
+jor_raise1,128,326,0	script	Ornamental Door#wsj	4_POINT_BLUE,{
+	if (wsj_ep21 == 720) {
+		mes "^4d4dffA stone door carved with a coiled serpent, set into the cliff. It's warm to the touch. Something breathes behind it.^000000";
+		next;
+		cutin "ep21_reinhardt02.png",2;
+		mes "[Reinhardt]";
+		mes "These marks... 'Here sleeps the Firstborn, fed by the faithful, until the Serpent wakes.'";
+		mes "It isn't a beast that wandered in. They ^FF0000made^000000 it. Grew it, out of Jormungandr's own mana and the people they fed it.";
+		next;
+		cutin "ep21_tan01.png",0;
+		mes "[Tan]";
+		mes "Then it dies. Tonight.";
+		next;
+		cutin "ep21_reinhardt01.png",2;
+		mes "[Reinhardt]";
+		mes "Not with four of us. Tell Tris. This is what Georborg was preparing for.";
+		mes "Back to <NAVI>[Lunaforma]<INFO>jor_mbase,204,193,0,101,0</INFO></NAVI>, quickly.";
+		callfunc "F_WSJ_Step21", 730, "18344", "18345";
+		close3;
+	}
+	if (wsj_ep21 >= 760) {
+		mes "^4d4dffThe ornamental door. Behind it, the Snake's Resting Place, and the last battle of the age of heroes.^000000";
+		if (wsj_ep21 == 760) {
+			mes "^4d4dffTris and the resistance are already inside.^000000";
+			next;
+			if (select("Go in.:Not yet.") == 2)
+				close;
+			callfunc "F_WSJ_EnterMd", "Snake's Resting Place";
+			end;
+		}
+		next;
+		// The battle repeats in memory (12647, daily).
+		switch (callfunc("F_WSJ_Daily", 12656, 12647)) {
+		case 0:
+		case 1:
+			mes "^4d4dffThe memory of the last battle lingers here. You could witness it again.^000000";
+			next;
+			if (select("Witness the last battle again.:Leave.") == 2)
+				close;
+			if (isbegin_quest(12656) == 0)
+				setquest 12656;
+			callfunc "F_WSJ_EnterMd", "Snake's Resting Place";
+			end;
+		case 2:
+			mes "^4d4dffThe memory is quiet today. It will repeat after dawn.^000000";
+			close;
+		}
+	}
+	mes "^4d4dffA stone door carved with a coiled serpent. It doesn't open.^000000";
+	close;
+}
+
+// Enters (or creates, then enters) a memorial dungeon for this character.
+function	script	F_WSJ_EnterMd	{
+	.@md$ = getarg(0);
+	if (instance_enter(.@md$) == IE_OK)
+		return;
+	.@id = instance_create(.@md$, IM_CHAR);
+	if (.@id < 0) {
+		mes "^4d4dffThe way won't open right now. Try again in a moment.^000000";
+		close;
+	}
+	if (instance_enter(.@md$) != IE_OK) {
+		mes "^4d4dffThe way won't open right now. Try again in a moment.^000000";
+		close;
+	}
+	return;
+}
+
+jor_raise1,126,329,5	script(CLOAKED)	Reinhardt#wsj_door	4_EP21_REINHARDT,{
+	cutin "ep21_reinhardt01.png",2;
+	mes "[Reinhardt]";
+	mes "I signed the lists that fed this thing. Tonight I'll see it end.";
+	close3;
+}
+jor_raise1,130,329,3	script(CLOAKED)	Tan#wsj_door	4_EP21_TAN,{
+	cutin "ep21_tan01.png",0;
+	mes "[Tan]";
+	mes "Tonight.";
+	close3;
+}
+jor_raise1,131,330,3	script(CLOAKED)	Nadoyo#wsj_door2	10574,{
+	if (wsj_ep21 == 750) {
+		cutin "ep21_nadoyo02.png",2;
+		mes "[Nadoyo]";
+		mes "You came after all! They went in already, Tris, Tan, Reinhardt, half the resistance.";
+		mes "I'm supposed to guard the door. Nobody said anything about guarding YOU from going in.";
+		next;
+		mes "[Nadoyo]";
+		mes "Go. Through the <NAVI>[ornamental door]<INFO>jor_raise1,128,326,0,101,0</INFO></NAVI>. Help them.";
+		callfunc "F_WSJ_Step21", 760, "18347", "18348";
+		close3;
+	}
+	cutin "ep21_nadoyo01.png",2;
+	mes "[Nadoyo]";
+	mes "Come back out. All of you. Please.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 750" );
+	end;
+}
+
+jor_raise1,128,329,0	script	#wsj_t_odoor	HIDDEN_WARP_NPC,9,9,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+jor_mbase,206,189,3	script(CLOAKED)	Tris#wsj_b2	4_EP21_TRIS,{
+	if (wsj_ep21 == 730) {
+		cutin "ep21_tris02.png",2;
+		mes "[Tris]";
+		mes "They made it. They grew a god-beast out of our people.";
+		next;
+		mes "[Tris]";
+		mes "Then this is the battle. Georborg, the Walter fleet, Richard's mercenaries, all of us, tonight, through that door.";
+		next;
+		cutin "ep21_tris01.png",2;
+		mes "[Tris]";
+		mes "Not you, though. You and your friends from the future stay out of it. If you die here, who knows what happens to your time?";
+		mes "Wait in the <NAVI>[small room]<INFO>mbase_in,64,184,0,101,0</INFO></NAVI> at the back of the barracks. That's an order.";
+		callfunc "F_WSJ_Step21", 740, "18345", "18346";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 730" );
+	end;
+}
+
+// The small room (mbase_in 64,184), behind the small door.
+mbase_in,66,185,3	script(CLOAKED)	Nyar#wsj_sm	4_EP20_NYAR,{
+	if (wsj_ep21 == 740) {
+		cutin "ep172_nillem03.png",2;
+		mes "[Nillem]";
+		mes "Tris is right, you know. We're not supposed to change things here. What if we break history?";
+		next;
+		cutin "ep19_lehar03.png",0;
+		mes "[Lehar]";
+		mes "And what if they lose because we sat in a cupboard?";
+		next;
+		mes "^4d4dffThe tablet in your pack hums. Heine's face appears, upside down.^000000";
+		next;
+		cutin "ep21_ilse_heine02.png",1;
+		mes "[Ilse el Heine]";
+		mes "Oh, stop it, both of you. I looked at the time-smudge again. The battle tonight is ^0000FFin the history books^000000. In your future. With you in it.";
+		mes "If you DON'T go, that's when history breaks. Go!";
+		next;
+		cutin "ep20_nyar01.png",1;
+		mes "[Nyar]";
+		mes "^0000FFMrrow. The bird-woman is right.^000000";
+		next;
+		cutin "ep21_nadoyo01.png",2;
+		mes "[Nadoyo]";
+		mes "(at the door) I'll take you. The others left already. Quickly, to the <NAVI>[ornamental door]<INFO>jor_raise1,128,326,0,101,0</INFO></NAVI>!";
+		callfunc "F_WSJ_Step21", 750, "18346", "18347";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 740" );
+	end;
+}
+mbase_in,63,185,5	script(CLOAKED)	Lehar#wsj_sm	4_EP19_LEHAR,{
+	cutin "ep19_lehar02.png",2;
+	mes "[Lehar]";
+	mes "A cupboard. They put us in a cupboard.";
+	close3;
+}
+mbase_in,65,182,5	script(CLOAKED)	Nillem#wsj_sm	4_M_NILLEM,{
+	cutin "ep172_nillem01.png",2;
+	mes "[Nillem]";
+	mes "History is watching us. Literally, in Heine's case.";
+	close3;
+}
+mbase_in,67,182,3	script(CLOAKED)	Nadoyo#wsj_sm	10574,{
+	cutin "ep21_nadoyo01.png",2;
+	mes "[Nadoyo]";
+	mes "Ready when you are.";
+	close3;
+}
+
+mbase_in,65,184,0	script	#wsj_t_small	HIDDEN_WARP_NPC,6,6,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// Memorial dungeon: the Snake's Resting Place (1@ep21b)
+// ------------------------------------------------------------
+1@ep21b	mapflag	nosave	SavePoint
+1@ep21b	mapflag	noteleport
+1@ep21b	mapflag	nomemo
+1@ep21b	mapflag	nowarpto
+1@ep21b	mapflag	nobranch
+1@ep21b	mapflag	monster_noteleport
+1@ep21b	mapflag	nopenalty
+
+1@ep21b,1,1,0	script	#wsj_md21b	-1,{
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("Tris#wsj_md21b");
+	monster instance_mapname("1@ep21b"),100,168,"Eroded Tan",22371,1,instance_npcname("#wsj_md21b") + "::OnTanDown";
+	end;
+OnTanDown:
+	mapannounce instance_mapname("1@ep21b"), "The giant serpent's coils go slack. In the middle of them, a man slumps to his knees: Tan.", bc_map, "0xFF4444";
+	sleep 3000;
+	enablenpc instance_npcname("Tris#wsj_md21b");
+	end;
+}
+
+1@ep21b,100,118,3	script	Tris#wsj_md21b	4_EP21_TRIS,{
+	if (wsj_ep21 == 760) {
+		cutin "ep21_tris02.png",2;
+		mes "[Tris]";
+		mes "Tan! TAN!";
+		next;
+		cutin "ep21_tan01.png",0;
+		mes "[Tan]";
+		mes "...It got me on the way in. Before any of you. It was inside me, the whole fight. I could feel it using my arms.";
+		next;
+		mes "[Tan]";
+		mes "Did we... is it...";
+		next;
+		cutin "ep21_tris02.png",2;
+		mes "[Tris]";
+		mes "It's dead. You held on long enough for us to kill it. You did it, Tan.";
+		next;
+		cutin "ep21_tan01.png",0;
+		mes "[Tan]";
+		mes "...Good.";
+		mes "Hey. You. The stranger from the crack in the air. I was wrong about you.";
+		next;
+		cutin "",255;
+		mes "^4d4dffThe resistance stands in silence around its vice-captain. Somewhere far above, the bells of Gimle start ringing in alarm.^000000";
+		next;
+		cutin "ep20_nyar04.png",1;
+		mes "^4d4dffAnd then, out of nowhere, a small white shape lands on your shoulder and sinks its teeth into your collar.^000000";
+		mes "[Nyar]";
+		mes "^0000FFNo time to cry. The snake's mana is moving. Come!^000000";
+		callfunc "F_WSJ_Step21", 770, "18348", "18349";
+		callfunc "F_WSJ_Chapter21";
+		close2;
+		cutin "",255;
+		warp "jor_tmple1",170,303;
+		end;
+	}
+	// A repeat of the battle, from memory.
+	if (isbegin_quest(12656) == 1) {
+		cutin "ep21_tris01.png",2;
+		mes "[Tris]";
+		mes "It's over. Again. Every time I live this night, it hurts the same.";
+		completequest 12656;
+		erasequest 12656;
+		if (isbegin_quest(12647) == 1)
+			erasequest 12647;
+		setquest 12647;
+		getexp2 30000000,0;
+		getitem 1001618,1;	// Ep21_Wigner_Ticket
+		close2;
+	} else
+		close2;
+	cutin "",255;
+	warp "jor_raise1",126,322;
+	end;
+}
+
+// ------------------------------------------------------------
+// Gimle's hidden altar (770-819)
+// ------------------------------------------------------------
+jor_tmple1,172,305,3	script(CLOAKED)	Nyar#wsj_alt	4_EP20_NYAR,{
+	if (wsj_ep21 == 770) {
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "^0000FFHere. Behind the bishops' altar. The snake's mana runs down through the floor like water.^000000";
+		mes "^0000FFThe beast you killed was only a cup. Someone is pouring what was in it into a seed. The seed of the undying.^000000";
+		next;
+		cutin "ep172_nillem02.png",2;
+		mes "[Nillem]";
+		mes "(arriving, out of breath) I followed the cat! There, that book on the lectern. It's not a book. It's a mechanism. Press it!";
+		callfunc "F_WSJ_Step21", 780, "18349", "18350";
+		close3;
+	}
+	if (wsj_ep21 == 790 || wsj_ep21 == 800) {
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "^0000FFThe shining door. Go through. I am right behind you.^000000";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 770" );
+	end;
+}
+
+jor_tmple1,168,305,3	script(CLOAKED)	Suspicious Book#wsj	4_EP18_PAPERS,{
+	if (wsj_ep21 == 780) {
+		mes "^4d4dffA heavy book bolted to a lectern. Its pages are blank, except one, which shows a serpent swallowing its own tail.^000000";
+		next;
+		if (select("Press the serpent.:Leave it.") == 2)
+			close;
+		specialeffect EF_LORD;
+		mes "^4d4dffThe floor grinds. Below the altar, a door of white light opens, humming with Jormungandr's mana.^000000";
+		callfunc "F_WSJ_Step21", 790, "18350", "18351";
+		close;
+	}
+	mes "^4d4dffThe serpent swallowing its tail.^000000";
+	close;
+}
+
+jor_tmple1,170,303,3	script(CLOAKED)	Shining Door#wsj	GATE_SKYBLUE,{
+	if (wsj_ep21 == 790 || wsj_ep21 == 800) {
+		if (wsj_ep21 == 790)
+			callfunc "F_WSJ_Step21", 800, "18351", "18352";
+		mes "^4d4dffThe shining door. Beyond it, the mana flows down into the dark.^000000";
+		next;
+		if (select("Go through.:Not yet.") == 2)
+			close;
+		callfunc "F_WSJ_EnterMd", "Secret Altar";
+		end;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 790" );
+	end;
+}
+
+jor_tmple1,170,305,0	script	#wsj_t_alt	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// Memorial dungeon: the Secret Altar (1@ep21a). Four shamans feed the
+// seed; when they fall, Nyar takes the mana.
+1@ep21a	mapflag	nosave	SavePoint
+1@ep21a	mapflag	noteleport
+1@ep21a	mapflag	nomemo
+1@ep21a	mapflag	nowarpto
+1@ep21a	mapflag	nobranch
+1@ep21a	mapflag	monster_noteleport
+1@ep21a	mapflag	nopenalty
+
+1@ep21a,1,1,0	script	#wsj_md21a	-1,{
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("Nyar#wsj_md21a");
+	'shamans = 4;
+	setarray .@x, 58, 66, 58, 66;
+	setarray .@y, 242, 242, 234, 234;
+	for (.@i = 0; .@i < 4; .@i++) {
+		monster instance_mapname("1@ep21a"),.@x[.@i],.@y[.@i],"Seed Keeper",22359,1,instance_npcname("#wsj_md21a") + "::OnShamanDown";
+		// Lighter than the temple's Yoscopus Shamans: a story fight.
+		setunitdata $@mobid[0], UMOB_MAXHP, 6000000;
+		setunitdata $@mobid[0], UMOB_HP, 6000000;
+	}
+	end;
+OnShamanDown:
+	'shamans--;
+	if ('shamans > 0) {
+		mapannounce instance_mapname("1@ep21a"), "The flow of mana falters. " + 'shamans + " keeper(s) still chanting.", bc_map, "0x88CCFF";
+		end;
+	}
+	mapannounce instance_mapname("1@ep21a"), "The last keeper falls. The mana churns over the altar, unguarded...", bc_map, "0x88CCFF";
+	sleep 2000;
+	enablenpc instance_npcname("Nyar#wsj_md21a");
+	end;
+}
+
+1@ep21a,62,238,3	script	Nyar#wsj_md21a	4_EP20_NYAR,{
+	if (wsj_ep21 == 800) {
+		cutin "ep20_nyar05.png",1;
+		mes "^4d4dffNyar leaps onto the altar, opens her small mouth, and breathes in.^000000";
+		mes "^4d4dffThe river of mana bends, spirals, and pours into her, until the air is still and cold.^000000";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "^0000FF...Done. The seed will never be planted. The snake bishop's undying has no root now.^000000";
+		mes "^0000FFCome. We talk on the island, where the rift is.^000000";
+		callfunc "F_WSJ_Step21", 810, "18352", "18353";
+		close2;
+		cutin "",255;
+		warp "jor_crk_p",104,103;
+		end;
+	}
+	close2;
+	warp "jor_tmple1",170,301;
+	end;
+}
+
+jor_crk_p,107,107,3	script(CLOAKED)	Nyar#wsj_p3	4_EP20_NYAR,{
+	if (wsj_ep21 == 810) {
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "^0000FFIt is done here. The seed is gone. In your time, the snake bishop should be only a snake.^000000";
+		next;
+		cutin "ep172_nillem01.png",2;
+		mes "[Nillem]";
+		mes "Then we go home and check. Carefully. Very carefully.";
+		next;
+		mes "^4d4dffYour tablet buzzes. Heine.^000000";
+		next;
+		cutin "ep21_ilse_heine02.png",1;
+		mes "[Ilse el Heine]";
+		mes "Before you vanish into your future: I made you a better tablet. One that might still work when you get there.";
+		mes "I hid it in the <NAVI>[bushes by the ferry]<INFO>jor_mbase,129,43,0,101,0</INFO></NAVI> at Lunaforma. Go get it. Don't thank me.";
+		callfunc "F_WSJ_Step21", 820, "18353", "18354";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 810" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Home again (820-1000)
+// ------------------------------------------------------------
+jor_mbase,128,45,3	script(CLOAKED)	Bushes#wsj	4_POINT_BLUE,{
+	if (wsj_ep21 == 820) {
+		mes "^4d4dffUnder the bushes, wrapped in oilcloth: a tablet, newer and thinner than the old one. A note is tied to it.^000000";
+		mes "^0000FF'Don't drop it. -H.'^000000";
+		getitem 1001627,1;	// Ep21_Tab
+		next;
+		mes "^4d4dffTime to go home. Back through the rift, to the <NAVI>[Scale Island]<INFO>jor_crk,137,138,0,101,0</INFO></NAVI> of your own time.^000000";
+		callfunc "F_WSJ_Step21", 830, "18354", "18355";
+		close;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 820" );
+	end;
+}
+
+jor_mbase,128,45,0	script	#wsj_t_bush	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+jor_crk,135,138,3	script(CLOAKED)	Nillem#wsj_crk2	4_M_NILLEM,{
+	if (wsj_ep21 == 830) {
+		cutin "ep172_nillem01.png",2;
+		mes "[Nillem]";
+		mes "Home. Same rocks, same sea. Older wind.";
+		next;
+		mes "[Nillem]";
+		mes "If it worked, Rasgand's seal in the Nest of Small Branches should be... quiet. Let's look.";
+		mes "<NAVI>[Nyar's Double]<INFO>jor_twig,122,164,0,101,0</INFO></NAVI> keeps watch over the seal.";
+		callfunc "F_WSJ_Step21", 840, "18355", "18356";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 830" );
+	end;
+}
+
+jor_crk,137,136,0	script	#wsj_t_crk2	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// Nyar's Double watches the sealed Rasgand in the Nest of Small Branches.
+jor_twig,122,164,3	script	Nyar's Double#wsj	4_EP20_NYAR,{
+	cutin "ep20_nyar02.png",1;
+	if (wsj_ep21 == 840) {
+		mes "[Nyar's Double]";
+		mes "^0000FFThe seal... the snake bishop's mana is weaker. Much weaker.^000000";
+		mes "^0000FFBut it is still there. Still beating.^000000";
+		next;
+		cutin "ep19_voglinde01.png",0;
+		mes "[Voglinde]";
+		mes "Then we end it now. Lehar and I will go in. Wait here.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Finally, something to hit!";
+		next;
+		cutin "",255;
+		mes "^4d4dffVoglinde and Lehar step into the barrier and vanish. All you can do is wait.^000000";
+		callfunc "F_WSJ_Step21", 850, "18356", "18357";
+		wsj_ep21_t = gettimetick(2);
+		close;
+	}
+	if (wsj_ep21 == 850) {
+		if (gettimetick(2) - wsj_ep21_t < 30) {
+			mes "[Nyar's Double]";
+			mes "^0000FFWait. They are fighting.^000000";
+			close3;
+		}
+		mes "^4d4dffVoglinde and Lehar stagger back out of the barrier, bruised.^000000";
+		next;
+		cutin "ep19_voglinde02.png",0;
+		mes "[Voglinde]";
+		mes "We cut him down. Three times. And three times he stood up again.";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "It's like hitting a reflection. Something's wrong.";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar's Double]";
+		mes "^0000FFThen look for yourself, little one. Go into the quiet sanctuary. See what stands up.^000000";
+		callfunc "F_WSJ_Step21", 860, "18357", "18358";
+		close3;
+	}
+	if (wsj_ep21 == 860) {
+		mes "[Nyar's Double]";
+		mes "^0000FFThe quiet sanctuary. I will open it.^000000";
+		next;
+		if (select("Go in.:Not yet.") == 2)
+			close3;
+		cutin "",255;
+		callfunc "F_WSJ_EnterMd", "Serene Sanctuary";
+		end;
+	}
+	if (wsj_ep21 == 870) {
+		mes "[Nyar's Double]";
+		mes "^0000FFNot the snake bishop? Only the heart shard's mana, wearing his shape?^000000";
+		next;
+		mes "[Nyar's Double]";
+		mes "^0000FFThen the bishop is truly gone. Only an echo is left, and an echo fades.^000000";
+		mes "^0000FFTell the true Nyar. She is at the rift on <NAVI>[Scale Island]<INFO>jor_crk,105,108,0,101,0</INFO></NAVI>, closing it.^000000";
+		callfunc "F_WSJ_Step21", 880, "18359", "18360";
+		close3;
+	}
+	mes "[Nyar's Double]";
+	mes "^0000FFI watch. That is all I do.^000000";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 840 || wsj_ep21 == 860 || wsj_ep21 == 870" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 850" );
+	end;
+}
+
+jor_twig,124,167,3	script(CLOAKED)	Voglinde#wsj_tw	4_EP19_VOGLINDE,{
+	cutin "ep19_voglinde01.png",0;
+	mes "[Voglinde]";
+	mes "Wait here. That's an order.";
+	close3;
+}
+jor_twig,120,167,5	script(CLOAKED)	Lehar#wsj_tw	4_EP19_LEHAR,{
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "I've got this. Probably.";
+	close3;
+}
+
+jor_twig,122,162,0	script	#wsj_t_dbl	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// Memorial dungeon: the Serene Sanctuary (1@mdtem).
+1@mdtem	mapflag	nosave	SavePoint
+1@mdtem	mapflag	noteleport
+1@mdtem	mapflag	nomemo
+1@mdtem	mapflag	nowarpto
+1@mdtem	mapflag	nobranch
+1@mdtem	mapflag	nopenalty
+
+1@mdtem,150,130,3	script	Rasgand?#wsj_md	4_EP20_LASGAND,{
+	if (wsj_ep21 == 860) {
+		cutin "ep20_lasgand01.png",2;
+		mes "[Rasgand?]";
+		mes "You again. I cannot die. I cannot die. I cannot die.";
+		next;
+		mes "^4d4dffThe figure repeats the words, flat and even. Its edges shimmer like heat over ice.^000000";
+		mes "^4d4dffWhere its heart should be, a cold blue light pulses: the same pulse as the shard of Ymir's heart in your pack.^000000";
+		next;
+		select("Hold up the shard.");
+		cutin "ep20_lasgand_god02.png",2;
+		mes "^4d4dffThe figure flickers and leans toward the shard, the way a flame leans toward air.^000000";
+		mes "^4d4dffIt isn't Rasgand at all. It's the heart shard's mana, remembering the last shape it filled.^000000";
+		next;
+		cutin "",255;
+		mes "^4d4dffWithout the seed from the past, there is nothing to feed it. Already it's thinner than a moment ago.^000000";
+		mes "^4d4dffTell <NAVI>[Nyar's Double]<INFO>jor_twig,122,164,0,101,0</INFO></NAVI>.^000000";
+		callfunc "F_WSJ_Step21", 870, "18358", "18359";
+		close2;
+		warp "jor_twig",122,160;
+		end;
+	}
+	mes "^4d4dffA faint shape, already fading.^000000";
+	close2;
+	warp "jor_twig",122,160;
+	end;
+}
+
+jor_crk,107,105,3	script(CLOAKED)	Nyar#wsj_crk2	4_EP20_NYAR,{
+	cutin "ep20_nyar01.png",1;
+	if (wsj_ep21 == 880) {
+		mes "[Nyar]";
+		mes "^0000FFAn echo. Good. Echoes fade.^000000";
+		next;
+		cutin "ep172_nillem02.png",2;
+		mes "[Nillem]";
+		mes "There's something else. While we were closing the rift, this fell out of it.";
+		mes "A letter. In Ivan Wigner's hand. Addressed to Lalaira, in Alberta. In the past.";
+		next;
+		mes "[Nillem]";
+		mes "I thought the past was fixed. Yet here is a letter no one delivered. If we don't deliver it, perhaps someone, somewhere, will never read it.";
+		mes "One more trip. The rift is still open, just. Take it to <NAVI>[Lalaira]<INFO>jalbe_in,56,138,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 890, "18360", "8914";
+		close3;
+	}
+	if (wsj_ep21 == 920) {
+		mes "[Nyar]";
+		mes "^0000FFYou are back, and the rift can close.^000000";
+		next;
+		mes "^4d4dffNyar trots over with something clamped in her mouth: a tiny pouch of woven roots, older than anything you've ever touched.^000000";
+		next;
+		cutin "ep20_nyar05.png",1;
+		mes "[Nyar]";
+		mes "^0000FFMy primeval pouch. I have had it since before the first snow. Look how fine it is.^000000";
+		mes "^0000FF...No, you cannot have it. But you may look at it. That is a great honour.^000000";
+		next;
+		cutin "ep172_nillem01.png",2;
+		mes "[Nillem]";
+		mes "And so ends the strangest research trip of my career. The age of heroes, frozen in its place, and the undying bishop undone at the root.";
+		mes "Thank you, adventurer. History thanks you. Probably.";
+		callfunc "F_WSJ_Step21", 1000, "18361", "";
+		callfunc "F_WSJ_Chapter21";
+		getitem 1001618,7;	// Ep21_Wigner_Ticket
+		close3;
+	}
+	mes "[Nyar]";
+	mes "^0000FFThe rift is closing. Slowly. Like a yawn.^000000";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 880 || wsj_ep21 == 920" );
+	end;
+}
+jor_crk,109,108,3	script(CLOAKED)	Nillem#wsj_crk3	4_M_NILLEM,{
+	cutin "ep172_nillem01.png",2;
+	mes "[Nillem]";
+	mes "Closing a hole in time is a lot like darning a sock. A very, very large sock.";
+	close3;
+}
+
+// The undelivered letter (890-919).
+jalbe_in,71,174,5	script(CLOAKED)	Lalaira Wigner#wsj_off	10585,{
+	if (wsj_ep21 == 900) {
+		cutin "ep21_lalaila03.png",2;
+		mes "[Lalaira Wigner]";
+		mes "Sit. Close the door.";
+		next;
+		mes "[Lalaira Wigner]";
+		mes "This is Ivan's hand. He wrote it the night before the last battle, he says. Asking me to come to Lunaforma. To 'stop counting and start living'.";
+		next;
+		cutin "ep21_lalaila04.png",2;
+		mes "[Lalaira Wigner]";
+		mes "He never sent it. Or it never arrived. And now you bring it to me, from wherever you come from.";
+		next;
+		mes "[Lalaira Wigner]";
+		mes "I'm not going. Somebody has to keep the Wigner Company standing, or there will be no grain for his cauldrons.";
+		mes "Tell him that. Tell him I read it. Tell him... I kept it.";
+		callfunc "F_WSJ_Step21", 910, "8915", "8916";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 900" );
+	end;
+}
+
+jor_mbase,332,150,3	script(CLOAKED)	Ivan#wsj_end	10584,{
+	if (wsj_ep21 == 910) {
+		cutin "ep21_ivan03.png",2;
+		mes "[Ivan]";
+		mes "She read it?";
+		next;
+		mes "[Ivan]";
+		mes "...And she's not coming. Of course she isn't. She's the sensible one. She always was.";
+		next;
+		cutin "ep21_ivan01.png",2;
+		mes "[Ivan]";
+		mes "'I kept it.' Hah. That's more than I hoped for.";
+		mes "Thank you, stranger. Wherever you're going, go well. The rift won't stay open forever; <NAVI>[Nyar]<INFO>jor_crk,105,108,0,101,0</INFO></NAVI> is waiting.";
+		callfunc "F_WSJ_Step21", 920, "8916", "18361";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 910" );
+	end;
+}
+
+jor_mbase,332,148,0	script	#wsj_t_ivanend	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+jalbe_in,71,176,0	script	#wsj_t_office3	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}

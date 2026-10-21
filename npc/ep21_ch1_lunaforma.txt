@@ -1,0 +1,975 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 21, chapters 1-2: the rift, Lunaforma, the Georborg
+//= resistance and Richard's mercenaries.
+//= Quests 18334-18337, 23240-23255, 24000-24018. Steps 0-399.
+//============================================================
+
+// The start: Voglinde (icas_in2) passes on Nillem's request, see
+// F_WSJ_Ep21Start, called from her script in ep20_ch5_undying.txt.
+function	script	F_WSJ_Ep21Start	{
+	cutin "ep19_voglinde01.png",0;
+	mes "[Voglinde]";
+	mes "A letter came for you. From the Prontera court, no less. Nillem, the court mage.";
+	next;
+	mes "[Voglinde]";
+	mes "He says the barrier stones picked up a tear in the world, north of here, on Scale Island. Something old and cold is leaking through it.";
+	mes "He's on his way and wants someone who knows Jormungandr's tricks. That would be you.";
+	next;
+	select("Scale Island?");
+	mes "[Voglinde]";
+	mes "A rock in the sea past the Frozen Tail. No one lives there.";
+	mes "^0000FFShupapa^000000, the diving Iwin at the <NAVI>[southern tip of the Frozen Tail]<INFO>jor_tail,233,41,0,101,0</INFO></NAVI>, can swim you over.";
+	next;
+	mes "[Voglinde]";
+	mes "And take Lehar. He's been bored since the twig nest. A bored Lehar is a dangerous Lehar.";
+	callfunc "F_WSJ_Step21", 10, "", "18334";
+	close3;
+}
+
+jor_tail,236,44,3	script	Shupapa#wsj	4_EP19_IWIN_DIVER,{
+	cutin "ep19_iwin_diver02.png",2;
+	mes "[Shupapa]";
+	if (wsj_ep21 == 10)
+		mes "Scale Island? Sure. The water's just right today: freezing.";
+	else
+		mes "Off to Scale Island? The current's with us today.";
+	next;
+	if (select("Swim to Scale Island.:Not now.") == 2) {
+		mes "[Shupapa]";
+		mes "Suit yourself. I'll be here, getting colder.";
+		close3;
+	}
+	mes "[Shupapa]";
+	mes "Grab my tail and don't let go!";
+	close2;
+	cutin "",255;
+	warp "jor_crk",137,137;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 10" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Scale Island, now (jor_crk) and then (jor_crk_p)
+// ------------------------------------------------------------
+jor_crk,108,111,3	script(CLOAKED)	Nillem#wsj_crk	4_M_NILLEM,{
+	if (wsj_ep21 == 10) {
+		cutin "ep172_nillem01.png",2;
+		mes "[Nillem]";
+		mes "Ah, you must be Voglinde's adventurer. And Lehar, I presume. Good, good.";
+		next;
+		mes "[Nillem]";
+		mes "Look at the air over the rocks. See how it folds? That's not a crack in the ice. It's a crack in ^0000FFtime^000000.";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "^0000FFIt is mine. I made it.^000000";
+		next;
+		cutin "ep172_nillem03.png",2;
+		mes "[Nillem]";
+		mes "...The cat talks.";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "^0000FFListen, little one. The snake bishop does not die because his power is fed from somewhere. From long ago.^000000";
+		mes "^0000FFIn the age of heroes, when men fought the snake's cult, someone planted the seed of his undying. If we pull it out there, it is gone here.^000000";
+		next;
+		cutin "ep19_lehar01.png",0;
+		mes "[Lehar]";
+		mes "So we go back in time. Sure. Why not. Last month I was a Rgan.";
+		next;
+		cutin "ep20_nyar01.png",1;
+		mes "[Nyar]";
+		mes "^0000FFHold on to my tail.^000000";
+		callfunc "F_WSJ_Step21", 20, "18334", "18335";
+		close2;
+		cutin "",255;
+		specialeffect2 EF_TELEPORTATION;
+		warp "jor_crk_p",104,103;
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 10" );
+	end;
+}
+
+jor_crk,108,104,0	script	#wsj_t_crk	HIDDEN_WARP_NPC,12,12,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+jor_crk_p,107,105,3	script(CLOAKED)	Nyar#wsj_p	4_EP20_NYAR,{
+	if (wsj_ep21 == 20) {
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "^0000FFThis is the same island, many hundreds of winters ago. The snake's cult is strong here. Its believers fill the land.^000000";
+		next;
+		mes "[Nyar]";
+		mes "^0000FFSomewhere in this time, the snake's mana is being gathered into a seed. Find where. I will follow the mana's smell.^000000";
+		next;
+		cutin "ep172_nillem02.png",2;
+		mes "[Nillem]";
+		mes "Fascinating. Do you realize what this means? Every step we take here, history has already taken. Or will take. Or...";
+		next;
+		cutin "ep19_lehar02.png",0;
+		mes "[Lehar]";
+		mes "Shh! Someone's coming. Footsteps on the gravel, by the rift.";
+		callfunc "F_WSJ_Step21", 30, "18335", "18336";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 20" );
+	end;
+}
+
+jor_crk_p,103,105,5	script(CLOAKED)	Nillem#wsj_p	4_M_NILLEM,{
+	cutin "ep172_nillem01.png",2;
+	mes "[Nillem]";
+	mes "The rocks, the sea, even the wind smells younger. Remarkable.";
+	close3;
+}
+
+jor_crk_p,95,93,5	script(CLOAKED)	Ivan#wsj_p	10584,{
+	if (wsj_ep21 == 30) {
+		cutin "ep21_ivan01.png",2;
+		mes "[Ivan]";
+		mes "Whoa there! Hands where I can see them!";
+		mes "...Oh. You're not cultists. Cultists don't dress that badly.";
+		next;
+		mes "[Ivan]";
+		mes "Ivan. Ivan Wigner, of the Wigner Company, at your service. Trader by blood, idealist by mistake.";
+		mes "And you three just walked out of a crack in the air. I saw it.";
+		next;
+		select("We're... travelers. From far away.");
+		cutin "ep21_ivan02.png",2;
+		mes "[Ivan]";
+		mes "Far away. Right. I'll pretend I believe that if you pretend I'm handsome.";
+		mes "Look, the cult patrols this island. You can't stay here.";
+		next;
+		mes "[Ivan]";
+		mes "Come with me to ^0000FFLunaforma^000000. It's the resistance's base, Georborg's men. They'll want to look at you, but they're decent folk.";
+		mes "My boat's on the <NAVI>[west shore]<INFO>jor_crk_p,79,64,0,101,0</INFO></NAVI>. The soldier will row.";
+		callfunc "F_WSJ_Step21", 40, "18336", "18337";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 30" );
+	end;
+}
+
+jor_crk_p,97,91,5	script(CLOAKED)	Georborg Soldier#wsj_p	4_EP21_SOLDIER_A,{
+	mes "[Georborg Soldier]";
+	if (wsj_ep21 == 40)
+		mes "The boat's on the west shore. Get in, I'll row you to Lunaforma.";
+	else
+		mes "Mister Ivan picks up strays. Nothing personal.";
+	close;
+}
+
+jor_crk_p,100,98,0	script	#wsj_t_crkp	HIDDEN_WARP_NPC,14,14,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// Lunaforma: the Georborg resistance (40-79)
+// ------------------------------------------------------------
+jor_mbase,126,34,3	script(CLOAKED)	Georborg Soldier#wsj_dock	4_EP21_SOLDIER_A,{
+	if (wsj_ep21 == 40) {
+		mes "[Georborg Soldier]";
+		mes "Here we are. Lunaforma. Not much to look at, but it's ours, and the cult hasn't taken it.";
+		next;
+		mes "[Georborg Soldier]";
+		mes "The captain likes to meet newcomers himself. He's at the <NAVI>[west gate]<INFO>jor_mbase,56,152,0,101,0</INFO></NAVI>.";
+		mes "...Though from the shouting, he's busy. Best go quietly.";
+		callfunc "F_WSJ_Step21", 50, "18337", "23240";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 40" );
+	end;
+}
+
+jor_mbase,56,152,5	script(CLOAKED)	Tris#wsj_g	4_EP21_TRIS,{
+	if (wsj_ep21 == 50) {
+		mes "[Freya Believer]";
+		mes "We won't pray under Odin's banner! We came here to be free of one god's fanatics, not to serve another's!";
+		next;
+		cutin "ep21_tris01.png",2;
+		mes "[Tris]";
+		mes "Nobody's asking you to pray to anyone. Georborg fights the cult. That's all.";
+		next;
+		cutin "ep21_tan01.png",0;
+		mes "[Tan]";
+		mes "And Odin's priests feed you. Remember that before you spit on their banner.";
+		next;
+		cutin "ep21_tris02.png",2;
+		mes "[Tris]";
+		mes "Tan. Enough.";
+		next;
+		cutin "",255;
+		mes "[Freya Believer]";
+		mes "Then we'll find our own place. Freyja will guide us.";
+		next;
+		mes "^4d4dffThe believers of Freyja pick up their bundles and walk out of the gate. Nobody stops them.^000000";
+		mes "^4d4dffA soldier nearby catches your eye and waves you over.^000000";
+		callfunc "F_WSJ_Step21", 60, "23240", "23241";
+		close;
+	}
+	if (wsj_ep21 == 70) {
+		cutin "ep21_tris01.png",2;
+		mes "[Tris]";
+		mes "Tan will take you to Richard's mercenaries. Talk to him.";
+		close3;
+	}
+	cutin "ep21_tris01.png",2;
+	mes "[Tris]";
+	mes "Every week somebody leaves. Every week more come. That's Lunaforma.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 50" );
+	end;
+}
+
+jor_mbase,58,150,5	script(CLOAKED)	Tan#wsj_g	4_EP21_TAN,{
+	if (wsj_ep21 == 70) {
+		cutin "ep21_tan01.png",0;
+		mes "[Tan]";
+		mes "So. You fell out of the sky with a court mage and a man in a fur coat, and you want to fight for Georborg.";
+		next;
+		mes "[Tan]";
+		mes "I don't trust you. I don't trust anyone the cult hasn't tried to kill yet.";
+		next;
+		mes "[Tan]";
+		mes "Richard's mercenaries train in the south-east. Last a week with them and I'll think about it.";
+		mes "Their camp is the <NAVI>[big tent by the shore]<INFO>jor_mbase,313,106,0,101,0</INFO></NAVI>. Go.";
+		callfunc "F_WSJ_Step21", 80, "23242", "23243";
+		close3;
+	}
+	cutin "ep21_tan01.png",0;
+	mes "[Tan]";
+	if (wsj_ep21 < 70)
+		mes "...";
+	else
+		mes "Still here? The mercenaries are that way.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 70" );
+	end;
+}
+
+jor_mbase,54,156,5	script(CLOAKED)	Resistance Soldier#wsj_g	4_EP21_SOLDIER_B,{
+	if (wsj_ep21 == 60) {
+		mes "[Resistance Soldier]";
+		mes "Sorry you had to see that. It happens. Different gods, same enemy, and still they quarrel.";
+		next;
+		mes "[Resistance Soldier]";
+		mes "Captain, these are the ones Mister Ivan brought from Scale Island.";
+		next;
+		cutin "ep21_tris01.png",2;
+		mes "[Tris]";
+		mes "Ivan's strays. Welcome to Lunaforma. I'm Tris; I lead the Georborg resistance, for what that's worth today.";
+		next;
+		mes "[Tris]";
+		mes "You want to join? Good. We need every pair of hands.";
+		mes "But I can't put strangers on the front line. Help Richard's mercenaries first, learn how we do things here.";
+		next;
+		cutin "ep21_tan01.png",0;
+		mes "[Tan]";
+		mes "Tris. They walked out of a crack in the air.";
+		next;
+		cutin "ep21_tris02.png",2;
+		mes "[Tris]";
+		mes "Then you'll be glad to keep an eye on them, Tan. Show them the way to Richard.";
+		callfunc "F_WSJ_Step21", 70, "23241", "23242";
+		close3;
+	}
+	mes "[Resistance Soldier]";
+	mes "Georborg holds. Whatever it takes.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 60" );
+	end;
+}
+
+// The believers of Freyja, leaving Lunaforma.
+jor_mbase,51,150,5	script(CLOAKED)	Freya Believer#wsj1	926,{
+	mes "[Freya Believer]";
+	mes "Freyja walks with the ones who leave. We'll be fine.";
+	close;
+}
+jor_mbase,51,152,5	duplicate(Freya Believer#wsj1)	Freya Believer#wsj2	926
+jor_mbase,52,148,5	duplicate(Freya Believer#wsj1)	Freya Believer#wsj3	927
+jor_mbase,53,150,5	duplicate(Freya Believer#wsj1)	Freya Believer#wsj4	917
+jor_mbase,53,153,5	duplicate(Freya Believer#wsj1)	Freya Believer#wsj5	916
+
+jor_mbase,56,150,0	script	#wsj_t_gate	HIDDEN_WARP_NPC,12,12,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+jor_mbase,126,34,0	script	#wsj_t_dock	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// Richard's mercenaries (80-279)
+// ------------------------------------------------------------
+// The mercenaries' office (mbase_in), its door at jor_mbase 321,115.
+mbase_in,292,124,0	script	#wsj_t_office	HIDDEN_WARP_NPC,9,6,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	if (wsj_ep21 == 80) {
+		callfunc "F_WSJ_Step21", 90, "23243", "24000";
+		dispbottom "The mercenaries' office. Nobody's here... wait, someone's coming in.";
+	}
+	end;
+}
+
+mbase_in,292,127,5	script(CLOAKED)	Gunter#wsj_o	10581,{
+	if (wsj_ep21 == 90 || wsj_ep21 == 100) {
+		cutin "ep21_gunter01.png",2;
+		mes "[Gunter]";
+		mes "Looking for the boss? Richard?";
+		mes "If he's not here, he's either asleep or in a fight. Sometimes both.";
+		next;
+		mes "[Gunter]";
+		mes "Try his room in the central barracks. North-west corner, the door on the right.";
+		mes "<NAVI>[Richard's room]<INFO>mbase_in,113,120,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 110, "24000,24001", "24002";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 90" );
+	end;
+}
+
+// Richard's door is locked while you look for him (step 110).
+mbase_in,111,120,0	script	#wsj_richdoor	HIDDEN_WARP_NPC,1,1,{
+	end;
+OnTouch:
+	if (wsj_ep21 == 110) {
+		dispbottom "Richard's door is locked. Somebody might be in the room next door.";
+		callfunc "F_WSJ_Step21", 120, "24002", "24003";
+	}
+	end;
+}
+
+mbase_in,111,115,3	script(CLOAKED)	Galaxia#wsj_d	10582,{
+	if (wsj_ep21 == 120) {
+		cutin "ep21_galaxia01.png",2;
+		mes "[Galaxia]";
+		mes "Who's banging on Richard's door at this hour? Oh, a new one.";
+		next;
+		mes "[Galaxia]";
+		mes "Richard's not in. And nobody joins by knocking on his door. There are forms. There are always forms.";
+		mes "Back to the <NAVI>[office]<INFO>mbase_in,289,124,0,101,0</INFO></NAVI> with you. I'll be along. Maybe.";
+		callfunc "F_WSJ_Step21", 130, "24003", "24004";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 120" );
+	end;
+}
+
+mbase_in,299,126,3	script	Stack of Documents#wsj	4_EP18_PAPERS,{
+	if (wsj_ep21 == 130 || wsj_ep21 == 140) {
+		if (wsj_ep21 == 130)
+			callfunc "F_WSJ_Step21", 140, "24004", "24005";
+		mes "^4d4dffApplication to join Richard's Mercenaries.^000000";
+		mes "^4d4dffName. Place of birth. Previous employers. 'Have you ever been eaten by a snake?'^000000";
+		next;
+		select("Fill in the form honestly.:Fill in the form... creatively.");
+		progressbar "ffffff", 3;
+		mes "^4d4dffDone. Now hand it to <NAVI>[Valdaris]<INFO>mbase_in,302,123,0,101,0</INFO></NAVI>, at the back of the office.^000000";
+		callfunc "F_WSJ_Step21", 150, "24005", "24006";
+		close;
+	}
+	mes "^4d4dffApplication forms. Hundreds of them.^000000";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 130 || wsj_ep21 == 140" );
+	end;
+}
+
+mbase_in,302,123,3	script	Valdaris#wsj	10580,{
+	if (wsj_ep21 == 150) {
+		cutin "ep21_valdaris01.png",2;
+		mes "[Valdaris]";
+		mes "An application? Let me see.";
+		mes "Handwriting: legible. Previous employers: 'the future'. Hm.";
+		next;
+		cutin "ep21_tan01.png",0;
+		mes "[Tan]";
+		mes "Don't bother reading it, Valdaris. It's all lies or madness.";
+		callfunc "F_WSJ_Step21", 160, "24006", "24007";
+		close3;
+	}
+	cutin "ep21_valdaris01.png",2;
+	mes "[Valdaris]";
+	if (wsj_ep21 >= 280)
+		mes "The mercenaries thank you. Richard won't, but he never thanks anyone.";
+	else
+		mes "I keep the books, the roster and Richard alive. Not always in that order.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 150" );
+	end;
+}
+
+mbase_in,304,121,3	script(CLOAKED)	Tan#wsj_o	4_EP21_TAN,{
+	if (wsj_ep21 == 160) {
+		cutin "ep21_tan01.png",0;
+		mes "[Tan]";
+		mes "I came to see if you'd run off. You didn't.";
+		mes "Valdaris, they're yours. Teach them where things are. I have real work.";
+		next;
+		cutin "ep21_valdaris02.png",2;
+		mes "[Valdaris]";
+		mes "And there he goes. He means well, I promise.";
+		mes "Meet me <NAVI>[outside the office]<INFO>jor_mbase,316,117,0,101,0</INFO></NAVI>. I'll show you Lunaforma.";
+		callfunc "F_WSJ_Step21", 170, "24007", "24008";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 160" );
+	end;
+}
+
+mbase_in,298,124,0	script	#wsj_t_office2	HIDDEN_WARP_NPC,10,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// The tour of Lunaforma with Valdaris.
+jor_mbase,316,119,3	script(CLOAKED)	Valdaris#wsj_t1	10580,{
+	if (wsj_ep21 == 170) {
+		cutin "ep21_valdaris01.png",2;
+		mes "[Valdaris]";
+		mes "Lunaforma was a fishing village before the war. Now it's a fishing village with a resistance in it.";
+		mes "Come, the docks first. Follow me to the <NAVI>[trading quarter]<INFO>jor_mbase,243,120,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 180, "24008", "24009";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 170" );
+	end;
+}
+
+jor_mbase,243,122,3	script(CLOAKED)	Valdaris#wsj_t2	10580,{
+	if (wsj_ep21 == 180) {
+		cutin "ep21_valdaris01.png",2;
+		mes "[Valdaris]";
+		mes "The Wigner Company keeps us fed. Food, cloth, steel, all on their ships. Ivan Wigner is the one who talked his family into it.";
+		next;
+		mes "[Valdaris]";
+		mes "And those ships with the blue sails belong to the ^0000FFWalter fleet^000000. Captain Walter's sailors ferry people from Alberta and back.";
+		mes "Without those two families, Lunaforma would have starved a year ago.";
+		next;
+		mes "[Valdaris]";
+		mes "Now, the <NAVI>[south quarter]<INFO>jor_mbase,145,108,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 190, "24009,24010", "24011";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 180" );
+	end;
+}
+
+jor_mbase,147,110,3	script(CLOAKED)	Valdaris#wsj_t3	10580,{
+	if (wsj_ep21 == 190) {
+		cutin "ep21_valdaris01.png",2;
+		mes "[Valdaris]";
+		mes "These are the children. Most of them came out of the cult's villages. Some don't remember their parents.";
+		mes "They play soldier all day. I wish they didn't.";
+		next;
+		mes "^4d4dffShouting and the clang of steel from the training ground nearby. A crowd is gathering.^000000";
+		next;
+		cutin "ep21_valdaris02.png",2;
+		mes "[Valdaris]";
+		mes "...That's Richard's voice. Of course it is. Come on!";
+		callfunc "F_WSJ_Step21", 210, "24011", "24012";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 190" );
+	end;
+}
+
+jor_mbase,136,104,3	script(CLOAKED)	Richard#wsj_tr	10579,{
+	if (wsj_ep21 == 210) {
+		cutin "ep21_galaxia02.png",0;
+		mes "[Galaxia]";
+		mes "Get UP, Richard! My grandmother hits harder than you!";
+		next;
+		cutin "ep21_richard01.png",2;
+		mes "[Richard]";
+		mes "Your grandmother... is a bear...";
+		next;
+		mes "^4d4dffGalaxia lifts Richard by the collar and throws him into the snow. The mercenaries cheer.^000000";
+		next;
+		cutin "ep21_valdaris02.png",0;
+		mes "[Valdaris]";
+		mes "ENOUGH! Both of you!";
+		mes "You, new one, help me carry him. <NAVI>[His room]<INFO>mbase_in,167,128,0,101,0</INFO></NAVI>, in the central barracks. Now.";
+		callfunc "F_WSJ_Step21", 220, "24012", "24013";
+		close3;
+	}
+	cutin "ep21_richard01.png",2;
+	mes "[Richard]";
+	mes "Ow.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 210" );
+	end;
+}
+
+jor_mbase,138,103,5	script(CLOAKED)	Galaxia#wsj_tr	10582,{
+	cutin "ep21_galaxia01.png",2;
+	mes "[Galaxia]";
+	mes "What? He asked for it. Literally. He asked me to hit him.";
+	close3;
+}
+
+jor_mbase,136,110,0	script	#wsj_t_tour	HIDDEN_WARP_NPC,14,14,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+jor_mbase,280,115,0	script	#wsj_t_tour2	HIDDEN_WARP_NPC,45,12,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// Richard's room (mbase_in 166,126).
+mbase_in,168,126,3	script(CLOAKED)	Richard#wsj_rm	10579,{
+	if (wsj_ep21 == 220 || wsj_ep21 == 230) {
+		if (wsj_ep21 == 220)
+			callfunc "F_WSJ_Step21", 230, "24013", "24014";
+		cutin "ep21_richard02.png",2;
+		mes "[Richard]";
+		mes "Don't look at me like that, Valdaris. It was for the book.";
+		next;
+		cutin "ep21_valdaris02.png",0;
+		mes "[Valdaris]";
+		mes "The BOOK.";
+		next;
+		cutin "ep21_richard03.png",2;
+		mes "[Richard]";
+		mes "The combat manual! For the recruits! Lee needs to draw real fights, not posed ones. So Galaxia and I fought. For real. For the drawings.";
+		mes "Ask Lee. Lee, show them.";
+		callfunc "F_WSJ_Step21", 240, "24014", "24015";
+		close3;
+	}
+	cutin "ep21_richard01.png",2;
+	mes "[Richard]";
+	mes "Chapter three: how to fall down with dignity. I'm the model.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 220 || wsj_ep21 == 230" );
+	end;
+}
+
+mbase_in,165,124,5	script(CLOAKED)	Lee#wsj_rm	10591,{
+	if (wsj_ep21 == 240) {
+		cutin "ep21_lee01.png",2;
+		mes "[Lee]";
+		mes "It's true! Look: figure one, the guard. Figure two, Galaxia's left hook. Figure three, Richard, horizontal.";
+		next;
+		mes "^4d4dffThe drawings are actually very good. Figure three is particularly lifelike.^000000";
+		next;
+		cutin "ep21_valdaris01.png",0;
+		mes "[Valdaris]";
+		mes "...I need a word with Richard. Alone.";
+		mes "Lee, take our new friend to Galaxia's room. <NAVI>[Next door]<INFO>mbase_in,167,79,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 250, "24015", "24016";
+		close3;
+	}
+	cutin "ep21_lee01.png",2;
+	mes "[Lee]";
+	mes "Hold still, I'm drawing you.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 240" );
+	end;
+}
+
+mbase_in,170,128,3	script(CLOAKED)	Valdaris#wsj_rm	10580,{
+	cutin "ep21_valdaris02.png",2;
+	mes "[Valdaris]";
+	mes "Combat manual. He'll be the death of me.";
+	close3;
+}
+
+mbase_in,167,81,3	script(CLOAKED)	Galaxia#wsj_gr	10582,{
+	if (wsj_ep21 == 250) {
+		cutin "ep21_galaxia01.png",2;
+		mes "[Galaxia]";
+		mes "Valdaris kicked you out too? Sit.";
+		next;
+		mes "[Galaxia]";
+		mes "Richard and I came up through the same cult village. He was a scrawny thing who got beaten every day. I got beaten for defending him.";
+		mes "When we ran, he swore he'd build an army that never left anyone behind.";
+		next;
+		mes "[Galaxia]";
+		mes "That's what the mercenaries are. Not soldiers for coin. Kids who got out, protecting kids who haven't yet.";
+		mes "Don't tell him I told you. He'd cry. Out loud.";
+		next;
+		mes "[Galaxia]";
+		mes "Go on. Lee will show you the rest of the base, <NAVI>[outside]<INFO>jor_mbase,163,196,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 260, "24016", "24017";
+		close3;
+	}
+	cutin "ep21_galaxia01.png",2;
+	mes "[Galaxia]";
+	mes "Knock next time.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 250" );
+	end;
+}
+
+jor_mbase,163,196,3	script(CLOAKED)	Lee#wsj_out	10591,{
+	if (wsj_ep21 == 260) {
+		cutin "ep21_lee01.png",2;
+		mes "[Lee]";
+		mes "Here's the main square. Barracks, canteen, the Wigner store, and the captain's tent.";
+		mes "And everyone in Lunaforma is talking about you. 'The one who didn't run from Galaxia.'";
+		next;
+		mes "[Lee]";
+		mes "That's worth something here. Go see the captain. <NAVI>[Tris]<INFO>jor_mbase,168,200,0,101,0</INFO></NAVI> is right over there.";
+		callfunc "F_WSJ_Step21", 270, "24017", "24018";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 260" );
+	end;
+}
+
+mbase_in,167,126,0	script	#wsj_t_rich	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+mbase_in,167,81,0	script	#wsj_t_gal	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+mbase_in,116,118,0	script	#wsj_t_hall	HIDDEN_WARP_NPC,6,6,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// Heine and her tablet (270-399)
+// ------------------------------------------------------------
+jor_mbase,168,200,3	script(CLOAKED)	Tris#wsj_m	4_EP21_TRIS,{
+	cutin "ep21_tris01.png",2;
+	if (wsj_ep21 == 270) {
+		mes "[Tris]";
+		mes "I hear Richard's crew likes you. And Galaxia didn't throw you anywhere. That's a first.";
+		next;
+		mes "[Tris]";
+		mes "Your friends have their posts: Nillem went to Alberta to help the refugees, and Lehar is with the Wigner Company, counting crates. He was thrilled.";
+		next;
+		mes "[Tris]";
+		mes "As for you, there's someone I want you to meet. Give me a moment to set it up.";
+		callfunc "F_WSJ_Step21", 280, "24018", "23244";
+		close3;
+	}
+	if (wsj_ep21 == 280) {
+		mes "[Tris]";
+		mes "Here. Hold this.";
+		next;
+		mes "^4d4dffTris hands you a thin slab of polished stone. It hums, then lights up with the face of a woman with very tired eyes.^000000";
+		next;
+		cutin "ep21_ilse_heine01.png",1;
+		mes "[Ilse el Heine]";
+		mes "Is this it? The adventurer? Hm. Smaller than I expected.";
+		next;
+		mes "[Ilse el Heine]";
+		mes "Heine. Wizard of Comodo. That slab is my ^0000FFtablet^000000: I talk through it from my workshop, you listen. Best invention of the century.";
+		mes "Tris says you'll be running errands for the resistance. Good. I have errands.";
+		callfunc "F_WSJ_Step21", 290, "23244", "23245";
+		close3;
+	}
+	if (wsj_ep21 == 290) {
+		mes "[Tris]";
+		mes "Ready for real work?";
+		next;
+		cutin "ep21_ilse_heine02.png",1;
+		mes "[Ilse el Heine]";
+		mes "Real work, yes. Bring me a ^0000FFBright Eye^000000. From the fish on the Raised Land.";
+		next;
+		cutin "ep21_tris02.png",2;
+		mes "[Tris]";
+		mes "That's... not what we agreed, Heine.";
+		next;
+		cutin "ep21_ilse_heine03.png",1;
+		mes "[Ilse el Heine]";
+		mes "I changed my mind. I do that. Ask Tris to explain, I'm busy.";
+		callfunc "F_WSJ_Step21", 300, "23245", "23246";
+		close3;
+	}
+	if (wsj_ep21 == 300) {
+		mes "[Tris]";
+		mes "I'm sorry. Heine is a genius and a nightmare in equal parts.";
+		mes "She wants the eye of a ^FF0000Skipskipper^000000, the flying fish on the <NAVI>[Raised Land]<INFO>jor_raise2,118,410,0,101,0</INFO></NAVI>. Most of them have dull eyes. One in ten, maybe, has a bright one.";
+		next;
+		mes "[Tris]";
+		mes "And she'll know if you cheat. She always knows.";
+		callfunc "F_WSJ_Step21", 310, "23246", "23247";
+		close3;
+	}
+	if (wsj_ep21 == 310) {
+		if (checkquest(23247,HUNTING) != 2 || countitem(1001641) < 1) {
+			mes "[Tris]";
+			mes "10 Skipskippers on the Raised Land, and one ^0000FFBright Eye^000000.";
+			close3;
+		}
+		delitem 1001641,1;
+		mes "[Tris]";
+		mes "You got one! Heine, it's here.";
+		next;
+		cutin "ep21_ilse_heine02.png",1;
+		mes "[Ilse el Heine]";
+		mes "Hold it up to the tablet. ...Yes. Lovely. Bright as a star.";
+		mes "Now go to Alberta. Nillem is there and I need eyes on what he's doing. The Walter sailors at the <NAVI>[east pier]<INFO>jor_mbase,343,148,0,101,0</INFO></NAVI> will take you.";
+		next;
+		cutin "ep21_tris02.png",2;
+		mes "[Tris]";
+		mes "...She's using you as a carrier pigeon. I'm so sorry.";
+		callfunc "F_WSJ_Step21", 320, "23247", "23248";
+		close3;
+	}
+	mes "[Tris]";
+	mes "Georborg holds.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 270 || wsj_ep21 == 280 || wsj_ep21 == 290 || wsj_ep21 == 300" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 310 && checkquest(23247,HUNTING) == 2 && countitem(1001641) >= 1" );
+	end;
+}
+
+jor_mbase,168,198,0	script	#wsj_t_square	HIDDEN_WARP_NPC,14,14,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+jor_albe,192,209,3	script(CLOAKED)	Nillem#wsj_albe	4_M_NILLEM,{
+	if (wsj_ep21 == 320) {
+		cutin "ep172_nillem01.png",2;
+		mes "[Nillem]";
+		mes "Oh! You're here. Heine sent you, didn't she? She's been checking on me every hour.";
+		next;
+		mes "[Nillem]";
+		mes "Alberta in this age is mostly tents. Refugees from the cult's lands, thousands of them. The Walter sailors bring more every day.";
+		mes "I help where I can. Mostly I listen. Nightmares, all of them. Serpents in the dark.";
+		next;
+		mes "[Nillem]";
+		mes "Tell Heine I'm fine. And tell Tris that more people are talking about a ^FF0000giant serpent^000000 every week. I don't like it.";
+		mes "Go back to Lunaforma. I'll stay a little longer.";
+		callfunc "F_WSJ_Step21", 330, "23248", "23249";
+		close3;
+	}
+	cutin "ep172_nillem01.png",2;
+	mes "[Nillem]";
+	mes "History is so much louder up close.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 320" );
+	end;
+}
+
+jor_albe,192,206,0	script	#wsj_t_albe	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// The central barracks.
+mbase_in,92,123,3	script(CLOAKED)	Tris#wsj_bk	4_EP21_TRIS,{
+	if (wsj_ep21 == 330) {
+		cutin "ep21_tris01.png",2;
+		mes "[Tris]";
+		mes "Welcome back. Heine wanted a word, she's... hold on.";
+		next;
+		mes "^4d4dffThe tablet in Tris's hands flickers. Heine's face breaks into stripes, then into noise, then nothing.^000000";
+		next;
+		cutin "ep21_tris02.png",2;
+		mes "[Tris]";
+		mes "That's never happened before. Let's wait for her to call back.";
+		next;
+		mes "^4d4dffAfter a long while, the tablet sputters back to life.^000000";
+		next;
+		cutin "ep21_ilse_heine03.png",1;
+		mes "[Ilse el Heine]";
+		mes "That was embarrassing. The crystal's cracked. It needs a full overhaul, and I can't do it from here alone.";
+		mes "I need hands at your end. Your hands, adventurer. You're my repair assistant now.";
+		next;
+		cutin "ep21_tris01.png",2;
+		mes "[Tris]";
+		mes "Use the <NAVI>[private room]<INFO>mbase_in,21,168,0,101,0</INFO></NAVI> at the end of the west hall. It's quiet there.";
+		callfunc "F_WSJ_Step21", 340, "23249", "23250";
+		close3;
+	}
+	cutin "ep21_tris01.png",2;
+	mes "[Tris]";
+	mes "Heine's in the private room. Figuratively.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 330" );
+	end;
+}
+
+mbase_in,21,168,3	script(CLOAKED)	Heine's Tablet#wsj	4_EP21_HEINE_TAB,{
+	cutin "ep21_ilse_heine01.png",1;
+	if (wsj_ep21 == 340) {
+		mes "[Ilse el Heine]";
+		mes "Quiet, no drafts, no Tris breathing down my neck. Perfect.";
+		next;
+		mes "[Ilse el Heine]";
+		mes "Remote repairs never work the first time, so bring spares. I need ^0000FF2 Vellelopy^000000, the jelly the Velellings carry on the Raised Land.";
+		callfunc "F_WSJ_Step21", 350, "23250", "23251";
+		close3;
+	}
+	if (wsj_ep21 == 350) {
+		if (countitem(1001643) < 2) {
+			mes "[Ilse el Heine]";
+			mes "Two Vellelopy. From the Velellings on the <NAVI>[Raised Land]<INFO>jor_raise1,301,10,0,101,0</INFO></NAVI>.";
+			close3;
+		}
+		delitem 1001643,2;
+		mes "[Ilse el Heine]";
+		mes "Good. Put one on the crystal, there, where it's cracked. Hold it steady while I pour mana through.";
+		callfunc "F_WSJ_Step21", 360, "23251", "23252";
+		next;
+		progressbar "ffffff", 5;
+		mes "^4d4dffThe jelly fizzes, glows, and turns to ash.^000000";
+		next;
+		cutin "ep21_ilse_heine03.png",1;
+		mes "[Ilse el Heine]";
+		mes "...Told you. Never the first time. Again, with the other one.";
+		callfunc "F_WSJ_Step21", 370, "23252", "23253";
+		close3;
+	}
+	if (wsj_ep21 == 370) {
+		mes "[Ilse el Heine]";
+		mes "Steady... steady...";
+		next;
+		progressbar "ffffff", 5;
+		mes "^4d4dffThe crack in the crystal seals with a soft click. The picture is sharper than ever.^000000";
+		next;
+		cutin "ep21_ilse_heine02.png",1;
+		mes "[Ilse el Heine]";
+		mes "There. Now, the real reason I wanted you alone.";
+		mes "My tablet doesn't only see places. It sees ^0000FFtime^000000, a little. And you, adventurer, are a smudge on it. You don't belong in this year.";
+		next;
+		select("Tell her everything.");
+		mes "[Ilse el Heine]";
+		mes "...A snake bishop who can't die. A cat that walks through time. A future where Jormungandr's cult is a bad memory.";
+		mes "I believe you. I don't like it, but I believe you.";
+		next;
+		mes "[Ilse el Heine]";
+		mes "From now on the tablet will do things it never did before. You'll see. Go tell Tris; the resistance needs to hear this.";
+		callfunc "F_WSJ_Step21", 380, "23253", "23254";
+		close3;
+	}
+	mes "[Ilse el Heine]";
+	mes "I'm thinking. Go away. Nicely.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 340 || wsj_ep21 == 370" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 350 && countitem(1001643) >= 2" );
+	end;
+}
+
+mbase_in,92,121,3	script(CLOAKED)	Tris#wsj_bk2	4_EP21_TRIS,{
+	if (wsj_ep21 == 380) {
+		cutin "ep21_tris01.png",2;
+		mes "[Tris]";
+		mes "From the future. All right. That explains the clothes.";
+		next;
+		cutin "ep21_aurelie01.png",0;
+		mes "[Aurelie]";
+		mes "And it explains what Leon found in the cult's lands. I came as soon as I heard.";
+		next;
+		cutin "ep21_tris02.png",2;
+		mes "[Tris]";
+		mes "Aurelie, Leon, a court mage, a cat, a time-lost adventurer. And a cult that grows stronger every day.";
+		mes "Then we stop waiting. Georborg prepares for ^FF0000all-out war^000000. We end this.";
+		next;
+		mes "^4d4dffShouts outside. Someone is yelling for help, and then laughing, and then yelling again.^000000";
+		next;
+		mes "[Tris]";
+		mes "What now? Go and see what's going on <NAVI>[outside]<INFO>jor_mbase,201,192,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 390, "23254", "23255";
+		callfunc "F_WSJ_Chapter21";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 380" );
+	end;
+}
+
+mbase_in,90,120,0	script	#wsj_t_bk	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+mbase_in,22,166,0	script	#wsj_t_priv	HIDDEN_WARP_NPC,6,6,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}

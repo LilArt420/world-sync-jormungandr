@@ -12,3 +12,27 @@ Body:
       Map: 1@twig
       X: 150
       Y: 100
+  - Id: 2021
+    Name: Snake's Resting Place
+    TimeLimit: 3600
+    IdleTimeOut: 300
+    Enter:
+      Map: 1@ep21b
+      X: 100
+      Y: 115
+  - Id: 2022
+    Name: Secret Altar
+    TimeLimit: 3600
+    IdleTimeOut: 300
+    Enter:
+      Map: 1@ep21a
+      X: 100
+      Y: 30
+  - Id: 2023
+    Name: Serene Sanctuary
+    TimeLimit: 1800
+    IdleTimeOut: 300
+    Enter:
+      Map: 1@mdtem
+      X: 150
+      Y: 40

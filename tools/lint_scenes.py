@@ -7,12 +7,20 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 txt = {f: open(f).read() for f in glob.glob(os.path.join(ROOT, 'npc', '*.txt'))}
 allt = '\n'.join(txt.values())
 npcs = {}
+seen = {}
+dups = []
+for m in re.finditer(r'^[a-z0-9_@]+,\d+,\d+,\d+\t(?:script\(CLOAKED\)|script|duplicate\([^)]*\)|warp|warp2|shop)\t([^\t]+)\t', allt, re.M):
+    if m.group(1) in seen:
+        dups.append(m.group(1))
+    seen[m.group(1)] = 1
 for m in re.finditer(r'^[a-z0-9_@]+,\d+,\d+,\d+\t(script\(CLOAKED\)|script|duplicate\([^)]*\))\t([^\t]+)\t', allt, re.M):
     npcs[m.group(2)] = m.group(1)
-common = txt[os.path.join(ROOT, 'npc', 'ep20_common.txt')]
+common = txt[os.path.join(ROOT, 'npc', 'ep20_common.txt')] + txt[os.path.join(ROOT, 'npc', 'ep21_common.txt')]
 table = set(re.findall(r'"([^"]+#wsj[^"]*)","-?\d+","\d+"', common))
 table |= {"Nyar's Clone#wsj%d" % i for i in range(1, 13)}
 bad = 0
+for d in dups:
+    print('duplicate NPC name:', d); bad += 1
 for n in sorted(table):
     if n not in npcs:
         print('in table, no such NPC:', n); bad += 1
@@ -20,7 +28,7 @@ for n, k in sorted(npcs.items()):
     if 'CLOAKED' in k and n not in table:
         print('cloaked but never shown:', n); bad += 1
 used = set(int(x) for x in re.findall(r'(?:setquest|completequest|checkquest\(|isbegin_quest\()\s*(\d{4,5})', allt))
-for s in re.findall(r'F_WSJ_Step", \d+, "([\d,]*)", "([\d,]*)"', allt):
+for s in re.findall(r'F_WSJ_Step(?:21)?", \d+, "([\d,]*)", "([\d,]*)"', allt):
     for part in s:
         used |= {int(x) for x in part.split(',') if x}
 for s in re.findall(r'setarray \.@q, ([\d, ]+);', allt):

@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.0
+- Episode 21, Age of Heroes, from start to finish (101 quests, with an English quest log written for this mod: the client only has these in Korean):
+  - A rift on Scale Island, and Nyar takes you back in time.
+  - Lunaforma of old: the Georborg resistance, Tris and Tan, Richard's mercenaries, and Heine's tablet.
+  - The ghost ship: Ivan Wigner, Lalaira and Captain Maristella Walter in Alberta of old.
+  - Two infiltrations of Gimle, the cult's temple, and the rescue of Karmilgand and Reinhardt.
+  - The giant serpent and the last battle, in the Snake's Resting Place (memorial dungeon), repeatable daily.
+  - Gimle's Secret Altar (memorial dungeon) and the Serene Sanctuary, back in the present.
+- Starts from Voglinde in the Ice Castle's west wing once Episode 20 is done, at level 230. Shupapa, at the Frozen Tail, swims you to Scale Island.
+- The Episode Valkyrie (standart-npc) can skip Episode 21 with an Eps 21 Clear Ticket: F_WSJ_Skip21 and F_WSJ_Done21.
+- Sprite names for Episode 21's characters and the Eroded Tan on iRO clients (System/jobname.lub).
+
 ## 1.0.0
 - Episode 20, The Undying One, from start to finish (83 quests in the quest log):
   - The Ancient Ice Canyon: Icewinds, mana absorption devices and Iwin soldiers who aren't Iwins.
