@@ -110,7 +110,7 @@ NAMES = [
     ('Ice Angoos', 'Ice Gangus'), ('Snake Roots', 'Roots of the Serpent God'), ('Yormungand', 'Jormungandr'), ('Icy Zone', 'Frozen Zone'),
     ('Icegard', 'Issgard'), ('Triss', 'Tris'), ('Nilem', 'Nillem'), ('Ephesus Walter Megas', 'Epesto Walter Megas'),
     ('Hunter Sanguine', 'Hunter Sanguin'), ('Lalira Wigner', 'Lalaira Wigner'), ('Laraira', 'Lalaira'),
-    ('loss of Eiji', 'lost mind'), ('Lara told', 'Lalaira told'),
+    ('loss of Eiji', 'lost mind'), ('prt_elib,60,37', 'jor_twig,113,146'), ('Lara told', 'Lalaira told'),
 ]
 
 

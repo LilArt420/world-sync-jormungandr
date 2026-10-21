@@ -1194,7 +1194,7 @@ QuestInfoList = {
 	[12588] = {
 		Title = "[Standby] The Immortal",
 		IconName = "ico_dq.bmp",
-		Description = { "After dawn, you can communicate with <NAVI>The Branch of the World Tree<INFO>prt_elib,60,37,0,101,0</INFO></NAVI> again." },
+		Description = { "After dawn, you can communicate with <NAVI>The Branch of the World Tree<INFO>jor_twig,113,146,0,101,0</INFO></NAVI> again." },
 		Summary = "Resets at 4 AM"
 	},
 	[12590] = {

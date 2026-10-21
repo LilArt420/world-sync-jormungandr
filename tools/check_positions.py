@@ -197,6 +197,9 @@ def main():
                 continue
             dx, dy = abs(o['x'] - n['x']), abs(o['y'] - n['y'])
             if o['kind'] in ('warp', 'warp2') or (invisible(o) and o['span'] != (0, 0)):
+                # This mod's own copy of a door another mod adds optionally.
+                if n['kind'] in ('warp', 'warp2') and o['kind'] in ('warp', 'warp2'):
+                    continue
                 if dx <= o['span'][0] and dy <= o['span'][1] and not invisible(n):
                     print('IN TRIGGER    %s,%d,%d %s  <- %s %s,%d,%d span %s (%s)' % (n['map'], n['x'], n['y'], n['name'], o['kind'], o['name'], o['x'], o['y'], o['span'], o['origin']))
                     bad += 1
