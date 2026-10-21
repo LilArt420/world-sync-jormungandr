@@ -7,6 +7,22 @@
 // The adventurers' lodge in the Ice Castle
 // ------------------------------------------------------------
 icas_in,259,219,3	script(CLOAKED)	Horuru#wsj_l	4_EP19_IWIN,{
+	if (wsj_ep20 == 0 && (BaseLevel < 200 || (ep19_main < 100 && !$wsj_skip19))) {
+		cutin "ep19_iwin06.png",2;
+		mes "[Horuru]";
+		mes "Welcome to the lodge, adventurer.";
+		mes "Things are tense here. The Rgans are still out there, and we're short of hands we can trust.";
+		next;
+		mes "[Horuru]";
+		if (BaseLevel < 200)
+			mes "Come back when you're stronger. What's waiting beyond the glacier would eat you alive.";
+		else
+			mes "Help the Ice Castle with its troubles first. Once Issgard trusts you, I'll have something for you.";
+		next;
+		mes "^4d4dffEpisode 20 starts here for characters of level 200 or more who have finished Episode 19.";
+		mes "The setting \"Start Episode 20 without finishing Episode 19\" (Settings -> Mods -> World Sync: Jormungandr) lifts the Episode 19 condition.^000000";
+		close3;
+	}
 	if (wsj_ep20 == 0) {
 		cutin "ep19_iwin06.png",2;
 		mes "[Horuru]";

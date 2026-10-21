@@ -25,7 +25,7 @@ function	script	F_WSJ_Scenes	{
 	// NPC name, first step, last step (both inclusive)
 	if (.@m$ == "icas_in") {
 		setarray .@t$,
-			"Horuru#wsj_l","0","129",
+			"Horuru#wsj_l","-1","129",
 			"Aurelie#wsj_l","40","129",
 			"Vellgunde#wsj_l","80","129",
 			"Miriam#wsj_l","100","129",
