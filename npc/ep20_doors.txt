@@ -1,0 +1,23 @@
+//===== World Sync: Jormungandr =============================
+//= Doors into the Ice Castle's west wing (icas_in2), where
+//= Nadyagand, Voglinde and the captured Bagot stay.
+//= rAthena's World Sync content only has the way out of icas_in2;
+//= the way in is one of World Sync Extras' optional "entrances".
+//= These are the same three doors, switched off when that setting
+//= is on so the two never stand on the same cell.
+//============================================================
+
+icecastle,230,160,0	warp	wsj_icas_in2_a	1,1,icas_in2,109,32
+icecastle,157,206,0	warp	wsj_icas_in2_b	1,1,icas_in2,248,112
+icecastle,46,164,0	warp	wsj_icas_in2_c	1,1,icas_in2,33,114
+
+-	script	WSJ_Doors	-1,{
+	end;
+OnInit:
+	if (callfunc("F_ModSetting", "world-sync-extras", "entrances", 0)) {
+		disablenpc "wsj_icas_in2_a";
+		disablenpc "wsj_icas_in2_b";
+		disablenpc "wsj_icas_in2_c";
+	}
+	end;
+}
