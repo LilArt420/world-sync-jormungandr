@@ -1,0 +1,52 @@
+# World Sync: Jormungandr - monsters the server doesn't have yet.
+#
+# 21981 MD_EP20_BOSS_LASGAND is the official id the client draws as the
+# undying bishop (its sprite and name are in the client's tables; rAthena
+# only has a commented-out placeholder for it). Its stats aren't published:
+# these follow the Snowstorm Angel, the other Episode 20 boss, so the
+# memorial dungeon fits the level 200-250 players the episode is for.
+Header:
+  Type: MOB_DB
+  Version: 5
+
+Body:
+  - Id: 21981
+    AegisName: MD_EP20_BOSS_LASGAND
+    Name: Rasgand
+    Level: 240
+    Hp: 180000000
+    BaseExp: 517488
+    JobExp: 362242
+    Attack: 14193
+    Attack2: 3590
+    Defense: 329
+    MagicDefense: 179
+    Resistance: 244
+    MagicResistance: 187
+    Str: 101
+    Agi: 83
+    Vit: 97
+    Int: 101
+    Dex: 98
+    Luk: 97
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Poison
+    ElementLevel: 3
+    WalkSpeed: 170
+    AttackDelay: 1000
+    AttackMotion: 1471
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Drops:
+      - Item: EP20_D_P_Ore
+        Rate: 4000
+      - Item: EP20_D_P_Crystal
+        Rate: 1000
+      - Item: Demigod_Lasgand_Card
+        Rate: 1
+        StealProtected: true

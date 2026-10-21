@@ -1,0 +1,636 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 20, chapter 5: The Undying One.
+//= Quests 18220-18233, memorial dungeon "Separated Sanctuary"
+//= (1@twig). Steps 530-700.
+//============================================================
+
+// ------------------------------------------------------------
+// Back at the Ice Castle (step 530)
+// ------------------------------------------------------------
+icas_in,111,228,3	script(CLOAKED)	Leon#wsj_c5	4_EP19_LEON,{
+	if (wsj_ep20 == 530) {
+		cutin "ep19_leon01.png",0;
+		mes "[Leon]";
+		mes "You too? I woke up in front of the fireplace with snow still in my boots.";
+		mes "Everyone did. Everyone except Lehar.";
+		next;
+		mes "[Leon]";
+		mes "That cat... Nyar. She helped us. I don't know why, but she did.";
+		next;
+		select("Lehar went to find Bagot's lab.");
+		mes "[Leon]";
+		mes "Of course she did. Alone, in the Roots, in a Rgan's skin.";
+		mes "Miriam says she left marks to follow. The first one is near the <NAVI>[entrance of the Roots' 1st floor]<INFO>jor_root1,32,75,0,101,0</INFO></NAVI>.";
+		next;
+		mes "[Leon]";
+		mes "Aurelie and I have to stay and hold the barrier. Find her. Bring her back, and Bagot with her if you can.";
+		callfunc "F_WSJ_Step", 540, "18220", "18221";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 530" );
+	end;
+}
+
+icas_in,111,224,0	script	#wsj_t_c5	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// Lehar's marks, Roots of the Serpent God 1st floor (540-559)
+// ------------------------------------------------------------
+jor_root1,34,77,3	script	Mark#wsj_k0	4_POINT_BLUE,{
+	if (wsj_ep20 == 540) {
+		mes "^4d4dffA mark scratched into the root: a crude drawing of a sword with a tail. Lehar's signature.^000000";
+		mes "^4d4dffBelow it, in tiny letters:^000000";
+		next;
+		mes "^0000FF'Three tunnels on this floor smell of oil and metal. Bagot's lab must be behind one of them.";
+		mes "I marked them all. Check them, then meet me at the Sacred Roots. Miriam is coming. -L'^000000";
+		callfunc "F_WSJ_Step", 550, "18221", "18222,18223,18224,18225";
+		wsj_ep20b = 0;
+		close;
+	}
+	if (wsj_ep20 == 550) {
+		mes "^0000FF'Three tunnels. Check them all. -L'^000000";
+		close;
+	}
+	mes "^4d4dffA sword with a tail, scratched into the root.^000000";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 540" );
+	end;
+}
+
+// The three tunnels. Each one turns out to be a dead end.
+function	script	F_WSJ_Mark	{
+	.@n = getarg(0);
+	if (wsj_ep20 != 550 || (wsj_ep20b & (1 << .@n))) {
+		mes "^4d4dffLehar's mark. The tunnel behind it is a dead end.^000000";
+		close;
+	}
+	mes "^4d4dffAnother of Lehar's marks. Behind it, a narrow tunnel runs deep into the roots.^000000";
+	next;
+	progressbar "ffffff", 3;
+	if (.@n == 0) {
+		mes "^4d4dffAt the end of the tunnel: a pile of broken crates and the smell of machine oil.^000000";
+		mes "^4d4dffSomeone stored things here, and moved them out in a hurry. No lab.^000000";
+	} else if (.@n == 1) {
+		mes "^4d4dffThe tunnel ends at a wall of fresh ice. On the other side, faint and blurred, you can see light.^000000";
+		mes "^4d4dffThe ice is too thick to break. If there's a lab there, this isn't the way in.^000000";
+	} else {
+		mes "^4d4dffA nest of sleeping Rgan hatchlings. You back out very, very quietly.^000000";
+		mes "^4d4dffNo lab here either.^000000";
+	}
+	setarray .@q, 18223, 18224, 18225;
+	completequest .@q[.@n];
+	wsj_ep20b |= (1 << .@n);
+	if ((wsj_ep20b & 7) == 7) {
+		next;
+		mes "^4d4dffAll three tunnels, and no lab. Lehar won't be happy.";
+		mes "Time to meet her at the <NAVI>[Sacred Roots]<INFO>jor_sanct,133,86,0,101,0</INFO></NAVI>.^000000";
+		callfunc "F_WSJ_Step", 560, "18222", "18226";
+	}
+	close;
+}
+
+jor_root1,69,128,3	script(CLOAKED)	Mark#wsj_k1	4_POINT_WHITE,{
+	callfunc "F_WSJ_Mark", 0;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 550 && (wsj_ep20b & 1) == 0" );
+	end;
+}
+jor_root1,35,211,3	script(CLOAKED)	Mark#wsj_k2	4_POINT_WHITE,{
+	callfunc "F_WSJ_Mark", 1;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 550 && (wsj_ep20b & 2) == 0" );
+	end;
+}
+jor_root1,254,66,3	script(CLOAKED)	Mark#wsj_k3	4_POINT_WHITE,{
+	callfunc "F_WSJ_Mark", 2;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 550 && (wsj_ep20b & 4) == 0" );
+	end;
+}
+
+// Older marks Lehar left on earlier trips.
+jor_root1,17,194,3	script	Mark#wsj_k4	4_POINT_WHITE,{
+	mes "^4d4dffA sword with a tail, and an arrow pointing back the way you came. Lehar was here once, and turned around.^000000";
+	close;
+}
+jor_root1,25,145,3	duplicate(Mark#wsj_k4)	Mark#wsj_k5	4_POINT_WHITE
+jor_root1,278,74,3	duplicate(Mark#wsj_k4)	Mark#wsj_k6	4_POINT_WHITE
+
+jor_root1,150,130,0	script	#wsj_t_k	HIDDEN_WARP_NPC,140,110,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// The Sacred Roots again (560-579)
+// ------------------------------------------------------------
+jor_sanct,133,86,3	script(CLOAKED)	Lehar#wsj_sn	4_EP19_RGAN_R3,{
+	if (!callfunc("F_WSJ_IsRgan", "Lehar?")) end;
+	if (wsj_ep20 == 560) {
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Nothing? Nothing at all?";
+		mes "...Me neither. I've been through every tunnel on this side of the Roots.";
+		next;
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "Bagot isn't the kind to hide his lab in a hole. He'd hide it somewhere important. Somewhere guarded.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Then let's find out what's important around here. We'll split up.";
+		mes "You take the middle of the Sacred Roots. There's a <NAVI>[bishop]<INFO>jor_sanct,150,207,0,101,0</INFO></NAVI> holding court up there. Bishops love to talk.";
+		callfunc "F_WSJ_Step", 570, "18226", "18227";
+		close3;
+	}
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "The <NAVI>[bishop]<INFO>jor_sanct,150,207,0,101,0</INFO></NAVI> in the middle of the Sacred Roots. Go!";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 560" );
+	end;
+}
+
+jor_sanct,135,88,3	script(CLOAKED)	Miriam#wsj_sn	4_EP19_RGAN_R2,{
+	cutin "ep18_miriam_01.png",2;
+	mes "[Miriam]";
+	mes "I'll check the east side. Be careful.";
+	close3;
+}
+
+jor_sanct,133,90,0	script	#wsj_t_sn	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+jor_sanct,150,207,5	script	Rgan Bishop#wsj	4_EP19_RGAN_SR2,{
+	if (!callfunc("F_WSJ_IsRgan", "Rgan Bishop")) end;
+	if (wsj_ep20 == 570) {
+		mes "[Rgan Bishop]";
+		mes "Ah, an attendant with manners. Come, come. You may listen to me.";
+		next;
+		mes "[Rgan Bishop]";
+		mes "You've heard, of course? Bishop Rasgand has found the way. Not through that silly maze, no.";
+		mes "Through the human's machine. The human Bagot built him a door to the branches themselves.";
+		next;
+		mes "[Rgan Bishop]";
+		mes "Tonight Rasgand walks into the Nest of Small Branches with the shard of the giant's heart in his chest, and then-";
+		next;
+		mes "^4d4dffThe ground heaves. Every root in the hall shudders at once, and the Rgans scream.^000000";
+		next;
+		mes "[Rgan Bishop]";
+		mes "It's begun! It's begun!";
+		next;
+		cutin "ep20_nyar04.png",1;
+		mes "^4d4dffWhite light. A voice you've heard once before, urgent now:^000000";
+		mes "^0000FFLittle one. He is here. Come!^000000";
+		callfunc "F_WSJ_Step", 580, "18227", "18228";
+		close2;
+		cutin "",255;
+		warp "jor_twig",187,195;
+		end;
+	}
+	if (wsj_ep20 > 570 && wsj_ep20 < 700) {
+		mes "[Rgan Bishop]";
+		mes "The roots are shaking. Something is very wrong with the branches!";
+		close;
+	}
+	mes "[Rgan Bishop]";
+	mes "The Serpent God dreams, and we are his dream. Remember that, attendant.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 570" );
+	end;
+}
+
+// ------------------------------------------------------------
+// The Nest of Small Branches (580-629)
+// ------------------------------------------------------------
+jor_twig,187,198,3	script(CLOAKED)	White Cat#wsj_tg2	4_EP20_NYAR,{
+	if (wsj_ep20 == 580) {
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "^0000FFYou came. Good.^000000";
+		next;
+		mes "[Nyar]";
+		mes "^0000FFThe snake bishop is inside my nest. The machine-man opened a hole in my branches and he crawled through it.^000000";
+		mes "^0000FFMy little copies are holding him, but they are only copies.^000000";
+		next;
+		mes "[Nyar]";
+		mes "^0000FFYour friends are already here. The loud one and the gentle one. Go to them, <NAVI>[further in]<INFO>jor_twig,180,123,0,101,0</INFO></NAVI>. Hurry.^000000";
+		callfunc "F_WSJ_Step", 590, "18228", "18229";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 580" );
+	end;
+}
+
+jor_twig,180,123,3	script(CLOAKED)	White Cat#wsj_tg3	4_EP20_NYAR,{
+	if (wsj_ep20 == 590) {
+		cutin "ep19_voglinde01.png",0;
+		mes "[Voglinde]";
+		mes "There you are. You're late, and I've already done the hard part.";
+		mes "Meet our guest.";
+		next;
+		cutin "ep18_bagot_03.png",2;
+		mes "[Bagot]";
+		mes "This is a misunderstanding! I'm a scientist! I only build doors, I don't decide who walks through them!";
+		next;
+		cutin "ep19_lehar04.png",0;
+		mes "[Lehar]";
+		mes "We caught him running the other way, with his machine still smoking. The coward.";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "^0000FFThe machine-man is nothing. The snake bishop is the danger.^000000";
+		mes "^0000FFHe has reached my heart-room. Your armoured friend is holding him with my copies. Go, <NAVI>[to the centre of the nest]<INFO>jor_twig,142,153,0,101,0</INFO></NAVI>!^000000";
+		callfunc "F_WSJ_Step", 600, "18229", "18230";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 590" );
+	end;
+}
+
+jor_twig,179,120,5	script(CLOAKED)	Lehar#wsj_tg3	4_EP19_LEHAR,{
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "I found the lab! Well. I found where it ends. It ends here.";
+	close3;
+}
+jor_twig,184,121,3	script(CLOAKED)	Miriam#wsj_tg3	4_EP18_MIRIAM,{
+	cutin "ep18_miriam_01.png",2;
+	mes "[Miriam]";
+	mes "The whole nest is trembling. Please hurry.";
+	close3;
+}
+jor_twig,178,126,5	script(CLOAKED)	Bagot#wsj_tg3	4_EP18_BAGOT,{
+	cutin "ep18_bagot_01.png",2;
+	mes "[Bagot]";
+	mes "Do you have any idea how hard it is to build a door into a god? And nobody even says thank you.";
+	close3;
+}
+jor_twig,176,129,5	script(CLOAKED)	Voglinde#wsj_tg3	4_EP19_VOGLINDE,{
+	cutin "ep19_voglinde01.png",0;
+	mes "[Voglinde]";
+	mes "I'll watch the scientist. Go.";
+	close3;
+}
+
+jor_twig,142,153,3	script(CLOAKED)	White Cat#wsj_tg4	4_EP20_NYAR,{
+	if (wsj_ep20 == 600) {
+		cutin "ep20_lasgand02.png",2;
+		mes "[Rasgand]";
+		mes "Ahh, the useful attendant. Come to watch the end of your little cat?";
+		next;
+		cutin "ep19_leon02.png",0;
+		mes "[Leon]";
+		mes "Took you long enough! He doesn't go down! I've hit him a dozen times!";
+		next;
+		cutin "ep20_lasgand05.png",2;
+		mes "[Rasgand]";
+		mes "Of course I don't. I carry a piece of the frost giant's heart. Ymir's heart.";
+		mes "Nothing that beats with Ymir's heart can die. Not by your swords. Not by your cat.";
+		next;
+		cutin "ep20_nyar05.png",1;
+		mes "[Nyar]";
+		mes "^0000FFThen you will not die. But you will not stay, either.^000000";
+		next;
+		specialeffect EF_HOLYHIT, AREA, "White Cat#wsj_tg4";
+		mes "^4d4dffNyar's copies leap at Rasgand all at once. Light tears through the nest.^000000";
+		mes "^4d4dffWhen it clears, Rasgand is gone, and one of the copies with him.^000000";
+		cloakonnpcself "Rasgand#wsj_tg4";
+		callfunc "F_WSJ_Step", 610, "18230", "18231";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "[Nyar]";
+		mes "^0000FF...Hhh. Ask the armoured one. I need to hold on.^000000";
+		close3;
+	}
+	if (wsj_ep20 >= 610 && wsj_ep20 < 630) {
+		cutin "ep20_nyar02.png",1;
+		mes "[Nyar]";
+		mes "^0000FFI am holding the wall. Don't talk to me. Go.^000000";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 600" );
+	end;
+}
+
+jor_twig,140,155,3	script(CLOAKED)	Rasgand#wsj_tg4	4_EP20_LASGAND,{
+	cutin "ep20_lasgand03.png",2;
+	mes "[Rasgand]";
+	mes "Your cat is tiring. I can wait.";
+	close3;
+}
+
+jor_twig,138,157,5	script(CLOAKED)	Leon#wsj_tg4	4_EP19_LEON,{
+	if (wsj_ep20 == 610) {
+		cutin "ep19_leon01.png",0;
+		mes "[Leon]";
+		mes "Where did he go? Nyar threw him somewhere, I saw it.";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "Not threw. ^0000FFSeparated^000000.";
+		mes "She cut away a piece of her own sanctuary, with Rasgand inside it, and pushed it into another place. A separated sanctuary.";
+		next;
+		cutin "ep19_leon02.png",0;
+		mes "[Leon]";
+		mes "So he's trapped?";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "For now. But holding it is draining her. If she lets go, he walks right back into the heart-room.";
+		mes "Somebody has to go in there and stop him. And I can open the way.";
+		next;
+		cutin "ep19_leon01.png",0;
+		mes "[Leon]";
+		mes "Then talk to Aurelie when you're ready. I'll stay with Nyar.";
+		callfunc "F_WSJ_Step", 620, "18231", "18232";
+		close3;
+	}
+	cutin "ep19_leon01.png",0;
+	mes "[Leon]";
+	mes "Can't kill him. Can't let him go. Hate this.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 610" );
+	end;
+}
+
+jor_twig,138,152,5	script(CLOAKED)	Aurelie#wsj_tg4	4_EP19_AURELIE,{
+	if (wsj_ep20 == 620) {
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "I can open a door into the separated sanctuary, through the barrier Nyar is holding.";
+		mes "Rasgand will be waiting. He can't die, so don't try to kill him: break him. Beat him until the shard can't hold him together.";
+		next;
+		mes "[Aurelie]";
+		mes "The door stays open for one hour. Are you ready?";
+		next;
+		if (select("Open the door.:Wait, I need to prepare.") == 2) {
+			mes "[Aurelie]";
+			mes "Don't take too long. Nyar won't last forever.";
+			close3;
+		}
+		if (instance_enter("Separated Sanctuary") != IE_OK) {
+			.@id = instance_create("Separated Sanctuary", IM_CHAR);
+			if (.@id < 0) {
+				mes "[Aurelie]";
+				mes "...The barrier won't open. Something is in the way. Try again in a moment.";
+				close3;
+			}
+			if (instance_enter("Separated Sanctuary") != IE_OK) {
+				mes "[Aurelie]";
+				mes "...The barrier won't open. Try again in a moment.";
+				close3;
+			}
+		}
+		cutin "",255;
+		end;
+	}
+	cutin "ep19_aurelie01.png",1;
+	mes "[Aurelie]";
+	mes "Nyar's sanctuary. I never imagined I'd stand inside a god.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 620" );
+	end;
+}
+
+// Nyar's copies, holding the wall around the heart-room.
+jor_twig,130,155,3	script(CLOAKED)	Nyar's Clone#wsj1	4_EP20_NYAR,{
+	mes "^4d4dffA copy of Nyar, eyes closed, tail stiff. It is concentrating very hard.^000000";
+	close;
+}
+jor_twig,134,152,3	duplicate(Nyar's Clone#wsj1)	Nyar's Clone#wsj2	4_EP20_NYAR
+jor_twig,134,158,3	duplicate(Nyar's Clone#wsj1)	Nyar's Clone#wsj3	4_EP20_NYAR
+jor_twig,137,149,3	duplicate(Nyar's Clone#wsj1)	Nyar's Clone#wsj4	4_EP20_NYAR
+jor_twig,137,161,3	duplicate(Nyar's Clone#wsj1)	Nyar's Clone#wsj5	4_EP20_NYAR
+jor_twig,140,146,3	duplicate(Nyar's Clone#wsj1)	Nyar's Clone#wsj6	4_EP20_NYAR
+jor_twig,140,164,3	duplicate(Nyar's Clone#wsj1)	Nyar's Clone#wsj7	4_EP20_NYAR
+jor_twig,143,149,3	duplicate(Nyar's Clone#wsj1)	Nyar's Clone#wsj8	4_EP20_NYAR
+jor_twig,143,161,3	duplicate(Nyar's Clone#wsj1)	Nyar's Clone#wsj9	4_EP20_NYAR
+jor_twig,146,152,3	duplicate(Nyar's Clone#wsj1)	Nyar's Clone#wsj10	4_EP20_NYAR
+jor_twig,146,158,3	duplicate(Nyar's Clone#wsj1)	Nyar's Clone#wsj11	4_EP20_NYAR
+jor_twig,149,155,3	duplicate(Nyar's Clone#wsj1)	Nyar's Clone#wsj12	4_EP20_NYAR
+
+jor_twig,183,160,0	script	#wsj_t_tg	HIDDEN_WARP_NPC,60,50,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// Memorial dungeon: the Separated Sanctuary (1@twig)
+// ------------------------------------------------------------
+1@twig	mapflag	nosave	SavePoint
+1@twig	mapflag	noteleport
+1@twig	mapflag	nomemo
+1@twig	mapflag	nowarpto
+1@twig	mapflag	nobranch
+1@twig	mapflag	monster_noteleport
+1@twig	mapflag	nopenalty
+
+1@twig,1,1,0	script	#wsj_md	-1,{
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("Nyar#wsj_md");
+	monster instance_mapname("1@twig"),142,155,"Rasgand",21981,1,instance_npcname("#wsj_md") + "::OnRasgandDown";
+	end;
+OnRasgandDown:
+	mapannounce instance_mapname("1@twig"), "Rasgand: Hhh... hhaaah... you can't... I can't... die...", bc_map, "0xFF4444";
+	sleep 3000;
+	mapannounce instance_mapname("1@twig"), "The shard of Ymir's heart cracks free of Rasgand's chest and falls to the ground.", bc_map, "0x88CCFF";
+	enablenpc instance_npcname("Nyar#wsj_md");
+	end;
+}
+
+1@twig,145,150,3	script	Nyar#wsj_md	4_EP20_NYAR,{
+	if (wsj_ep20 == 620) {
+		cutin "ep20_nyar03.png",1;
+		mes "[Nyar]";
+		mes "^0000FFHe is broken. Not dead. He will never be dead, not while the giant's heart remembers him.^000000";
+		mes "^0000FFBut without this, he is only a snake again. A weak one.^000000";
+		next;
+		mes "^4d4dffNyar nudges a shard of dark ice toward you. It pulses, faintly, like a heartbeat.^000000";
+		getitem 1001254,1;	// Ep20_Ymir_Heart
+		next;
+		cutin "ep20_nyar04.png",1;
+		mes "[Nyar]";
+		mes "^0000FFTake it far away from my branches. I will push him somewhere cold and quiet, where he can sleep for a long time.^000000";
+		mes "^0000FFThank you, little one.^000000";
+		next;
+		mes "[Nyar]";
+		mes "^0000FFYour friends are waiting at the castle. The bird-woman who caught the machine-man wants to see you.^000000";
+		mes "^0000FFThe small one with the bell knows where she is.^000000";
+		callfunc "F_WSJ_Step", 630, "18232", "18233";
+		close2;
+		cutin "",255;
+		warp "icecastle",158,204;
+		end;
+	}
+	cutin "ep20_nyar01.png",1;
+	mes "[Nyar]";
+	mes "^0000FFIt is over, little one. Go home.^000000";
+	next;
+	close2;
+	cutin "",255;
+	warp "icecastle",158,204;
+	end;
+}
+
+// ------------------------------------------------------------
+// The Undying One: back at the castle (630-700)
+// ------------------------------------------------------------
+icecastle,75,126,5	script	Chichiring#wsj	4_EP19_IWIN,{
+	if (wsj_ep20 == 630) {
+		mes "[Chichiring]";
+		mes "*jingle jingle* You're the one the Commander's looking for! The one who went into the god!";
+		next;
+		mes "[Chichiring]";
+		mes "Lady Voglinde is in the <NAVI>[west wing guest room]<INFO>icas_in2,253,118,0,101,0</INFO></NAVI>, with the prisoner. The scientist.";
+		mes "She said to send you straight in. *jingle*";
+		callfunc "F_WSJ_Step", 635, "", "";
+		close;
+	}
+	mes "[Chichiring]";
+	if (wsj_ep20 >= 700)
+		mes "The ancient Icewinds have been restless since the deep roots shook. Somebody should do something. *jingle*";
+	else
+		mes "*jingle jingle* Bells keep the bad dreams away. Everybody knows that.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 630" );
+	end;
+}
+
+icas_in2,253,118,3	script(CLOAKED)	Voglinde#wsj_end	4_EP19_VOGLINDE,{
+	if (wsj_ep20 == 635) {
+		cutin "ep19_voglinde01.png",0;
+		mes "[Voglinde]";
+		mes "So. You broke the undying bishop.";
+		mes "Show me.";
+		next;
+		select("Show her the shard.");
+		cutin "ep19_voglinde02.png",0;
+		mes "[Voglinde]";
+		mes "......";
+		mes "A shard of Ymir's heart. Tainted, but still beating.";
+		next;
+		mes "[Voglinde]";
+		mes "This is what made him undying. And this is what the Rgans have been feeding all that stolen mana into.";
+		mes "Keep it. You've earned the right to carry it. Just don't let it near any snakes.";
+		next;
+		cutin "ep18_bagot_02.png",2;
+		mes "[Captured Bagot]";
+		mes "That shard is my finest work! Do you know how many cores it took to-";
+		next;
+		cutin "ep19_voglinde01.png",0;
+		mes "[Voglinde]";
+		mes "Quiet.";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "Rasgand is sealed away, Bagot is in chains, and the Nest of Small Branches is safe. For now.";
+		mes "Nyar says she will call us if he stirs again.";
+		next;
+		cutin "ep19_leizi03.png",2;
+		mes "[Lazy]";
+		mes "And in the meantime, His Holiness Nadyagand has translated forty crates of Rgan paperwork. I'm thinking of giving him a raise.";
+		next;
+		cutin "ep19_voglinde01.png",0;
+		mes "[Voglinde]";
+		mes "The Rgans who are left won't give up the Roots without a fight. I'll be organizing patrols. If you want to help, come and see me.";
+		mes "Thank you, adventurer. Issgard owes you.";
+		callfunc "F_WSJ_Step", 700, "18233", "";
+		callfunc "F_WSJ_Chapter";
+		getitem 1001251,7;	// EP20_D_Scale
+		close3;
+	}
+	cutin "ep19_voglinde01.png",0;
+	mes "[Voglinde]";
+	mes "The undying bishop sleeps somewhere cold. Let's keep it that way.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 635" );
+	end;
+}
+
+icas_in2,247,122,5	script(CLOAKED)	Captured Bagot#wsj_end	4_EP18_BAGOT,{
+	cutin "ep18_bagot_01.png",2;
+	mes "[Captured Bagot]";
+	mes "When the Rgans come to rescue me, I'll put in a good word for you. Maybe.";
+	close3;
+}
+icas_in2,246,119,5	script(CLOAKED)	Maram#wsj_end	4_EP18_MARAM,{
+	cutin "ep18_maram_01.png",2;
+	mes "[Maram]";
+	mes "Everyone came home. That's all I wanted.";
+	close3;
+}
+icas_in2,251,121,3	script(CLOAKED)	Miriam#wsj_end	4_EP18_MIRIAM,{
+	cutin "ep18_miriam_01.png",2;
+	mes "[Miriam]";
+	mes "Lehar is telling the story of the twig nest to every soldier in the castle. It gets bigger every time.";
+	close3;
+}
+icas_in2,252,113,3	script(CLOAKED)	Lazy#wsj_end	4_EP19_LAZY,{
+	cutin "ep19_leizi01.png",2;
+	mes "[Lazy]";
+	mes "Bagot's notes are fascinating. Terrible handwriting, though.";
+	close3;
+}
+icas_in2,245,115,5	script(CLOAKED)	Leon#wsj_end	4_EP19_LEON,{
+	cutin "ep19_leon01.png",0;
+	mes "[Leon]";
+	mes "Next time he wakes up, I want the first swing.";
+	close3;
+}
+icas_in2,246,112,5	script(CLOAKED)	Aurelie#wsj_end	4_EP19_AURELIE,{
+	cutin "ep19_aurelie01.png",1;
+	mes "[Aurelie]";
+	mes "An undying enemy, sealed by a cat. The world is stranger than any of us thought.";
+	close3;
+}
+
+icas_in2,249,116,0	script	#wsj_t_end	HIDDEN_WARP_NPC,9,9,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}

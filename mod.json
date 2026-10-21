@@ -1,0 +1,19 @@
+{
+  "name": "world-sync-jormungandr",
+  "version": "1.0.0",
+  "author": "Lil Art",
+  "description": "Episode 20 of the Jormungandr saga, playable: the Ancient Ice Canyon, the Lair of the Rgans, the Sacred Roots, the Serpent's Maze, the Frozen Zone and the Nest of Small Branches, up to the memorial dungeon against the undying Rasgand. Full dialogue, the official quest steps, kill goals and rewards. Starts from Horuru in the Ice Castle once Episode 19 is done (level 200+). Needs the World Sync maps (Ragnarok Offline 1.6.6+).",
+  "requires": {
+    "app": ">=1.6.7",
+    "era": "renewal"
+  },
+  "settings": [
+    {
+      "key": "skip_ep19",
+      "type": "boolean",
+      "default": false,
+      "label": "Start Episode 20 without finishing Episode 19",
+      "description": "Horuru offers the episode to any character of level 200 or more, even one that hasn't finished Issgard's Episode 19 story."
+    }
+  ]
+}

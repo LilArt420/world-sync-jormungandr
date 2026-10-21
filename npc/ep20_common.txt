@@ -1,0 +1,267 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 20 (The Undying One): shared functions.
+//===== Description: =========================================
+//= Written from the official client's quest text (kRO, English
+//= by ROenglishRE) and the navigation tables; no official script
+//= exists. Steps, goals and places follow the client's quest log.
+//=
+//= Character variables (prefixed so a future official script
+//= can't collide with them):
+//=   wsj_ep20   main story step (0 = not started, 700 = done)
+//=   wsj_ep20b  bits for steps done in any order
+//= The episode starts after Episode 19 (ep19_main == 100), at
+//= level 200, unless the setting skip_ep19 is on.
+//============================================================
+
+// Who can see which story NPC. Every scene NPC is CLOAKED; this
+// shows it to a player whose step is in its range and hides it
+// otherwise. Called on map load, from the scene triggers and after
+// every step change.
+function	script	F_WSJ_Scenes	{
+	.@m$ = strcharinfo(3);
+	.@s = wsj_ep20;
+	if ((ep19_main < 100 && !$wsj_skip19) || BaseLevel < 200)
+		.@s = -1;
+	// NPC name, first step, last step (both inclusive)
+	if (.@m$ == "icas_in") {
+		setarray .@t$,
+			"Horuru#wsj_l","0","129",
+			"Aurelie#wsj_l","40","129",
+			"Vellgunde#wsj_l","80","129",
+			"Miriam#wsj_l","100","129",
+			"Lazy#wsj_l","110","129",
+			"Iwin Soldier#wsj_bar","60","69",
+			"Traveler#wsj_inn","60","69",
+			"Aurelie#wsj_rep","330","339",
+			"Leon#wsj_rep","330","339",
+			"Lehar#wsj_rep","330","339",
+			"Leon#wsj_c5","530","539";
+	} else if (.@m$ == "icecastle") {
+		setarray .@t$,
+			"Iwin Soldier#wsj_alley","60","69",
+			"Lehar#wsj_front","90","94";
+	} else if (.@m$ == "jor_back5") {
+		setarray .@t$,
+			"Lehar#wsj_c1a","10","29",
+			"Lazy#wsj_c1a","10","29",
+			"Miriam#wsj_c1a","10","29",
+			"Horuru#wsj_c1a","10","29",
+			"Lehar#wsj_c1b","30","39",
+			"Lazy#wsj_c1b","30","39",
+			"Miriam#wsj_c1b","30","39",
+			"Horuru#wsj_c1b","30","39",
+			"Magical Object#wsj_c1b","30","39";
+	} else if (.@m$ == "jor_back6") {
+		setarray .@t$,
+			"Lehar#wsj_b6","95","99",
+			"Fake Iwin Soldier#wsj_b6","95","99";
+	} else if (.@m$ == "jor_nest") {
+		setarray .@t$,
+			"Lazy#wsj_door","120","139",
+			"Lehar#wsj_door","120","139";
+	} else if (.@m$ == "jor_root1") {
+		setarray .@t$,
+			"Rgan Shaman#wsj","150","159",
+			"Mark#wsj_k1","550","559",
+			"Mark#wsj_k2","550","559",
+			"Mark#wsj_k3","550","559";
+	} else if (.@m$ == "jor_root2") {
+		setarray .@t$,
+			"Lehar#wsj_hide","160","179",
+			"Miriam#wsj_hide","160","179",
+			"Aurelie#wsj_hide","160","179",
+			"Leon#wsj_hide","160","179",
+			"Lazy#wsj_hide","160","169";
+	} else if (.@m$ == "jor_safty2") {
+		setarray .@t$,
+			"Lazy#wsj_bishop","180","189",
+			"Bishop Rgan#wsj","180","339";
+	} else if (.@m$ == "jor_sanct") {
+		setarray .@t$,
+			"Lehar#wsj_sn","560","579",
+			"Miriam#wsj_sn","560","579";
+	} else if (.@m$ == "jor_maze") {
+		setarray .@t$,
+			"Traces#wsj_m1","280","289",
+			"Traces#wsj_m2","290","299",
+			"Rasgand#wsj_m3","310","319",
+			"Sarekgand#wsj_m3","310","319",
+			"Lehar#wsj_mz","490","499",
+			"Leon#wsj_mz","490","499",
+			"Aurelie#wsj_mz","490","499",
+			"Lazy#wsj_mz","490","499",
+			"Miriam#wsj_mz","490","519",
+			"Maram#wsj_mz","490","519",
+			"Miriam#wsj_mz2","520","529";
+	} else if (.@m$ == "jor_back1") {
+		setarray .@t$,
+			"Lehar#wsj_b1","320","329",
+			"Aurelie#wsj_b1","320","329",
+			"Leon#wsj_b1","320","329",
+			"Lazy#wsj_b1","320","329",
+			"Miriam#wsj_b1","320","329";
+	} else if (.@m$ == "icas_in2") {
+		setarray .@t$,
+			"Horuru#wsj_n","340","389",
+			"Lazy#wsj_n","370","389",
+			"Voglinde#wsj_end","635","700",
+			"Captured Bagot#wsj_end","635","700",
+			"Maram#wsj_end","635","700",
+			"Miriam#wsj_end","635","700",
+			"Lazy#wsj_end","635","700",
+			"Leon#wsj_end","635","700",
+			"Aurelie#wsj_end","635","700";
+	} else if (.@m$ == "jor_twice") {
+		setarray .@t$,
+			"Miriam#wsj_tw1","430","439",
+			"Lazy#wsj_tw1","430","439",
+			"Lehar#wsj_tw1","430","439",
+			"Leon#wsj_tw2","440","449",
+			"Aurelie#wsj_tw2","440","449",
+			"White Cat#wsj_tw2","440","449",
+			"Maram#wsj_tw2","440","489",
+			"Miriam#wsj_tw2","440","489",
+			"Lazy#wsj_tw2","440","489",
+			"Lehar#wsj_tw3","450","489",
+			"Aurelie#wsj_tw3","470","489",
+			"Leon#wsj_tw3","470","489";
+	} else if (.@m$ == "jor_twig") {
+		setarray .@t$,
+			"Leon#wsj_tg1","450","469",
+			"Aurelie#wsj_tg1","450","469",
+			"White Cat#wsj_tg2","580","589",
+			"White Cat#wsj_tg3","590","599",
+			"Lehar#wsj_tg3","590","599",
+			"Miriam#wsj_tg3","590","599",
+			"Bagot#wsj_tg3","590","599",
+			"Voglinde#wsj_tg3","590","599",
+			"White Cat#wsj_tg4","600","629",
+			"Leon#wsj_tg4","600","629",
+			"Aurelie#wsj_tg4","600","629",
+			"Rasgand#wsj_tg4","600","609";
+		for (.@c = 1; .@c <= 12; .@c++)
+			setarray .@t$[getarraysize(.@t$)], "Nyar's Clone#wsj" + .@c, "600", "629";
+	} else
+		return;
+	for (.@i = 0; .@i < getarraysize(.@t$); .@i += 3) {
+		if (.@s >= atoi(.@t$[.@i+1]) && .@s <= atoi(.@t$[.@i+2]))
+			cloakoffnpcself .@t$[.@i];
+		else
+			cloakonnpcself .@t$[.@i];
+	}
+	return;
+}
+
+// Moves the story on: finishes the quests given, starts the next ones,
+// sets the step and refreshes who is visible.
+// callfunc "F_WSJ_Step", <new step>, "<quests to complete>", "<quests to start>";
+// Quest lists are comma separated ids ("" for none).
+function	script	F_WSJ_Step	{
+	.@done$ = getarg(1);
+	.@next$ = getarg(2);
+	if (.@done$ != "") {
+		explode .@d$, .@done$, ",";
+		.@n = getarraysize(.@d$);
+		for (.@i = 0; .@i < .@n; .@i++) {
+			.@q = atoi(.@d$[.@i]);
+			if (isbegin_quest(.@q) == 1)
+				completequest .@q;
+			else if (isbegin_quest(.@q) == 0) {
+				setquest .@q;
+				completequest .@q;
+			}
+		}
+	}
+	if (.@next$ != "") {
+		explode .@x$, .@next$, ",";
+		.@n = getarraysize(.@x$);
+		for (.@i = 0; .@i < .@n; .@i++) {
+			.@q = atoi(.@x$[.@i]);
+			if (isbegin_quest(.@q) == 0)
+				setquest .@q;
+		}
+	}
+	wsj_ep20 = getarg(0);
+	callfunc "F_WSJ_Scenes";
+	questinfo_refresh;
+	return;
+}
+
+// The end of a chapter: experience, Snake God Scales and Isgard
+// reputation. The official amounts aren't published; these follow
+// Episode 19's main story (getexp2 ~52M) for level 200+ players.
+function	script	F_WSJ_Chapter	{
+	getexp2 60000000,0;
+	getexp 0,3500000;
+	getitem 1001251,3;	// EP20_D_Scale
+	add_reputation_points( REPUTATION_EP19, 50 );
+	return;
+}
+
+// Rgans only talk to Rgans. Returns 1 when the player is transformed
+// with a Rgan Transformation Scroll; otherwise the Rgan shoos them.
+// callfunc("F_WSJ_IsRgan", "<npc display name>")
+function	script	F_WSJ_IsRgan	{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) == 21530)
+		return 1;
+	mes "[" + getarg(0) + "]";
+	mes "A... a human?!";
+	mes "Go away, go away! Guards!";
+	next;
+	mes "^4d4dffYou'd better look like a Rgan first.";
+	mes "Use a " + getitemname(101162) + ". Lunch, out on the Frozen Scale Glacier, makes them.^000000";
+	close;
+}
+
+// Snakeberries come up from the hardened soil of the Serpent God's
+// Roots, 2nd floor.
+function	script	F_WSJ_Berry	{
+	if (countitem(1001154) >= 10 && (wsj_ep20 < 200 || wsj_ep20 > 215) && wsj_ep20 != 360) {
+		mes "There's hardened soil here. Snakeberries grow under it.";
+		mes "But your pockets are full of them already.";
+		close;
+	}
+	mes "Hardened soil, with a few red berries poking out.";
+	mes "Dig some up?";
+	next;
+	if (select("Dig:Leave it") == 2)
+		close;
+	close2;
+	progressbar "ffffff", 3;
+	if (rand(100) < 70) {
+		getitem 1001154,1;	// Ep20_Jor_Berry
+		specialeffect2 EF_BUBBLE;
+	} else
+		dispbottom "Only roots and pebbles this time.";
+	if (wsj_ep20 == 210 && countitem(1001154) >= 3) {
+		callfunc "F_WSJ_Step", 215, "17698", "17719";
+		dispbottom "That's three Snakeberries. Back to the Bishops at the Sacred Roots.";
+	}
+	end;
+}
+
+-	script	WSJ_SceneLoader	-1,{
+	end;
+OnInit:
+	// Setting "skip_ep19": start Episode 20 without finishing Episode 19.
+	$wsj_skip19 = callfunc("F_ModSetting", "world-sync-jormungandr", "skip_ep19", 0);
+	end;
+OnPCLoadMapEvent:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+icas_in	mapflag	loadevent
+icas_in2	mapflag	loadevent
+icecastle	mapflag	loadevent
+jor_back1	mapflag	loadevent
+jor_back5	mapflag	loadevent
+jor_back6	mapflag	loadevent
+jor_nest	mapflag	loadevent
+jor_root1	mapflag	loadevent
+jor_root2	mapflag	loadevent
+jor_safty2	mapflag	loadevent
+jor_sanct	mapflag	loadevent
+jor_maze	mapflag	loadevent
+jor_twice	mapflag	loadevent
+jor_twig	mapflag	loadevent
