@@ -1,0 +1,241 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 20: daily quests (reset at 04:00).
+//= Official quest ids; rewards aren't published, so each gives
+//= experience and Snake God Scales like the story's smaller steps.
+//============================================================
+
+// Daily state of one quest pair.
+// callfunc("F_WSJ_Daily", <active quest>, <standby quest>)
+// 0 = can be taken, 1 = in progress, 2 = done today (standby running).
+function	script	F_WSJ_Daily	{
+	.@q = getarg(0);
+	.@w = getarg(1);
+	if (isbegin_quest(.@q) == 1)
+		return 1;
+	if (isbegin_quest(.@w) == 1) {
+		if (checkquest(.@w,PLAYTIME) == 2) {
+			erasequest .@w;
+			return 0;
+		}
+		return 2;
+	}
+	return 0;
+}
+
+// Hands in a daily: removes the active quest, starts the standby one,
+// and gives the reward.
+// callfunc "F_WSJ_DailyDone", <active quest>, <standby quest>, <base exp>, <scales>;
+function	script	F_WSJ_DailyDone	{
+	erasequest getarg(0);
+	setquest getarg(1);
+	getexp2 getarg(2), 0;
+	getexp 0, getarg(2) / 15;
+	if (getarg(3) > 0)
+		getitem 1001251, getarg(3);	// EP20_D_Scale
+	add_reputation_points( REPUTATION_EP19, 5 );
+	return;
+}
+
+// ------------------------------------------------------------
+// Cleaning the Serpent's Maze (Supervisor, jor_sanct)
+// ------------------------------------------------------------
+jor_sanct,24,281,5	script	Cleaning Board#wsj	4_EP19_RGAN_R1,{
+	if (!callfunc("F_WSJ_IsRgan", "Cleaner")) end;
+	if (wsj_ep20 < 280) {
+		mes "[Cleaner]";
+		mes "The Supervisor hands out the cleaning. Not me. I just hold the mop.";
+		close;
+	}
+	switch (callfunc("F_WSJ_Daily", 17710, 17711)) {
+	case 0:
+		mes "[Cleaner]";
+		mes "The Supervisor says today's cleaning is the guards in the Serpent's Maze. Ten purple, ten yellow.";
+		mes "He says you clean best. Want the job?";
+		next;
+		if (select("I'll do it.:Not today.") == 2)
+			close;
+		setquest 17710;
+		mes "[Cleaner]";
+		mes "^FF000010 Jormun Guard-P and 10 Jormun Guard-Y^000000 in the maze. Come back to me when you're done.";
+		close;
+	case 1:
+		if (checkquest(17710,HUNTING) != 2) {
+			mes "[Cleaner]";
+			mes "Still dirty in there. Ten purple, ten yellow.";
+			close;
+		}
+		mes "[Cleaner]";
+		mes "Spotless! The Supervisor will be pleased. Here, from the cleaning budget.";
+		callfunc "F_WSJ_DailyDone", 17710, 17711, 20000000, 1;
+		close;
+	case 2:
+		mes "[Cleaner]";
+		mes "That's enough cleaning for today. The maze gets dirty again overnight. Always does.";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsj_ep20 >= 280 && isbegin_quest(17710) == 0 && (isbegin_quest(17711) == 0 || checkquest(17711,PLAYTIME) == 2)" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Taste of Leisure (Nadyagand, icas_in2), from step 380
+// ------------------------------------------------------------
+function	script	F_WSJ_DailyNadya	{
+	switch (callfunc("F_WSJ_Daily", 17718, 17717)) {
+	case 0:
+		mes "[Nadyagand]";
+		mes "Hard work makes a bishop hungry. Very hungry.";
+		mes "Ten snakeberries would help me work even harder. For the Ice Castle, of course.";
+		next;
+		if (select("Fine, ten snakeberries.:Work hungry.") == 2)
+			close;
+		setquest 17718;
+		mes "[Nadyagand]";
+		mes "Ten, from the <NAVI>[Roots, 2nd floor]<INFO>jor_root2,25,21,0,101,0</INFO></NAVI>. Fresh ones!";
+		close;
+	case 1:
+		if (countitem(1001154) < 10) {
+			mes "[Nadyagand]";
+			mes "Ten snakeberries. I am counting.";
+			close;
+		}
+		delitem 1001154,10;
+		mes "[Nadyagand]";
+		mes "Mmmh. Now I can translate another crate.";
+		mes "Take this. The Iwins pay me, and I have nothing to spend it on.";
+		callfunc "F_WSJ_DailyDone", 17718, 17717, 15000000, 1;
+		close;
+	case 2:
+		mes "[Nadyagand]";
+		mes "Full. Working. Come back tomorrow with more.";
+		close;
+	}
+	return;
+}
+
+// ------------------------------------------------------------
+// Example of Silent Answer (Pamoshugand) and I've Come This Far
+// (Nalsioramigand), after the trust errands of the main story.
+// ------------------------------------------------------------
+function	script	F_WSJ_DailyPamo	{
+	switch (callfunc("F_WSJ_Daily", 8845, 8844)) {
+	case 0:
+		mes "^4d4dffPamoshugand points at the picture of the grey feather again. Then at the number twenty. Then at you.^000000";
+		next;
+		if (select("Nod.:Shake your head.") == 2)
+			close;
+		setquest 8845;
+		mes "^4d4dffHe nods back, deeply. Twenty " + getitemname(1001244) + "s, from the Grey Icewinds of the canyon.^000000";
+		close;
+	case 1:
+		if (countitem(1001244) < 20) {
+			mes "^4d4dffPamoshugand taps the number twenty. Patiently.^000000";
+			close;
+		}
+		delitem 1001244,20;
+		mes "^4d4dffPamoshugand takes the feathers and hands them, without a word, to Doririrogand. Doririrogand beams.^000000";
+		callfunc "F_WSJ_DailyDone", 8845, 8844, 15000000, 1;
+		close;
+	case 2:
+		mes "^4d4dffPamoshugand holds up one finger and points at the sky. Tomorrow.^000000";
+		close;
+	}
+	return;
+}
+
+// ------------------------------------------------------------
+// Awin's Awin Worry (Chichiring, icecastle)
+// Boclinde's Extermination Operations (Voglinde, icas_in2)
+// Pulling Out Jormungandr's Roots (Kororo, jor_twice)
+// ------------------------------------------------------------
+// These three give their dailies through the story NPCs' own scripts:
+// see F_WSJ_DailyHunt below, called from Chichiring, Voglinde and Kororo.
+
+// A kill daily handed out by a story NPC.
+// callfunc "F_WSJ_DailyHunt", "<npc name>", <active>, <standby>, "<what to kill>", "<offer line>", <exp>;
+function	script	F_WSJ_DailyHunt	{
+	.@npc$ = getarg(0);
+	.@q = getarg(1);
+	.@w = getarg(2);
+	switch (callfunc("F_WSJ_Daily", .@q, .@w)) {
+	case 0:
+		mes "[" + .@npc$ + "]";
+		mes getarg(4);
+		next;
+		if (select("I'll take care of it.:Not today.") == 2)
+			close;
+		setquest .@q;
+		mes "[" + .@npc$ + "]";
+		mes "Defeat ^FF0000" + getarg(3) + "^000000 and come back to me.";
+		close;
+	case 1:
+		if (checkquest(.@q,HUNTING) != 2) {
+			mes "[" + .@npc$ + "]";
+			mes "Not done yet: ^FF0000" + getarg(3) + "^000000.";
+			close;
+		}
+		mes "[" + .@npc$ + "]";
+		mes "Well done. That'll keep them quiet for a day. Take this for your trouble.";
+		callfunc "F_WSJ_DailyDone", .@q, .@w, getarg(5), 1;
+		close;
+	case 2:
+		mes "[" + .@npc$ + "]";
+		mes "That's enough for today. Come back after dawn.";
+		close;
+	}
+	return;
+}
+
+// Chichiring's daily, from step 700.
+icecastle,77,124,5	script	Iwin Lookout#wsj_d1	4_EP19_IWIN,{
+	if (wsj_ep20 < 700) {
+		mes "[Iwin Lookout]";
+		mes "*jingle* Chichiring says the deep roots are restless. I just keep watch.";
+		close;
+	}
+	callfunc "F_WSJ_DailyHunt", "Chichiring", 18234, 18235, "30 monsters in the Deep Roots Cave", "*jingle jingle* The ancient Icewinds won't go near the Deep Roots Cave any more. Something down there scares them. Could you thin out the monsters? For the Icewinds' sake?", 20000000;
+	end;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsj_ep20 >= 700 && isbegin_quest(18234) == 0 && (isbegin_quest(18235) == 0 || checkquest(18235,PLAYTIME) == 2)" );
+	end;
+}
+
+// Voglinde's two operations, from step 700.
+icas_in2,255,116,3	script	Patrol Orders#wsj_d2	4_EP19_IWIN,{
+	if (wsj_ep20 < 700) {
+		mes "[Iwin Officer]";
+		mes "Lady Voglinde's patrols start once the bishop business is settled.";
+		close;
+	}
+	mes "[Iwin Officer]";
+	mes "Lady Voglinde's extermination operations. Which floor of the Roots?";
+	next;
+	if (select("1st floor (Superior Rgans):2nd floor (Jormun cultists)") == 1)
+		callfunc "F_WSJ_DailyHunt", "Iwin Officer", 18236, 18237, "30 Rgans on the 1st floor of the Roots of the Serpent God", "The Superior Rgans on the 1st floor keep slipping out to the glacier. Lady Voglinde wants them pushed back. Hard.", 25000000;
+	else
+		callfunc "F_WSJ_DailyHunt", "Iwin Officer", 18238, 18239, "30 Rgans on the 2nd floor of the Roots of the Serpent God", "The cult's warlocks and bishops on the 2nd floor are regrouping. Lady Voglinde says: go wild.", 25000000;
+	end;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsj_ep20 >= 700 && ((isbegin_quest(18236) == 0 && (isbegin_quest(18237) == 0 || checkquest(18237,PLAYTIME) == 2)) || (isbegin_quest(18238) == 0 && (isbegin_quest(18239) == 0 || checkquest(18239,PLAYTIME) == 2)))" );
+	end;
+}
+
+// Kororo's daily, from step 490 (after the cultists were driven off once).
+jor_twice,237,113,3	script	Drift Ice Notes#wsj_d3	4_EP19_IWIN,{
+	if (wsj_ep20 < 490) {
+		mes "[Iwin Watcher]";
+		mes "Kororo's assistant. I write down where the ice goes. It goes everywhere.";
+		close;
+	}
+	callfunc "F_WSJ_DailyHunt", "Kororo", 23111, 23110, "15 Jormun Warlocks on the floes", "Those cult ritualists are back on the floes, chanting at the ice. If you have time, chase them off again? Fifteen should do.", 20000000;
+	end;
+
+OnInit:
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsj_ep20 >= 490 && isbegin_quest(23111) == 0 && (isbegin_quest(23110) == 0 || checkquest(23110,PLAYTIME) == 2)" );
+	end;
+}

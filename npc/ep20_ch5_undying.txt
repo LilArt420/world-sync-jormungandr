@@ -471,9 +471,9 @@ OnInstanceInit:
 	monster instance_mapname("1@twig"),142,155,"Rasgand",21981,1,instance_npcname("#wsj_md") + "::OnRasgandDown";
 	end;
 OnRasgandDown:
-	mapannounce instance_mapname("1@twig"), "Rasgand: Hhh... hhaaah... you can't... I can't... die...", bc_map, 0xFF4444;
+	mapannounce instance_mapname("1@twig"), "Rasgand: Hhh... hhaaah... you can't... I can't... die...", bc_map, "0xFF4444";
 	sleep 3000;
-	mapannounce instance_mapname("1@twig"), "The shard of Ymir's heart cracks free of Rasgand's chest and falls to the ground.", bc_map, 0x88CCFF;
+	mapannounce instance_mapname("1@twig"), "The shard of Ymir's heart cracks free of Rasgand's chest and falls to the ground.", bc_map, "0x88CCFF";
 	enablenpc instance_npcname("Nyar#wsj_md");
 	end;
 }

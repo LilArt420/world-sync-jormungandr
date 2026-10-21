@@ -192,3 +192,67 @@ Body:
     Title: "Separated Sanctuary"
   - Id: 18233
     Title: "The Undying One"
+  - Id: 17710
+    Title: "Cleaning the Serpent's Maze"
+    Targets:
+      - Mob: EP20_JORMUNGUARD1
+        Count: 10
+      - Mob: EP20_JORMUNGUARD2
+        Count: 10
+  - Id: 17711
+    Title: "[Standby] Cleaning the Serpent's Maze"
+    TimeLimit: 4h
+  - Id: 17717
+    Title: "[Standby] Taste of Leisure"
+    TimeLimit: 4h
+  - Id: 17718
+    Title: "Taste of Leisure"
+  - Id: 8844
+    Title: "[Standby] Example of Silent Answer"
+    TimeLimit: 4h
+  - Id: 8845
+    Title: "Example of Silent Answer"
+  - Id: 18234
+    Title: "Iwin's Iwin Worry"
+    Targets:
+      - Id: 1
+        Count: 30
+        MapName: Deep Roots Cave
+        Location: jor_root3
+  - Id: 18235
+    Title: "[Standby] Iwin's Iwin Worry"
+    TimeLimit: 4h
+  - Id: 18236
+    Title: "Voglinde's Extermination Operation 1"
+    Targets:
+      - Id: 1
+        Count: 30
+        MapName: Roots 1st floor Rgans
+        Location: jor_root1
+        MapMobTargets:
+          EP20_RGAN_WARLOCK: true
+          EP20_RGAN_HEALER: true
+  - Id: 18237
+    Title: "[Standby] Voglinde's Extermination Operation 1"
+    TimeLimit: 4h
+  - Id: 18238
+    Title: "Voglinde's Extermination Operation 2"
+    Targets:
+      - Id: 1
+        Count: 30
+        MapName: Roots 2nd floor Rgans
+        Location: jor_root2
+        MapMobTargets:
+          EP20_JORGAN_WARLOCK: true
+          EP20_JORGAN_HEALER: true
+  - Id: 18239
+    Title: "[Standby] Voglinde's Extermination Operation 2"
+    TimeLimit: 4h
+  - Id: 23110
+    Title: "[Standby] Pulling Out Jormungandr's Roots"
+    TimeLimit: 4h
+  - Id: 23111
+    Title: "Pulling Out Jormungandr's Roots"
+    Targets:
+      - Mob: EP20_JORGAN_WARLOCK
+        Count: 15

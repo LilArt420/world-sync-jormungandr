@@ -9,5 +9,6 @@
   - A guest in the Ice Castle: His Holiness Nadyagand.
   - The Frozen Zone and the Nest of Small Branches, with Kororo, the Diving Iwin and Nyar.
   - The memorial dungeon Separated Sanctuary (1@twig): break the undying Rasgand.
+- Dailies (reset at 04:00): cleaning the Serpent's Maze, Nadyagand's snakeberries, Pamoshugand's feathers, Chichiring's Deep Roots Cave, Voglinde's two extermination operations and Kororo's cultists.
 - 119 of World Sync Extras' placeholder NPCs on these maps now have their part in the story.
 - Setting `skip_ep19`: start the episode without Episode 19.

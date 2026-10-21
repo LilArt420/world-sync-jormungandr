@@ -24,7 +24,9 @@ from luadata import load_any  # noqa: E402
 # Quests used by npc/, in story order.
 QUESTS = (list(range(16691, 16705)) + list(range(17690, 17710)) + list(range(17712, 17717)) + [17719]
           + [8839, 8840, 8841, 8842, 8843, 8846, 8847, 8848, 8849, 8850, 8851, 8854]
-          + list(range(23100, 23110)) + list(range(23112, 23119)) + list(range(18220, 18234)))
+          + list(range(23100, 23110)) + list(range(23112, 23119)) + list(range(18220, 18234))
+          # dailies
+          + [17710, 17711, 17717, 17718, 8844, 8845, 18234, 18235, 18236, 18237, 18238, 18239, 23110, 23111])
 
 # Kill counters (the client's text names the monsters, not the numbers).
 TARGETS = {
@@ -35,7 +37,17 @@ TARGETS = {
     23101: ['      - Mob: EP19_ICE_GANGU', '        Count: 5'],
     23102: ['      - Mob: EP19_SHINING_SEAWEED', '        Count: 5'],
     23109: ['      - Mob: EP20_JORGAN_WARLOCK', '        Count: 5'],
+    17710: ['      - Mob: EP20_JORMUNGUARD1', '        Count: 10', '      - Mob: EP20_JORMUNGUARD2', '        Count: 10'],
+    23111: ['      - Mob: EP20_JORGAN_WARLOCK', '        Count: 15'],
+    18234: ['      - Id: 1', '        Count: 30', '        MapName: Deep Roots Cave', '        Location: jor_root3'],
+    18236: ['      - Id: 1', '        Count: 30', '        MapName: Roots 1st floor Rgans', '        Location: jor_root1',
+            '        MapMobTargets:', '          EP20_RGAN_WARLOCK: true', '          EP20_RGAN_HEALER: true'],
+    18238: ['      - Id: 1', '        Count: 30', '        MapName: Roots 2nd floor Rgans', '        Location: jor_root2',
+            '        MapMobTargets:', '          EP20_JORGAN_WARLOCK: true', '          EP20_JORGAN_HEALER: true'],
 }
+
+# Standby quests: the daily reset.
+STANDBY = {17711, 17717, 8844, 18235, 18237, 18239, 23110}
 
 # Summaries that should say how many.
 SUMMARY = {
@@ -43,6 +55,10 @@ SUMMARY = {
     17703: 'Defeat 3 parasites in the Serpent\'s Maze',
     23101: '5 Ice Gangus, 3 Frozen Insect Shells',
     23102: '5 Shining Seaweeds, 3 Shiny Seaweed Stems',
+    18234: 'Defeat 30 monsters in the Deep Roots Cave',
+    18236: 'Defeat 30 Rgans on the Roots 1st floor',
+    18238: 'Defeat 30 Rgans on the Roots 2nd floor',
+    23111: 'Defeat 15 Jormun Warlocks',
 }
 
 # Client spelling -> the name the NPC has in game (longest first).
@@ -59,7 +75,7 @@ NAMES = [
     ('Kokoro', 'Kororo'), ('Orelli', 'Aurelie'), ('Aureli', 'Aurelie'), ('Aureliee', 'Aurelie'),
     ('Leo and', 'Leon and'), ('to Leo', 'to Leon'), ('Lord Naya', 'Lord Nyar'),
     ('Diving Awin', 'Diving Iwin'), ('Awin', 'Iwin'), ('Icesen', 'the Ice Castle'),
-    ('Ice Angoos', 'Ice Gangus'), ('Yormungand', 'Jormungandr'), ('Icy Zone', 'Frozen Zone'),
+    ('Ice Angoos', 'Ice Gangus'), ('Snake Roots', 'Roots of the Serpent God'), ('Yormungand', 'Jormungandr'), ('Icy Zone', 'Frozen Zone'),
     ('Icegard', 'Issgard'),
 ]
 
@@ -99,6 +115,8 @@ def main():
         summ = SUMMARY.get(i, fix(e.get('Summary') or ''))
         yml.append('  - Id: %d' % i)
         yml.append('    Title: "%s"' % title.replace('"', "'"))
+        if i in STANDBY:
+            yml.append('    TimeLimit: 4h')
         if i in TARGETS:
             yml.append('    Targets:')
             yml += TARGETS[i]

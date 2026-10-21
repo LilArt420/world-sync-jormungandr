@@ -197,17 +197,13 @@ OnTouch:
 // ------------------------------------------------------------
 // The fallen bishop (jor_safty2)
 // ------------------------------------------------------------
-jor_safty2,75,360,3	script	Bishop Rgan#wsj	4_EP19_RGAN_SR2,{
+jor_safty2,75,360,3	script(CLOAKED)	Bishop Rgan#wsj	4_EP19_RGAN_SR2,{
 	if (wsj_ep20 == 180) {
 		mes "^4d4dffA large Rgan in heavy vestments lies in the rubbish, snoring through his nose slits.^000000";
 		mes "^4d4dffA crest hangs on a cord around his neck: a coiled serpent, gold on black.^000000";
 		close;
 	}
-	if (wsj_ep20 > 180 && wsj_ep20 < 340) {
-		mes "^4d4dffThe bishop is tied up with his own vestment cords. Still snoring.^000000";
-		close;
-	}
-	mes "^4d4dffAn old pile of rubbish. Someone heavy lay here for a long while.^000000";
+	mes "^4d4dffThe bishop is tied up with his own vestment cords. Still snoring.^000000";
 	close;
 }
 
@@ -564,11 +560,16 @@ jor_sanct,257,115,3	script	Pamoshugand#wsj	4_EP19_RGAN_SR2,{
 		wsj_ep20b |= 1024;
 		close;
 	}
+	if (wsj_ep20 >= 250) {
+		callfunc "F_WSJ_DailyPamo";
+		end;
+	}
 	mes "^4d4dffPamoshugand nods at you. From him, that's a speech.^000000";
 	close;
 
 OnInit:
 	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 240 && (wsj_ep20b & 1024) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsj_ep20 >= 250 && isbegin_quest(8845) == 0 && (isbegin_quest(8844) == 0 || checkquest(8844,PLAYTIME) == 2)" );
 	end;
 }
 

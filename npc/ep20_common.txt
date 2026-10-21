@@ -74,7 +74,8 @@ function	script	F_WSJ_Scenes	{
 			"Lazy#wsj_hide","160","169";
 	} else if (.@m$ == "jor_safty2") {
 		setarray .@t$,
-			"Lazy#wsj_bishop","180","189";
+			"Lazy#wsj_bishop","180","189",
+			"Bishop Rgan#wsj","180","339";
 	} else if (.@m$ == "jor_sanct") {
 		setarray .@t$,
 			"Lehar#wsj_sn","560","579",

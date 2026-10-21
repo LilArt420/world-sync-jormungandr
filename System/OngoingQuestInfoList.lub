@@ -501,4 +501,88 @@ QuestInfoList = {
 		Description = { "Rasgand, who absorbed the power of Imir's Heart Shard, was an opponent we couldn't defeat. However, now that we have the tainted Imir's Heart Shard, let's return to <NAVI>[Ice Castle]<INFO>icecastle,158,204,0,101,0</INFO></NAVI>. Chichiring knows the location of <NAVI>[Voglinde]<INFO>icecastle,75,126,0,101,0</INFO></NAVI>." },
 		Summary = "Conversation with Voglinde"
 	},
+	[17710] = {
+		Title = "Cleaning the Serpent's Maze",
+		IconName = "ico_ep.bmp",
+		Description = { "It's all about cleaning today! Eliminate 10 Jormungandr Guardians of each color in the Serpent's Maze and then return to <NAVI>[Sacred Roots]<INFO>jor_sanct,22,283,0,101,0</INFO></NAVI>." },
+		Summary = "Dealing with Jormungandr Guardians"
+	},
+	[17711] = {
+		Title = "[Standby] Cleaning the Serpent's Maze",
+		IconName = "ico_dq.bmp",
+		Description = { "After the dawn passes, go to the <NAVI>[Supervisor]<INFO>jor_sanct,22,283,0,101,0</INFO></NAVI> in the Sacred Roots to receive new cleaning tasks." },
+		Summary = "4 AM Reset"
+	},
+	[17717] = {
+		Title = "[Standby] Taste of Leisure",
+		IconName = "ico_dq.bmp",
+		Description = { "Unintentionally, we've decided to bring some snacks to <NAVI>[Nadyagand]<INFO>icas_in2,30,121,0,101,0</INFO></NAVI> who is working hard. Let's return to the Ice Castle after dawn." },
+		Summary = "4 AM Reset"
+	},
+	[17718] = {
+		Title = "Taste of Leisure",
+		IconName = "ico_ep.bmp",
+		Description = { "Let's gather 10 snakeberries from <NAVI>[Snake God's Roots]<INFO>jor_root2,25,21,0,101,0</INFO></NAVI> for <NAVI>[Nadyagand]<INFO>icas_in2,30,121,0,101,0</INFO></NAVI>, who is working diligently in the Ice Castle." },
+		Summary = "Collect 10 Snakeberries"
+	},
+	[8844] = {
+		Title = "[Standby] Example of Silent Answer",
+		IconName = "ico_dq.bmp",
+		Description = { "This quest is a daily quest, and when the waiting time expires, you can receive it again from <NAVI>[Pamoshugand]<INFO>jor_sanct,257,115,0,101,0</INFO></NAVI>." },
+		Summary = "Reset at 04:00"
+	},
+	[8845] = {
+		Title = "Example of Silent Answer",
+		IconName = "ico_ep.bmp",
+		Description = { "<NAVI>[Pamoshugand]<INFO>jor_sanct,257,115,0,101,0</INFO></NAVI> asks you to get 20x <ITEM>[Large Gray Feather]<INFO>1001244</INFO></ITEM>. ...But whose orders are these? Doririrogand?" },
+		Summary = "Deliver 20 Large Gray Feathers"
+	},
+	[18234] = {
+		Title = "Iwin's Iwin Worry",
+		IconName = "ico_ep.bmp",
+		Description = { "A request from Ice Castle's <NAVI>[Chichiring]<INFO>icecastle,75,126,0,101,0</INFO></NAVI>. In order to ensure the safety of the ancient Ice Winds, you must defeat the monsters in the Deep Roots Cave." },
+		Summary = "Defeat 30 monsters in the Deep Roots Cave"
+	},
+	[18235] = {
+		Title = "[Standby] Iwin's Iwin Worry",
+		IconName = "ico_dq.bmp",
+		Description = { "This quest is a daily quest and can be accepted again after the cooldown period expires. You can receive the quest from <NAVI>[Chichiring]<INFO>icecastle,75,126,0,101,0</INFO></NAVI> in Ice Castle." },
+		Summary = "04:00 Reset"
+	},
+	[18236] = {
+		Title = "Voglinde's Extermination Operation 1",
+		IconName = "ico_ep.bmp",
+		Description = { "Issgard's <NAVI>[Voglinde]<INFO>icas_in2,253,118,0,101,0</INFO></NAVI> wants to exterminate the monsters coming out of the 1st floor of the Snake's Roots. Let's go wild with them!" },
+		Summary = "Defeat 30 Rgans on the Roots 1st floor"
+	},
+	[18237] = {
+		Title = "[Standby] Voglinde's Extermination Operation 1",
+		IconName = "ico_dq.bmp",
+		Description = { "This quest is a daily quest and can be accepted again after the cooldown period expires. You can receive the quest from <NAVI>[Voglinde]<INFO>icas_in2,253,118,0,101,0</INFO></NAVI> in Issgard." },
+		Summary = "04:00 Reset"
+	},
+	[18238] = {
+		Title = "Voglinde's Extermination Operation 2",
+		IconName = "ico_ep.bmp",
+		Description = { "Issgard's <NAVI>[Voglinde]<INFO>icas_in2,253,118,0,101,0</INFO></NAVI> wants to exterminate the monsters coming out of the 2nd floor of the Snake's Roots. Let's go wild with them!" },
+		Summary = "Defeat 30 Rgans on the Roots 2nd floor"
+	},
+	[18239] = {
+		Title = "[Standby] Voglinde's Extermination Operation 2",
+		IconName = "ico_dq.bmp",
+		Description = { "This quest is a daily quest and can be accepted again after the cooldown period expires. You can receive the quest from <NAVI>[Voglinde]<INFO>icas_in2,253,118,0,101,0</INFO></NAVI> in Issgard." },
+		Summary = "04:00 Reset"
+	},
+	[23110] = {
+		Title = "[Standby] Pulling Out Jormungandr's Roots",
+		IconName = "ico_dq.bmp",
+		Description = { "It seems like you've done enough for today. If the threat is too great, it might backfire, so if you want to clear out the Jormungandr Cult Ritualists in the Frozen Zone, wait until tomorrow." },
+		Summary = "Resets at 04:00"
+	},
+	[23111] = {
+		Title = "Pulling Out Jormungandr's Roots",
+		IconName = "ico_ep.bmp",
+		Description = { "You've received a request from <NAVI>[Kororo]<INFO>jor_twice,235,111,0,101,0</INFO></NAVI>. Let's confront the Jormungandr Cult Ritualists wandering in the Frozen Zone. If you've left the Frozen Zone, <NAVI>[Diving Iwin]<INFO>icecastle,141,212,0,101,0</INFO></NAVI> in the Ice Castle will take you back." },
+		Summary = "Defeat 15 Jormun Warlocks"
+	},
 }
