@@ -1,0 +1,801 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 20, chapters 3-4: a guest in the castle, the Frozen
+//= Zone and the Serpent's Maze.
+//= Quests 17712-17716, 23100-23118. Steps 340-529.
+//============================================================
+
+// ------------------------------------------------------------
+// A New Beginning: the captured bishop (steps 340-389)
+// ------------------------------------------------------------
+icecastle,48,162,3	script	Iwin Soldier#wsj_w	4_EP19_IWIN,{
+	if (wsj_ep20 == 340) {
+		mes "[Iwin Soldier]";
+		mes "Adventurer! Thank the snow, you're here.";
+		mes "That big Rgan you lot carried back from the Roots, the one in the robes...";
+		next;
+		mes "[Iwin Soldier]";
+		mes "He won't stop complaining! The bed's too hard, the room's too cold, the food is 'peasant slop'.";
+		mes "He bit Corporal Toruru. Gently, but he bit him.";
+		next;
+		mes "[Iwin Soldier]";
+		mes "Commander Horuru is with him in the west wing. Please, go in and help before he bites anyone else.";
+		callfunc "F_WSJ_Step", 350, "17712", "17713";
+		close;
+	}
+	mes "[Iwin Soldier]";
+	if (wsj_ep20 > 340 && wsj_ep20 < 390)
+		mes "The west wing is just through here. Mind your fingers.";
+	else
+		mes "West wing, guest quarters. Quiet today, thankfully.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsj_ep20 == 340" );
+	end;
+}
+
+icas_in2,31,116,3	script(CLOAKED)	Horuru#wsj_n	4_EP19_IWIN,{
+	if (wsj_ep20 == 350) {
+		cutin "ep19_iwin06.png",2;
+		mes "[Horuru]";
+		mes "Ah. You heard.";
+		mes "Meet our distinguished guest: His Holiness ^0000FFNadyagand^000000, top-tier Rgan, bishop of the Sacred Roots.";
+		next;
+		mes "[Nadyagand]";
+		mes "Hisss. Your castle is cold and your servants are rude.";
+		next;
+		cutin "ep19_iwin03.png",2;
+		mes "[Horuru]";
+		mes "We hoped he could tell us about Rasgand and the gate in the maze. He says he'll talk...";
+		mes "...after he's had a proper meal.";
+		next;
+		mes "[Nadyagand]";
+		mes "^0000FFSnakeberries^000000. Ten of them, fresh, from the Serpent God's Roots. Not one less.";
+		mes "Then perhaps I'll remember something.";
+		next;
+		cutin "ep19_iwin06.png",2;
+		mes "[Horuru]";
+		mes "I hate to ask. But you know where they grow, and I don't.";
+		mes "They come from the <NAVI>[hardened soil on the 2nd floor of the Roots]<INFO>jor_root2,25,21,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step", 360, "17713", "17714";
+		close3;
+	}
+	cutin "ep19_iwin06.png",2;
+	mes "[Horuru]";
+	if (wsj_ep20 == 360)
+		mes "Ten snakeberries for His Holiness. I've never been so ashamed to be hospitable.";
+	else
+		mes "Lazy's in there with him now. I don't want to know.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 350" );
+	end;
+}
+
+icas_in2,30,121,5	script	Nadyagand#wsj	4_EP19_RGAN_SR2,{
+	if (wsj_ep20 == 360) {
+		if (countitem(1001154) < 10) {
+			mes "[Nadyagand]";
+			mes "Ten snakeberries. I can count, you know. Bishops are very good at counting.";
+			close;
+		}
+		delitem 1001154,10;
+		mes "[Nadyagand]";
+		mes "Ohh. Ohhh, yes. Fresh from the Roots. You can taste the Serpent God in them.";
+		next;
+		mes "^4d4dffNadyagand eats all ten in one gulp.^000000";
+		next;
+		select("Now, about Rasgand and the gate.");
+		mes "[Nadyagand]";
+		mes "Rasgand? Never liked him. Too ambitious. Always talking about hearts and branches and destiny.";
+		mes "I went to the Roots to nap. I napped. Then I fell through a hole. That's all I know.";
+		next;
+		mes "[Nadyagand]";
+		mes "But this place... it's not bad, is it? Quiet. Snakeberries delivered.";
+		mes "I think I'll stay. You may serve me breakfast at noon.";
+		next;
+		cutin "ep19_leizi01.png",2;
+		mes "[Lazy]";
+		mes "Did someone say breakfast? I love breakfast.";
+		callfunc "F_WSJ_Step", 370, "17714", "17715";
+		close3;
+	}
+	if (wsj_ep20 >= 380) {
+		mes "[Nadyagand]";
+		mes "Busy. Can't you see I'm working? Hard. Very hard.";
+		mes "...Did you bring snakeberries?";
+		close;
+	}
+	mes "[Nadyagand]";
+	mes "Hisss. Peasants.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 360 && countitem(1001154) >= 10" );
+	end;
+}
+
+icas_in2,32,120,3	script(CLOAKED)	Lazy#wsj_n	4_EP19_LAZY,{
+	if (wsj_ep20 == 370) {
+		cutin "ep19_leizi01.png",2;
+		mes "[Lazy]";
+		mes "So our guest wants to live here, eat for free and never work. A man after my own heart.";
+		next;
+		select("He says he knows nothing.");
+		mes "[Lazy]";
+		mes "Of course he doesn't. He's a bishop.";
+		mes "But a bishop who can read Rgan script, who knows every rank and every ritual in the Roots... is worth a lot to people who can't.";
+		next;
+		mes "[Lazy]";
+		mes "Give us a minute. Bishop to bishop.";
+		next;
+		cutin "",255;
+		mes "^4d4dffLazy pulls up a chair beside Nadyagand and starts whispering. You catch the words 'pension', 'warm room' and 'snakeberries, weekly'.^000000";
+		next;
+		mes "^4d4dffTen minutes later, Nadyagand is sitting at a desk with a stack of captured Rgan documents, translating with great enthusiasm.^000000";
+		callfunc "F_WSJ_Step", 380, "17715", "17716";
+		close;
+	}
+	if (wsj_ep20 == 380) {
+		cutin "ep19_leizi03.png",2;
+		mes "[Lazy]";
+		mes "How? Simple~";
+		mes "I told him that in the Ice Castle, the hardest workers get the biggest rooms and the most snakeberries.";
+		next;
+		mes "[Lazy]";
+		mes "Rgans respect rank above everything. Now he's competing for a rank. He's going to work himself into the ground.";
+		next;
+		select("That's terrible.");
+		mes "[Lazy]";
+		mes "That's management.";
+		next;
+		cutin "ep19_leizi01.png",2;
+		mes "[Lazy]";
+		mes "One more thing. Aurelie's been asking around about that white cat.";
+		mes "The Iwin divers say they saw it once, far out on the frozen sea, where the water never freezes all the way.";
+		next;
+		mes "[Lazy]";
+		mes "There's a diver at the <NAVI>[castle docks]<INFO>icecastle,141,212,0,101,0</INFO></NAVI> who can swim further than anyone. Ask him.";
+		callfunc "F_WSJ_Step", 390, "17716", "23100";
+		getexp 0,3500000;
+		add_reputation_points( REPUTATION_EP19, 30 );
+		close3;
+	}
+	cutin "ep19_leizi01.png",2;
+	mes "[Lazy]";
+	mes "Shh. He's working.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 370 || wsj_ep20 == 380" );
+	end;
+}
+
+icas_in2,37,118,3	script	Iwin Soldier#wsj_n1	4_EP19_IWIN,{
+	mes "[Iwin Soldier]";
+	if (wsj_ep20 >= 380)
+		mes "The big one's actually working. I'm almost proud of him.";
+	else
+		mes "Guarding a bishop. Never thought I'd say that.";
+	close;
+}
+icas_in2,34,117,3	duplicate(Iwin Soldier#wsj_n1)	Iwin Soldier#wsj_n2	4_EP19_IWIN
+icas_in2,29,114,5	duplicate(Iwin Soldier#wsj_n1)	Iwin Soldier#wsj_n3	4_EP19_IWIN
+icas_in2,27,118,5	duplicate(Iwin Soldier#wsj_n1)	Iwin Soldier#wsj_n4	4_EP19_IWIN
+icas_in2,37,115,3	duplicate(Iwin Soldier#wsj_n1)	Iwin Soldier#wsj_n5	4_EP19_IWIN
+
+icas_in2,32,117,0	script	#wsj_t_n	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// The Diving Iwin (steps 390-419), and the swim to the Frozen Zone
+// ------------------------------------------------------------
+icecastle,144,214,3	script	Diving Iwin#wsj	4_EP19_IWIN_DIVER,{
+	cutin "ep19_iwin_diver01.png",2;
+	if (wsj_ep20 == 390) {
+		mes "[Diving Iwin]";
+		mes "A white cat? Out on the sea?";
+		mes "...Yes. Once. Sitting on an iceberg in the middle of the drift ice, licking its paw. Then the iceberg was gone and so was the cat.";
+		next;
+		mes "[Diving Iwin]";
+		mes "That's the ^0000FFFrozen Zone^000000. Ice floes as far as you can see, and freezing water between them. Nobody goes there.";
+		mes "Except me. I can get you there. But it's a long swim, and I'll need fuel.";
+		next;
+		mes "[Diving Iwin]";
+		mes "Ice Gangus are full of fat. Hunt ^FF00005 Ice Gangus^000000 on the glacier and bring me ^FF00003 " + getitemname(1000832) + "s^000000.";
+		mes "I grind the shells into a paste. High energy. Tastes awful.";
+		callfunc "F_WSJ_Step", 400, "23100", "23101";
+		close3;
+	}
+	if (wsj_ep20 == 400) {
+		if (checkquest(23101,HUNTING) != 2 || countitem(1000832) < 3) {
+			mes "[Diving Iwin]";
+			mes "5 Ice Gangus and 3 " + getitemname(1000832) + "s. You'll find them on the glacier around the castle.";
+			close3;
+		}
+		delitem 1000832,3;
+		mes "[Diving Iwin]";
+		mes "Perfect. Disgusting, but perfect.";
+		next;
+		mes "[Diving Iwin]";
+		mes "One more thing. The water out there will freeze your fur off. I need a coat of ^0000FFshining seaweed^000000 to keep the cold out.";
+		mes "Gather from ^FF00005 Shining Seaweeds^000000 in the canyons and bring me ^FF00003 " + getitemname(1000831) + "s^000000.";
+		callfunc "F_WSJ_Step", 410, "23101", "23102";
+		close3;
+	}
+	if (wsj_ep20 == 410) {
+		if (checkquest(23102,HUNTING) != 2 || countitem(1000831) < 3) {
+			mes "[Diving Iwin]";
+			mes "5 Shining Seaweeds and 3 " + getitemname(1000831) + "s. They grow in the Ancient Ice Canyon.";
+			close3;
+		}
+		delitem 1000831,3;
+		mes "[Diving Iwin]";
+		mes "Now we're talking.";
+		mes "Paste for the belly, seaweed for the back. I'm ready.";
+		next;
+		mes "[Diving Iwin]";
+		mes "Hold on to my tail and don't let go, whatever you see down there.";
+		callfunc "F_WSJ_Step", 420, "23102", "23103";
+		next;
+		if (select("Let's go.:Wait, not yet.") == 1) {
+			close2;
+			cutin "",255;
+			warp "jor_twice",235,107;
+			end;
+		}
+		mes "[Diving Iwin]";
+		mes "Whenever you're ready. I'll be here.";
+		close3;
+	}
+	if (wsj_ep20 >= 420) {
+		mes "[Diving Iwin]";
+		mes "Off to the Frozen Zone again?";
+		next;
+		if (select("Yes, take me there.:No, thanks.") == 1) {
+			close2;
+			cutin "",255;
+			warp "jor_twice",235,107;
+			end;
+		}
+		close3;
+	}
+	mes "[Diving Iwin]";
+	mes "The sea out there goes on forever. One day I'll find the end of it.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 390" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 400 && checkquest(23101,HUNTING) == 2 && countitem(1000832) >= 3" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 410 && checkquest(23102,HUNTING) == 2 && countitem(1000831) >= 3" );
+	end;
+}
+
+// ------------------------------------------------------------
+// The Frozen Zone (jor_twice)
+// ------------------------------------------------------------
+jor_twice,235,111,3	script	Kororo#wsj	4_EP19_IWIN,{
+	if (wsj_ep20 == 420) {
+		mes "[Kororo]";
+		mes "Whoa! A human, dripping wet, holding a diver's tail. That's a first.";
+		next;
+		mes "[Kororo]";
+		mes "I'm Kororo. I watch the drift ice for the castle. Somebody has to.";
+		mes "A white cat? Hmm... no. But a bunch of your friends came through here this morning. A loud girl with a big sword, a quiet lady, a man who wouldn't stop talking...";
+		next;
+		mes "[Kororo]";
+		mes "They went north across the floes. Said they were following 'the magic'. Whatever that means.";
+		mes "Careful out there. The ice moves when you're not looking.";
+		callfunc "F_WSJ_Step", 430, "23103", "23104";
+		close;
+	}
+	mes "[Kororo]";
+	if (wsj_ep20 >= 700)
+		mes "The Yormungand cultists are back on the floes. They never learn.";
+	else
+		mes "Lots of ice. Lots of water. Not much else. I love it.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 420" );
+	end;
+}
+
+// Step 430: wandering the floes. Lehar is the one who found the spot.
+jor_twice,247,163,3	script(CLOAKED)	Miriam#wsj_tw1	4_EP18_MIRIAM,{
+	cutin "ep18_miriam_01.png",2;
+	mes "[Miriam]";
+	mes "You made it across! Lehar ran ahead again. She said she could 'feel the magic in her teeth'.";
+	mes "She went <NAVI>[north, along the ridge]<INFO>jor_twice,232,249,0,101,0</INFO></NAVI>.";
+	close3;
+}
+
+jor_twice,222,226,5	script(CLOAKED)	Lazy#wsj_tw1	4_EP19_LAZY,{
+	cutin "ep19_leizi01.png",2;
+	mes "[Lazy]";
+	mes "I'm resting. Ice floes are exhausting. They keep moving.";
+	mes "Lehar's just up there. Follow the shouting.";
+	close3;
+}
+
+jor_twice,232,249,3	script(CLOAKED)	Lehar#wsj_tw1	4_EP19_LEHAR,{
+	if (wsj_ep20 == 430) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "There you are! Can you feel it? That prickling in the air?";
+		mes "It's the same feeling as at the gate in the maze. Yormungand's magic.";
+		next;
+		mes "[Lehar]";
+		mes "It gets stronger to the <NAVI>[west]<INFO>jor_twice,158,243,0,101,0</INFO></NAVI>. Leon and Aurelie went ahead to look.";
+		mes "Come on, before the floe we're standing on decides to go somewhere else!";
+		callfunc "F_WSJ_Step", 440, "23104", "23105";
+		close3;
+	}
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "West! The magic's to the west!";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 430" );
+	end;
+}
+
+// Step 440: the cat.
+jor_twice,162,246,3	script(CLOAKED)	White Cat#wsj_tw2	4_EP20_NYAR,{
+	if (wsj_ep20 == 440) {
+		cutin "ep20_nyar01.png",1;
+		mes "^4d4dffA small white cat sits on the ice, tail wrapped around its paws, as if it had been waiting for you.^000000";
+		next;
+		mes "[White Cat]";
+		mes "Mrrr.";
+		next;
+		cutin "ep19_leon02.png",0;
+		mes "[Leon]";
+		mes "That's it. That's the cat that threw a bishop across the island.";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "^4d4dffThe cat stands, stretches, and trots away across the floes. Leon and Aurelie go after it without a word.^000000";
+		mes "^4d4dffA gust of snow, and all three of them are gone.^000000";
+		next;
+		cutin "ep19_lehar03.png",0;
+		mes "[Lehar]";
+		mes "Leon! Aurelie!";
+		mes "They can't have gone far. There are tracks, look, heading <NAVI>[north-west]<INFO>jor_twice,43,331,0,101,0</INFO></NAVI>!";
+		callfunc "F_WSJ_Step", 450, "23105", "23106";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 440" );
+	end;
+}
+
+jor_twice,158,243,5	script(CLOAKED)	Leon#wsj_tw2	4_EP19_LEON,{
+	cutin "ep19_leon01.png",0;
+	mes "[Leon]";
+	mes "The magic is thick here. Even I can feel it.";
+	close3;
+}
+jor_twice,161,240,5	script(CLOAKED)	Aurelie#wsj_tw2	4_EP19_AURELIE,{
+	cutin "ep19_aurelie01.png",1;
+	mes "[Aurelie]";
+	mes "Something is watching us. Something old.";
+	close3;
+}
+jor_twice,159,247,5	script(CLOAKED)	Maram#wsj_tw2	4_EP18_MARAM,{
+	cutin "ep18_maram_01.png",2;
+	mes "[Maram]";
+	mes "I came as soon as the wounded were settled. Miriam would never forgive me if I missed this.";
+	close3;
+}
+jor_twice,163,248,3	script(CLOAKED)	Miriam#wsj_tw2	4_EP18_MIRIAM,{
+	cutin "ep18_miriam_01.png",2;
+	mes "[Miriam]";
+	mes "Maram's here too. Now it feels like the whole family.";
+	close3;
+}
+jor_twice,169,249,3	script(CLOAKED)	Lazy#wsj_tw2	4_EP19_LAZY,{
+	cutin "ep19_leizi01.png",2;
+	mes "[Lazy]";
+	mes "I'm not chasing a cat across the ocean. Wake me when someone comes back.";
+	close3;
+}
+jor_twice,164,244,3	script(CLOAKED)	Lehar#wsj_tw3	4_EP19_LEHAR,{
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "The tracks go to the <NAVI>[far north-west corner]<INFO>jor_twice,43,331,0,101,0</INFO></NAVI> of the floes. Go, I'll keep everyone together here!";
+	close3;
+}
+
+// The white cat that carries people to the Nest of Small Branches.
+jor_twice,45,333,3	script	White Cat#wsj_portal	4_EP20_NYAR,{
+	if (wsj_ep20 == 450 || wsj_ep20 == 460) {
+		cutin "ep20_nyar01.png",1;
+		mes "^4d4dffThe white cat is sitting on the last floe, staring at the empty air in front of it.^000000";
+		mes "^4d4dffThe air shimmers. Behind it, white branches climb into the fog.^000000";
+		next;
+		mes "[White Cat]";
+		mes "Mrrrow?";
+		next;
+		if (select("Follow the cat.:Not yet.") == 2)
+			close3;
+		close2;
+		cutin "",255;
+		warp "jor_twig",212,114;
+		end;
+	}
+	if (wsj_ep20 >= 470) {
+		cutin "ep20_nyar01.png",1;
+		mes "[White Cat]";
+		mes "Mrr. (The cat glances at the shimmering air, then at you.)";
+		next;
+		if (select("Go to the Nest of Small Branches.:Pet the cat.") == 1) {
+			close2;
+			cutin "",255;
+			warp "jor_twig",212,114;
+			end;
+		}
+		mes "^4d4dffThe cat tolerates exactly one stroke, then bites you. Gently.^000000";
+		close3;
+	}
+	mes "^4d4dffA small white cat dozing on the ice. It opens one eye, decides you're not interesting, and closes it again.^000000";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 450" );
+	end;
+}
+
+// Step 470-489: back with the others on the floes.
+jor_twice,161,243,5	script(CLOAKED)	Aurelie#wsj_tw3	4_EP19_AURELIE,{
+	if (wsj_ep20 == 470) {
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "We're back. Everyone, listen.";
+		mes "That place behind the shimmer is the ^0000FFNest of Small Branches^000000. The farthest, finest branches of Yormungand's body.";
+		next;
+		mes "[Aurelie]";
+		mes "And the cat isn't a cat. She is ^0000FFNyar^000000. A guardian of the nest. Perhaps a piece of Yormungand's own will.";
+		mes "She's been keeping Rasgand out of the nest. That's why she threw him out of the maze.";
+		next;
+		cutin "ep18_maram_01.png",0;
+		mes "[Maram]";
+		mes "Then the Rgans on these floes...";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "Yes. The ^FF0000Yormungand cult ritualists^000000 out here are trying to draw the nest's magic out through the ice.";
+		mes "If they open a crack, Rasgand will walk in through it.";
+		next;
+		mes "[Aurelie]";
+		mes "Drive them off. Five should send the rest running. Then come back to me.";
+		callfunc "F_WSJ_Step", 480, "23108", "23109";
+		close3;
+	}
+	if (wsj_ep20 == 480) {
+		if (checkquest(23109,HUNTING) != 2) {
+			cutin "ep19_aurelie01.png",1;
+			mes "[Aurelie]";
+			mes "Five ^FF0000Yormungand cult ritualists^000000. They're all over the floes.";
+			close3;
+		}
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "Well done. The magic is calmer already.";
+		next;
+		cutin "ep19_leon01.png",0;
+		mes "[Leon]";
+		mes "One of them ran back through the passage to the maze. Squealing about telling 'the Bishop'.";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "Then that's where we go. The ^0000FFSerpent's Maze^000000, in disguise, all of us.";
+		mes "Transform and meet Lehar inside. The passage is at the <NAVI>[south-west edge]<INFO>jor_twice,40,52,0,101,0</INFO></NAVI> of the floes.";
+		callfunc "F_WSJ_Step", 490, "23109", "23112";
+		close3;
+	}
+	cutin "ep19_aurelie01.png",1;
+	mes "[Aurelie]";
+	mes "Nyar. Such a small name for something so old.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 470" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 480 && checkquest(23109,HUNTING) == 2" );
+	end;
+}
+
+jor_twice,157,245,5	script(CLOAKED)	Leon#wsj_tw3	4_EP19_LEON,{
+	cutin "ep19_leon01.png",0;
+	mes "[Leon]";
+	mes "Cultists on the ice. Finally, something I can hit.";
+	close3;
+}
+
+jor_twice,232,240,0	script	#wsj_t_tw1	HIDDEN_WARP_NPC,20,80,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+jor_twice,162,245,0	script	#wsj_t_tw2	HIDDEN_WARP_NPC,12,12,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// The Nest of Small Branches, first visit (steps 450-469)
+// ------------------------------------------------------------
+jor_twig,212,120,3	script(CLOAKED)	Leon#wsj_tg1	4_EP19_LEON,{
+	if (wsj_ep20 == 450) {
+		cutin "ep19_leon03.png",0;
+		mes "[Leon]";
+		mes "......";
+		next;
+		mes "^4d4dffLeon is staring up at the white branches. He doesn't seem to hear you.^000000";
+		mes "^4d4dffBetter give him a moment.^000000";
+		callfunc "F_WSJ_Step", 460, "23106", "23107";
+		close3;
+	}
+	if (wsj_ep20 == 460) {
+		cutin "ep19_leon01.png",0;
+		mes "[Leon]";
+		mes "Sorry. It's... a lot.";
+		mes "The cat led us here and then she spoke. In my head. Her name is Nyar.";
+		next;
+		mes "[Leon]";
+		mes "She says this is the Nest of Small Branches. Jormungandr's body is wrapped around the world, and these are the very tips of it. Where his sleep is lightest.";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "And somewhere in this nest is the heart Rasgand talked about. The 'heart that still beats'.";
+		mes "Nyar guards it. She can't leave, and she can't fight everyone who comes knocking.";
+		next;
+		cutin "ep19_leon02.png",0;
+		mes "[Leon]";
+		mes "So she needs us. Fine by me.";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "Let's go back to the floes and tell the others. I'll explain the rest there.";
+		mes "Meet me at the <NAVI>[floes]<INFO>jor_twice,161,243,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step", 470, "23107", "23108";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 450 || wsj_ep20 == 460" );
+	end;
+}
+
+jor_twig,213,117,3	script(CLOAKED)	Aurelie#wsj_tg1	4_EP19_AURELIE,{
+	cutin "ep19_aurelie01.png",1;
+	mes "[Aurelie]";
+	mes "Give him a moment. This place is overwhelming.";
+	close3;
+}
+
+jor_twig,212,117,0	script	#wsj_t_tg1	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// Rumours in the Serpent's Maze (steps 490-529)
+// Everyone is disguised as Rgans here.
+// ------------------------------------------------------------
+jor_maze,142,70,3	script(CLOAKED)	Lehar#wsj_mz	4_EP19_RGAN_R3,{
+	if (!callfunc("F_WSJ_IsRgan", "Lehar?")) end;
+	if (wsj_ep20 == 490) {
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "It's me, it's me! Don't laugh. Lazy picked this body, not me.";
+		next;
+		mes "[Lehar]";
+		mes "The maze is buzzing. Every Rgan in here is gossiping about something.";
+		mes "Let's split up and listen. There are groups chatting in the <NAVI>[north-west]<INFO>jor_maze,52,238,0,101,0</INFO></NAVI>, the <NAVI>[north]<INFO>jor_maze,154,244,0,101,0</INFO></NAVI> and the <NAVI>[east]<INFO>jor_maze,281,191,0,101,0</INFO></NAVI>.";
+		next;
+		mes "[Lehar]";
+		mes "When you've heard enough, meet Miriam at the <NAVI>[south end]<INFO>jor_maze,150,33,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step", 500, "23112", "23116,23113,23114,23115";
+		wsj_ep20b = 0;
+		close3;
+	}
+	cutin "ep19_lehar02.png",2;
+	mes "[Lehar]";
+	mes "Listen, don't talk. Rgans gossip more when nobody's asking.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 490" );
+	end;
+}
+
+jor_maze,137,69,5	script(CLOAKED)	Leon#wsj_mz	4_EP19_RGAN_R2,{
+	cutin "ep19_leon01.png",0;
+	mes "[Leon]";
+	mes "I have no arms. How am I supposed to hold a sword with no arms?";
+	close3;
+}
+jor_maze,145,53,5	script(CLOAKED)	Aurelie#wsj_mz	4_EP19_RGAN_R1,{
+	cutin "ep19_aurelie01.png",1;
+	mes "[Aurelie]";
+	mes "Walk slowly. Rgans never hurry unless a bishop is watching.";
+	close3;
+}
+jor_maze,145,41,3	script(CLOAKED)	Lazy#wsj_mz	4_EP19_RGAN_SR3,{
+	cutin "ep19_leizi01.png",2;
+	mes "[Lazy]";
+	mes "Top-tier again. I'm getting used to this.";
+	close3;
+}
+jor_maze,150,36,5	script(CLOAKED)	Maram#wsj_mz	4_EP19_RGAN_R3,{
+	cutin "ep18_maram_01.png",2;
+	mes "[Maram]";
+	mes "Miriam keeps poking my scales. It's very distracting.";
+	close3;
+}
+
+jor_maze,150,33,3	script(CLOAKED)	Miriam#wsj_mz	4_EP19_RGAN_R2,{
+	if (!callfunc("F_WSJ_IsRgan", "Miriam?")) end;
+	if (wsj_ep20 == 510) {
+		cutin "ep18_miriam_01.png",2;
+		mes "[Miriam]";
+		mes "What did you hear? Everyone's back but you.";
+		next;
+		select("Rasgand's furious, Bagot's lab is on the 1st floor, and they've found another way into the nest.");
+		mes "[Miriam]";
+		mes "Lehar heard about the lab too. She's gone to the Roots to look for it already. She left marks for us.";
+		next;
+		mes "[Miriam]";
+		mes "But 'another way into the nest'... that worries me.";
+		mes "Aurelie went further in, to the <NAVI>[inner maze]<INFO>jor_maze,197,34,0,101,0</INFO></NAVI>. Let's catch up with her.";
+		callfunc "F_WSJ_Step", 520, "23117", "23118";
+		close3;
+	}
+	cutin "ep18_miriam_01.png",2;
+	mes "[Miriam]";
+	mes "Go and listen. I'll wait here.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 510" );
+	end;
+}
+
+jor_maze,197,34,3	script(CLOAKED)	Miriam#wsj_mz2	4_EP19_RGAN_R2,{
+	if (wsj_ep20 == 520) {
+		cutin "ep18_miriam_01.png",2;
+		mes "[Miriam]";
+		mes "Aurelie? Aurelie, where are you?";
+		next;
+		mes "^4d4dffThe floor lurches. Ice cracks along the walls of the maze, and the whole passage starts to tilt.^000000";
+		next;
+		mes "[Miriam]";
+		mes "The maze is collapsing! They must have done something to the gate!";
+		next;
+		cutin "ep20_nyar03.png",1;
+		mes "^4d4dffA white shape lands on the falling ice in front of you. Nyar.^000000";
+		mes "^4d4dffShe looks at you, and for the first time, you hear her voice:^000000";
+		next;
+		mes "[Nyar]";
+		mes "^0000FFNot here, little one. Not yet.^000000";
+		mes "^0000FFGo home. Gather your friends. When the snake reaches for my branches, I will call you.^000000";
+		next;
+		cutin "",255;
+		specialeffect2 EF_TELEPORTATION;
+		mes "^4d4dffLight. Cold. And then the familiar smell of the Ice Castle's hearth.^000000";
+		callfunc "F_WSJ_Step", 530, "23118,23116", "18220";
+		close2;
+		warp "icas_in",112,225;
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 520" );
+	end;
+}
+
+// The three gossiping pairs. Overhearing one is enough for its rumour.
+function	script	F_WSJ_Rumor	{
+	.@n = getarg(0);
+	if (!callfunc("F_WSJ_IsRgan", getarg(1))) end;
+	if (wsj_ep20 != 500 || (wsj_ep20b & (1 << .@n))) {
+		mes "[" + getarg(1) + "]";
+		mes "Hm? Mind your own tail.";
+		close;
+	}
+	if (.@n == 0) {
+		mes "[Hoton Lokengand]";
+		mes "Did you hear? Bishop Rasgand got thrown out of the maze. By a CAT.";
+		next;
+		mes "[Sohem Garyugand]";
+		mes "Shh! Don't let him hear you. He's been smashing things for two tides.";
+		mes "He says next time he'll go in with the heart shard, and no cat will stop him.";
+	} else if (.@n == 1) {
+		mes "[Misu Gozengand]";
+		mes "The human Bagot's lab? It's on the 1st floor of the Roots. Behind one of the walls.";
+		next;
+		mes "[Naaryugand]";
+		mes "Which wall?";
+		next;
+		mes "[Misu Gozengand]";
+		mes "A wall. It's a lab. It's behind a wall. I'm not an architect.";
+	} else {
+		mes "[Kengundrgand]";
+		mes "The cultists out on the floes have been chanting for days. Pulling the magic up through the ice.";
+		next;
+		mes "[Hanaungand]";
+		mes "The Bishop says it doesn't matter if the maze gate fails. There's ^FF0000another way^000000 into the nest now.";
+		mes "He's very pleased about it. I don't like it when he's pleased.";
+	}
+	setarray .@q, 23113, 23114, 23115;
+	completequest .@q[.@n];
+	wsj_ep20b |= (1 << .@n);
+	if ((wsj_ep20b & 7) == 7) {
+		next;
+		mes "^4d4dffThat's enough rumours. Time to meet <NAVI>[Miriam]<INFO>jor_maze,150,33,0,101,0</INFO></NAVI> at the south end of the maze.^000000";
+		callfunc "F_WSJ_Step", 510, "", "23117";
+	}
+	close;
+}
+
+jor_maze,52,238,5	script	Hoton Lokengand#wsj	4_EP19_RGAN_R1,{
+	callfunc "F_WSJ_Rumor", 0, "Hoton Lokengand";
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 500 && (wsj_ep20b & 1) == 0" );
+	end;
+}
+jor_maze,55,238,3	script	Sohem Garyugand#wsj	4_EP19_RGAN_R2,{
+	callfunc "F_WSJ_Rumor", 0, "Sohem Garyugand";
+	end;
+}
+jor_maze,154,244,5	script	Misu Gozengand#wsj	4_EP19_RGAN_R3,{
+	callfunc "F_WSJ_Rumor", 1, "Misu Gozengand";
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 500 && (wsj_ep20b & 2) == 0" );
+	end;
+}
+jor_maze,157,241,3	script	Naaryugand#wsj	4_EP19_RGAN_SR1,{
+	callfunc "F_WSJ_Rumor", 1, "Naaryugand";
+	end;
+}
+jor_maze,281,191,5	script	Kengundrgand#wsj	4_EP19_RGAN_SR2,{
+	callfunc "F_WSJ_Rumor", 2, "Kengundrgand";
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 500 && (wsj_ep20b & 4) == 0" );
+	end;
+}
+jor_maze,283,188,3	script	Hanaungand#wsj	4_EP19_RGAN_SR3,{
+	callfunc "F_WSJ_Rumor", 2, "Hanaungand";
+	end;
+}
+
+jor_maze,145,55,0	script	#wsj_t_mz	HIDDEN_WARP_NPC,14,25,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+jor_maze,197,34,0	script	#wsj_t_mz2	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}

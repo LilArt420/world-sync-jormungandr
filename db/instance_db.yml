@@ -1,0 +1,14 @@
+# World Sync: Jormungandr - the memorial dungeon of Episode 20.
+Header:
+  Type: INSTANCE_DB
+  Version: 2
+
+Body:
+  - Id: 2020
+    Name: Separated Sanctuary
+    TimeLimit: 3600
+    IdleTimeOut: 300
+    Enter:
+      Map: 1@twig
+      X: 150
+      Y: 100

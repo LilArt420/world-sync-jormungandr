@@ -1,0 +1,775 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 20, chapter 1: the Ancient Ice Canyon.
+//= Quests 16691-16704, 17690. Steps 0-139.
+//============================================================
+
+// ------------------------------------------------------------
+// The adventurers' lodge in the Ice Castle
+// ------------------------------------------------------------
+icas_in,259,219,3	script(CLOAKED)	Horuru#wsj_l	4_EP19_IWIN,{
+	if (wsj_ep20 == 0) {
+		cutin "ep19_iwin06.png",2;
+		mes "[Horuru]";
+		mes "Oh, it's you. Good timing.";
+		mes "Since the day we shut the Rgans out of their nest, my scouts haven't slept a wink.";
+		next;
+		mes "[Horuru]";
+		mes "We promised to find another way into their hiding place, didn't we?";
+		mes "Well, one of my patrols came back from beyond the Frozen Scale Hill this morning.";
+		next;
+		mes "[Horuru]";
+		mes "Past the hill there's a canyon nobody has mapped. The old Iwins call it the ^0000FFAncient Ice Canyon^000000.";
+		mes "My scouts saw Rgan tracks in the snow there. Fresh ones.";
+		next;
+		select("Rgans, that far out?");
+		mes "[Horuru]";
+		mes "That's what bothers me.";
+		mes "Lehar, Lazy and Miriam have already gone ahead to look around. I'm about to follow them.";
+		next;
+		mes "[Horuru]";
+		mes "Would you come too? If the Rgans have a back door somewhere, I'd like an adventurer with us when we find it.";
+		next;
+		if (select("Count me in.:Not right now.") == 2) {
+			mes "[Horuru]";
+			mes "I see. If you change your mind, come and find me here.";
+			close3;
+		}
+		mes "[Horuru]";
+		mes "Ha! I knew it.";
+		mes "Go through the Frozen Scale Hill and the Glacier to the <NAVI>[Ancient Ice Canyon]<INFO>jor_back5,350,75,0,101,0</INFO></NAVI>. The others are waiting near the canyon's southern edge.";
+		next;
+		mes "[Horuru]";
+		mes "I'll catch up with you there. Mind the wildlife: the scouts say it's bigger than anything around the castle.";
+		callfunc "F_WSJ_Step", 10, "", "16691";
+		close3;
+	}
+	if (wsj_ep20 == 50) {
+		cutin "ep19_iwin03.png",2;
+		mes "[Horuru]";
+		mes "Ah, you found my corner. Sit, sit.";
+		mes "Keep your voice down, will you?";
+		next;
+		mes "[Horuru]";
+		mes "Those soldiers we saw in the canyon... they wore our uniforms. Iwin uniforms.";
+		mes "But I know every soldier of the castle by name, and I didn't know a single one of them.";
+		next;
+		select("Fake Iwins?");
+		mes "[Horuru]";
+		mes "That's my fear. If the Rgans can look like us out there, who's to say they aren't already in here?";
+		next;
+		mes "[Horuru]";
+		mes "I can't ask my own soldiers without tipping anyone off. But nobody minds an adventurer asking around.";
+		mes "Have a look at three places for me:";
+		mes "the <NAVI>[Barracks]<INFO>icas_in,113,41,0,101,0</INFO></NAVI>, the <NAVI>[Inn]<INFO>icas_in,92,113,0,101,0</INFO></NAVI>, and the <NAVI>[Back Alley]<INFO>icecastle,209,243,0,101,0</INFO></NAVI> of the castle town.";
+		next;
+		mes "[Horuru]";
+		mes "Anything odd at all, remember it and come back to me.";
+		callfunc "F_WSJ_Step", 60, "16695", "16696,16697,16698";
+		wsj_ep20b = wsj_ep20b &~ 7;
+		close3;
+	}
+	if (wsj_ep20 == 60) {
+		cutin "ep19_iwin06.png",2;
+		mes "[Horuru]";
+		mes "Still asking around?";
+		mes "The <NAVI>[Barracks]<INFO>icas_in,113,41,0,101,0</INFO></NAVI>, the <NAVI>[Inn]<INFO>icas_in,92,113,0,101,0</INFO></NAVI> and the <NAVI>[Back Alley]<INFO>icecastle,209,243,0,101,0</INFO></NAVI>. Take your time, but not too much.";
+		close3;
+	}
+	if (wsj_ep20 == 70) {
+		cutin "ep19_iwin06.png",2;
+		mes "[Horuru]";
+		mes "Well? What did you find?";
+		next;
+		select("A soldier no one knows, a guest who asked about the barrier, and a fake Iwin in the alley.");
+		cutin "ep19_iwin03.png",2;
+		mes "[Horuru]";
+		mes "......";
+		mes "Then it's true. They're already inside our walls.";
+		next;
+		mes "[Horuru]";
+		mes "The one in the alley got away, you say? Hmph. A real Iwin would have stood and saluted.";
+		next;
+		mes "[Horuru]";
+		mes "Vellgunde has been working on that device we brought back from the canyon all night.";
+		mes "She sent word that she knows what it is. Go to her, I'll double the watch at the gates.";
+		callfunc "F_WSJ_Step", 80, "16699", "16700";
+		close3;
+	}
+	cutin "ep19_iwin06.png",2;
+	mes "[Horuru]";
+	if (wsj_ep20 < 50)
+		mes "The others went ahead to the <NAVI>[Ancient Ice Canyon]<INFO>jor_back5,350,75,0,101,0</INFO></NAVI>. I'll follow when I've briefed the scouts.";
+	else
+		mes "Every soldier in this castle is someone I can name. That's how it should stay.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "(ep19_main == 100 || $wsj_skip19) && BaseLevel >= 200 && wsj_ep20 == 0" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 50 || wsj_ep20 == 70" );
+	end;
+}
+
+icas_in,262,202,3	script(CLOAKED)	Aurelie#wsj_l	4_EP19_AURELIE,{
+	if (wsj_ep20 == 40) {
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "You're back. Horuru's scouts told me you went into the canyon. What did you find?";
+		next;
+		select("Show her the device.");
+		mes "[Aurelie]";
+		mes "......";
+		mes "Rgan work, no doubt about it. Look at these markings.";
+		mes "But I've never seen them build anything like this.";
+		next;
+		mes "[Aurelie]";
+		mes "Leave it with me. Vellgunde knows magic engineering better than anyone here; she'll take it apart.";
+		next;
+		delitem 1001218,1;	// Ep20_Jor_Device
+		mes "[Aurelie]";
+		mes "Oh, and Horuru was looking for you. Something about the castle, he said. He's waiting in the <NAVI>[corner of the lodge]<INFO>icas_in,259,219,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step", 50, "16694", "16695";
+		close3;
+	}
+	if (wsj_ep20 == 130) {
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "Good, everyone's here. Let's talk about where we go next.";
+		next;
+		mes "[Aurelie]";
+		mes "Thanks to Lazy, we know the door at the back of the Snake God's Nest isn't sealed by magic at all.";
+		mes "It opens for Rgans of high rank. For the bishops and their attendants.";
+		next;
+		cutin "ep19_leizi01.png",2;
+		mes "[Lazy]";
+		mes "The guards practically bowed to me~";
+		mes "A little rank goes a long way with those snakes.";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "So we go in disguised, as before. Beyond that door lies what the Rgans call the ^0000FFRoots of the Serpent God^000000.";
+		mes "If Rasgand and Bagot are hiding anywhere, it's down there.";
+		next;
+		mes "[Aurelie]";
+		mes "This is a new exploration site, and we know nothing about it. Be careful.";
+		mes "Transform with your " + getitemname(101162) + " and meet the others at the <NAVI>[door of the Snake God's Nest]<INFO>jor_nest,36,274,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step", 140, "17690", "17691";
+		callfunc "F_WSJ_Chapter";
+		close3;
+	}
+	cutin "ep19_aurelie01.png",1;
+	mes "[Aurelie]";
+	if (wsj_ep20 < 130)
+		mes "Leon and I are keeping the barrier in shape. Tell me when you've found something.";
+	else
+		mes "The door to the Snake God's Nest is open to Rgans of rank. Go in disguised.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 40 || wsj_ep20 == 130" );
+	end;
+}
+
+icas_in,260,205,5	script(CLOAKED)	Vellgunde#wsj_l	4_EP19_VELLGUNDE,{
+	if (wsj_ep20 == 80) {
+		cutin "ep19_vellgunde01.png",1;
+		mes "[Vellgunde]";
+		mes "There you are. I haven't slept, so forgive me if I'm blunt.";
+		next;
+		mes "[Vellgunde]";
+		mes "That thing you brought back is a ^0000FFmana absorption device^000000.";
+		mes "Planted in the ground, it drinks the magic out of the land around it and stores it in a core.";
+		next;
+		select("What would the Rgans want with that much mana?");
+		mes "[Vellgunde]";
+		mes "That's the question, isn't it?";
+		mes "After you shut them out, they lost the mana of the nest. They'll need a great deal of it for whatever they're planning.";
+		next;
+		cutin "ep19_vellgunde02.png",1;
+		mes "[Vellgunde]";
+		mes "And there's something worse. Part of the circuit isn't for absorbing at all.";
+		mes "It's a pattern for ^0000FFshape-shifting^000000. The same principle as your scrolls, but built to make a Rgan look like an Iwin.";
+		next;
+		mes "[Vellgunde]";
+		mes "So Horuru was right about the soldiers.";
+		next;
+		mes "[Vellgunde]";
+		mes "Lehar is getting ready to go back to the canyon and see how many of these things are out there.";
+		mes "She's at the <NAVI>[front gate of the castle]<INFO>icecastle,201,171,0,101,0</INFO></NAVI>. Go with her.";
+		callfunc "F_WSJ_Step", 90, "16700", "16701";
+		close3;
+	}
+	cutin "ep19_vellgunde01.png",1;
+	mes "[Vellgunde]";
+	mes "Mana absorption, shape-shifting circuits... Bagot's fingerprints are all over this.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 80" );
+	end;
+}
+
+icas_in,259,200,5	script(CLOAKED)	Miriam#wsj_l	4_EP18_MIRIAM,{
+	if (wsj_ep20 == 100) {
+		cutin "ep18_miriam_01.png",2;
+		mes "[Miriam]";
+		mes "You're back! Both of you!";
+		mes "When the scouts said the canyon had collapsed I thought...";
+		next;
+		select("We're fine. We ran.");
+		mes "[Miriam]";
+		mes "Thank goodness.";
+		mes "Lehar is already telling everyone about the fake soldiers, I can hear her from here.";
+		next;
+		mes "[Miriam]";
+		mes "Lazy wanted to hear it from you too. He's at the <NAVI>[lodge table]<INFO>icas_in,263,200,0,101,0</INFO></NAVI>, pretending to read.";
+		callfunc "F_WSJ_Step", 110, "16702", "16703";
+		close3;
+	}
+	cutin "ep18_miriam_01.png",2;
+	mes "[Miriam]";
+	mes "Maram went out to help the Iwins with the wounded. I'm holding the lodge until she's back.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 100" );
+	end;
+}
+
+icas_in,263,200,3	script(CLOAKED)	Lazy#wsj_l	4_EP19_LAZY,{
+	if (wsj_ep20 == 110) {
+		cutin "ep19_leizi01.png",2;
+		mes "[Lazy]";
+		mes "Ah, the survivor~";
+		mes "Lehar's version has the canyon collapsing three times and her saving you twice. What's yours?";
+		next;
+		select("Fake Iwins, planting devices, guarding the canyon.");
+		mes "[Lazy]";
+		mes "Mm. And they ran away the moment they saw you, didn't they?";
+		mes "Because underneath the uniform, they're cowards. Rgans are rather predictable creatures.";
+		next;
+		cutin "ep19_leizi02.png",2;
+		mes "[Lazy]";
+		mes "Here's a thought.";
+		mes "They put on our faces to walk among us. Why don't we put on theirs again?";
+		next;
+		mes "[Lazy]";
+		mes "Not lowly Rgans this time. ^0000FFHigh-ranking ones^000000.";
+		mes "Nobody questions a bishop. If we slip in among their betters, we'll hear what they're really up to.";
+		next;
+		select("Spies among spies.");
+		cutin "ep19_leizi03.png",2;
+		mes "[Lazy]";
+		mes "An age of cold war and espionage~ Doesn't it sound fun?";
+		mes "Meet me at the <NAVI>[door of the Snake God's Nest]<INFO>jor_nest,36,274,0,101,0</INFO></NAVI>. Bring a " + getitemname(101162) + ".";
+		callfunc "F_WSJ_Step", 120, "16703", "16704";
+		close3;
+	}
+	cutin "ep19_leizi01.png",2;
+	mes "[Lazy]";
+	mes "Reading. Very serious reading. Don't disturb me~";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 110" );
+	end;
+}
+
+// Scene trigger for the lodge (also fired on map load).
+icas_in,260,208,0	script	#wsj_t_lodge	HIDDEN_WARP_NPC,9,12,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// Three places Horuru wants checked (step 60)
+// ------------------------------------------------------------
+icas_in,113,41,5	script(CLOAKED)	Iwin Soldier#wsj_bar	4_EP19_IWIN,{
+	if (wsj_ep20 != 60) end;
+	mes "[Iwin Soldier]";
+	mes "Hm? Adventurers aren't supposed to be in the barracks.";
+	next;
+	select("Seen anything strange lately?");
+	mes "[Iwin Soldier]";
+	mes "Strange... Well, there was a fellow in the mess hall yesterday.";
+	mes "Wore a corporal's hat, ate three bowls of stew and didn't say a word to anybody.";
+	next;
+	mes "[Iwin Soldier]";
+	mes "I asked which squad he was in and he just stared at me. Then he left.";
+	mes "Didn't walk like a soldier, either. More like he was... sliding.";
+	if (!(wsj_ep20b & 1)) {
+		wsj_ep20b |= 1;
+		completequest 16696;
+	}
+	callfunc "F_WSJ_Ch1Check";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 60 && (wsj_ep20b & 1) == 0" );
+	end;
+}
+
+icas_in,92,113,3	script(CLOAKED)	Traveler#wsj_inn	4_M_01,{
+	if (wsj_ep20 != 60) end;
+	mes "[Traveler]";
+	mes "A fellow adventurer! Finally someone who doesn't squeak when they talk.";
+	next;
+	select("Anything odd at the inn?");
+	mes "[Traveler]";
+	mes "Odd? A guest in the room next to mine kept asking the innkeeper about the barrier.";
+	mes "Where it starts, who keeps it up, when they check it.";
+	next;
+	mes "[Traveler]";
+	mes "He paid in Rgan cores. The innkeeper took them, of course, she takes anything.";
+	mes "He checked out before dawn. Left the window open, the room was full of snow.";
+	if (!(wsj_ep20b & 2)) {
+		wsj_ep20b |= 2;
+		completequest 16697;
+	}
+	callfunc "F_WSJ_Ch1Check";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 60 && (wsj_ep20b & 2) == 0" );
+	end;
+}
+
+icecastle,209,243,3	script(CLOAKED)	Iwin Soldier#wsj_alley	21974,{
+	if (wsj_ep20 != 60) end;
+	cutin "ep20_fake_iwin01.png",2;
+	mes "[Iwin Soldier]";
+	mes "......";
+	mes "Sa-salute! Nothing to report, sir! Ma'am! Adventurer!";
+	next;
+	select("Which squad are you in?");
+	mes "[Iwin Soldier]";
+	mes "The... the squad. The one with the hats.";
+	mes "Long live the Ice Castle, hiss-";
+	next;
+	cutin "ep20_fake_iwin02.png",2;
+	mes "[Iwin Soldier]";
+	mes "I mean, ahem! I have to go. Orders!";
+	next;
+	cutin "",255;
+	specialeffect EF_TELEPORTATION;
+	mes "The soldier slithers off down the alley faster than any Iwin could run.";
+	mes "For a moment, you're sure you saw a tail under the coat.";
+	if (!(wsj_ep20b & 4)) {
+		wsj_ep20b |= 4;
+		completequest 16698;
+	}
+	callfunc "F_WSJ_Ch1Check";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 60 && (wsj_ep20b & 4) == 0" );
+	end;
+}
+
+// All three places checked -> back to Horuru.
+function	script	F_WSJ_Ch1Check	{
+	if (wsj_ep20 == 60 && (wsj_ep20b & 7) == 7) {
+		next;
+		mes "^4d4dffThat's all three places. Time to report to <NAVI>[Horuru]<INFO>icas_in,259,219,0,101,0</INFO></NAVI>.^000000";
+		callfunc "F_WSJ_Step", 70, "", "16699";
+	}
+	return;
+}
+
+icas_in,104,46,0	script	#wsj_t_bar	HIDDEN_WARP_NPC,12,12,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+icecastle,209,238,0	script	#wsj_t_alley	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// The Ancient Ice Canyon (jor_back5)
+// ------------------------------------------------------------
+jor_back5,350,75,3	script(CLOAKED)	Lehar#wsj_c1a	4_EP19_LEHAR,{
+	if (wsj_ep20 == 10) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Over here! Quick, behind the rocks!";
+		next;
+		mes "^4d4dffA deafening screech echoes through the canyon. Huge grey shapes wheel overhead.^000000";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "Ancient Icewinds! A whole flock of them!";
+		mes "We walked a little too close to their nests and they didn't like it one bit.";
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[Lazy]";
+		mes "Birds the size of houses. How delightful.";
+		mes "I'd rather not be pecked into ice cubes, so let's stay in this hollow until they settle.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "This spot's safe, they can't dive in here. Catch your breath.";
+		callfunc "F_WSJ_Step", 20, "16691", "16692";
+		close3;
+	}
+	if (wsj_ep20 == 20) {
+		cutin "ep18_miriam_01.png",0;
+		mes "[Miriam]";
+		mes "They're quieting down. I think they were only guarding their eggs.";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "The Iwins say Icewinds lived in this canyon long before the castle was built. We're the intruders here, not them.";
+		next;
+		cutin "ep19_iwin06.png",0;
+		mes "[Horuru]";
+		mes "Sorry I'm late! Did I miss... the birds. I see.";
+		mes "Listen: my scout found the Rgan tracks further north, past the frozen falls. Near the canyon's far end.";
+		next;
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Then that's where we go. Quietly this time.";
+		mes "Let's regroup at the <NAVI>[north end of the canyon]<INFO>jor_back5,353,357,0,101,0</INFO></NAVI> and look around.";
+		callfunc "F_WSJ_Step", 30, "16692", "16693";
+		close3;
+	}
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "We'll meet at the <NAVI>[north end of the canyon]<INFO>jor_back5,353,357,0,101,0</INFO></NAVI>.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 10 || wsj_ep20 == 20" );
+	end;
+}
+
+jor_back5,350,72,5	script(CLOAKED)	Lazy#wsj_c1a	4_EP19_LAZY,{
+	cutin "ep19_leizi01.png",2;
+	mes "[Lazy]";
+	mes "The Icewinds remind me of the Rekenber board of directors. Loud, territorial, and very interested in eggs.";
+	close3;
+}
+
+jor_back5,348,78,5	script(CLOAKED)	Miriam#wsj_c1a	4_EP18_MIRIAM,{
+	cutin "ep18_miriam_01.png",2;
+	mes "[Miriam]";
+	mes "Stay close to the rocks. The Icewinds don't come down here.";
+	close3;
+}
+
+jor_back5,353,77,3	script(CLOAKED)	Horuru#wsj_c1a	4_EP19_IWIN,{
+	cutin "ep19_iwin06.png",2;
+	mes "[Horuru]";
+	mes "Even my grandfather only told stories about this canyon. I never thought I'd stand in it.";
+	close3;
+}
+
+jor_back5,353,357,5	script(CLOAKED)	Miriam#wsj_c1b	4_EP18_MIRIAM,{
+	cutin "ep18_miriam_01.png",2;
+	mes "[Miriam]";
+	mes "Something's humming. Can you hear it? It's coming from over there.";
+	close3;
+}
+
+jor_back5,352,355,5	script(CLOAKED)	Lazy#wsj_c1b	4_EP19_LAZY,{
+	if (wsj_ep20 == 30) {
+		cutin "ep19_leizi02.png",2;
+		mes "[Lazy]";
+		mes "Rgan tracks everywhere. Dozens of them, coming and going.";
+		mes "And look what they left behind~";
+		next;
+		mes "[Lazy]";
+		mes "That ^0000FFthing on the ice^000000 over there. It's humming like a beehive.";
+		mes "Go on, have a look. If it explodes, I'll tell everyone you were very brave.";
+		close3;
+	}
+	cutin "ep19_leizi01.png",2;
+	mes "[Lazy]";
+	mes "Careful with that.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 30" );
+	end;
+}
+
+jor_back5,355,354,3	script(CLOAKED)	Lehar#wsj_c1b	4_EP19_LEHAR,{
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	if (wsj_ep20 == 30)
+		mes "Lazy found something. Take a look at that device while we watch the sky.";
+	else
+		mes "We should get that thing back to the castle before its owners come looking for it.";
+	close3;
+}
+
+jor_back5,353,353,1	script(CLOAKED)	Horuru#wsj_c1b	4_EP19_IWIN,{
+	cutin "ep19_iwin06.png",2;
+	mes "[Horuru]";
+	mes "These tracks... some of them aren't Rgan. They look like Iwin boots.";
+	close3;
+}
+
+jor_back5,356,357,3	script(CLOAKED)	Magical Object#wsj_c1b	4_EP20_DEVICE_BLUE,{
+	if (wsj_ep20 != 30) end;
+	mes "A strange device is driven deep into the ice.";
+	mes "Its core glows a pale blue and pulses slowly, like something breathing.";
+	next;
+	mes "The frost around it has melted in a perfect circle. Even the snow looks... drained.";
+	next;
+	select("Pull it out.");
+	progressbar "ffffff", 3;
+	specialeffect EF_LORD;
+	mes "With a crack the device comes free. The humming stops.";
+	getitem 1001218,1;	// Ep20_Jor_Device
+	next;
+	cutin "ep19_lehar03.png",2;
+	mes "[Lehar]";
+	mes "...Someone's coming. Soldiers, a whole squad.";
+	mes "Iwin uniforms. But there's no patrol out this far, I checked the roster myself!";
+	next;
+	cutin "ep19_iwin03.png",0;
+	mes "[Horuru]";
+	mes "Those aren't my soldiers.";
+	next;
+	cutin "ep19_leizi01.png",0;
+	mes "[Lazy]";
+	mes "Then I suggest we leave before they ask for their toy back~";
+	next;
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "Agreed. Take the device to the <NAVI>[Ice Castle]<INFO>icas_in,262,202,0,101,0</INFO></NAVI>. We'll draw them off and meet you there!";
+	callfunc "F_WSJ_Step", 40, "16693", "16694";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 30" );
+	end;
+}
+
+jor_back5,350,80,0	script	#wsj_t_c1a	HIDDEN_WARP_NPC,14,14,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+jor_back5,354,350,0	script	#wsj_t_c1b	HIDDEN_WARP_NPC,14,14,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// The second trip into the canyon (steps 90-99)
+// ------------------------------------------------------------
+icecastle,201,171,5	script(CLOAKED)	Lehar#wsj_front	4_EP19_LEHAR,{
+	if (wsj_ep20 == 90) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "There you are! I've packed rope, food for three days, and Horuru's spare boots.";
+		next;
+		mes "[Lehar]";
+		mes "Vellgunde told you? Mana absorption devices, and Rgans walking around in Iwin skins.";
+		mes "If they planted one, they planted a hundred. I want to see how far it goes.";
+		next;
+		mes "[Lehar]";
+		mes "The scouts saw that squad heading west, toward the ^0000FFdeep canyon^000000 past the old Icewind nests.";
+		mes "Ready?";
+		next;
+		if (select("Let's go.:Give me a moment.") == 2) {
+			mes "[Lehar]";
+			mes "Don't take too long. Their tracks won't last in this wind.";
+			close3;
+		}
+		callfunc "F_WSJ_Step", 95, "", "";
+		close2;
+		cutin "",255;
+		warp "jor_back6",372,258;
+		end;
+	}
+	if (wsj_ep20 == 95) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Back already? The squad is in the deep canyon. Come on!";
+		next;
+		if (select("Go to the deep canyon.:Not yet.") == 2)
+			close3;
+		close2;
+		cutin "",255;
+		warp "jor_back6",372,258;
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 90 || wsj_ep20 == 95" );
+	end;
+}
+
+icecastle,201,176,0	script	#wsj_t_front	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+jor_back6,370,262,3	script(CLOAKED)	Lehar#wsj_b6	4_EP19_LEHAR,{
+	if (wsj_ep20 == 95) {
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Shh. Down.";
+		mes "There. Do you see them?";
+		next;
+		mes "^4d4dffBelow the ridge, a dozen 'Iwin soldiers' are hammering devices into the ice in a long line.^000000";
+		mes "^4d4dffEvery few steps, the snow around them turns grey and dull.^000000";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "They're draining the whole canyon. Bit by bit.";
+		mes "And look at the one giving orders. That's not a hat, that's a crest. A Rgan bishop's crest.";
+		next;
+		mes "^4d4dffOne of the soldiers looks up, straight at your hiding spot.^000000";
+		next;
+		cutin "ep20_fake_iwin02.png",0;
+		mes "[Fake Iwin Soldier]";
+		mes "HUMANS! On the ridge! Hisssss!";
+		next;
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "So much for quiet. Run!";
+		next;
+		cutin "",255;
+		mes "^4d4dffYou flee along the ridge as the ice cracks behind you. A roar shakes the canyon:^000000";
+		mes "^4d4dffthe ancient Icewinds, furious at the noise, dive on the fake soldiers and scatter them across the snow.^000000";
+		next;
+		cutin "ep19_lehar04.png",2;
+		mes "[Lehar]";
+		mes "Hah... haha! The birds saved us! I take back everything I said about them.";
+		mes "Let's get home before they remember they don't like us either.";
+		mes "Miriam will be worried sick. She's at the <NAVI>[lodge]<INFO>icas_in,259,200,0,101,0</INFO></NAVI>.";
+		next;
+		callfunc "F_WSJ_Step", 100, "16701", "16702";
+		if (select("Head back to the Ice Castle.:I'll walk back myself.") == 1) {
+			close2;
+			cutin "",255;
+			warp "icas_in",257,206;
+			end;
+		}
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 95" );
+	end;
+}
+
+jor_back6,366,264,5	script(CLOAKED)	Fake Iwin Soldier#wsj_b6	21977,{
+	cutin "ep20_fake_iwin01.png",2;
+	mes "[Fake Iwin Soldier]";
+	mes "Nothing to see here. Just a normal Iwin. Doing normal Iwin things. Hiss.";
+	close3;
+}
+
+jor_back6,372,260,0	script	#wsj_t_b6	HIDDEN_WARP_NPC,12,12,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// The door of the Snake God's Nest (steps 120-139)
+// ------------------------------------------------------------
+jor_nest,35,274,5	script(CLOAKED)	Lazy#wsj_door	4_EP19_LAZY,{
+	if (wsj_ep20 == 120) {
+		cutin "ep19_leizi01.png",2;
+		mes "[Lazy]";
+		mes "Right on time. Lehar is sulking because I told her she makes a terrible bishop.";
+		next;
+		if (countitem(101162) < 1 && getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+			mes "[Lazy]";
+			mes "No scroll? Tsk. Here, I always carry spares.";
+			getitem 101162,2;	// Ep19_Rgan_Scroll
+			next;
+		}
+		mes "[Lazy]";
+		mes "The plan is simple. I'm a visiting bishop from the Sacred Roots. You're my attendant. Lehar is my other attendant.";
+		mes "Attendants don't talk. Lehar.";
+		next;
+		cutin "ep19_lehar02.png",0;
+		mes "[Lehar]";
+		mes "I heard that.";
+		next;
+		cutin "ep19_leizi02.png",2;
+		mes "[Lazy]";
+		mes "Let's see what the door guards know. Transform, and follow my lead.";
+		next;
+		if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+			mes "^4d4dffUse your " + getitemname(101162) + " first, then talk to Lazy again.^000000";
+			close3;
+		}
+		mes "^4d4dffLazy glides up to the guards. They straighten at once.^000000";
+		next;
+		mes "[Rgan Security]";
+		mes "Y-your Holiness! We weren't told a bishop was coming!";
+		next;
+		mes "[Lazy]";
+		mes "Of course you weren't. That's what makes it an inspection.";
+		mes "Tell me, how long since this door was last opened? And who opened it?";
+		next;
+		mes "[Rgan Security]";
+		mes "Only for the procession, Holiness! When the bishops go down to the Roots of the Serpent God.";
+		mes "The door knows high blood. It opens for the upper ranks and their attendants, nobody else.";
+		next;
+		mes "[Lazy]";
+		mes "Good. And the device shipments from the canyon?";
+		next;
+		mes "[Rgan Security]";
+		mes "Down to the Sacred Roots, like always. Bishop Rasgand's orders.";
+		mes "Er... does Your Holiness need to see the cores?";
+		next;
+		mes "[Lazy]";
+		mes "Not today. Carry on.";
+		next;
+		cutin "ep19_leizi03.png",2;
+		mes "[Lazy]";
+		mes "Did you hear that? Rasgand. And the mana is going down to the Sacred Roots.";
+		mes "Let's tell Aurelie. She's at the <NAVI>[lodge]<INFO>icas_in,262,202,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step", 130, "16704", "17690";
+		close3;
+	}
+	if (wsj_ep20 == 130) {
+		cutin "ep19_leizi01.png",2;
+		mes "[Lazy]";
+		mes "Aurelie is waiting at the <NAVI>[lodge]<INFO>icas_in,262,202,0,101,0</INFO></NAVI>. Off you go, attendant~";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 120" );
+	end;
+}
+
+jor_nest,36,272,5	script(CLOAKED)	Lehar#wsj_door	4_EP19_LEHAR,{
+	cutin "ep19_lehar02.png",2;
+	mes "[Lehar]";
+	mes "I'd make a great bishop. I'd make the best bishop.";
+	close3;
+}
+
+jor_nest,36,270,0	script	#wsj_t_door	HIDDEN_WARP_NPC,7,7,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}

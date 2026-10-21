@@ -1,0 +1,1064 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 20, chapter 2: the Lair of the Rgans.
+//= Quests 17691-17709, 17719 and the trust errands 8839-8854.
+//= Steps 140-339.
+//============================================================
+
+// ------------------------------------------------------------
+// The door at the back of the Snake God's Nest
+// ------------------------------------------------------------
+jor_nest,40,274,0	script	#wsj_nestdoor	HIDDEN_WARP_NPC,1,1,{
+	end;
+OnTouch:
+	if (wsj_ep20 < 140) {
+		dispbottom "A heavy door carved with serpents. It doesn't move an inch.";
+		end;
+	}
+	if (wsj_ep20 == 140) {
+		if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+			dispbottom "The door stays shut. It only opens for Rgans of rank: use a " + getitemname(101162) + " first.";
+			end;
+		}
+		specialeffect2 EF_CLOAKING;
+		callfunc "F_WSJ_Step", 150, "17691", "17692";
+	}
+	warp "jor_root1",32,17;
+	end;
+}
+
+// ------------------------------------------------------------
+// Roots of the Serpent God, 1st floor
+// ------------------------------------------------------------
+jor_root1,32,34,3	script(CLOAKED)	Rgan Shaman#wsj	21985,{
+	if (wsj_ep20 == 150) {
+		mes "[Rgan Shaman]";
+		mes "Hm? A new attendant? I don't remember you.";
+		next;
+		mes "^4d4dffThe shaman leans in and sniffs, long and slow.^000000";
+		next;
+		mes "[Rgan Shaman]";
+		mes "......";
+		mes "You smell of snow and bread. ^FF0000You smell of HUMAN.^000000";
+		next;
+		mes "[Rgan Shaman]";
+		mes "The scrolls fool the guards, not us. We shamans see what's under the skin!";
+		mes "Brothers! Intruders in the Roots!";
+		next;
+		specialeffect EF_TELEPORTATION;
+		mes "^4d4dffThe shaman vanishes into the dark, shrieking. You hear answering hisses from deeper in.^000000";
+		next;
+		mes "^4d4dffIf the shamans can see through the disguise, the others are in danger too.";
+		mes "Deal with the ^FF0000Superior Rgan Warlocks^4d4dff on this floor before they raise the alarm, then find your companions on the <NAVI>[2nd floor]<INFO>jor_root2,239,243,0,101,0</INFO></NAVI>.^000000";
+		callfunc "F_WSJ_Step", 160, "17692", "17693";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 150" );
+	end;
+}
+
+jor_root1,32,28,0	script	#wsj_t_root1	HIDDEN_WARP_NPC,10,12,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// The hideout on the 2nd floor
+// ------------------------------------------------------------
+jor_root2,239,243,3	script(CLOAKED)	Lehar#wsj_hide	4_EP19_LEHAR,{
+	if (wsj_ep20 == 160) {
+		if (checkquest(17693,HUNTING) != 2) {
+			cutin "ep19_lehar02.png",2;
+			mes "[Lehar]";
+			mes "Shamans? That can see through the scrolls? That's bad.";
+			mes "Thin them out on the 1st floor before they bring the whole nest down on us. We'll hold this spot.";
+			close3;
+		}
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "There you are! We heard the shrieking all the way down here.";
+		mes "You took care of the shamans? Good. They'll think it was a squabble between clans.";
+		next;
+		cutin "ep19_aurelie01.png",0;
+		mes "[Aurelie]";
+		mes "This hollow is out of the way. The Rgans don't come here, it smells of old water.";
+		mes "We'll use it as our base.";
+		next;
+		cutin "ep19_leizi01.png",0;
+		mes "[Lazy]";
+		mes "And while you all enjoy the smell, I'll go and look around. Alone. Rgans trust a lone bishop more than a parade.";
+		next;
+		cutin "ep19_lehar03.png",2;
+		mes "[Lehar]";
+		mes "Lazy, wait-!";
+		mes "...And he's gone. Of course.";
+		next;
+		mes "[Lehar]";
+		mes "Nothing to do but wait for him. Stay close.";
+		callfunc "F_WSJ_Step", 170, "17693", "17694";
+		close3;
+	}
+	if (wsj_ep20 == 170) {
+		cutin "ep19_lehar02.png",2;
+		mes "[Lehar]";
+		mes "Still no sign of him. If he's been caught, I'm going to-";
+		next;
+		cutin "ep19_leizi03.png",0;
+		mes "[Lazy]";
+		mes "-to welcome me back warmly, I'm sure.";
+		next;
+		mes "[Lazy]";
+		mes "Good news. Under this hollow there's a cave the Rgans use as a dump. And in the dump...";
+		mes "...a ^0000FFRgan bishop^000000, out cold. Slipped on the ice and fell right through a crack, poor thing.";
+		next;
+		cutin "ep19_aurelie01.png",2;
+		mes "[Aurelie]";
+		mes "A real bishop. Alone and unconscious.";
+		next;
+		cutin "ep19_leizi02.png",0;
+		mes "[Lazy]";
+		mes "So here's my stratagem: we borrow his face. I'll go up as him, and none of the shamans will dare sniff a bishop.";
+		mes "Come and see him. He's in the <NAVI>[cave below]<INFO>jor_safty2,75,360,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step", 180, "17694", "17695";
+		next;
+		if (select("Climb down to the cave.:I'll find my own way.") == 1) {
+			close2;
+			cutin "",255;
+			warp "jor_safty2",70,356;
+			end;
+		}
+		close3;
+	}
+	if (wsj_ep20 == 180) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "Lazy's in the <NAVI>[cave below]<INFO>jor_safty2,75,360,0,101,0</INFO></NAVI> with his bishop.";
+		next;
+		if (select("Climb down to the cave.:Not now.") == 1) {
+			close2;
+			cutin "",255;
+			warp "jor_safty2",70,356;
+			end;
+		}
+		close3;
+	}
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "We'll keep the hideout. Go on, the Sacred Roots are up the slope to the north.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 160 && checkquest(17693,HUNTING) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 170" );
+	end;
+}
+
+jor_root2,236,243,5	script(CLOAKED)	Aurelie#wsj_hide	4_EP19_AURELIE,{
+	cutin "ep19_aurelie01.png",1;
+	mes "[Aurelie]";
+	mes "Leon and I can't stay long. The barrier won't hold forever without us.";
+	mes "But Rasgand is down here somewhere. I can feel it.";
+	close3;
+}
+
+jor_root2,238,245,5	script(CLOAKED)	Leon#wsj_hide	4_EP19_LEON,{
+	cutin "ep19_leon01.png",0;
+	mes "[Leon]";
+	mes "Hmph. Hiding in a puddle while a snake plays dress-up.";
+	mes "When this is over I want a real fight.";
+	close3;
+}
+
+jor_root2,237,241,7	script(CLOAKED)	Miriam#wsj_hide	4_EP18_MIRIAM,{
+	cutin "ep18_miriam_01.png",2;
+	mes "[Miriam]";
+	mes "Maram stayed at the castle with the wounded. I promised her I'd bring everyone back.";
+	close3;
+}
+
+jor_root2,241,246,3	script(CLOAKED)	Lazy#wsj_hide	4_EP19_LAZY,{
+	cutin "ep19_leizi01.png",2;
+	mes "[Lazy]";
+	mes "Lovely hollow. Smells like a fish market.";
+	close3;
+}
+
+jor_root2,238,244,0	script	#wsj_t_hide	HIDDEN_WARP_NPC,9,9,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// The fallen bishop (jor_safty2)
+// ------------------------------------------------------------
+jor_safty2,75,360,3	script	Bishop Rgan#wsj	4_EP19_RGAN_SR2,{
+	if (wsj_ep20 == 180) {
+		mes "^4d4dffA large Rgan in heavy vestments lies in the rubbish, snoring through his nose slits.^000000";
+		mes "^4d4dffA crest hangs on a cord around his neck: a coiled serpent, gold on black.^000000";
+		close;
+	}
+	if (wsj_ep20 > 180 && wsj_ep20 < 340) {
+		mes "^4d4dffThe bishop is tied up with his own vestment cords. Still snoring.^000000";
+		close;
+	}
+	mes "^4d4dffAn old pile of rubbish. Someone heavy lay here for a long while.^000000";
+	close;
+}
+
+jor_safty2,72,358,5	script(CLOAKED)	Lazy#wsj_bishop	4_EP19_LAZY,{
+	if (wsj_ep20 == 180) {
+		cutin "ep19_leizi01.png",2;
+		mes "[Lazy]";
+		mes "Allow me to introduce His Holiness ^0000FFNadyagand^000000. He fell through the ceiling while looking for a quiet place to nap.";
+		mes "I respect that.";
+		next;
+		mes "[Lazy]";
+		mes "His crest, his vestments, and above all his manner: lazy, fat and rude. I can do that.";
+		next;
+		specialeffect EF_FOOD06, AREA, "Lazy#wsj_bishop";
+		mes "^4d4dffLazy drapes the bishop's vestments over himself and hangs the crest around his neck.^000000";
+		mes "^4d4dffWith a shimmer, his shape swells and darkens until a top-tier Rgan stands where he stood.^000000";
+		next;
+		cutin "ep19_leizi03.png",2;
+		mes "[Lazy]";
+		mes "Hisss. Bring me snacks, attendant.";
+		mes "...Too much?";
+		next;
+		select("Perfect, actually.");
+		mes "[Lazy]";
+		mes "I thought so~";
+		mes "We'll leave His real Holiness tied up here. The others will keep an eye on him.";
+		next;
+		mes "[Lazy]";
+		mes "Now, to the ^0000FFSacred Roots^000000. Up the 2nd floor and through the arch to the north.";
+		mes "Stay transformed and stay behind me. Let's meet them at the <NAVI>[Sacred Roots]<INFO>jor_sanct,162,86,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step", 190, "17695", "17696";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 180" );
+	end;
+}
+
+jor_safty2,70,358,0	script	#wsj_t_bishop	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// Snakeberries under the hardened soil of the 2nd floor.
+jor_root2,43,63,0	script	Hardened Spot#wsj01	4_POINT_RED,{
+	callfunc "F_WSJ_Berry";
+	end;
+}
+jor_root2,45,257,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj02	4_POINT_RED
+jor_root2,48,111,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj03	4_POINT_RED
+jor_root2,53,167,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj04	4_POINT_RED
+jor_root2,76,92,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj05	4_POINT_RED
+jor_root2,77,191,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj06	4_POINT_RED
+jor_root2,83,234,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj07	4_POINT_RED
+jor_root2,90,50,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj08	4_POINT_RED
+jor_root2,114,149,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj09	4_POINT_RED
+jor_root2,118,104,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj10	4_POINT_RED
+jor_root2,122,204,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj11	4_POINT_RED
+jor_root2,143,79,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj12	4_POINT_RED
+jor_root2,147,189,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj13	4_POINT_RED
+jor_root2,170,178,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj14	4_POINT_RED
+jor_root2,171,114,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj15	4_POINT_RED
+jor_root2,211,196,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj16	4_POINT_RED
+jor_root2,211,225,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj17	4_POINT_RED
+jor_root2,217,115,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj18	4_POINT_RED
+jor_root2,234,95,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj19	4_POINT_RED
+jor_root2,235,258,0	duplicate(Hardened Spot#wsj01)	Hardened Spot#wsj20	4_POINT_RED
+
+// ------------------------------------------------------------
+// The Sacred Roots (jor_sanct). Its Rgans only talk to Rgans.
+// ------------------------------------------------------------
+jor_sanct,162,86,3	script	Rgan#wsj_s1	4_EP19_RGAN_SR3,{
+	if (!callfunc("F_WSJ_IsRgan", "Rgan")) end;
+	if (wsj_ep20 == 190) {
+		mes "[Rgan]";
+		mes "His Holiness Nadyagand! At last!";
+		mes "We've been queueing since the morning tide, Holiness. There's so much to be done and nobody to do it.";
+		next;
+		cutin "ep19_leizi03.png",2;
+		mes "[Lazy]";
+		mes "Hisss. My attendant here will see to your little problems. Won't you, attendant?";
+		next;
+		cutin "",255;
+		mes "^4d4dffThe Rgans in the line all turn to look at you. Every one of them has a request.^000000";
+		mes "^4d4dffThe best way to learn about this place is to make yourself useful. Help them.^000000";
+		callfunc "F_WSJ_Step", 200, "17696", "17697";
+		close;
+	}
+	if (wsj_ep20 == 200) {
+		mes "[Rgan]";
+		mes "You're His Holiness's attendant, yes? Then you know what bishops like.";
+		mes "Snakeberries! Sweet, juicy, crunchy snakeberries. The bishops can't get enough of them.";
+		next;
+		mes "[Rgan]";
+		mes "They grow under the hardened soil on the <NAVI>[2nd floor of the Roots]<INFO>jor_root2,26,271,0,101,0</INFO></NAVI>. Look for the red-tinged spots.";
+		mes "Three will do. Hurry, hurry, before the bishops get hungry. Hungry bishops bite.";
+		callfunc "F_WSJ_Step", 210, "17697", "17698";
+		close;
+	}
+	if (wsj_ep20 == 210) {
+		mes "[Rgan]";
+		mes "Three snakeberries, attendant. From the <NAVI>[hardened soil]<INFO>jor_root2,26,271,0,101,0</INFO></NAVI> on the 2nd floor.";
+		close;
+	}
+	if (wsj_ep20 == 215) {
+		if (countitem(1001154) < 3) {
+			mes "[Rgan]";
+			mes "Where are the snakeberries? You had them, I smelled them!";
+			close;
+		}
+		delitem 1001154,3;
+		mes "[Rgan]";
+		mes "Oh, they're perfect. Look at that shine.";
+		mes "The bishops will be in a good mood for a whole tide. You have no idea what that means down here.";
+		next;
+		mes "[Rgan]";
+		mes "Here's a secret for your trouble: these roots are the Serpent God's own. They drink the land's mana and carry it to the deep.";
+		mes "Lately the bishops have been feeding them more than the land gives. A lot more.";
+		next;
+		mes "[Rgan]";
+		mes "If you want to know where it comes from, ask the old one by the <NAVI>[east pillars]<INFO>jor_sanct,185,128,0,101,0</INFO></NAVI>. He's been here longer than the roots.";
+		callfunc "F_WSJ_Step", 220, "17719", "17699";
+		close;
+	}
+	mes "[Rgan]";
+	mes "Busy, busy. The Sacred Roots never sleep.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 190 || wsj_ep20 == 200 || wsj_ep20 == 215" );
+	end;
+}
+
+jor_sanct,161,88,3	script	Rgan#wsj_s2	4_EP19_RGAN_SR2,{
+	if (!callfunc("F_WSJ_IsRgan", "Rgan")) end;
+	mes "[Rgan]";
+	mes "I was here first! Whatever he wants, I wanted it first!";
+	close;
+}
+
+jor_sanct,164,86,3	script	Rgan#wsj_s3	4_EP19_RGAN_SR1,{
+	if (!callfunc("F_WSJ_IsRgan", "Rgan")) end;
+	mes "[Rgan]";
+	mes "The line goes back to the maze door. Please don't push.";
+	close;
+}
+
+jor_sanct,185,128,3	script	Rgan#wsj_s4	4_EP19_RGAN_SR2,{
+	if (!callfunc("F_WSJ_IsRgan", "Rgan")) end;
+	if (wsj_ep20 == 220) {
+		mes "[Rgan]";
+		mes "Mm? A young one asking old questions. Sit.";
+		next;
+		mes "[Rgan]";
+		mes "The Sacred Roots are where the Serpent God touches the world. Every Rgan is born from his scales, and every Rgan returns to his roots.";
+		mes "For as long as I remember, the roots took only what the land could spare.";
+		next;
+		mes "[Rgan]";
+		mes "Then Bishop Rasgand came back from the surface with the human Bagot, and everything sped up.";
+		mes "Bigger cores. Stronger Rgans. Bishops who don't sleep.";
+		next;
+		select("Where does the extra mana come from?");
+		mes "[Rgan]";
+		mes "Ask the clerk at the <NAVI>[west wall]<INFO>jor_sanct,42,105,0,101,0</INFO></NAVI>. She counts every crate that comes in. Counting is all she lives for.";
+		callfunc "F_WSJ_Step", 230, "17699", "17700";
+		close;
+	}
+	mes "[Rgan]";
+	mes "Old roots, new hunger. I don't like it.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 220" );
+	end;
+}
+
+jor_sanct,42,105,5	script	Rgan#wsj_s5	4_EP19_RGAN_SR1,{
+	if (!callfunc("F_WSJ_IsRgan", "Rgan")) end;
+	if (wsj_ep20 == 230) {
+		mes "[Rgan]";
+		mes "Forty-one, forty-two... Don't touch the crates!";
+		next;
+		select("What's in the crates?");
+		mes "[Rgan]";
+		mes "Cores, of course. Full cores from the ^0000FFmagic absorption devices^000000.";
+		mes "The devices drink the mana of the canyons out there, and the cores come here, and the roots drink the cores.";
+		next;
+		mes "[Rgan]";
+		mes "And those, those are the ^0000FFIwin transformation devices^000000. Very clever. A lower Rgan wears one and looks just like one of those fluffy ice people.";
+		mes "That's how the cores get past their patrols.";
+		next;
+		mes "[Rgan]";
+		mes "Why do you want to know? Who are you counting for?";
+		next;
+		select("For His Holiness Nadyagand.");
+		mes "[Rgan]";
+		mes "Hmph. Bishops. Always want numbers, never want to count.";
+		mes "If you want to know more than numbers, you'll need friends here. Nobody tells secrets to a stranger, attendant or not.";
+		next;
+		mes "^4d4dffYou need the Rgans' trust. Many of them here are struggling with something: lend them a hand.^000000";
+		callfunc "F_WSJ_Step", 240, "17700", "17701,8839";
+		wsj_ep20b = 0;
+		wsj_ep20c = 0;
+		close;
+	}
+	mes "[Rgan]";
+	mes "Forty-three, forty-four...";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 230" );
+	end;
+}
+
+// The five Rgans who need help (step 240, wsj_ep20b bits):
+//  1 Gomiagand   2 Holsibigand   4 Pamoshugand/Doririrogand
+//  8 Nalsioramigand's job search   16 Eririgand
+//  32..512 the five intermediate Rgans placed, 1024 feathers given
+//  to Pamoshugand, 2048 Gamirabagand hushed.
+function	script	F_WSJ_Trust	{
+	if (wsj_ep20 == 240 && (wsj_ep20b & 31) == 31) {
+		next;
+		mes "^4d4dffWord travels fast in the Sacred Roots. Everyone seems to know the helpful attendant now.";
+		mes "Perhaps <NAVI>[Sarekgand]<INFO>jor_sanct,157,171,0,101,0</INFO></NAVI>, Rasgand's right hand, will talk to you at last.^000000";
+		callfunc "F_WSJ_Step", 250, "8839", "8840";
+	}
+	return;
+}
+
+jor_sanct,215,84,3	script	Gomiagand#wsj	4_EP19_RGAN_SR3,{
+	if (!callfunc("F_WSJ_IsRgan", "Gomiagand")) end;
+	if (wsj_ep20 == 240 && !(wsj_ep20b & 1)) {
+		if (isbegin_quest(8841) == 0)
+			setquest 8841;
+		if (!(wsj_ep20b & 2048)) {
+			mes "[Gomiagand]";
+			mes "Ah, a listener! Finally. Now, the way I see it, the problem with the Sacred Roots is-";
+			next;
+			mes "[Gamirabagand]";
+			mes "Boss, boss! The tide's turning! Boss, did you eat? Boss, look, a beetle!";
+			next;
+			mes "[Gomiagand]";
+			mes "...Every time. Every single time.";
+			mes "Make him stop, would you? Then I can tell you what I think.";
+			close;
+		}
+		mes "[Gomiagand]";
+		mes "Blessed silence! Now. The problem with the Sacred Roots is the bishops.";
+		mes "They used to argue for a whole tide before deciding anything. Now Rasgand decides, and everyone nods.";
+		next;
+		mes "[Gomiagand]";
+		mes "A Rgan who doesn't argue is a Rgan who's afraid. Think about it.";
+		mes "You're a good listener. I'll put in a word for you.";
+		completequest 8841;
+		wsj_ep20b |= 1;
+		callfunc "F_WSJ_Trust";
+		close;
+	}
+	mes "[Gomiagand]";
+	mes "Think about it! That's all I ask of anyone.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 240 && (wsj_ep20b & 1) == 0" );
+	end;
+}
+
+jor_sanct,218,86,3	script	Gamirabagand#wsj	4_EP19_RGAN_R2,{
+	if (!callfunc("F_WSJ_IsRgan", "Gamirabagand")) end;
+	if (wsj_ep20 == 240 && !(wsj_ep20b & 2048) && isbegin_quest(8841)) {
+		mes "[Gamirabagand]";
+		mes "Hi! Hi! Are you the boss's friend? Do you like beetles?";
+		next;
+		select("If you count every beetle in the Roots, the boss will be very proud.");
+		mes "[Gamirabagand]";
+		mes "EVERY beetle?! On it!";
+		mes "One... two... ooh, a big one... three...";
+		wsj_ep20b |= 2048;
+		close;
+	}
+	mes "[Gamirabagand]";
+	mes "...four hundred and six... four hundred and seven...";
+	close;
+}
+
+jor_sanct,190,128,3	script	Holsibigand#wsj	4_EP19_RGAN_SR2,{
+	if (!callfunc("F_WSJ_IsRgan", "Holsibigand")) end;
+	if (wsj_ep20 == 240 && !(wsj_ep20b & 2)) {
+		if (isbegin_quest(8842) == 0) {
+			mes "[Holsibigand]";
+			mes "WHAT. What do you want. Can't you see I'm furious?";
+			next;
+			mes "[Holsibigand]";
+			mes "My nest! My beautiful nest! Some idiot sat on it and now it's flat as a fish!";
+			mes "I need feathers to fix it. Copo head feathers, the soft ones. Thirty of them!";
+			next;
+			mes "[Holsibigand]";
+			mes "Copos live out in the Ancient Ice Canyon. Go! Why are you still here? Go!";
+			setquest 8842;
+			close;
+		}
+		if (countitem(1001246) < 30) {
+			mes "[Holsibigand]";
+			mes "Thirty " + getitemname(1001246) + "! THIRTY! Can you count?";
+			close;
+		}
+		delitem 1001246,30;
+		mes "[Holsibigand]";
+		mes "...Oh.";
+		mes "Oh, these are lovely. So soft.";
+		next;
+		mes "[Holsibigand]";
+		mes "I'm... still angry. But less. Thank you, I suppose. Don't tell anyone I said that.";
+		completequest 8842;
+		wsj_ep20b |= 2;
+		callfunc "F_WSJ_Trust";
+		close;
+	}
+	mes "[Holsibigand]";
+	mes "Hmph. My nest is fine now. Go away. Nicely.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 240 && (wsj_ep20b & 2) == 0" );
+	end;
+}
+
+jor_sanct,257,115,3	script	Pamoshugand#wsj	4_EP19_RGAN_SR2,{
+	if (!callfunc("F_WSJ_IsRgan", "Pamoshugand")) end;
+	if (wsj_ep20 == 240 && !(wsj_ep20b & 1024)) {
+		if (isbegin_quest(8843) == 0) {
+			mes "[Pamoshugand]";
+			mes "...";
+			mes "......";
+			next;
+			mes "^4d4dffPamoshugand points, without a word, at a picture scratched on the wall: a big grey feather, and the number twenty.^000000";
+			next;
+			mes "^4d4dffThen he points at you. Then at the door.^000000";
+			mes "^4d4dffGrey Icewinds in the Ancient Ice Canyon drop " + getitemname(1001244) + "s.^000000";
+			setquest 8843;
+			close;
+		}
+		if (countitem(1001244) < 20) {
+			mes "^4d4dffPamoshugand taps the picture of the grey feather. Twenty. He waits.^000000";
+			close;
+		}
+		delitem 1001244,20;
+		mes "^4d4dffPamoshugand takes the feathers and nods once, deeply.^000000";
+		mes "^4d4dffThen he points at the Rgan beside him, who has been staring at the wall this whole time.^000000";
+		wsj_ep20b |= 1024;
+		close;
+	}
+	mes "^4d4dffPamoshugand nods at you. From him, that's a speech.^000000";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 240 && (wsj_ep20b & 1024) == 0" );
+	end;
+}
+
+jor_sanct,258,117,3	script	Doririrogand#wsj	4_EP19_RGAN_R1,{
+	if (!callfunc("F_WSJ_IsRgan", "Doririrogand")) end;
+	if (wsj_ep20 == 240 && (wsj_ep20b & 1024) && !(wsj_ep20b & 4)) {
+		mes "[Doririrogand]";
+		mes "Did he give you a job? He gives everyone jobs. He never gives ME jobs.";
+		mes "I'm supposed to be his assistant. I assist by standing here.";
+		next;
+		select("He wanted the feathers for you. To make you a proper nest.");
+		mes "[Doririrogand]";
+		mes "......For me?";
+		mes "He never says anything. I thought he didn't like me.";
+		next;
+		mes "[Doririrogand]";
+		mes "I'll go and thank him. Silently. That's how he'd want it.";
+		completequest 8843;
+		wsj_ep20b |= 4;
+		callfunc "F_WSJ_Trust";
+		close;
+	}
+	mes "[Doririrogand]";
+	mes "Standing. Assisting.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 240 && (wsj_ep20b & 1024) && (wsj_ep20b & 4) == 0" );
+	end;
+}
+
+jor_sanct,101,138,3	script	Eririgand#wsj	4_EP19_RGAN_SR3,{
+	if (!callfunc("F_WSJ_IsRgan", "Eririgand")) end;
+	if (wsj_ep20 == 240 && !(wsj_ep20b & 16)) {
+		setquest 8854;
+		mes "[Eririgand]";
+		mes "Have you ever thought that you might be a lunch box?";
+		next;
+		select("...No?");
+		mes "[Eririgand]";
+		mes "I think I am. Probably.";
+		mes "The bishops send us out to the canyons with full bellies, and we come back with full cores, and the roots eat the cores.";
+		next;
+		mes "[Eririgand]";
+		mes "So we're just carrying lunch for the roots. Lunch boxes. With legs. Well, without legs.";
+		next;
+		mes "[Eririgand]";
+		mes "I've told this to everyone. Nobody wants to hear it. You listened all the way to the end!";
+		mes "You're the nicest attendant in the Sacred Roots.";
+		completequest 8854;
+		wsj_ep20b |= 16;
+		callfunc "F_WSJ_Trust";
+		close;
+	}
+	mes "[Eririgand]";
+	mes "Lunch box. Probably.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 240 && (wsj_ep20b & 16) == 0" );
+	end;
+}
+
+jor_sanct,271,156,3	script	Nalsioramigand#wsj	EP19_RGAN_D,{
+	if (!callfunc("F_WSJ_IsRgan", "Nalsioramigand")) end;
+	if (wsj_ep20 == 240 && !(wsj_ep20b & 8)) {
+		if (isbegin_quest(8846) == 0) {
+			mes "[Nalsioramigand]";
+			mes "Excuse me, are you in charge? Somebody has to be in charge.";
+			next;
+			mes "[Nalsioramigand]";
+			mes "We're intermediate Rgans. We followed the procession up to the Sacred Roots because... well, everyone was going.";
+			mes "And now there's nothing for us to do. Nobody gave us work. Five of us, standing around.";
+			next;
+			mes "[Nalsioramigand]";
+			mes "Could you give us jobs? Anything! There's a ^0000FFpuddle^000000 by the west wall that needs watching, the old ^0000FFtower^000000 needs sweeping, and down on the 2nd floor there's the ^0000FFrubbish dump^000000, the ^0000FFjunk heap^000000 and the ^0000FFstorehouse^000000.";
+			next;
+			mes "[Nalsioramigand]";
+			mes "Just tell each of us where to go. Start with me, if you like!";
+			setquest 8846;
+			close2;
+		}
+		callfunc "F_WSJ_Job", "Nalsioramigand", 32, 8847;
+		end;
+	}
+	mes "[Nalsioramigand]";
+	mes "We all have jobs now! I've never been so happy to watch a puddle.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 240 && (wsj_ep20b & 8) == 0" );
+	end;
+}
+
+jor_sanct,264,160,5	script	Numkasaigagand#wsj	EP19_RGAN_D,{
+	if (!callfunc("F_WSJ_IsRgan", "Numkasaigagand")) end;
+	callfunc "F_WSJ_Job", "Numkasaigagand", 64, 8848;
+	end;
+}
+jor_sanct,266,155,5	script	Onnaecheramelgand#wsj	EP19_RGAN_D,{
+	if (!callfunc("F_WSJ_IsRgan", "Onnaecheramelgand")) end;
+	callfunc "F_WSJ_Job", "Onnaecheramelgand", 128, 8849;
+	end;
+}
+jor_sanct,268,160,3	script	Jakreudagumigand#wsj	EP19_RGAN_D,{
+	if (!callfunc("F_WSJ_IsRgan", "Jakreudagumigand")) end;
+	callfunc "F_WSJ_Job", "Jakreudagumigand", 256, 8850;
+	end;
+}
+jor_sanct,267,163,3	script	Kljeinamogand#wsj	EP19_RGAN_D,{
+	if (!callfunc("F_WSJ_IsRgan", "Kljeinamogand")) end;
+	callfunc "F_WSJ_Job", "Kljeinamogand", 512, 8851;
+	end;
+}
+
+// Gives one intermediate Rgan a job.
+// callfunc "F_WSJ_Job", "<name>", <bit>, <quest>;
+function	script	F_WSJ_Job	{
+	.@name$ = getarg(0);
+	.@bit = getarg(1);
+	if (wsj_ep20 != 240 || isbegin_quest(8846) != 1) {
+		mes "[" + .@name$ + "]";
+		mes "Rgan rgan. Work is good.";
+		close;
+	}
+	if (wsj_ep20b & .@bit) {
+		mes "[" + .@name$ + "]";
+		mes "I know where I'm going! Thank you, thank you.";
+		close;
+	}
+	mes "[" + .@name$ + "]";
+	mes "A job? For me? Where should I go?";
+	next;
+	// Places already handed out are taken (bits 4096..65536 in wsj_ep20c).
+	setarray .@place$, "The puddle by the west wall", "The old tower", "The rubbish dump (2nd floor)", "The junk heap (2nd floor)", "The storehouse (2nd floor)";
+	for (.@i = 0; .@i < 5; .@i++) {
+		if (wsj_ep20c & (1 << .@i))
+			.@opt$[.@i] = .@place$[.@i] + " (taken)";
+		else
+			.@opt$[.@i] = .@place$[.@i];
+	}
+	.@s = select(implode(.@opt$, ":")) - 1;
+	if (wsj_ep20c & (1 << .@s)) {
+		mes "[" + .@name$ + "]";
+		mes "Somebody's already there. Two of us would just get in each other's way.";
+		close;
+	}
+	wsj_ep20c |= (1 << .@s);
+	wsj_ep20b |= .@bit;
+	setquest getarg(2);
+	completequest getarg(2);
+	mes "[" + .@name$ + "]";
+	mes "Yes! I'll guard it with my life!";
+	mes "Or at least until the next tide.";
+	if ((wsj_ep20b & 992) == 992) {
+		next;
+		mes "^4d4dffAll five intermediate Rgans have somewhere to be. They wriggle off happily.^000000";
+		completequest 8846;
+		wsj_ep20b |= 8;
+		callfunc "F_WSJ_Trust";
+	}
+	close;
+}
+
+jor_sanct,157,171,3	script	Sarekgand#wsj	4_EP19_RGAN_SR1,{
+	if (!callfunc("F_WSJ_IsRgan", "Sarekgand")) end;
+	if (wsj_ep20 == 250) {
+		mes "[Sarekgand]";
+		mes "So you're the attendant everyone keeps talking about.";
+		mes "Holsibigand smiled yesterday. I didn't know he could.";
+		next;
+		mes "[Sarekgand]";
+		mes "I am Sarekgand. I keep the Sacred Roots in order for Bishop Rasgand.";
+		mes "A Rgan who gets things done is rare. Rasgand likes rare things.";
+		next;
+		mes "[Sarekgand]";
+		mes "Listen closely. Tonight, at the turn of the tide, He returns to the Sacred Roots through the Serpent's Maze.";
+		mes "I'm to receive Him. I could use someone useful at my side.";
+		next;
+		mes "[Sarekgand]";
+		mes "Come quietly to the <NAVI>[door to the Serpent's Maze]<INFO>jor_sanct,22,283,0,101,0</INFO></NAVI>. Tell no one. Not even your bishop.";
+		callfunc "F_WSJ_Step", 260, "8840,17701", "17702";
+		close;
+	}
+	mes "[Sarekgand]";
+	if (wsj_ep20 < 250)
+		mes "I don't know you. Move along.";
+	else
+		mes "Order in the Roots. That's all I ask.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 250" );
+	end;
+}
+
+jor_sanct,22,283,5	script	Supervisor#wsj	4_EP19_RGAN_SR3,{
+	if (!callfunc("F_WSJ_IsRgan", "Supervisor")) end;
+	if (wsj_ep20 == 260) {
+		mes "[Supervisor]";
+		mes "You're Sarekgand's new helper? He said you'd come.";
+		mes "He's not here yet. And He is coming tonight. Everything has to be perfect.";
+		next;
+		mes "[Supervisor]";
+		mes "There are ^FF0000parasites^000000 in the Serpent's Maze beyond this door. Guards gone wild, chewing on the walls.";
+		mes "Clean up ^FF0000three^000000 of them before He arrives, then come back here.";
+		callfunc "F_WSJ_Step", 270, "17702", "17703";
+		close;
+	}
+	if (wsj_ep20 == 270) {
+		if (checkquest(17703,HUNTING) != 2) {
+			mes "[Supervisor]";
+			mes "Three parasites in the Serpent's Maze. Just through this door.";
+			close;
+		}
+		mes "[Supervisor]";
+		mes "Good, good. Clean enough.";
+		next;
+		mes "[Supervisor]";
+		mes "Sarekgand? He went into the maze while you were cleaning. To meet Him at the end of it.";
+		mes "No, you can't follow. Those are His orders.";
+		next;
+		mes "[Supervisor]";
+		mes "...Though if you happened to walk the maze and happened to notice which way he went, that's not following. That's cleaning.";
+		next;
+		mes "^4d4dffSarekgand's tracks must still be fresh. Look for them in the <NAVI>[Serpent's Maze]<INFO>jor_maze,15,47,0,101,0</INFO></NAVI>.^000000";
+		callfunc "F_WSJ_Step", 280, "17703", "17704";
+		close;
+	}
+	if (wsj_ep20 >= 700) {
+		mes "[Supervisor]";
+		mes "The maze never stays clean. Never!";
+		close;
+	}
+	mes "[Supervisor]";
+	mes "The maze door is not for loitering.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 260" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 270 && checkquest(17703,HUNTING) == 2" );
+	end;
+}
+
+// ------------------------------------------------------------
+// The Serpent's Maze (jor_maze)
+// ------------------------------------------------------------
+jor_maze,15,47,3	script(CLOAKED)	Traces#wsj_m1	4_POINT_WHITE,{
+	if (wsj_ep20 != 280) end;
+	mes "^4d4dffA long, smooth trail through the frost, as if something heavy slid past.^000000";
+	mes "^4d4dffA scrap of black and gold cloth is caught on the ice. Sarekgand's sash.^000000";
+	next;
+	mes "^4d4dffThe trail goes north, then vanishes where the floor turns to bare rock.^000000";
+	mes "^4d4dffYou'll have to search the <NAVI>[northern part of the maze]<INFO>jor_maze,17,153,0,101,0</INFO></NAVI> more carefully.^000000";
+	callfunc "F_WSJ_Step", 290, "17704", "17705";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 280" );
+	end;
+}
+
+jor_maze,17,153,3	script(CLOAKED)	Traces#wsj_m2	4_POINT_WHITE,{
+	if (wsj_ep20 != 290) end;
+	mes "^4d4dffMore trails here, several of them, crossing and recrossing.^000000";
+	mes "^4d4dffSarekgand was not alone. Something much larger moved beside him, and the walls are scorched where it passed.^000000";
+	next;
+	mes "^4d4dffYou realize you've lost track of your companions somewhere in the twisting halls.^000000";
+	mes "^4d4dffYou're on your own. The freshest trail leads toward the <NAVI>[center of the maze]<INFO>jor_maze,140,71,0,101,0</INFO></NAVI>.^000000";
+	callfunc "F_WSJ_Step", 300, "17705", "17706";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 290" );
+	end;
+}
+
+jor_maze,140,72,0	script	Rippling Wall#wsj	GATE_SKYBLUE,{
+	if (wsj_ep20 == 300) {
+		mes "^4d4dffAt the heart of the maze, a wall of pale light ripples like water.^000000";
+		mes "^4d4dffBolted into the rock beside it is a familiar shape: a device, like the ones in the canyon, but much bigger.^000000";
+		next;
+		mes "^4d4dffThe workmanship is unmistakable. Only one person builds things like this.^000000";
+		mes "^4d4dffBagot.^000000";
+		callfunc "F_WSJ_Step", 310, "17706", "17707";
+		next;
+		select("Examine the device.");
+		mes "^4d4dffThe device is pumping mana into the rippling wall. Behind the light, you can just make out another place:";
+		mes "^4d4dffbranches, white and enormous, like the inside of a frozen tree.^000000";
+		next;
+		cloakoffnpcself "Rasgand#wsj_m3";
+		cloakoffnpcself "Sarekgand#wsj_m3";
+		specialeffect EF_DARKBREATH, AREA, "Rasgand#wsj_m3";
+		cutin "ep20_lasgand01.png",2;
+		mes "[???]";
+		mes "Admiring Bagot's toy? He'll be flattered.";
+		next;
+		mes "[Rasgand]";
+		mes "So this is the 'useful attendant' Sarekgand told me about.";
+		mes "The scroll is good. But you hold yourself like a human. You always will.";
+		next;
+		cutin "ep20_lasgand02.png",2;
+		mes "[Rasgand]";
+		mes "No matter. You're just in time to see it open.";
+		mes "Beyond this gate is the nest of the Serpent God's smallest branches, where his heart still beats. When I reach it, I won't need bishops or roots or devices any more.";
+		next;
+		select("You'll have to get past me first.");
+		cutin "ep20_lasgand03.png",2;
+		mes "[Rasgand]";
+		mes "Gladly.";
+		next;
+		cutin "ep20_nyar01.png",1;
+		specialeffect EF_HOLYHIT;
+		mes "^4d4dffA blinding white light floods the maze.^000000";
+		mes "^4d4dffSitting on top of the device, where nothing sat a moment ago, is a small white cat.^000000";
+		next;
+		mes "[White Cat]";
+		mes "Mrrrow.";
+		next;
+		cutin "ep20_lasgand04.png",2;
+		mes "[Rasgand]";
+		mes "You...! Not now, not when I'm this close!";
+		next;
+		cutin "ep20_nyar02.png",1;
+		mes "^4d4dffThe cat flicks its tail. The world folds in half.^000000";
+		mes "^4d4dffRasgand and Sarekgand are flung one way, you the other, and the maze spins away into white.^000000";
+		callfunc "F_WSJ_Step", 320, "17707", "17708";
+		close2;
+		cutin "",255;
+		warp "jor_back1",364,224;
+		end;
+	}
+	mes "^4d4dffA wall of pale light. Touch it and it ripples, cold and hard as ice.^000000";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 300" );
+	end;
+}
+
+jor_maze,143,69,3	script(CLOAKED)	Rasgand#wsj_m3	4_EP20_LASGAND,{
+	cutin "ep20_lasgand01.png",2;
+	mes "[Rasgand]";
+	mes "......";
+	close3;
+}
+
+jor_maze,137,70,5	script(CLOAKED)	Sarekgand#wsj_m3	4_EP19_RGAN_SR1,{
+	mes "[Sarekgand]";
+	mes "Bow, attendant. You stand before the Bishop.";
+	close;
+}
+
+jor_maze,16,100,0	script	#wsj_t_maze1	HIDDEN_WARP_NPC,30,60,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// Thrown onto the Frozen Scale Hill (jor_back1)
+// ------------------------------------------------------------
+jor_back1,365,226,3	script(CLOAKED)	Aurelie#wsj_b1	4_EP19_AURELIE,{
+	if (wsj_ep20 == 320) {
+		cutin "ep19_aurelie02.png",1;
+		mes "[Aurelie]";
+		mes "You're alive! We landed here a moment before you did. All of us, out of nowhere.";
+		next;
+		select("Rasgand. He was at the heart of the maze.");
+		mes "[Aurelie]";
+		mes "Rasgand himself...";
+		mes "And a white cat, you say? It threw him away too?";
+		next;
+		cutin "ep19_leon02.png",0;
+		mes "[Leon]";
+		mes "A cat that can toss a bishop across the island. I'd like to meet that cat.";
+		next;
+		cutin "ep19_lehar03.png",0;
+		mes "[Lehar]";
+		mes "I'd like to know whose side it's on!";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "We can't answer that standing in the snow.";
+		mes "Everyone back to the castle. We'll report to the others in the <NAVI>[Ice Castle]<INFO>icas_in,226,255,0,101,0</INFO></NAVI> and decide what to do about this gate.";
+		callfunc "F_WSJ_Step", 330, "17708", "17709";
+		close3;
+	}
+	cutin "ep19_aurelie01.png",1;
+	mes "[Aurelie]";
+	mes "Back to the castle. We'll talk there.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 320" );
+	end;
+}
+
+jor_back1,367,228,3	script(CLOAKED)	Leon#wsj_b1	4_EP19_LEON,{
+	cutin "ep19_leon01.png",0;
+	mes "[Leon]";
+	mes "My armour's full of snow. I blame the cat.";
+	close3;
+}
+jor_back1,362,227,5	script(CLOAKED)	Lehar#wsj_b1	4_EP19_LEHAR,{
+	cutin "ep19_lehar02.png",2;
+	mes "[Lehar]";
+	mes "One moment I was in the maze, the next I was face-down in a snowdrift!";
+	close3;
+}
+jor_back1,363,229,5	script(CLOAKED)	Lazy#wsj_b1	4_EP19_LAZY,{
+	cutin "ep19_leizi01.png",2;
+	mes "[Lazy]";
+	mes "I lost the bishop's crest in the fall. His Holiness will be so disappointed.";
+	close3;
+}
+jor_back1,368,225,3	script(CLOAKED)	Miriam#wsj_b1	4_EP18_MIRIAM,{
+	cutin "ep18_miriam_01.png",2;
+	mes "[Miriam]";
+	mes "Is anyone hurt? Hold still, let me look.";
+	close3;
+}
+
+jor_back1,365,226,0	script	#wsj_t_b1	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// The report (icas_in)
+// ------------------------------------------------------------
+icas_in,226,255,3	script(CLOAKED)	Aurelie#wsj_rep	4_EP19_AURELIE,{
+	if (wsj_ep20 == 330) {
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "Let's put it together.";
+		mes "The Rgans drain the land with Bagot's devices and feed the mana to the Sacred Roots.";
+		next;
+		mes "[Aurelie]";
+		mes "From the roots it flows to a gate in the heart of the Serpent's Maze. Behind the gate, Rasgand said, is the nest of the Serpent God's smallest branches.";
+		mes "Where his heart still beats.";
+		next;
+		cutin "ep19_leon01.png",0;
+		mes "[Leon]";
+		mes "Then Rasgand is trying to reach Jormungandr's heart. And a cat is stopping him.";
+		next;
+		cutin "ep19_lehar01.png",0;
+		mes "[Lehar]";
+		mes "When you say it like that it sounds ridiculous.";
+		next;
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "Ridiculous or not, we've learned more today than in a month.";
+		mes "Rest. You've earned it. I'll send for you when we know where that cat came from.";
+		callfunc "F_WSJ_Step", 340, "17709", "17712";
+		callfunc "F_WSJ_Chapter";
+		next;
+		cutin "",255;
+		mes "^4d4dffAs you leave, an Iwin soldier runs up, out of breath. Something about a prisoner causing trouble at the <NAVI>[castle's west wing]<INFO>icecastle,46,164,0,101,0</INFO></NAVI>.^000000";
+		close;
+	}
+	cutin "ep19_aurelie01.png",1;
+	mes "[Aurelie]";
+	mes "Rasgand, a gate, and a white cat. What a strange war this has become.";
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 330" );
+	end;
+}
+
+icas_in,228,257,3	script(CLOAKED)	Leon#wsj_rep	4_EP19_LEON,{
+	cutin "ep19_leon01.png",0;
+	mes "[Leon]";
+	mes "Next time we meet Rasgand, I'm not letting a cat finish the fight.";
+	close3;
+}
+icas_in,224,256,5	script(CLOAKED)	Lehar#wsj_rep	4_EP19_LEHAR,{
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "I'm writing it all down before I forget. 'Day forty: thrown by cat.'";
+	close3;
+}
+
+icas_in,226,255,0	script	#wsj_t_rep	HIDDEN_WARP_NPC,6,6,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
