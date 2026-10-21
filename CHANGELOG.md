@@ -24,3 +24,4 @@
 - Dailies (reset at 04:00): cleaning the Serpent's Maze, Nadyagand's snakeberries, Pamoshugand's feathers, Chichiring's Deep Roots Cave, Voglinde's two extermination operations and Kororo's cultists.
 - 119 of World Sync Extras' placeholder NPCs on these maps now have their part in the story.
 - Setting `skip_ep19`: start the episode without Episode 19.
+- Doors into the Ice Castle's west wing (Nadyagand, Voglinde), which the server only has as one of World Sync Extras' optional entrances; switched off when that setting is on.
