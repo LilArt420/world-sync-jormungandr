@@ -18,6 +18,7 @@
 // otherwise. Called on map load, from the scene triggers and after
 // every step change.
 function	script	F_WSJ_Scenes	{
+	callfunc "F_WSJ_Scenes21";
 	.@m$ = strcharinfo(3);
 	.@s = wsj_ep20;
 	if ((ep19_main < 100 && !$wsj_skip19) || BaseLevel < 200)

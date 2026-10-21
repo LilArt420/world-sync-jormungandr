@@ -256,3 +256,210 @@ Body:
     Targets:
       - Mob: EP20_JORGAN_WARLOCK
         Count: 15
+  - Id: 18334
+    Title: "A Rift Detected in the North"
+  - Id: 18335
+    Title: "The Rift on Scale Island"
+  - Id: 18336
+    Title: "First Meeting"
+  - Id: 18337
+    Title: "To Lunaforma"
+  - Id: 23240
+    Title: "The Georborg Resistance"
+  - Id: 23241
+    Title: "The Georborg Resistance"
+  - Id: 23242
+    Title: "The Georborg Resistance"
+  - Id: 23243
+    Title: "The Georborg Resistance"
+  - Id: 24000
+    Title: "Richard's Mercenaries"
+  - Id: 24001
+    Title: "Richard's Mercenaries"
+  - Id: 24002
+    Title: "Richard's Mercenaries"
+  - Id: 24003
+    Title: "Richard's Mercenaries"
+  - Id: 24004
+    Title: "Richard's Mercenaries"
+  - Id: 24005
+    Title: "Richard's Mercenaries"
+  - Id: 24006
+    Title: "Richard's Mercenaries"
+  - Id: 24007
+    Title: "Richard's Mercenaries"
+  - Id: 24008
+    Title: "Richard's Mercenaries"
+  - Id: 24009
+    Title: "Richard's Mercenaries"
+  - Id: 24010
+    Title: "Richard's Mercenaries"
+  - Id: 24011
+    Title: "Richard's Mercenaries"
+  - Id: 24012
+    Title: "Richard's Mercenaries"
+  - Id: 24013
+    Title: "Richard's Mercenaries"
+  - Id: 24014
+    Title: "Richard's Mercenaries"
+  - Id: 24015
+    Title: "Richard's Mercenaries"
+  - Id: 24016
+    Title: "Richard's Mercenaries"
+  - Id: 24017
+    Title: "Richard's Mercenaries"
+  - Id: 24018
+    Title: "Richard's Mercenaries"
+  - Id: 23244
+    Title: "Profit and Loss"
+  - Id: 23245
+    Title: "Profit and Loss"
+  - Id: 23246
+    Title: "Profit and Loss"
+  - Id: 23247
+    Title: "Profit and Loss"
+    Targets:
+      - Mob: EP21_SKIPSKIPPER
+        Count: 10
+    Drops:
+      - Mob: EP21_SKIPSKIPPER
+        Item: aegis_1001641
+        Count: 1
+        Rate: 1000
+  - Id: 23248
+    Title: "Profit and Loss"
+  - Id: 23249
+    Title: "The Black-Haired Beast"
+  - Id: 23250
+    Title: "The Black-Haired Beast"
+  - Id: 23251
+    Title: "The Black-Haired Beast"
+  - Id: 23252
+    Title: "The Black-Haired Beast"
+  - Id: 23253
+    Title: "The Black-Haired Beast"
+  - Id: 23254
+    Title: "The Black-Haired Beast"
+  - Id: 23255
+    Title: "The Black-Haired Beast"
+  - Id: 8882
+    Title: "Ivan Wigner's Pleasant Missionary Life"
+  - Id: 8883
+    Title: "Lehar's Rewarding Relief Work (1)"
+  - Id: 8884
+    Title: "Lehar's Rewarding Relief Work (2)"
+  - Id: 8885
+    Title: "He's robbing the whole house!"
+  - Id: 8886
+    Title: "Lehar's Rewarding Relief Work (3)"
+  - Id: 8887
+    Title: "People who saw the ghost ship (1)"
+  - Id: 8888
+    Title: "People who saw the ghost ship (2)"
+  - Id: 8889
+    Title: "Ivan's Scheme"
+  - Id: 8890
+    Title: "Ivan's Errand"
+  - Id: 8891
+    Title: "Ivan's Old Folly"
+  - Id: 8892
+    Title: "With the Unclaimed Weapon"
+  - Id: 8893
+    Title: "Infiltrating the Cult"
+  - Id: 8894
+    Title: "The recipient of the letter"
+  - Id: 17752
+    Title: "Infiltrating the Cult"
+  - Id: 17753
+    Title: "Infiltrating the Cult"
+  - Id: 17754
+    Title: "Infiltrating the Cult"
+  - Id: 17755
+    Title: "Infiltrating the Cult"
+  - Id: 17756
+    Title: "Infiltrating the Cult"
+  - Id: 17757
+    Title: "Infiltrating the Cult"
+  - Id: 17758
+    Title: "Recruiting for Success"
+  - Id: 17759
+    Title: "Recruiting for Success"
+  - Id: 17760
+    Title: "Recruiting for Success"
+  - Id: 17761
+    Title: "Second Infiltration"
+  - Id: 17762
+    Title: "Second Infiltration"
+  - Id: 17763
+    Title: "Second Infiltration"
+  - Id: 17764
+    Title: "Second Infiltration"
+  - Id: 17765
+    Title: "Second Infiltration"
+  - Id: 17766
+    Title: "Second Infiltration"
+  - Id: 17767
+    Title: "Second Infiltration"
+  - Id: 17768
+    Title: "Second Infiltration"
+  - Id: 17769
+    Title: "Report on the Ghost Ship"
+  - Id: 18338
+    Title: "Gathering Witnesses"
+  - Id: 18339
+    Title: "Witness 1"
+  - Id: 18340
+    Title: "Witness 2"
+  - Id: 18341
+    Title: "Witness 3"
+  - Id: 18342
+    Title: "All Accounts Gathered!"
+  - Id: 18343
+    Title: "Looking for Tan and Nadoyo"
+  - Id: 18344
+    Title: "A Suspicious Place in the Temple"
+  - Id: 18345
+    Title: "The Serpent's Lair?"
+  - Id: 18346
+    Title: "Left Out of the Last Battle"
+  - Id: 18347
+    Title: "I Can't Sit This Out!"
+  - Id: 18348
+    Title: "Joining the Last Battle"
+  - Id: 18349
+    Title: "Carried Off by a Cat"
+  - Id: 18350
+    Title: "Gimle's Suspicious Book"
+  - Id: 18351
+    Title: "The Shining Door"
+  - Id: 18352
+    Title: "A Real Mission at Last!"
+  - Id: 18353
+    Title: "The Source Is Cut Off"
+  - Id: 18354
+    Title: "Heine's Gift"
+  - Id: 18355
+    Title: "Back to Scale Island"
+  - Id: 18356
+    Title: "Time to Check the Consequences"
+  - Id: 18357
+    Title: "Time to Settle the Curse"
+  - Id: 18358
+    Title: "Rasgand?"
+  - Id: 18359
+    Title: "Butterfly Effect"
+  - Id: 18360
+    Title: "The Frozen Age of Heroes"
+  - Id: 18361
+    Title: "Nyar's Primeval Pouch"
+  - Id: 8914
+    Title: "An Unexpected Timeline"
+  - Id: 8915
+    Title: "Nazar's Eye"
+  - Id: 8916
+    Title: "Returning"
+  - Id: 12647
+    Title: "Memory Repetition"
+    TimeLimit: 4h
+  - Id: 12656
+    Title: "Final Battle"

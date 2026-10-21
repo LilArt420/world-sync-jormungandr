@@ -1,119 +1,21 @@
-14324	jor_twice,43,331	White Cat#ws14324	White Cat#wsj_portal
-14329	icas_in2,30,121	Nadyagand#ws14329	Nadyagand#wsj
-14330	icas_in2,31,116	Horuru#ws14330	Horuru#wsj_n
-14331	icas_in2,32,120	Lazy#ws14331	Lazy#wsj_n
-14332	icas_in2,37,118	Iwin Soldier#ws14332	Iwin Soldier#wsj_n1
-14333	icas_in2,34,117	Iwin Soldier#ws14333	Iwin Soldier#wsj_n1
-14334	icas_in2,29,114	Iwin Soldier#ws14334	Iwin Soldier#wsj_n3
-14335	icas_in2,27,118	Iwin Soldier#ws14335	Iwin Soldier#wsj_n4
-14336	icas_in2,37,115	Iwin Soldier#ws14336	Iwin Soldier#wsj_n1
-14396	jor_back5,350,75	Lehar#ws14396	Lehar#wsj_c1a
-14399	jor_back5,350,72	Lazy#ws14399	Lazy#wsj_c1a
-14400	jor_back5,348,78	Miriam#ws14400	Miriam#wsj_c1a
-14401	jor_back5,353,77	Horuru#ws14401	Horuru#wsj_c1a
-14420	jor_back5,353,357	Miriam#ws14420	Miriam#wsj_c1b
-14422	jor_back5,352,355	Lazy#ws14422	Lazy#wsj_c1b
-14423	jor_back5,355,354	Lehar#ws14423	Lehar#wsj_c1b
-14424	jor_back5,356,357	Magical Object#ws14424	Magical Object#wsj_c1b
-14425	jor_back5,353,353	Horuru#ws14425	Horuru#wsj_c1b
-14457	jor_root1,32,34	Rgan Shaman#ws14457	Rgan Shaman#wsj
-14464	jor_safty2,75,360	Bishop Rgan#ws14464	Bishop Rgan#wsj
-14467	jor_sanct,162,86	Rgan#ws14467	Rgan#wsj_s1
-14472	jor_sanct,161,88	Rgan#ws14472	Rgan#wsj_s1
-14474	jor_sanct,164,86	Rgan#ws14474	Rgan#wsj_s1
-14476	jor_sanct,185,128	Rgan#ws14476	Rgan#wsj_s4
-14481	jor_sanct,42,105	Rgan#ws14481	Rgan#wsj_s5
-14506	jor_maze,140,72	Rippling Wall#ws14506	Rippling Wall#wsj
-14508	jor_root2,43,63	Hardened Spot#ws14508	Hardened Spot#wsj01
-14509	jor_root2,90,50	Hardened Spot#ws14509	Hardened Spot#wsj08
-14510	jor_root2,235,258	Hardened Spot#ws14510	Hardened Spot#wsj20
-14511	jor_root2,77,191	Hardened Spot#ws14511	Hardened Spot#wsj06
-14512	jor_root2,118,104	Hardened Spot#ws14512	Hardened Spot#wsj10
-14513	jor_root2,143,79	Hardened Spot#ws14513	Hardened Spot#wsj12
-14514	jor_root2,234,95	Hardened Spot#ws14514	Hardened Spot#wsj19
-14515	jor_root2,114,149	Hardened Spot#ws14515	Hardened Spot#wsj09
-14516	jor_root2,53,167	Hardened Spot#ws14516	Hardened Spot#wsj04
-14517	jor_root2,211,225	Hardened Spot#ws14517	Hardened Spot#wsj17
-14518	jor_root2,217,115	Hardened Spot#ws14518	Hardened Spot#wsj18
-14519	jor_root2,171,114	Hardened Spot#ws14519	Hardened Spot#wsj15
-14520	jor_root2,76,92	Hardened Spot#ws14520	Hardened Spot#wsj05
-14521	jor_root2,45,257	Hardened Spot#ws14521	Hardened Spot#wsj02
-14522	jor_root2,83,234	Hardened Spot#ws14522	Hardened Spot#wsj07
-14523	jor_root2,147,189	Hardened Spot#ws14523	Hardened Spot#wsj13
-14524	jor_root2,122,204	Hardened Spot#ws14524	Hardened Spot#wsj11
-14525	jor_root2,48,111	Hardened Spot#ws14525	Hardened Spot#wsj03
-14526	jor_root2,211,196	Hardened Spot#ws14526	Hardened Spot#wsj16
-14527	jor_root2,170,178	Hardened Spot#ws14527	Hardened Spot#wsj14
-14629	jor_twice,235,111	Kororo#ws14629	Kororo#wsj
-14633	jor_twice,247,163	Miriam#ws14633	Miriam#wsj_tw1
-14634	jor_twice,222,226	Lazy#ws14634	Lazy#wsj_tw1
-14635	jor_twice,232,249	Lehar#ws14635	Lehar#wsj_tw1
-14638	jor_twice,158,243	Leon#ws14638	Leon#wsj_tw2
-14647	jor_twice,161,243	Aurelie#ws14647	Aurelie#wsj_tw2
-14649	jor_twice,164,244	Lehar#ws14649	Lehar#wsj_tw3
-14650	jor_twice,159,247	Maram#ws14650	Maram#wsj_tw2
-14651	jor_twice,163,248	Miriam#ws14651	Miriam#wsj_tw2
-14652	jor_twice,169,249	Lazy#ws14652	Lazy#wsj_tw2
-14653	jor_twice,162,246	White Cat#ws14653	White Cat#wsj_tw2
-14654	jor_maze,137,69	Leon#ws14654	Leon#wsj_mz
-14655	jor_maze,142,70	Lehar#ws14655	Lehar#wsj_mz
-14656	jor_maze,145,53	Aurelie#ws14656	Aurelie#wsj_mz
-14657	jor_maze,150,36	Maram#ws14657	Maram#wsj_mz
-14658	jor_maze,150,33	Miriam#ws14658	Miriam#wsj_mz
-14659	jor_maze,145,41	Lazy#ws14659	Lazy#wsj_mz
-14660	jor_maze,52,238	Hoton Lokengand#ws14660	Hoton Lokengand#wsj
-14662	jor_maze,55,238	Sohem Garyugand#ws14662	Sohem Garyugand#wsj
-14664	jor_maze,154,244	Misu Gozengand#ws14664	Misu Gozengand#wsj
-14666	jor_maze,157,241	Naaryugand#ws14666	Naaryugand#wsj
-14668	jor_maze,281,191	Kengundrgand#ws14668	Kengundrgand#wsj
-14670	jor_maze,283,188	Hanaungand#ws14670	Hanaungand#wsj
-14672	jor_maze,197,34	Miriam#ws14672	Miriam#wsj_mz2
-14701	jor_root1,32,75	Mark#ws14701	Mark#wsj_k0
-14706	jor_root1,69,128	Mark#ws14706	Mark#wsj_k1
-14707	jor_root1,25,145	Mark#ws14707	Mark#wsj_k5
-14708	jor_root1,35,211	Mark#ws14708	Mark#wsj_k2
-14709	jor_root1,17,194	Mark#ws14709	Mark#wsj_k4
-14710	jor_root1,254,66	Mark#ws14710	Mark#wsj_k3
-14711	jor_root1,278,74	Mark#ws14711	Mark#wsj_k6
-14735	jor_twig,187,198	White Cat#ws14735	White Cat#wsj_tg2
-14736	jor_twig,180,123	White Cat#ws14736	White Cat#wsj_tg3
-14737	jor_twig,179,120	Lehar#ws14737	Lehar#wsj_tg3
-14738	jor_twig,184,121	Miriam#ws14738	Miriam#wsj_tg3
-14739	jor_twig,178,126	Bagot#ws14739	Bagot#wsj_tg3
-14740	jor_twig,176,129	Voglinde#ws14740	Voglinde#wsj_tg3
-14741	jor_twig,142,153	White Cat#ws14741	White Cat#wsj_tg4
-14742	jor_twig,138,157	Leon#ws14742	Leon#wsj_tg4
-14743	jor_twig,138,152	Aurelie#ws14743	Aurelie#wsj_tg4
-14745	jor_twig,140,155	Rasgand#ws14745	Rasgand#wsj_tg4
-14746	jor_twig,140,164	Nyar's Clone#ws14746	Nyar's Clone#wsj5
-14747	jor_twig,143,161	Nyar's Clone#ws14747	Nyar's Clone#wsj7
-14748	jor_twig,146,158	Nyar's Clone#ws14748	Nyar's Clone#wsj9
-14749	jor_twig,149,155	Nyar's Clone#ws14749	Nyar's Clone#wsj10
-14750	jor_twig,146,152	Nyar's Clone#ws14750	Nyar's Clone#wsj8
-14751	jor_twig,143,149	Nyar's Clone#ws14751	Nyar's Clone#wsj6
-14752	jor_twig,140,146	Nyar's Clone#ws14752	Nyar's Clone#wsj4
-14753	jor_twig,137,149	Nyar's Clone#ws14753	Nyar's Clone#wsj2
-14754	jor_twig,134,152	Nyar's Clone#ws14754	Nyar's Clone#wsj2
-14755	jor_twig,130,155	Nyar's Clone#ws14755	Nyar's Clone#wsj1
-14756	jor_twig,134,158	Nyar's Clone#ws14756	Nyar's Clone#wsj3
-14757	jor_twig,137,161	Nyar's Clone#ws14757	Nyar's Clone#wsj3
-14760	icas_in2,247,122	Captured Bagot#ws14760	Captured Bagot#wsj_end
-14761	icas_in2,253,118	Voglinde#ws14761	Voglinde#wsj_end
-14762	icas_in2,246,119	Maram#ws14762	Maram#wsj_end
-14763	icas_in2,251,121	Miriam#ws14763	Miriam#wsj_end
-14764	icas_in2,252,113	Lazy#ws14764	Lazy#wsj_end
-14765	icas_in2,245,115	Leon#ws14765	Leon#wsj_end
-14766	icas_in2,246,112	Aurelie#ws14766	Aurelie#wsj_end
-18376	jor_sanct,157,171	Sarekgand#ws18376	Sarekgand#wsj
-18378	jor_sanct,22,283	Supervisor#ws18378	Supervisor#wsj
-18658	jor_sanct,258,117	Doririrogand#ws18658	Doririrogand#wsj
-18661	jor_sanct,257,115	Pamoshugand#ws18661	Pamoshugand#wsj
-18664	jor_sanct,215,84	Gomiagand#ws18664	Gomiagand#wsj
-18666	jor_sanct,218,86	Gamirabagand#ws18666	Gamirabagand#wsj
-18668	jor_sanct,190,128	Holsibigand#ws18668	Holsibigand#wsj
-18671	jor_sanct,101,138	Eririgand#ws18671	Eririgand#wsj
-18684	jor_sanct,271,156	Nalsioramigand#ws18684	Nalsioramigand#wsj
-18686	jor_sanct,264,160	Numkasaigagand#ws18686	Numkasaigagand#wsj
-18688	jor_sanct,266,155	Onnaecheramelgand#ws18688	Onnaecheramelgand#wsj
-18690	jor_sanct,268,160	Jakreudagumigand#ws18690	Jakreudagumigand#wsj
-18692	jor_sanct,267,163	Kljeinamogand#ws18692	Kljeinamogand#wsj
+18985	mbase_in,299,126	Stack of Documents#ws18985	Stack of Documents#wsj
+18986	mbase_in,302,123	Valdaris#ws18986	Valdaris#wsj
+19079	jor_crk,105,108	Nyar#ws19079	Nyar#wsj_crk2
+19085	jor_crk_p,105,108	Nyar#ws19085	Nyar#wsj_p
+19097	jor_mbase,189,249	Exhausted Soldier#ws19097	Exhausted Soldier#wsj
+19098	jor_mbase,218,298	Escaped Cultist#ws19098	Escaped Cultist#wsj
+19099	jor_mbase,60,196	Wounded Soldier#ws19099	Wounded Soldier#wsj
+19106	jor_raise1,128,326	Ornamental Door#ws19106	Ornamental Door#wsj
+19136	jor_twig,122,164	Nyar's Double#ws19136	Nyar's Double#wsj
+19153	jor_mbase,53,150	Freya Believer#ws19153	Freya Believer#wsj1
+19154	jor_mbase,52,148	Freya Believer#ws19154	Freya Believer#wsj1
+19155	jor_mbase,51,152	Freya Believer#ws19155	Freya Believer#wsj1
+19156	jor_mbase,51,150	Freya Believer#ws19156	Freya Believer#wsj1
+19157	jor_mbase,53,153	Freya Believer#ws19157	Freya Believer#wsj1
+19177	jor_albe,192,209	Nilem#ws19177	Nillem#wsj_albe
+19233	jor_mbase,214,316	Lehar#ws19233	Lehar#wsj_lf
+19282	jor_mbase,185,311	Lyric#ws19282	Lyric#wsj
+19290	jalbe_in,56,138	Lalaira Wigner#ws19290	Lalaira Wigner#wsj
+19354	jor_mbase,233,277	Ivan#ws19354	Ivan#wsj_lf2
+19355	jor_mbase,332,148	Ivan#ws19355	Ivan#wsj_end
+19359	jalbe_in,71,174	Lalaira Wigner#ws19359	Lalaira Wigner#wsj_off

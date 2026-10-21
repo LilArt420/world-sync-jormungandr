@@ -1,0 +1,24 @@
+-- World Sync: Jormungandr: sprite names for the Episode 21 characters and
+-- monsters the iRO client's own table doesn't name (kRO-only ones). The
+-- sprites themselves come from the kRO fallback GRF.
+JobNameTable = {
+	[10572] = "4_ep21_tan",
+	[10573] = "4_ep21_tris",
+	[10574] = "4_ep21_nadoyo",
+	[10575] = "4_ep21_reinhardt",
+	[10576] = "4_ep21_wilhelm",
+	[10577] = "4_ep21_maristella",
+	[10578] = "4_ep21_yohan",
+	[10579] = "4_ep21_richard",
+	[10581] = "4_ep21_gunter",
+	[10582] = "4_ep21_galaxia_a",
+	[10583] = "4_ep21_galaxia_b",
+	[10586] = "4_ep21_ilse",
+	[10587] = "4_ep21_howell",
+	[10588] = "4_ep21_epesto",
+	[10590] = "4_ep21_iana",
+	[10592] = "4_ep21_aurelie",
+	[10593] = "4_ep21_howell_s",
+	[10594] = "4_ep21_tan_s",
+	[22371] = "EP21_YOR_TAN",
+}

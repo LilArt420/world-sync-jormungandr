@@ -1,0 +1,813 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 21, chapter 3: the ghost ship and the cult's temple.
+//= Quests 8882-8894, 17752-17769. Steps 390-689.
+//============================================================
+
+// ------------------------------------------------------------
+// Ivan's shelter (390-479)
+// ------------------------------------------------------------
+jor_mbase,201,190,3	script(CLOAKED)	Ivan#wsj_out	10584,{
+	if (wsj_ep21 == 390) {
+		cutin "ep21_ivan02.png",2;
+		mes "[Ivan]";
+		mes "Soup! Hot soup for everyone! Free! Courtesy of the Wigner Company and its most handsome son!";
+		next;
+		mes "^4d4dffSo that was the noise. A line of refugees is shuffling toward a set of steaming cauldrons in the north of the base.^000000";
+		next;
+		mes "[Ivan]";
+		mes "Oh, it's you! Perfect timing. I wanted to talk, but look at this line. Lehar's on the cauldrons and he's drowning.";
+		mes "Help him at the <NAVI>[shelter]<INFO>jor_mbase,214,316,0,101,0</INFO></NAVI>, would you? We'll talk after.";
+		callfunc "F_WSJ_Step21", 400, "23255", "8882";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 390" );
+	end;
+}
+
+jor_mbase,201,192,0	script	#wsj_t_out	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+jor_mbase,214,316,3	script(CLOAKED)	Lehar#wsj_lf	4_EP19_LEHAR,{
+	cutin "ep19_lehar01.png",2;
+	if (wsj_ep21 == 400) {
+		mes "[Lehar]";
+		mes "You! Grab a ladle! No, the big one! Stir!";
+		next;
+		progressbar "ffffff", 3;
+		mes "^4d4dffYou stir. Lehar tips a sack of grain into the next cauldron, tastes, adds salt, tastes again.^000000";
+		next;
+		mes "[Lehar]";
+		mes "Cauldron rice. My grandmother's way. Turns out I'm good at something that isn't hitting things!";
+		callfunc "F_WSJ_Step21", 410, "8882", "8883";
+		close3;
+	}
+	if (wsj_ep21 == 410) {
+		mes "[Lehar]";
+		mes "Next batch! Hand them out, two scoops each, three for the children.";
+		next;
+		progressbar "ffffff", 3;
+		mes "^4d4dffThe line moves. Bowls fill. Somebody's grandmother pats Lehar's cheek and he turns bright red.^000000";
+		next;
+		mes "[Lehar]";
+		mes "That's the last of them. Phew. Sit down, we've earned a bowl ourselves.";
+		callfunc "F_WSJ_Step21", 420, "8883", "8884";
+		close3;
+	}
+	if (wsj_ep21 == 420) {
+		mes "[Lehar]";
+		mes "Mm. Not bad, if I say so myself.";
+		next;
+		mes "[Lehar]";
+		mes "You know who paid for all this? Ivan. The cauldrons, the grain, the tents. The Wigner clerks say he's spent half the family fortune on Lunaforma.";
+		next;
+		mes "[Wigner Company Clerk]";
+		mes "HALF? More than half! He's robbing the whole house blind! His sister will skin him!";
+		next;
+		mes "[Lehar]";
+		mes "...And that's the clerk. He's been saying that all day.";
+		callfunc "F_WSJ_Step21", 430, "8884", "8885";
+		close3;
+	}
+	if (wsj_ep21 == 430) {
+		mes "[Lehar]";
+		mes "Ivan's done with his line too. Go eat with him, he's at the <NAVI>[shelter tables]<INFO>jor_mbase,189,282,0,101,0</INFO></NAVI>. I'll clean up.";
+		callfunc "F_WSJ_Step21", 440, "8885", "8886";
+		close3;
+	}
+	mes "[Lehar]";
+	mes "Cauldron rice, served hot.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 >= 400 && wsj_ep21 <= 430" );
+	end;
+}
+
+jor_mbase,189,282,3	script(CLOAKED)	Ivan#wsj_lf1	10584,{
+	if (wsj_ep21 == 440) {
+		cutin "ep21_ivan01.png",2;
+		mes "[Ivan]";
+		mes "Ahh, sit, sit. Lehar's rice is criminally good.";
+		next;
+		mes "[Ivan]";
+		mes "I know what the clerks say. Let them. Money is for moving, not for sleeping in a vault.";
+		mes "But there's something I need that money can't buy. A ship. A very particular ship.";
+		next;
+		select("A ship?");
+		cutin "ep21_ivan03.png",2;
+		mes "[Ivan]";
+		mes "The ^0000FFghost ship^000000. People swear they've seen it in the fog off the Raised Land. Black sails, no crew, gone when you blink.";
+		mes "Talk to Lyric over there. He saw it with his own eyes.";
+		callfunc "F_WSJ_Step21", 450, "8886", "8887";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 440" );
+	end;
+}
+
+jor_mbase,185,311,3	script	Lyric#wsj	4_EP21_WORKER_KID_A,{
+	if (wsj_ep21 == 450) {
+		mes "[Lyric]";
+		mes "The ghost ship? I SAW it! I was fishing with my uncle, and the fog came, and there it was, right next to us!";
+		next;
+		mes "[Lyric]";
+		mes "It was HUGE. And black. And it didn't make a sound. Not one!";
+		callfunc "F_WSJ_Step21", 460, "8887", "8888";
+		close;
+	}
+	if (wsj_ep21 == 460) {
+		mes "[Lyric]";
+		mes "What else? Um... there was a flag. A blue one, with a wave on it. Like the Walter ships. But all torn up.";
+		next;
+		mes "[Lyric]";
+		mes "My uncle says I dreamed it. I didn't! Ivan believes me!";
+		next;
+		mes "^4d4dffNot much to go on. But the ship is real, and its flag was the Walter fleet's.^000000";
+		mes "^4d4dffBack to <NAVI>[Ivan]<INFO>jor_mbase,233,277,0,101,0</INFO></NAVI>.^000000";
+		callfunc "F_WSJ_Step21", 470, "8888", "8889";
+		close;
+	}
+	mes "[Lyric]";
+	mes "When I grow up I'm going to have a ship. A real one. Not a ghost one.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 450 || wsj_ep21 == 460" );
+	end;
+}
+
+jor_mbase,233,277,3	script(CLOAKED)	Ivan#wsj_lf2	10584,{
+	if (wsj_ep21 == 470) {
+		cutin "ep21_ivan03.png",2;
+		mes "[Ivan]";
+		mes "A Walter flag. I knew it.";
+		next;
+		mes "[Ivan]";
+		mes "Years ago, the Walter fleet lost a ship to the cult. Every soul aboard. And with them, a sword that belonged to someone I... owe a great deal.";
+		mes "If that ship sails again, someone is sailing it. And I want to know who.";
+		next;
+		cutin "ep21_ivan02.png",2;
+		mes "[Ivan]";
+		mes "First, an errand. My sister Lalaira runs the Wigner Company's house in ^0000FFAlberta^000000. She's kept something of mine. Fetch it for me?";
+		mes "The Walter sailors at the <NAVI>[east pier]<INFO>jor_mbase,343,148,0,101,0</INFO></NAVI> go to Alberta. Lalaira is at the <NAVI>[Wigner house]<INFO>jalbe_in,56,138,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 480, "8889", "8890";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 470" );
+	end;
+}
+
+jor_mbase,213,316,0	script	#wsj_t_shelter	HIDDEN_WARP_NPC,30,40,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// Alberta of old (480-509)
+// ------------------------------------------------------------
+jalbe_in,56,138,5	script	Lalaira Wigner#wsj	10585,{
+	if (wsj_ep21 == 480) {
+		cutin "ep21_lalaila01.png",2;
+		mes "[Lalaira Wigner]";
+		mes "Ivan sent you. Of course he did. He never comes himself, it might involve an apology.";
+		next;
+		mes "[Lalaira Wigner]";
+		mes "He wants the sword, doesn't he? The one from the Walter ship.";
+		mes "It's in the old chest, <NAVI>[upstairs]<INFO>jalbe_in,73,187,0,101,0</INFO></NAVI>. Take it. It's been waiting long enough.";
+		callfunc "F_WSJ_Step21", 490, "8890", "8891";
+		close3;
+	}
+	if (wsj_ep21 == 890) {
+		cutin "ep21_lalaila03.png",2;
+		mes "[Lalaira Wigner]";
+		mes "A letter? For me? From... Ivan.";
+		next;
+		mes "^4d4dffLalaira turns the letter over and over. The seal is old, the ink older.^000000";
+		next;
+		mes "[Lalaira Wigner]";
+		mes "Not here. Come up to my <NAVI>[office]<INFO>jalbe_in,71,174,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 900, "8914", "8915";
+		close3;
+	}
+	if (wsj_ep21 == 500) {
+		cutin "ep21_lalaila02.png",2;
+		mes "[Lalaira Wigner]";
+		mes "Did you find it? Good. Then one more favour.";
+		mes "Take this letter to ^0000FFCaptain Walter^000000. Maristella. She's at the <NAVI>[harbour office]<INFO>jalbe_in,68,46,0,101,0</INFO></NAVI>, downstairs.";
+		close3;
+	}
+	cutin "ep21_lalaila01.png",2;
+	mes "[Lalaira Wigner]";
+	mes "The Wigner Company feeds half the north. Somebody has to keep the books while my brother plays saint.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 480 || wsj_ep21 == 890" );
+	end;
+}
+
+jalbe_in,73,187,3	script(CLOAKED)	Old Chest#wsj	4_WOODBOX,{
+	if (wsj_ep21 == 490) {
+		mes "^4d4dffAn old sea chest, the Walter wave painted on its lid. Inside, wrapped in oilcloth: a sailor's sword, its edge still bright.^000000";
+		next;
+		mes "^4d4dffUnder it lies a sealed letter, addressed in a neat hand: 'Captain M. Walter'.^000000";
+		next;
+		cutin "ep21_lalaila02.png",2;
+		mes "[Lalaira Wigner]";
+		mes "(from the stairs) Take the letter too! Give it to Maristella, at the <NAVI>[harbour office]<INFO>jalbe_in,68,46,0,101,0</INFO></NAVI>!";
+		callfunc "F_WSJ_Step21", 500, "8891", "8894";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 490" );
+	end;
+}
+
+jalbe_in,68,46,5	script(CLOAKED)	Maristella#wsj	10577,{
+	if (wsj_ep21 == 500) {
+		cutin "ep21_maristella01.png",2;
+		mes "[Maristella]";
+		mes "A letter from Lalaira Wigner? She hasn't written to me in years.";
+		next;
+		mes "^4d4dffMaristella reads it twice, folds it carefully, and puts it inside her coat.^000000";
+		next;
+		cutin "ep21_maristella02.png",2;
+		mes "[Maristella]";
+		mes "So Ivan wants to hunt the ghost ship. That fool. That brave fool.";
+		mes "The ship he's after was ours. The 'Walter'. Lost with my brother aboard. If someone sails her now, it's the cult, wearing our colours.";
+		next;
+		mes "[Maristella]";
+		mes "Take the sword to Ivan. And tell him: if he finds my ship, he tells ^0000FFme^000000 first.";
+		callfunc "F_WSJ_Step21", 510, "8894", "8892";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 500" );
+	end;
+}
+
+jalbe_in,60,140,0	script	#wsj_t_jalbe	HIDDEN_WARP_NPC,20,60,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+jalbe_in,68,46,0	script	#wsj_t_jalbe2	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+jor_mbase,233,277,3	script(CLOAKED)	Ivan#wsj_lf3	10584,{
+	if (wsj_ep21 == 510) {
+		cutin "ep21_ivan03.png",2;
+		mes "[Ivan]";
+		mes "That's it. That's the sword.";
+		mes "...Maristella said that? Ha. She would.";
+		next;
+		cutin "ep21_ivan01.png",2;
+		mes "[Ivan]";
+		mes "The ghost ship comes and goes from the cult's coast. If we want to know who sails it, we have to look inside the cult itself.";
+		mes "In ^0000FFGimle^000000, their temple on the Raised Land.";
+		next;
+		mes "[Ivan]";
+		mes "Tris agreed to a scouting party. Lehar, you, me. Meet us in the <NAVI>[north of the Raised Land]<INFO>jor_raise1,323,71,0,101,0</INFO></NAVI>. The hidden ship at the north pier will take you.";
+		callfunc "F_WSJ_Step21", 520, "8892", "8893";
+		close3;
+	}
+	if (wsj_ep21 == 520) {
+		cutin "ep21_ivan01.png",2;
+		mes "[Ivan]";
+		mes "The <NAVI>[north of the Raised Land]<INFO>jor_raise1,323,71,0,101,0</INFO></NAVI>. The hidden ship at the north pier goes there.";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 510" );
+	end;
+}
+
+// ------------------------------------------------------------
+// First infiltration of Gimle (520-569)
+// ------------------------------------------------------------
+jor_raise1,321,70,5	script(CLOAKED)	Ivan#wsj_rs	10584,{
+	if (wsj_ep21 == 520) {
+		cutin "ep21_ivan01.png",2;
+		mes "[Ivan]";
+		mes "There it is. Gimle. The cult's temple.";
+		mes "Robes on, hoods up. We walk in like pilgrims. Nobody looks twice at pilgrims.";
+		next;
+		cutin "ep19_lehar02.png",0;
+		mes "[Lehar]";
+		mes "Last time I disguised myself, I was a snake.";
+		next;
+		cutin "ep21_ivan02.png",2;
+		mes "[Ivan]";
+		mes "This time you're a fanatic. Much easier: just look very sure of yourself.";
+		mes "Meet us inside, at the <NAVI>[temple entrance]<INFO>jor_tmple1,186,72,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 530, "8893", "17752";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 520" );
+	end;
+}
+jor_raise1,324,69,5	script(CLOAKED)	Lehar#wsj_rs	4_EP19_LEHAR,{
+	cutin "ep19_lehar02.png",2;
+	mes "[Lehar]";
+	mes "I look very sure of myself. Look at me. Very sure.";
+	close3;
+}
+
+jor_tmple1,186,74,3	script(CLOAKED)	Ivan#wsj_tp	10584,{
+	if (wsj_ep21 == 530) {
+		cutin "ep21_ivan01.png",2;
+		mes "[Ivan]";
+		mes "We split up. I'll take the front halls.";
+		mes "You: find out if anyone here wants out, look for anything about the ghost ship, and see if you can get to the 2nd floor.";
+		next;
+		mes "^4d4dffThree places to look: the <NAVI>[west halls]<INFO>jor_tmple1,110,190,0,101,0</INFO></NAVI>, the <NAVI>[archive]<INFO>jor_tmple1,186,228,0,101,0</INFO></NAVI> and the <NAVI>[stairs to the 2nd floor]<INFO>jor_tmple1,238,268,0,101,0</INFO></NAVI>.^000000";
+		callfunc "F_WSJ_Step21", 540, "17752", "17753,17754,17755";
+		wsj_ep21b = 0;
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 530" );
+	end;
+}
+jor_tmple1,184,73,5	script(CLOAKED)	Lehar#wsj_tp	4_EP19_LEHAR,{
+	cutin "ep19_lehar02.png",2;
+	mes "[Lehar]";
+	mes "Praise the serpent. Praise it very loudly. (Is this right?)";
+	close3;
+}
+
+// The three searches. None of them gives anything useful.
+function	script	F_WSJ_Search	{
+	.@n = getarg(0);
+	if (wsj_ep21 != 540 || (wsj_ep21b & (1 << .@n)))
+		end;
+	if (.@n == 0) {
+		mes "[Believer]";
+		mes "Escape? Who would want to escape? The Serpent loves us. The Serpent feeds us.";
+		mes "...Please stop looking at me like that. Someone might be listening.";
+	} else if (.@n == 1) {
+		mes "[Cult Archivist]";
+		mes "Ships? This is a temple, pilgrim, not a harbour. We keep the scriptures here.";
+		mes "Now shoo. Your sandals are scuffing the floor.";
+	} else {
+		mes "[Stairway Guard]";
+		mes "The upper floor is for the anointed. Where's your seal?";
+		next;
+		mes "[Stairway Guard]";
+		mes "No seal, no stairs. Move along.";
+	}
+	setarray .@q, 17753, 17754, 17755;
+	completequest .@q[.@n];
+	wsj_ep21b |= (1 << .@n);
+	if ((wsj_ep21b & 7) == 7) {
+		next;
+		mes "^4d4dffNothing. Time to meet the others at the <NAVI>[entrance]<INFO>jor_tmple1,188,72,0,101,0</INFO></NAVI>.^000000";
+		callfunc "F_WSJ_Step21", 550, "", "17756";
+	}
+	close;
+}
+
+jor_tmple1,110,190,3	script(CLOAKED)	Believer#wsj_s1	4_EP21_M_WORKER_A,{
+	callfunc "F_WSJ_Search", 0;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 540 && (wsj_ep21b & 1) == 0" );
+	end;
+}
+jor_tmple1,186,228,3	script(CLOAKED)	Cult Archivist#wsj_s2	4_EP21_F_WORKER_A,{
+	callfunc "F_WSJ_Search", 1;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 540 && (wsj_ep21b & 2) == 0" );
+	end;
+}
+jor_tmple1,238,266,3	script(CLOAKED)	Stairway Guard#wsj_s3	4_EP21_M_WORKER_B,{
+	callfunc "F_WSJ_Search", 2;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 540 && (wsj_ep21b & 4) == 0" );
+	end;
+}
+
+jor_tmple1,190,74,3	script(CLOAKED)	Ivan#wsj_tp2	10584,{
+	if (wsj_ep21 == 550) {
+		cutin "ep21_ivan03.png",2;
+		mes "[Ivan]";
+		mes "Nothing here either. Tight-lipped lot. And the second floor needs a seal we don't have.";
+		next;
+		cutin "ep19_lehar03.png",0;
+		mes "[Lehar]";
+		mes "Someone asked me to recite the Fourth Coil. I don't know what the Fourth Coil is!";
+		next;
+		cutin "ep21_ivan02.png",2;
+		mes "[Ivan]";
+		mes "Then we leave before they ask for the Fifth. Back to <NAVI>[Lunaforma]<INFO>jor_mbase,143,272,0,101,0</INFO></NAVI>. We need someone who knows this place from the inside.";
+		callfunc "F_WSJ_Step21", 560, "17756", "17757";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 550" );
+	end;
+}
+jor_tmple1,192,72,3	script(CLOAKED)	Lehar#wsj_tp2	4_EP19_LEHAR,{
+	cutin "ep19_lehar03.png",2;
+	mes "[Lehar]";
+	mes "The Fourth Coil! What IS it?!";
+	close3;
+}
+
+jor_tmple1,186,74,0	script	#wsj_t_tp	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+jor_tmple1,170,200,0	script	#wsj_t_tp2	HIDDEN_WARP_NPC,80,80,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+jor_mbase,143,272,3	script(CLOAKED)	Tris#wsj_r	4_EP21_TRIS,{
+	if (wsj_ep21 == 560) {
+		cutin "ep21_tris01.png",2;
+		mes "[Tris]";
+		mes "No luck, I heard. Gimle doesn't let outsiders past the front halls.";
+		next;
+		mes "[Tris]";
+		mes "But we do have someone. ^0000FFNadoyo^000000, one of our scouts. Grew up inside the cult, knows every corridor.";
+		mes "Nadoyo is waiting at the old meeting place on <NAVI>[Scale Island]<INFO>jor_crk_p,71,85,0,101,0</INFO></NAVI>. The small boat at the south dock goes there.";
+		callfunc "F_WSJ_Step21", 570, "17757", "17758";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 560" );
+	end;
+}
+
+// ------------------------------------------------------------
+// Recruiting for success (570-599)
+// ------------------------------------------------------------
+jor_crk_p,71,85,3	script(CLOAKED)	Nadoyo#wsj_p	10574,{
+	if (wsj_ep21 == 570) {
+		cutin "ep21_nadoyo01.png",2;
+		mes "[Nadoyo]";
+		mes "You're the ones Tris sent? You look like terrible cultists. No offence.";
+		next;
+		mes "[Nadoyo]";
+		mes "The second floor of Gimle needs a seal. I can get you in on the register as new acolytes, but the guards check every face.";
+		mes "We need someone inside who outranks the guards. A priest.";
+		next;
+		cutin "ep21_ivan02.png",0;
+		mes "[Ivan]";
+		mes "Ah! Then let me make a proposal...";
+		callfunc "F_WSJ_Step21", 580, "17758", "17759";
+		close3;
+	}
+	cutin "ep21_nadoyo01.png",2;
+	mes "[Nadoyo]";
+	mes "I know every crack in Gimle. I hid in most of them.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 570" );
+	end;
+}
+
+jor_crk_p,69,87,5	script(CLOAKED)	Ivan#wsj_p2	10584,{
+	if (wsj_ep21 == 580) {
+		cutin "ep21_ivan01.png",2;
+		mes "[Ivan]";
+		mes "There's a man at the Lunaforma canteen. Wilhelm. Peels potatoes, says nothing, hits harder than Galaxia.";
+		mes "His brother is ^0000FFReinhardt^000000. Reinhardt was a priest of the cult once, before he turned on them. They locked him up for it.";
+		next;
+		mes "[Ivan]";
+		mes "Wilhelm knows things about the cult's priests. If he helps us, we'll know who to free and how.";
+		mes "Go talk to him. He's at the <NAVI>[canteen]<INFO>jor_mbase,166,302,0,101,0</INFO></NAVI>. Bring your best manners; he has none.";
+		callfunc "F_WSJ_Step21", 590, "17759", "17760";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 580" );
+	end;
+}
+
+jor_crk_p,70,86,0	script	#wsj_t_crkp2	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+jor_mbase,166,302,3	script(CLOAKED)	Wilhelm#wsj_c	10576,{
+	if (wsj_ep21 == 590) {
+		cutin "ep21_wilhelm01.png",2;
+		mes "[Wilhelm]";
+		mes "......";
+		next;
+		select("Ivan sent me. It's about your brother.");
+		cutin "ep21_wilhelm02.png",2;
+		mes "[Wilhelm]";
+		mes "...Reinhardt.";
+		mes "They keep him in Gimle. Under the second floor. As a lesson for anyone else who doubts.";
+		next;
+		mes "[Wilhelm]";
+		mes "But it isn't Reinhardt you need. It's ^0000FFKarmilgand^000000, a high priest. He tried to stop the bishops' new rituals, so they caged him too. Right beside my brother.";
+		mes "Free Karmilgand, and he'll walk you past any guard. Free my brother while you're at it.";
+		next;
+		cutin "ep21_wilhelm03.png",2;
+		mes "[Wilhelm]";
+		mes "Nadoyo knows the way in. Go. I'll keep the soup warm.";
+		callfunc "F_WSJ_Step21", 600, "17760", "17761";
+		close3;
+	}
+	cutin "ep21_wilhelm01.png",2;
+	mes "[Wilhelm]";
+	mes "......Potatoes.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 590" );
+	end;
+}
+
+jor_mbase,166,300,0	script	#wsj_t_canteen	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+// ------------------------------------------------------------
+// Second infiltration (600-689)
+// ------------------------------------------------------------
+jor_raise1,323,71,5	script(CLOAKED)	Nadoyo#wsj_rs	10574,{
+	if (wsj_ep21 == 600) {
+		cutin "ep21_nadoyo02.png",2;
+		mes "[Nadoyo]";
+		mes "Ready? Listen carefully, because I'll only say it once.";
+		mes "Inside, I'm your guide. You're a new acolyte. You don't speak unless spoken to. You bow to anything in a red robe.";
+		next;
+		mes "[Nadoyo]";
+		mes "Meet me at the <NAVI>[foot of the stairs]<INFO>jor_tmple1,238,268,0,101,0</INFO></NAVI>. I'll do the talking.";
+		callfunc "F_WSJ_Step21", 610, "17761", "17762";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 600" );
+	end;
+}
+
+jor_tmple1,236,268,3	script(CLOAKED)	Nadoyo#wsj_tp	10574,{
+	cutin "ep21_nadoyo01.png",2;
+	if (wsj_ep21 == 610) {
+		mes "[Nadoyo]";
+		mes "(quietly) Good, you came. Now bow.";
+		next;
+		mes "[Nadoyo]";
+		mes "(loudly) Brother guard! A new acolyte for the register. Sent from the southern villages.";
+		next;
+		mes "[Temple Guard]";
+		mes "Another one? Wait here. I have to find the book.";
+		callfunc "F_WSJ_Step21", 620, "17762", "17763";
+		close3;
+	}
+	if (wsj_ep21 == 620) {
+		mes "[Nadoyo]";
+		mes "(whispering) He's slow. Let him take his time.";
+		close3;
+	}
+	if (wsj_ep21 == 630) {
+		mes "[Nadoyo]";
+		mes "(whispering) Karmilgand's cell is on this floor, behind the <NAVI>[east shrine]<INFO>jor_tmple1,254,283,0,101,0</INFO></NAVI>. Go, I'll keep the guard talking.";
+		close3;
+	}
+	mes "[Nadoyo]";
+	mes "(whispering) Don't stare at the statues. They stare back.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 610" );
+	end;
+}
+
+jor_tmple1,240,266,3	script(CLOAKED)	Temple Guard#wsj_tp	4_EP21_M_WORKER_B,{
+	if (wsj_ep21 == 620) {
+		mes "[Temple Guard]";
+		mes "Here it is. New acolyte... name? Doesn't matter, I'll write 'acolyte'.";
+		next;
+		progressbar "ffffff", 3;
+		mes "[Temple Guard]";
+		mes "There. You're registered. Welcome to the upper temple. Don't touch anything red.";
+		next;
+		mes "^4d4dffNadoyo catches your eye and nods toward the <NAVI>[east shrine]<INFO>jor_tmple1,254,283,0,101,0</INFO></NAVI>. Karmilgand's cell is there.^000000";
+		callfunc "F_WSJ_Step21", 630, "17763", "17764";
+		close;
+	}
+	mes "[Temple Guard]";
+	mes "Register's closed. Come back after prayers.";
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 620" );
+	end;
+}
+
+jor_tmple1,254,283,3	script(CLOAKED)	Karmilgand#wsj_cell	4_EP19_RGAN_SR1,{
+	if (wsj_ep21 == 630) {
+		mes "[Karmilgand]";
+		mes "Who's there? If you've come to make me recant again, the answer hasn't changed.";
+		next;
+		select("Wilhelm sent us. We're getting you out.");
+		mes "[Karmilgand]";
+		mes "Wilhelm? Then Reinhardt... yes. He's in the next cell. Quickly, the key hangs by the brazier.";
+		next;
+		progressbar "ffffff", 4;
+		mes "^4d4dffOne lock, then another. Two gaunt figures stumble into the light: an old priest in torn red robes, and a long-haired man who smiles despite everything.^000000";
+		next;
+		cutin "ep21_reinhardt01.png",2;
+		mes "[Reinhardt]";
+		mes "My brother sent strangers to break me out of a temple. That's the most words he's ever spent on me.";
+		next;
+		cutin "",255;
+		mes "[Karmilgand]";
+		mes "Follow me. The priests' stair goes straight down to the north gate. No guard questions a high priest.";
+		mes "Meet your friends in the <NAVI>[north of the Raised Land]<INFO>jor_raise1,323,71,0,101,0</INFO></NAVI>.";
+		callfunc "F_WSJ_Step21", 640, "17764", "17765";
+		close2;
+		warp "jor_raise1",320,69;
+		end;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 630" );
+	end;
+}
+
+jor_tmple1,245,275,0	script	#wsj_t_tp3	HIDDEN_WARP_NPC,20,20,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+jor_raise1,325,68,5	script(CLOAKED)	Tan#wsj_rs2	4_EP21_TAN,{
+	if (wsj_ep21 == 640) {
+		cutin "ep21_tan01.png",0;
+		mes "[Tan]";
+		mes "A high priest and a heretic, walking out the front door. Hmph.";
+		mes "...That was well done. Don't let it go to your head.";
+		next;
+		cutin "ep21_nadoyo02.png",2;
+		mes "[Nadoyo]";
+		mes "Tan came to cover our escape. He worries.";
+		next;
+		cutin "ep21_tan01.png",0;
+		mes "[Tan]";
+		mes "I do not. Everyone, back to <NAVI>[Lunaforma]<INFO>jor_mbase,143,272,0,101,0</INFO></NAVI>. The believers they freed are coming too.";
+		callfunc "F_WSJ_Step21", 650, "17765", "17766";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 640" );
+	end;
+}
+jor_raise1,321,66,5	script(CLOAKED)	Nadoyo#wsj_rs2	10574,{
+	cutin "ep21_nadoyo01.png",2;
+	mes "[Nadoyo]";
+	mes "We did it. We actually did it.";
+	close3;
+}
+
+jor_raise1,323,70,0	script	#wsj_t_rs	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+jor_mbase,145,270,3	script(CLOAKED)	Tris#wsj_r2	4_EP21_TRIS,{
+	if (wsj_ep21 == 650) {
+		cutin "ep21_tris01.png",2;
+		mes "[Tris]";
+		mes "Karmilgand. In Lunaforma. I never thought I'd see the day.";
+		mes "And Reinhardt, alive. Wilhelm hasn't stopped staring at him.";
+		next;
+		mes "[Tris]";
+		mes "This isn't a talk for the square. Come to the <NAVI>[central barracks]<INFO>mbase_in,116,186,0,101,0</INFO></NAVI>, the quiet room at the back.";
+		callfunc "F_WSJ_Step21", 660, "17766", "17767";
+		close3;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 650" );
+	end;
+}
+
+jor_mbase,143,272,0	script	#wsj_t_luna	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+mbase_in,118,186,3	script(CLOAKED)	Reinhardt#wsj_q	4_EP21_REINHARDT,{
+	if (wsj_ep21 == 660 || wsj_ep21 == 670) {
+		if (wsj_ep21 == 660)
+			callfunc "F_WSJ_Step21", 670, "17767", "17768";
+		cutin "ep21_reinhardt02.png",2;
+		mes "[Reinhardt]";
+		mes "You want to know about the ghost ship. Everyone does.";
+		next;
+		mes "[Reinhardt]";
+		mes "It's the 'Walter', taken from the Walter fleet years ago. The cult never sank her. They ^0000FFkeep^000000 her, and on moonless nights they sail her up the coast to collect.";
+		next;
+		mes "[Reinhardt]";
+		mes "Collect what? People. Villagers who 'answered the call'. They go aboard and they're never seen again. I signed the lists myself, once. Before I understood.";
+		next;
+		mes "[Karmilgand]";
+		mes "The bishops feed them to something in the deep temple. Something they call the Firstborn of the Serpent.";
+		next;
+		cutin "ep21_tris02.png",0;
+		mes "[Tris]";
+		mes "...Captain Walter needs to hear this. Today.";
+		mes "Take it to <NAVI>[Maristella]<INFO>jalbe_in,68,46,0,101,0</INFO></NAVI> in Alberta, adventurer. She's earned the truth.";
+		callfunc "F_WSJ_Step21", 680, "17768", "17769";
+		close3;
+	}
+	cutin "ep21_reinhardt01.png",2;
+	mes "[Reinhardt]";
+	mes "Wilhelm made me soup. It was terrible. Best soup I've ever had.";
+	close3;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 660 || wsj_ep21 == 670" );
+	end;
+}
+
+mbase_in,114,186,5	script(CLOAKED)	Karmilgand#wsj_q	4_EP19_RGAN_SR1,{
+	mes "[Karmilgand]";
+	mes "I served the Serpent for forty years. I will spend what years remain undoing it.";
+	close;
+}
+mbase_in,116,184,5	script(CLOAKED)	Tris#wsj_q	4_EP21_TRIS,{
+	cutin "ep21_tris01.png",2;
+	mes "[Tris]";
+	mes "Listen to Reinhardt. I'll do the worrying.";
+	close3;
+}
+
+mbase_in,116,186,0	script	#wsj_t_quiet	HIDDEN_WARP_NPC,8,8,{
+	end;
+OnTouch:
+	callfunc "F_WSJ_Scenes";
+	end;
+}
+
+jalbe_in,70,46,5	script(CLOAKED)	Maristella#wsj2	10577,{
+	if (wsj_ep21 == 680) {
+		cutin "ep21_maristella02.png",2;
+		mes "[Maristella]";
+		mes "They keep her. They sail her. And they fill her with people.";
+		next;
+		mes "^4d4dffMaristella is quiet for a long moment.^000000";
+		next;
+		cutin "ep21_maristella03.png",2;
+		mes "[Maristella]";
+		mes "Thank you for telling me straight. Tell Tris: when Georborg moves on the cult, the Walter fleet sails with it. All of it.";
+		mes "And when we find my ship, I'm the one who brings her home.";
+		callfunc "F_WSJ_Step21", 690, "17769", "18338";
+		callfunc "F_WSJ_Chapter21";
+		wsj_ep21b = 0;
+		next;
+		cutin "",255;
+		mes "^4d4dffBack in Lunaforma, everyone is talking about the 'Firstborn of the Serpent'. Some say it's a giant snake.";
+		mes "^4d4dffIs it real? Ask the people who came back from the cult's lands: an <NAVI>[exhausted soldier]<INFO>jor_mbase,189,249,0,101,0</INFO></NAVI>, an <NAVI>[escaped cultist]<INFO>jor_mbase,218,298,0,101,0</INFO></NAVI> and a <NAVI>[wounded soldier]<INFO>jor_mbase,60,196,0,101,0</INFO></NAVI>.^000000";
+		close;
+	}
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 680" );
+	end;
+}

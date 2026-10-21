@@ -1,0 +1,230 @@
+//===== World Sync: Jormungandr =============================
+//= Episode 21 (Age of Heroes): shared functions.
+//===== Description: =========================================
+//= Written from the kRO client's Korean quest text (translated for
+//= this mod) and its navigation tables; no official script exists.
+//=
+//= Character variables:
+//=   wsj_ep21   main story step (0 = not started, 1000 = done)
+//=   wsj_ep21b  bits for steps done in any order
+//= Starts once Episode 20 is done (wsj_ep20 >= 700), at level 230.
+//============================================================
+
+// Who can see which Episode 21 story NPC (see F_WSJ_Scenes).
+function	script	F_WSJ_Scenes21	{
+	.@m$ = strcharinfo(3);
+	.@s = wsj_ep21;
+	if (wsj_ep20 < 700 || BaseLevel < 230)
+		.@s = -1;
+	if (.@m$ == "jor_crk") {
+		setarray .@t$,
+			"Nillem#wsj_crk","10","19",
+			"Nillem#wsj_crk2","830","839",
+			"Nyar#wsj_crk2","880","999",
+			"Nillem#wsj_crk3","880","999";
+	} else if (.@m$ == "jor_crk_p") {
+		setarray .@t$,
+			"Nyar#wsj_p","20","29",
+			"Nillem#wsj_p","20","39",
+			"Ivan#wsj_p","30","39",
+			"Georborg Soldier#wsj_p","30","39",
+			"Nadoyo#wsj_p","570","589",
+			"Ivan#wsj_p2","570","589",
+			"Nyar#wsj_p3","810","819";
+	} else if (.@m$ == "jor_mbase") {
+		setarray .@t$,
+			"Georborg Soldier#wsj_dock","40","49",
+			"Freya Believer#wsj1","50","59",
+			"Freya Believer#wsj2","50","59",
+			"Freya Believer#wsj3","50","59",
+			"Freya Believer#wsj4","50","59",
+			"Freya Believer#wsj5","50","59",
+			"Tris#wsj_g","50","69",
+			"Tan#wsj_g","50","79",
+			"Resistance Soldier#wsj_g","60","69",
+			"Valdaris#wsj_t1","170","179",
+			"Valdaris#wsj_t2","180","189",
+			"Valdaris#wsj_t3","190","199",
+			"Richard#wsj_tr","200","219",
+			"Galaxia#wsj_tr","200","219",
+			"Lee#wsj_out","260","269",
+			"Tris#wsj_m","270","329",
+			"Ivan#wsj_out","390","399",
+			"Lehar#wsj_lf","400","439",
+			"Ivan#wsj_lf1","440","449",
+			"Ivan#wsj_lf2","470","479",
+			"Ivan#wsj_lf3","510","529",
+			"Tris#wsj_r","560","569",
+			"Tris#wsj_r2","650","659",
+			"Wilhelm#wsj_c","590","599",
+			"Tris#wsj_b","700","709",
+			"Tris#wsj_b2","730","739",
+			"Bushes#wsj","820","829",
+			"Ivan#wsj_end","910","919";
+	} else if (.@m$ == "mbase_in") {
+		setarray .@t$,
+			"Gunter#wsj_o","90","109",
+			"Galaxia#wsj_d","120","129",
+			"Tan#wsj_o","160","169",
+			"Richard#wsj_rm","220","249",
+			"Lee#wsj_rm","220","249",
+			"Valdaris#wsj_rm","220","249",
+			"Galaxia#wsj_gr","250","259",
+			"Tris#wsj_bk","330","339",
+			"Tris#wsj_bk2","380","389",
+			"Heine's Tablet#wsj","340","379",
+			"Tris#wsj_q","660","679",
+			"Reinhardt#wsj_q","660","679",
+			"Karmilgand#wsj_q","660","679",
+			"Nyar#wsj_sm","740","749",
+			"Lehar#wsj_sm","740","749",
+			"Nillem#wsj_sm","740","749",
+			"Nadoyo#wsj_sm","740","749";
+	} else if (.@m$ == "jor_albe") {
+		setarray .@t$,
+			"Nillem#wsj_albe","320","329";
+	} else if (.@m$ == "jalbe_in") {
+		setarray .@t$,
+			"Old Chest#wsj","490","499",
+			"Maristella#wsj","500","509",
+			"Maristella#wsj2","680","689",
+			"Lalaira Wigner#wsj_off","900","909";
+	} else if (.@m$ == "jor_raise1") {
+		setarray .@t$,
+			"Ivan#wsj_rs","520","529",
+			"Lehar#wsj_rs","520","529",
+			"Nadoyo#wsj_rs","600","609",
+			"Tan#wsj_rs2","640","649",
+			"Nadoyo#wsj_rs2","640","649",
+			"Tan#wsj_crack","710","719",
+			"Nadoyo#wsj_crack","710","719",
+			"Reinhardt#wsj_door","720","729",
+			"Tan#wsj_door","720","729",
+			"Nadoyo#wsj_door2","750","769";
+	} else if (.@m$ == "jor_tmple1") {
+		setarray .@t$,
+			"Ivan#wsj_tp","530","539",
+			"Lehar#wsj_tp","530","539",
+			"Believer#wsj_s1","540","549",
+			"Cult Archivist#wsj_s2","540","549",
+			"Stairway Guard#wsj_s3","540","549",
+			"Ivan#wsj_tp2","550","559",
+			"Lehar#wsj_tp2","550","559",
+			"Nadoyo#wsj_tp","610","629",
+			"Temple Guard#wsj_tp","610","629",
+			"Karmilgand#wsj_cell","630","639",
+			"Nyar#wsj_alt","770","809",
+			"Suspicious Book#wsj","780","789",
+			"Shining Door#wsj","790","809";
+	} else if (.@m$ == "jor_twig") {
+		setarray .@t$,
+			"Voglinde#wsj_tw","850","869",
+			"Lehar#wsj_tw","850","869";
+	} else
+		return;
+	for (.@i = 0; .@i < getarraysize(.@t$); .@i += 3) {
+		if (.@s >= atoi(.@t$[.@i+1]) && .@s <= atoi(.@t$[.@i+2]))
+			cloakoffnpcself .@t$[.@i];
+		else
+			cloakonnpcself .@t$[.@i];
+	}
+	return;
+}
+
+// Moves Episode 21 on (as F_WSJ_Step does for Episode 20).
+function	script	F_WSJ_Step21	{
+	.@done$ = getarg(1);
+	.@next$ = getarg(2);
+	if (.@done$ != "") {
+		explode .@d$, .@done$, ",";
+		.@n = getarraysize(.@d$);
+		for (.@i = 0; .@i < .@n; .@i++) {
+			.@q = atoi(.@d$[.@i]);
+			if (isbegin_quest(.@q) == 0)
+				setquest .@q;
+			if (isbegin_quest(.@q) == 1)
+				completequest .@q;
+		}
+	}
+	if (.@next$ != "") {
+		explode .@x$, .@next$, ",";
+		.@n = getarraysize(.@x$);
+		for (.@i = 0; .@i < .@n; .@i++) {
+			.@q = atoi(.@x$[.@i]);
+			if (isbegin_quest(.@q) == 0)
+				setquest .@q;
+		}
+	}
+	wsj_ep21 = getarg(0);
+	callfunc "F_WSJ_Scenes21";
+	questinfo_refresh;
+	return;
+}
+
+// The end of an Episode 21 chapter. Amounts aren't published: these
+// follow Episode 20's, raised for level 230+, with Wigner Premium
+// Exchange Tickets, the episode's currency.
+function	script	F_WSJ_Chapter21	{
+	getexp2 80000000,0;
+	getexp 0,4000000;
+	getitem 1001618,3;	// Ep21_Wigner_Ticket
+	add_reputation_points( REPUTATION_EP19, 50 );
+	return;
+}
+
+// Episode 21 Clear Ticket (the Episode Valkyrie, standart-npc): marks
+// the main story finished, as the official ticket does. No rewards.
+function	script	F_WSJ_Skip21	{
+	setarray .@q[0],
+		18334, 18335, 18336, 18337, 23240, 23241, 23242, 23243,
+		24000, 24001, 24002, 24003, 24004, 24005, 24006, 24007, 24008, 24009,
+		24010, 24011, 24012, 24013, 24014, 24015, 24016, 24017, 24018,
+		23244, 23245, 23246, 23247, 23248, 23249, 23250, 23251, 23252, 23253, 23254, 23255,
+		8882, 8883, 8884, 8885, 8886, 8887, 8888, 8889, 8890, 8891, 8894, 8892, 8893,
+		17752, 17753, 17754, 17755, 17756, 17757, 17758, 17759, 17760, 17761,
+		17762, 17763, 17764, 17765, 17766, 17767, 17768, 17769,
+		18338, 18339, 18340, 18341, 18342, 18343, 18344, 18345, 18346, 18347, 18348,
+		18349, 18350, 18351, 18352, 18353, 18354, 18355, 18356, 18357, 18358, 18359, 18360,
+		8914, 8915, 8916;
+	.@n = getarraysize(.@q);
+	for (.@i = 0; .@i < .@n; .@i++) {
+		if (isbegin_quest(.@q[.@i]) == 1)
+			erasequest .@q[.@i];
+	}
+	if (isbegin_quest(18361) == 0)
+		setquest 18361;
+	if (isbegin_quest(18361) == 1)
+		completequest 18361;
+	// The story's own items, taken back by the story.
+	setarray .@it[0], 1001641, 1001643;
+	for (.@i = 0; .@i < 2; .@i++) {
+		if (countitem(.@it[.@i]))
+			delitem .@it[.@i], countitem(.@it[.@i]);
+	}
+	wsj_ep21 = 1000;
+	wsj_ep21b = 0;
+	callfunc "F_WSJ_Scenes21";
+	return;
+}
+
+// For the Valkyrie: 1 once Episode 21's story is finished.
+function	script	F_WSJ_Done21	{
+	return (wsj_ep21 >= 1000);
+}
+
+-	script	WSJ_Skip21Flag	-1,{
+	end;
+OnInit:
+	$@wsj_ep21_skip = 1;
+	end;
+}
+
+jor_tail	mapflag	loadevent
+jor_crk	mapflag	loadevent
+jor_crk_p	mapflag	loadevent
+jor_mbase	mapflag	loadevent
+mbase_in	mapflag	loadevent
+jor_albe	mapflag	loadevent
+jalbe_in	mapflag	loadevent
+jor_raise1	mapflag	loadevent
+jor_tmple1	mapflag	loadevent

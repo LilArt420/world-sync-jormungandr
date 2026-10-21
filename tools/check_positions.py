@@ -30,6 +30,8 @@ GAME = HOME + '/Documents/Games/Ragnarok Offline/Ragnarok-Portable/Ragnarok'
 DEF_GRFS = [GAME + '/Game (Client)/data.grf', GAME + '/Game (kRO)/new.grf', GAME + '/Game (kRO)/data.grf']
 DEF_MODS = HOME + '/Library/Application Support/Ragnarok Offline/state/mods'
 MODNAME = 'world-sync-jormungandr'
+# This mod's spelling -> World Sync Extras' (from the client's navigation table).
+ALIASES = {'Nillem': 'Nilem'}
 
 HEADER = re.compile(r'^([a-z0-9_@]+),(\d+),(\d+)(?:,\d+)?\t(script|warp|warp2|duplicate\([^)]*\)|shop|cashshop|itemshop|pointshop|marketshop|trader|script\(CLOAKED\))\t([^\t]+)\t?(.*)$')
 
@@ -171,6 +173,7 @@ def main():
     # Placeholders this mod takes over: same map and name, within 3 cells.
     for n in mine:
         base = n['name'].split('#')[0]
+        base = ALIASES.get(base, base)
         for o in others:
             if o['map'] == n['map'] and o['origin'] == 'mod:world-sync-extras' and '#ws' in o['name'] \
                     and o['name'].split('#')[0] == base and max(abs(o['x'] - n['x']), abs(o['y'] - n['y'])) <= 3:

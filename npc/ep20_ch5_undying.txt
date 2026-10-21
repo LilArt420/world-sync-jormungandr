@@ -581,13 +581,22 @@ icas_in2,253,118,3	script(CLOAKED)	Voglinde#wsj_end	4_EP19_VOGLINDE,{
 		getitem 1001251,7;	// EP20_D_Scale
 		close3;
 	}
+	if (wsj_ep20 >= 700 && wsj_ep21 == 0 && BaseLevel >= 230) {
+		callfunc "F_WSJ_Ep21Start";
+		end;
+	}
 	cutin "ep19_voglinde01.png",0;
 	mes "[Voglinde]";
 	mes "The undying bishop sleeps somewhere cold. Let's keep it that way.";
+	if (wsj_ep20 >= 700 && wsj_ep21 == 0 && BaseLevel < 230) {
+		next;
+		mes "^4d4dffEpisode 21 starts here for characters of level 230 or more.^000000";
+	}
 	close3;
 
 OnInit:
 	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 635" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "wsj_ep20 >= 700 && wsj_ep21 == 0 && BaseLevel >= 230" );
 	end;
 }
 

@@ -585,4 +585,598 @@ QuestInfoList = {
 		Description = { "You've received a request from <NAVI>[Kororo]<INFO>jor_twice,235,111,0,101,0</INFO></NAVI>. Let's confront the Jormungandr Cult Ritualists wandering in the Frozen Zone. If you've left the Frozen Zone, <NAVI>[Diving Iwin]<INFO>icecastle,141,212,0,101,0</INFO></NAVI> in the Ice Castle will take you back." },
 		Summary = "Defeat 15 Jormun Warlocks"
 	},
+	[18334] = {
+		Title = "A Rift Detected in the North",
+		IconName = "ico_ep.bmp",
+		Description = { "Nillem believes a rift has opened on Scale Island, near Issgard, and wants to look into it. <NAVI>[Shupapa]<INFO>jor_tail,233,41,0,101,0</INFO></NAVI>, waiting at the Frozen Tail, can take you to Scale Island." },
+		Summary = "Talk to Nyar"
+	},
+	[18335] = {
+		Title = "The Rift on Scale Island",
+		IconName = "ico_ep.bmp",
+		Description = { "You crossed into the Scale Island of the past with Nyar. Somewhere in this time lies the source of Rasgand's power, and it has to be destroyed. Talk to <NAVI>[Nyar]<INFO>jor_crk_p,105,108,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to Nyar"
+	},
+	[18336] = {
+		Title = "First Meeting",
+		IconName = "ico_ep.bmp",
+		Description = { "While you were planning your next move on the Scale Island of the past, you sensed someone nearby. Meet whoever is <NAVI>[near the rift]<INFO>jor_crk_p,95,93,0,101,0</INFO></NAVI>." },
+		Summary = "Meet someone near the rift"
+	},
+	[18337] = {
+		Title = "To Lunaforma",
+		IconName = "ico_ep.bmp",
+		Description = { "The one you met on the Scale Island of the past was Ivan Wigner. Go with <NAVI>[Ivan]<INFO>jor_crk_p,95,93,0,101,0</INFO></NAVI> and his soldier to <NAVI>[Lunaforma]<INFO>jor_mbase,124,32,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to a soldier in Lunaforma"
+	},
+	[23240] = {
+		Title = "The Georborg Resistance",
+		IconName = "ico_ep.bmp",
+		Description = { "The moment you reach Lunaforma, the Georborg resistance's base, you hear shouting. From the soldiers' faces, the ones being shouted at are the resistance's <NAVI>[captain]<INFO>jor_mbase,56,152,0,101,0</INFO></NAVI> and vice-captain. Lehar and Nillem suggest listening quietly, out of the line of fire." },
+		Summary = "Listen to the argument"
+	},
+	[23241] = {
+		Title = "The Georborg Resistance",
+		IconName = "ico_ep.bmp",
+		Description = { "The believers of Freyja, unhappy with a resistance built around Odin, left Lunaforma to look for another home. Once things calm down, a <NAVI>[resistance soldier]<INFO>jor_mbase,54,155,0,101,0</INFO></NAVI> waves you over." },
+		Summary = "Talk to a resistance soldier"
+	},
+	[23242] = {
+		Title = "The Georborg Resistance",
+		IconName = "ico_ep.bmp",
+		Description = { "Tris welcomed you, Lehar and Nillem when you said you wanted to join. Until there is a proper task for you, you are to help Richard's mercenaries. The vice-captain, Tan, doesn't trust you, but Tris has told him to show you the way. Talk to <NAVI>[Tan]<INFO>jor_mbase,57,150,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to Tan"
+	},
+	[23243] = {
+		Title = "The Georborg Resistance",
+		IconName = "ico_ep.bmp",
+		Description = { "Tan made it clear he doesn't trust you: if you last through the mercenaries' training, he may think again. Head for <NAVI>[Richard's mercenaries]<INFO>jor_mbase,313,106,0,101,0</INFO></NAVI> in Lunaforma." },
+		Summary = "Talk to Richard"
+	},
+	[24000] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "Tan still doesn't trust you. Go to the <NAVI>[mercenaries' office]<INFO>mbase_in,289,124,0,101,0</INFO></NAVI> in south-east Lunaforma and meet Richard." },
+		Summary = "Go to the mercenaries' office"
+	},
+	[24001] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "The office was empty, until a <NAVI>[man]<INFO>mbase_in,292,127,0,101,0</INFO></NAVI> walked in. Ask him where Richard is." },
+		Summary = "Talk to the man in the office"
+	},
+	[24002] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "Richard might be in his room. Go to <NAVI>[Richard's room]<INFO>mbase_in,113,120,0,101,0</INFO></NAVI> in the central barracks of Lunaforma." },
+		Summary = "To Richard's room"
+	},
+	[24003] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "Richard's room is locked. See if anyone is in the <NAVI>[room next door]<INFO>mbase_in,113,114,0,101,0</INFO></NAVI>." },
+		Summary = "The room next door"
+	},
+	[24004] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "The woman from the room next door tells you to go back to the <NAVI>[mercenaries' office]<INFO>mbase_in,289,124,0,101,0</INFO></NAVI>." },
+		Summary = "Back to the office"
+	},
+	[24005] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "To join Richard's mercenaries you have to fill in the <NAVI>[application forms]<INFO>mbase_in,299,126,0,101,0</INFO></NAVI>." },
+		Summary = "Fill in the forms"
+	},
+	[24006] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "Hand your filled-in forms to <NAVI>[Valdaris]<INFO>mbase_in,302,123,0,101,0</INFO></NAVI>, at the back of the office." },
+		Summary = "Hand the forms to Valdaris"
+	},
+	[24007] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "As Valdaris checked your forms, Tan appeared. Talk to <NAVI>[Tan]<INFO>mbase_in,302,122,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to Tan"
+	},
+	[24008] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "Tan left you with Valdaris and vanished again. Talk to <NAVI>[Valdaris]<INFO>jor_mbase,316,117,0,101,0</INFO></NAVI> outside the office." },
+		Summary = "Talk to Valdaris"
+	},
+	[24009] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "Valdaris will show you around Lunaforma. Follow <NAVI>[Valdaris]<INFO>jor_mbase,243,120,0,101,0</INFO></NAVI>." },
+		Summary = "Follow Valdaris"
+	},
+	[24010] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "You heard about the Wigner Company and the Walter fleet. On to the <NAVI>[next stop]<INFO>jor_mbase,145,108,0,101,0</INFO></NAVI>." },
+		Summary = "Follow Valdaris"
+	},
+	[24011] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "You heard about the children of Lunaforma. Something is happening at the <NAVI>[training ground]<INFO>jor_mbase,135,108,0,101,0</INFO></NAVI>." },
+		Summary = "Follow Valdaris"
+	},
+	[24012] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "There's a commotion at the training ground in south Lunaforma. Get <NAVI>[closer]<INFO>jor_mbase,135,108,0,101,0</INFO></NAVI>." },
+		Summary = "To the training ground"
+	},
+	[24013] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "At the training ground you found Richard being beaten up by Galaxia. Take him to <NAVI>[his room]<INFO>mbase_in,167,128,0,101,0</INFO></NAVI> to patch him up." },
+		Summary = "To Richard's room"
+	},
+	[24014] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "Valdaris is furious. Ask <NAVI>[Richard]<INFO>mbase_in,168,126,0,101,0</INFO></NAVI> what the fight was about." },
+		Summary = "Talk to Richard"
+	},
+	[24015] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "Richard and Galaxia were staging a fight for the illustrations of a combat manual. Look at <NAVI>[Lee]<INFO>mbase_in,166,124,0,101,0</INFO></NAVI>'s drawings." },
+		Summary = "Talk to Lee"
+	},
+	[24016] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "Valdaris has words for Richard alone. Give them some room and go to <NAVI>[Galaxia's room]<INFO>mbase_in,167,79,0,101,0</INFO></NAVI>." },
+		Summary = "To Galaxia's room"
+	},
+	[24017] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "You heard about Galaxia and Richard. Go outside and let <NAVI>[Lee]<INFO>jor_mbase,163,196,0,101,0</INFO></NAVI> show you around." },
+		Summary = "Talk to Lee"
+	},
+	[24018] = {
+		Title = "Richard's Mercenaries",
+		IconName = "ico_ep.bmp",
+		Description = { "You seem to have earned a little trust. Meet <NAVI>[Tris]<INFO>jor_mbase,168,200,0,101,0</INFO></NAVI> in Lunaforma." },
+		Summary = "To Tris"
+	},
+	[23244] = {
+		Title = "Profit and Loss",
+		IconName = "ico_ep.bmp",
+		Description = { "You told Tris how it went with the mercenaries. Nillem has been sent to Alberta and Lehar to the Wigner Company, and Tris has someone to introduce to you. Talk to <NAVI>[Tris]<INFO>jor_mbase,168,200,0,101,0</INFO></NAVI> again." },
+		Summary = "Talk to Tris"
+	},
+	[23245] = {
+		Title = "Profit and Loss",
+		IconName = "ico_ep.bmp",
+		Description = { "You were introduced to Heine, the wizard of Comodo, and to her newest invention: Heine's Tablet. Tell <NAVI>[Tris]<INFO>jor_mbase,168,200,0,101,0</INFO></NAVI> when you are ready for a new task." },
+		Summary = "Talk to Tris"
+	},
+	[23246] = {
+		Title = "Profit and Loss",
+		IconName = "ico_ep.bmp",
+		Description = { "Heine wants you to gather Bright Eyes around Lunaforma yourself. From Tris's face, this was a sudden whim of hers. Hear the rest from <NAVI>[Tris]<INFO>jor_mbase,168,200,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to Tris"
+	},
+	[23247] = {
+		Title = "Profit and Loss",
+		IconName = "ico_ep.bmp",
+		Description = { "Heine notices at once when something isn't done exactly as she said. Defeat 10 Skipskippers on the Raised Land, collect 1 Bright Eye, and report to <NAVI>[Tris]<INFO>jor_mbase,168,200,0,101,0</INFO></NAVI>." },
+		Summary = "1 Bright Eye"
+	},
+	[23248] = {
+		Title = "Profit and Loss",
+		IconName = "ico_ep.bmp",
+		Description = { "Meanwhile Heine asked Tris to send you to Alberta. Join <NAVI>[Nillem]<INFO>jor_albe,192,209,0,101,0</INFO></NAVI> there." },
+		Summary = "To Alberta"
+	},
+	[23249] = {
+		Title = "The Black-Haired Beast",
+		IconName = "ico_ep.bmp",
+		Description = { "Back at the barracks of Lunaforma, Heine's Tablet broke down in the middle of a call. <NAVI>[Tris]<INFO>mbase_in,92,123,0,101,0</INFO></NAVI> suggests waiting until Heine calls back." },
+		Summary = "Talk to Tris"
+	},
+	[23250] = {
+		Title = "The Black-Haired Beast",
+		IconName = "ico_ep.bmp",
+		Description = { "The tablet reconnected, but Heine says it needs an overhaul and has named you her repair assistant. Tris lent you a <NAVI>[private room]<INFO>mbase_in,21,168,0,101,0</INFO></NAVI> in the barracks." },
+		Summary = "To the private room"
+	},
+	[23251] = {
+		Title = "The Black-Haired Beast",
+		IconName = "ico_ep.bmp",
+		Description = { "A remote repair never works on the first try, Heine says, so bring plenty of parts: 2 Vellelopy, from the Velellings of the Raised Land. Then return to <NAVI>[Heine]<INFO>mbase_in,21,168,0,101,0</INFO></NAVI>." },
+		Summary = "2 Vellelopy"
+	},
+	[23252] = {
+		Title = "The Black-Haired Beast",
+		IconName = "ico_ep.bmp",
+		Description = { "Heine has started the repair. Stay in the <NAVI>[private room]<INFO>mbase_in,21,168,0,101,0</INFO></NAVI> and assist her." },
+		Summary = "Help with the repair"
+	},
+	[23253] = {
+		Title = "The Black-Haired Beast",
+		IconName = "ico_ep.bmp",
+		Description = { "The first attempt failed. Stay in the <NAVI>[private room]<INFO>mbase_in,21,168,0,101,0</INFO></NAVI> and assist her once more." },
+		Summary = "Help with the repair"
+	},
+	[23254] = {
+		Title = "The Black-Haired Beast",
+		IconName = "ico_ep.bmp",
+		Description = { "The tablet works, but Heine had another reason to pick you. You told her why you came from the future. Tell <NAVI>[Tris]<INFO>mbase_in,92,123,0,101,0</INFO></NAVI> the news." },
+		Summary = "Talk to Tris"
+	},
+	[23255] = {
+		Title = "The Black-Haired Beast",
+		IconName = "ico_ep.bmp",
+		Description = { "With what Leon found and the news you brought from the future, the Georborg resistance decided to prepare the all-out war that will end the fight with the Jormungandr cult. Then there is a loud noise outside. Go <NAVI>[outside]<INFO>jor_mbase,201,192,0,101,0</INFO></NAVI> and see." },
+		Summary = "Go outside"
+	},
+	[8882] = {
+		Title = "Ivan Wigner's Pleasant Missionary Life",
+		IconName = "ico_ep.bmp",
+		Description = { "I was planning to speak with Ivan Wigner at Lunaforma, but both he and Lehar are busy. Let's help <NAVI>[Lehar]<INFO>jor_mbase,214,316,0,101,0</INFO></NAVI> prepare the food." },
+		Summary = "Talk with Lehar"
+	},
+	[8883] = {
+		Title = "Lehar's Rewarding Relief Work (1)",
+		IconName = "ico_ep.bmp",
+		Description = { "Lunaforma's shelter has been expanded to provide meals using available ingredients, and it turns out that <NAVI>[Lehar]<INFO>jor_mbase,214,316,0,101,0</INFO></NAVI> possesses a hidden talent for perfectly cooking cauldron rice!" },
+		Summary = "Talk with Lehar"
+	},
+	[8884] = {
+		Title = "Lehar's Rewarding Relief Work (2)",
+		IconName = "ico_ep.bmp",
+		Description = { "Thankfully, the Lunaforma shelter is operating smoothly without any major issues. After the meal distribution, I decided to have a meal with <NAVI>[Lehar]<INFO>jor_mbase,214,316,0,101,0</INFO></NAVI>." },
+		Summary = "Talk with Lehar"
+	},
+	[8885] = {
+		Title = "He's robbing the whole house!",
+		IconName = "ico_ep.bmp",
+		Description = { "<NAVI>[Lehar]<INFO>jor_mbase,214,316,0,101,0</INFO></NAVI> heard that Ivan had poured a considerable amount of money from the Wigner Group into building a shelter in Lunaforma." },
+		Summary = "Talk with Lehar"
+	},
+	[8886] = {
+		Title = "Lehar's Rewarding Relief Work (3)",
+		IconName = "ico_ep.bmp",
+		Description = { "The food distribution at the Lunaforma shelter is complete. Now, let's take a breather and have a meal with <NAVI>[Ivan]<INFO>jor_mbase,189,282,0,101,0</INFO></NAVI> and Lehar." },
+		Summary = "Talk with Ivan"
+	},
+	[8887] = {
+		Title = "People who saw the ghost ship (1)",
+		IconName = "ico_ep.bmp",
+		Description = { "Talk to <NAVI>[Lyric]<INFO>jor_mbase,185,311,0,101,0</INFO></NAVI> in Lunaforma.." },
+		Summary = "Talk with Lyric"
+	},
+	[8888] = {
+		Title = "People who saw the ghost ship (2)",
+		IconName = "ico_ep.bmp",
+		Description = { "Talk to <NAVI>[Lyric]<INFO>jor_mbase,185,311,0,101,0</INFO></NAVI> in Lunaforma." },
+		Summary = "Talk with Lyric"
+	},
+	[8889] = {
+		Title = "Ivan's Scheme",
+		IconName = "ico_ep.bmp",
+		Description = { "Lyric's story wasn't helpful, but it confirmed the existence of the ghost ship. Let's hear <NAVI>[Ivan]<INFO>jor_mbase,233,277,0,101,0</INFO></NAVI>'s story." },
+		Summary = "Talk with Ivan"
+	},
+	[8890] = {
+		Title = "Ivan's Errand",
+		IconName = "ico_ep.bmp",
+		Description = { "Meet <NAVI>[Lalira Wigner]<INFO>jalbe_in,56,138,0,101,0</INFO></NAVI> at the top of Wigner in Alberta." },
+		Summary = "Talk to Lalira Wigner"
+	},
+	[8891] = {
+		Title = "Ivan's Old Folly",
+		IconName = "ico_ep.bmp",
+		Description = { "At the top of Alberta's Wigner, Lara told Ivan <NAVI>[where]<INFO>jalbe_in,73,187,0,101,0</INFO></NAVI> the item he had requested was." },
+		Summary = "Finding the Chest"
+	},
+	[8892] = {
+		Title = "With the Unclaimed Weapon",
+		IconName = "ico_ep.bmp",
+		Description = { "Then, it's time to return the weapon to its rightful owner. Return to Lunaforma and speak with <NAVI>[Ivan]<INFO>jor_mbase,233,277,0,101,0</INFO></NAVI>." },
+		Summary = "Talk with Ivan"
+	},
+	[8893] = {
+		Title = "Infiltrating the Cult",
+		IconName = "ico_ep.bmp",
+		Description = { "Now, let's regroup and head north to the Rising Lands. It's time to <NAVI>[infiltrate]<INFO>jor_raise1,323,71,0,101,0</INFO></NAVI> the cult." },
+		Summary = "Infiltrating the Cult"
+	},
+	[8894] = {
+		Title = "The recipient of the letter",
+		IconName = "ico_ep.bmp",
+		Description = { "Laraira Wigner, at the top of Wigner, asked you to deliver a letter to <NAVI>[Captain Walter]<INFO>jalbe_in,68,46,0,101,0</INFO></NAVI>. Could it be an important letter?" },
+		Summary = "Talk with Maristella Walter"
+	},
+	[17752] = {
+		Title = "Infiltrating the Cult",
+		IconName = "ico_ep.bmp",
+		Description = { "Time to act inside <NAVI>[Gimle]<INFO>jor_tmple1,186,72,0,101,0</INFO></NAVI>, the temple of the Jormungandr cult." },
+		Summary = "Enter the temple"
+	},
+	[17753] = {
+		Title = "Infiltrating the Cult",
+		IconName = "ico_ep.bmp",
+		Description = { "Find out whether anyone in <NAVI>[Gimle]<INFO>jor_tmple1,110,190,0,101,0</INFO></NAVI> wants to escape." },
+		Summary = "Search the temple 1"
+	},
+	[17754] = {
+		Title = "Infiltrating the Cult",
+		IconName = "ico_ep.bmp",
+		Description = { "Look for information about the ghost ship in <NAVI>[Gimle]<INFO>jor_tmple1,186,228,0,101,0</INFO></NAVI>." },
+		Summary = "Search the temple 2"
+	},
+	[17755] = {
+		Title = "Infiltrating the Cult",
+		IconName = "ico_ep.bmp",
+		Description = { "Maybe the 2nd floor of <NAVI>[Gimle]<INFO>jor_tmple1,238,268,0,101,0</INFO></NAVI> holds better information?" },
+		Summary = "Search the temple 3"
+	},
+	[17756] = {
+		Title = "Infiltrating the Cult",
+		IconName = "ico_ep.bmp",
+		Description = { "Nothing useful. Meet the others at the meeting point in <NAVI>[Gimle]<INFO>jor_tmple1,188,72,0,101,0</INFO></NAVI>." },
+		Summary = "Join the others"
+	},
+	[17757] = {
+		Title = "Infiltrating the Cult",
+		IconName = "ico_ep.bmp",
+		Description = { "Nobody found anything. Go back to <NAVI>[Lunaforma]<INFO>jor_mbase,143,272,0,101,0</INFO></NAVI> and think of something else." },
+		Summary = "To Lunaforma"
+	},
+	[17758] = {
+		Title = "Recruiting for Success",
+		IconName = "ico_ep.bmp",
+		Description = { "Meet Nadoyo at the meeting place on <NAVI>[Scale Island]<INFO>jor_crk_p,71,85,0,101,0</INFO></NAVI>: Nadoyo knows the inside of the temple." },
+		Summary = "To the meeting place"
+	},
+	[17759] = {
+		Title = "Recruiting for Success",
+		IconName = "ico_ep.bmp",
+		Description = { "<NAVI>[Ivan]<INFO>jor_crk_p,69,85,0,101,0</INFO></NAVI> has a proposal for those left on Scale Island..." },
+		Summary = "Talk to Ivan"
+	},
+	[17760] = {
+		Title = "Recruiting for Success",
+		IconName = "ico_ep.bmp",
+		Description = { "The talent Ivan talked about works at the canteen of <NAVI>[Lunaforma]<INFO>jor_mbase,166,302,0,101,0</INFO></NAVI>. Can you win him over?" },
+		Summary = "To Lunaforma"
+	},
+	[17761] = {
+		Title = "Second Infiltration",
+		IconName = "ico_ep.bmp",
+		Description = { "Join Nadoyo in the north of the <NAVI>[Raised Land]<INFO>jor_raise1,323,71,0,101,0</INFO></NAVI> and hear how to get into the temple." },
+		Summary = "To the Raised Land"
+	},
+	[17762] = {
+		Title = "Second Infiltration",
+		IconName = "ico_ep.bmp",
+		Description = { "Meet Nadoyo, waiting in <NAVI>[Gimle]<INFO>jor_tmple1,238,268,0,101,0</INFO></NAVI>, and learn what to watch out for inside the cult. You can't fail twice." },
+		Summary = "To the temple's 2nd floor"
+	},
+	[17763] = {
+		Title = "Second Infiltration",
+		IconName = "ico_ep.bmp",
+		Description = { "The guard of <NAVI>[Gimle]<INFO>jor_tmple1,238,268,0,101,0</INFO></NAVI> needs a moment to check the register." },
+		Summary = "Register with the guard"
+	},
+	[17764] = {
+		Title = "Second Infiltration",
+		IconName = "ico_ep.bmp",
+		Description = { "Karmilgand, a high priest, is locked up somewhere in <NAVI>[Gimle]<INFO>jor_tmple1,238,268,0,101,0</INFO></NAVI>. Help him escape." },
+		Summary = "Rescue Karmilgand"
+	},
+	[17765] = {
+		Title = "Second Infiltration",
+		IconName = "ico_ep.bmp",
+		Description = { "You barely got Karmilgand out. Join the others in the north of the <NAVI>[Raised Land]<INFO>jor_raise1,323,71,0,101,0</INFO></NAVI>." },
+		Summary = "To the Raised Land"
+	},
+	[17766] = {
+		Title = "Second Infiltration",
+		IconName = "ico_ep.bmp",
+		Description = { "The rescue worked. Take Karmilgand and the believers back to <NAVI>[Lunaforma]<INFO>jor_mbase,143,272,0,101,0</INFO></NAVI>." },
+		Summary = "To Lunaforma"
+	},
+	[17767] = {
+		Title = "Second Infiltration",
+		IconName = "ico_ep.bmp",
+		Description = { "An open square is no place for this talk. Go somewhere quiet in <NAVI>[Lunaforma]<INFO>mbase_in,116,186,0,101,0</INFO></NAVI>." },
+		Summary = "Somewhere quiet"
+	},
+	[17768] = {
+		Title = "Second Infiltration",
+		IconName = "ico_ep.bmp",
+		Description = { "In the central barracks of <NAVI>[Lunaforma]<INFO>mbase_in,118,186,0,101,0</INFO></NAVI> everyone is talking about Reinhardt. He says he knows about the ghost ship." },
+		Summary = "Talk to Reinhardt"
+	},
+	[17769] = {
+		Title = "Report on the Ghost Ship",
+		IconName = "ico_ep.bmp",
+		Description = { "You have news of the ghost ship. Report to <NAVI>[Maristella]<INFO>jalbe_in,68,46,0,101,0</INFO></NAVI> in Alberta." },
+		Summary = "To Maristella"
+	},
+	[18338] = {
+		Title = "Gathering Witnesses",
+		IconName = "ico_ep.bmp",
+		Description = { "You decided to gather information about the giant serpent. Is it real? Hear the people who made it back to Lunaforma." },
+		Summary = "Collect 3 accounts"
+	},
+	[18339] = {
+		Title = "Witness 1",
+		IconName = "ico_ep.bmp",
+		Description = { "An exhausted soldier says he saw a vile, slimy serpent monster." },
+		Summary = ""
+	},
+	[18340] = {
+		Title = "Witness 2",
+		IconName = "ico_ep.bmp",
+		Description = { "A believer who escaped the cult says he saw the serpent monster eat people." },
+		Summary = ""
+	},
+	[18341] = {
+		Title = "Witness 3",
+		IconName = "ico_ep.bmp",
+		Description = { "A wounded soldier has the scars of huge scales across his back." },
+		Summary = ""
+	},
+	[18342] = {
+		Title = "All Accounts Gathered!",
+		IconName = "ico_ep.bmp",
+		Description = { "You have all the accounts. Report to <NAVI>[Tris]<INFO>jor_mbase,204,193,0,101,0</INFO></NAVI> in front of the central barracks." },
+		Summary = "Talk to Tris"
+	},
+	[18343] = {
+		Title = "Looking for Tan and Nadoyo",
+		IconName = "ico_ep.bmp",
+		Description = { "Tris is worried: Tan and Nadoyo haven't come back. Look for them in the <NAVI>[north of the Raised Land]<INFO>jor_raise1,199,190,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to Nadoyo"
+	},
+	[18344] = {
+		Title = "A Suspicious Place in the Temple",
+		IconName = "ico_ep.bmp",
+		Description = { "With Tan, Nadoyo and Reinhardt you will check a suspicious spot outside Gimle. Examine the <NAVI>[ornamental door]<INFO>jor_raise1,128,326,0,101,0</INFO></NAVI> outside the temple." },
+		Summary = "Examine the ornamental door"
+	},
+	[18345] = {
+		Title = "The Serpent's Lair?",
+		IconName = "ico_ep.bmp",
+		Description = { "It seems the cult has made a giant serpent. Hurry back to Lunaforma and tell <NAVI>[Tris]<INFO>jor_mbase,204,193,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to Tris"
+	},
+	[18346] = {
+		Title = "Left Out of the Last Battle",
+		IconName = "ico_ep.bmp",
+		Description = { "Tris and the resistance will face the giant serpent. Discuss what comes next with your companions in the <NAVI>[small room]<INFO>mbase_in,64,184,0,101,0</INFO></NAVI> of the central barracks." },
+		Summary = "Talk to Nyar"
+	},
+	[18347] = {
+		Title = "I Can't Sit This Out!",
+		IconName = "ico_ep.bmp",
+		Description = { "Heine urges you to join the battle against the serpent. Hurry to the <NAVI>[ornamental door]<INFO>jor_raise1,128,326,0,101,0</INFO></NAVI> before Tris and the others face it." },
+		Summary = "Talk to Nadoyo"
+	},
+	[18348] = {
+		Title = "Joining the Last Battle",
+		IconName = "ico_ep.bmp",
+		Description = { "Your comrades are searching the hidden place behind the <NAVI>[ornamental door]<INFO>jor_raise1,128,326,0,101,0</INFO></NAVI> for the giant serpent. Fight beside Tris in the last battle recorded in history." },
+		Summary = "Fight in the Last Battle"
+	},
+	[18349] = {
+		Title = "Carried Off by a Cat",
+		IconName = "ico_ep.bmp",
+		Description = { "Nyar appeared out of nowhere and carried you off. She had followed Jormungandr's mana to a hidden space behind the <NAVI>[ornamental altar]<INFO>jor_tmple1,170,307,0,101,0</INFO></NAVI> of Gimle. Follow her." },
+		Summary = "Talk to Nyar"
+	},
+	[18350] = {
+		Title = "Gimle's Suspicious Book",
+		IconName = "ico_ep.bmp",
+		Description = { "Behind Gimle's <NAVI>[altar]<INFO>jor_tmple1,170,307,0,101,0</INFO></NAVI> lies a hidden room with a very suspicious book. Nillem says it is some kind of mechanism and tells you to press it..." },
+		Summary = "Press the suspicious book"
+	},
+	[18351] = {
+		Title = "The Shining Door",
+		IconName = "ico_ep.bmp",
+		Description = { "Pressing the book opened a shining door below the <NAVI>[altar]<INFO>jor_tmple1,170,307,0,101,0</INFO></NAVI>. Jormungandr's mana pours out of it. Go in!" },
+		Summary = "Through the shining door"
+	},
+	[18352] = {
+		Title = "A Real Mission at Last!",
+		IconName = "ico_ep.bmp",
+		Description = { "The hidden place behind the <NAVI>[altar]<INFO>jor_tmple1,170,307,0,101,0</INFO></NAVI> leads further. Follow the surging mana and destroy Jormungandr's mana before it gathers in Rasgand." },
+		Summary = "Break the secret altar"
+	},
+	[18353] = {
+		Title = "The Source Is Cut Off",
+		IconName = "ico_ep.bmp",
+		Description = { "After all that, Nyar seems to have caught the mana meant for Rasgand. Discuss the next steps with <NAVI>[Nyar]<INFO>jor_crk_p,105,108,0,101,0</INFO></NAVI> on the Scale Island of the past." },
+		Summary = "Talk to Nyar"
+	},
+	[18354] = {
+		Title = "Heine's Gift",
+		IconName = "ico_ep.bmp",
+		Description = { "Ilse el Heine called through the tablet: take the new tablet she hid in the <NAVI>[bushes]<INFO>jor_mbase,129,43,0,101,0</INFO></NAVI> near the Lunaforma ferry." },
+		Summary = "Search the bushes"
+	},
+	[18355] = {
+		Title = "Back to Scale Island",
+		IconName = "ico_ep.bmp",
+		Description = { "Return to the <NAVI>[Scale Island]<INFO>jor_crk,137,138,0,101,0</INFO></NAVI> of your own time and see whether everything went as planned." },
+		Summary = "To Scale Island"
+	},
+	[18356] = {
+		Title = "Time to Check the Consequences",
+		IconName = "ico_ep.bmp",
+		Description = { "Go to the Nest of Small Branches and check on Rasgand. <NAVI>[Nyar's Double]<INFO>jor_twig,122,164,0,101,0</INFO></NAVI> can tell how the sealed Rasgand's mana is doing." },
+		Summary = "Talk to Nyar's Double"
+	},
+	[18357] = {
+		Title = "Time to Settle the Curse",
+		IconName = "ico_ep.bmp",
+		Description = { "Voglinde and Lehar went into the barrier to see the end of the curse. Wait and pray they succeed. <NAVI>[Nyar's Double]<INFO>jor_twig,122,164,0,101,0</INFO></NAVI> will know." },
+		Summary = "Wait, then talk to Nyar's Double"
+	},
+	[18358] = {
+		Title = "Rasgand?",
+		IconName = "ico_ep.bmp",
+		Description = { "Rasgand keeps coming back to life. To check one possibility, you will go into the barrier yourself. Enter the Serene Sanctuary through <NAVI>[Nyar's Double]<INFO>jor_twig,122,164,0,101,0</INFO></NAVI>." },
+		Summary = "Check the Serene Sanctuary"
+	},
+	[18359] = {
+		Title = "Butterfly Effect",
+		IconName = "ico_ep.bmp",
+		Description = { "As you thought: the Rasgand inside the barrier was not Rasgand. The mana of the shard of Ymir's heart was imitating him. Tell <NAVI>[Nyar's Double]<INFO>jor_twig,122,164,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to Nyar's Double"
+	},
+	[18360] = {
+		Title = "The Frozen Age of Heroes",
+		IconName = "ico_ep.bmp",
+		Description = { "<NAVI>[Nyar]<INFO>jor_crk,105,108,0,101,0</INFO></NAVI> and Nillem, closing the rift on Scale Island, say something strange has happened. Go to Scale Island." },
+		Summary = "Talk to Nyar"
+	},
+	[18361] = {
+		Title = "Nyar's Primeval Pouch",
+		IconName = "ico_ep.bmp",
+		Description = { "Nyar showed off her primeval pouch." },
+		Summary = "Talk to Nyar"
+	},
+	[8914] = {
+		Title = "An Unexpected Timeline",
+		IconName = "ico_ep.bmp",
+		Description = { "I thought nothing would change within a fixed timeline, but I received a new request. Nilem's comment that this meant the present would no longer change played a role. Let's deliver a letter to <NAVI>[Lalira Wigner]<INFO>jalbe_in,56,138,0,101,0</INFO></NAVI> in Alberta." },
+		Summary = "Talk to Lalira Wigner"
+	},
+	[8915] = {
+		Title = "Nazar's Eye",
+		IconName = "ico_ep.bmp",
+		Description = { "Lalira looks genuinely surprised to receive the letter, but suggests we talk in her office. Speak with <NAVI>[Lalira Wigner]<INFO>jalbe_in,71,174,0,101,0</INFO></NAVI> in the office at the Wigner Headquarters in Alberta." },
+		Summary = "Talk to Lalira Wigner"
+	},
+	[8916] = {
+		Title = "Returning",
+		IconName = "ico_ep.bmp",
+		Description = { "Lalira has decided not to accompany you to Lunaforma. You must convey Lalira's choice to <NAVI>[Ivan]<INFO>jor_mbase,332,148,0,101,0</INFO></NAVI>, who will be waiting at Lunaforma." },
+		Summary = "Talk with Ivan"
+	},
+	[12647] = {
+		Title = "Memory Repetition",
+		IconName = "ico_dq.bmp",
+		Description = { "It seems the time of the final battle repeats itself, slightly changing every day. If I return the next day, the same day will repeat itself. Let's witness the final battle again in the cult's temple, in an unknown location hidden behind a <NAVI>[decorative door]<INFO>jor_raise1,128,326,0,101,0</INFO></NAVI>." },
+		Summary = "Resets at 4 AM"
+	},
+	[12656] = {
+		Title = "Final Battle",
+		IconName = "ico_dq.bmp",
+		Description = { "We cannot even begin to imagine what battle awaits us beyond the gloomy, massive gate before us. Let us go and witness the battle for humanity's survival. Let's witness the final battle again in the cult's temple, in an unknown location hidden behind a <NAVI>[decorative door]<INFO>jor_raise1,128,326,0,101,0</INFO></NAVI>." },
+		Summary = "A Hand in the Flow of History"
+	},
 }
