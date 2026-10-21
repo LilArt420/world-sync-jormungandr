@@ -655,12 +655,40 @@ jor_sanct,271,156,3	script	Nalsioramigand#wsj	EP19_RGAN_D,{
 		callfunc "F_WSJ_Job", "Nalsioramigand", 32, 8847;
 		end;
 	}
+	if (wsj_ep20 >= 250) {
+		switch (callfunc("F_WSJ_Daily", 8853, 8852)) {
+		case 0:
+			mes "[Nalsioramigand]";
+			mes "A new tide, new intermediate Rgans with nothing to do! Could you hand out the jobs again?";
+			next;
+			if (select("Sure.:Not today.") == 2)
+				close;
+			setquest 8853;
+			wsj_d20j = 0;
+			wsj_d20p = 0;
+			mes "[Nalsioramigand]";
+			mes "Start with me, if you like!";
+			close2;
+			callfunc "F_WSJ_Job", "Nalsioramigand", 32, 8847;
+			end;
+		case 1:
+			if ((wsj_d20j & 992) == 992) {
+				mes "[Nalsioramigand]";
+				mes "Everyone has a job! You're the best attendant in the Sacred Roots.";
+				callfunc "F_WSJ_DailyDone", 8853, 8852, 15000000, 1;
+				close;
+			}
+			callfunc "F_WSJ_Job", "Nalsioramigand", 32, 8847;
+			end;
+		}
+	}
 	mes "[Nalsioramigand]";
 	mes "We all have jobs now! I've never been so happy to watch a puddle.";
 	close;
 
 OnInit:
 	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep20 == 240 && (wsj_ep20b & 8) == 0" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "wsj_ep20 >= 250 && isbegin_quest(8853) == 0 && (isbegin_quest(8852) == 0 || checkquest(8852,PLAYTIME) == 2)" );
 	end;
 }
 
@@ -685,17 +713,21 @@ jor_sanct,267,163,3	script	Kljeinamogand#wsj	EP19_RGAN_D,{
 	end;
 }
 
-// Gives one intermediate Rgan a job.
+// Gives one intermediate Rgan a job: in the story (step 240, quest 8846)
+// and again every day afterwards (8853, standby 8852).
 // callfunc "F_WSJ_Job", "<name>", <bit>, <quest>;
 function	script	F_WSJ_Job	{
 	.@name$ = getarg(0);
 	.@bit = getarg(1);
-	if (wsj_ep20 != 240 || isbegin_quest(8846) != 1) {
+	.@daily = (wsj_ep20 != 240 && isbegin_quest(8853) == 1);
+	if (!.@daily && (wsj_ep20 != 240 || isbegin_quest(8846) != 1)) {
 		mes "[" + .@name$ + "]";
 		mes "Rgan rgan. Work is good.";
 		close;
 	}
-	if (wsj_ep20b & .@bit) {
+	.@done = .@daily ? wsj_d20j : wsj_ep20b;
+	.@taken = .@daily ? wsj_d20p : wsj_ep20c;
+	if (.@done & .@bit) {
 		mes "[" + .@name$ + "]";
 		mes "I know where I'm going! Thank you, thank you.";
 		close;
@@ -703,33 +735,43 @@ function	script	F_WSJ_Job	{
 	mes "[" + .@name$ + "]";
 	mes "A job? For me? Where should I go?";
 	next;
-	// Places already handed out are taken (bits 4096..65536 in wsj_ep20c).
 	setarray .@place$, "The puddle by the west wall", "The old tower", "The rubbish dump (2nd floor)", "The junk heap (2nd floor)", "The storehouse (2nd floor)";
 	for (.@i = 0; .@i < 5; .@i++) {
-		if (wsj_ep20c & (1 << .@i))
+		if (.@taken & (1 << .@i))
 			.@opt$[.@i] = .@place$[.@i] + " (taken)";
 		else
 			.@opt$[.@i] = .@place$[.@i];
 	}
 	.@s = select(implode(.@opt$, ":")) - 1;
-	if (wsj_ep20c & (1 << .@s)) {
+	if (.@taken & (1 << .@s)) {
 		mes "[" + .@name$ + "]";
 		mes "Somebody's already there. Two of us would just get in each other's way.";
 		close;
 	}
-	wsj_ep20c |= (1 << .@s);
-	wsj_ep20b |= .@bit;
-	setquest getarg(2);
-	completequest getarg(2);
+	if (.@daily) {
+		wsj_d20p |= (1 << .@s);
+		wsj_d20j |= .@bit;
+		.@done = wsj_d20j;
+	} else {
+		wsj_ep20c |= (1 << .@s);
+		wsj_ep20b |= .@bit;
+		.@done = wsj_ep20b;
+		setquest getarg(2);
+		completequest getarg(2);
+	}
 	mes "[" + .@name$ + "]";
 	mes "Yes! I'll guard it with my life!";
 	mes "Or at least until the next tide.";
-	if ((wsj_ep20b & 992) == 992) {
+	if ((.@done & 992) == 992) {
 		next;
 		mes "^4d4dffAll five intermediate Rgans have somewhere to be. They wriggle off happily.^000000";
-		completequest 8846;
-		wsj_ep20b |= 8;
-		callfunc "F_WSJ_Trust";
+		if (.@daily) {
+			mes "^4d4dffTell <NAVI>[Nalsioramigand]<INFO>jor_sanct,271,156,0,101,0</INFO></NAVI>.^000000";
+		} else {
+			completequest 8846;
+			wsj_ep20b |= 8;
+			callfunc "F_WSJ_Trust";
+		}
 	}
 	close;
 }

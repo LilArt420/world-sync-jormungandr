@@ -6,23 +6,23 @@
 // ------------------------------------------------------------
 // Ivan's shelter (390-479)
 // ------------------------------------------------------------
-jor_mbase,201,190,3	script(CLOAKED)	Ivan#wsj_out	10584,{
-	if (wsj_ep21 == 390) {
+jor_mbase,233,277,3	script(CLOAKED)	Ivan#wsj_out	10584,{
+	if (wsj_ep21 == 329) {
 		cutin "ep21_ivan02.png",2;
 		mes "[Ivan]";
 		mes "Soup! Hot soup for everyone! Free! Courtesy of the Wigner Company and its most handsome son!";
 		next;
-		mes "^4d4dffSo that was the noise. A line of refugees is shuffling toward a set of steaming cauldrons in the north of the base.^000000";
+		mes "^4d4dffA new wave of escapees from the cult has reached Lunaforma. A line of them is shuffling toward a set of steaming cauldrons in the north of the base.^000000";
 		next;
 		mes "[Ivan]";
-		mes "Oh, it's you! Perfect timing. I wanted to talk, but look at this line. Lehar's on the cauldrons and he's drowning.";
+		mes "Oh, it's you! Back from Alberta? Perfect timing. I wanted to talk, but look at this line. Lehar's on the cauldrons and he's drowning.";
 		mes "Help him at the <NAVI>[shelter]<INFO>jor_mbase,214,316,0,101,0</INFO></NAVI>, would you? We'll talk after.";
-		callfunc "F_WSJ_Step21", 400, "23255", "8882";
+		callfunc "F_WSJ_Step21", 400, "16815", "8882";
 		close3;
 	}
 	end;
 OnInit:
-	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 390" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 329" );
 	end;
 }
 
@@ -30,6 +30,10 @@ jor_mbase,201,192,0	script	#wsj_t_out	HIDDEN_WARP_NPC,8,8,{
 	end;
 OnTouch:
 	callfunc "F_WSJ_Scenes";
+	if (isbegin_quest(23255) == 1) {
+		completequest 23255;
+		dispbottom "New arrivals from the cult's lands. Everyone is talking about a serpent. Hear what the witnesses saw.";
+	}
 	end;
 }
 
@@ -797,13 +801,11 @@ jalbe_in,70,46,5	script(CLOAKED)	Maristella#wsj2	10577,{
 		mes "[Maristella]";
 		mes "Thank you for telling me straight. Tell Tris: when Georborg moves on the cult, the Walter fleet sails with it. All of it.";
 		mes "And when we find my ship, I'm the one who brings her home.";
-		callfunc "F_WSJ_Step21", 690, "17769", "18338";
-		callfunc "F_WSJ_Chapter21";
-		wsj_ep21b = 0;
 		next;
-		cutin "",255;
-		mes "^4d4dffBack in Lunaforma, everyone is talking about the 'Firstborn of the Serpent'. Some say it's a giant snake.";
-		mes "^4d4dffIs it real? Ask the people who came back from the cult's lands: an <NAVI>[exhausted soldier]<INFO>jor_mbase,189,249,0,101,0</INFO></NAVI>, an <NAVI>[escaped cultist]<INFO>jor_mbase,218,298,0,101,0</INFO></NAVI> and a <NAVI>[wounded soldier]<INFO>jor_mbase,60,196,0,101,0</INFO></NAVI>.^000000";
+		mes "[Maristella]";
+		mes "...No. Not 'when'. Now. The fog is in tonight, and the Walter rides the fog.";
+		mes "Meet me at the <NAVI>[Alberta port]<INFO>jor_albe,191,186,0,101,0</INFO></NAVI>. We're going to board her.";
+		callfunc "F_WSJ_Step21", 681, "17769", "16816";
 		close;
 	}
 	end;

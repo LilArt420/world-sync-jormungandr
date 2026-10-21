@@ -1,8 +1,8 @@
 {
   "name": "world-sync-jormungandr",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "Lil Art",
-  "description": "The Jormungandr saga, playable: Episode 20 (The Undying One: the Ancient Ice Canyon, the Lair of the Rgans, the Sacred Roots, the Serpent's Maze, the Frozen Zone, the Nest of Small Branches and the undying Rasgand) and Episode 21 (Age of Heroes: back in time to Lunaforma and Alberta of old, the Georborg resistance, the cult's temple Gimle and the last battle against the giant serpent). Full dialogue, the official quest steps, kill goals, rewards and memorial dungeons. Starts from Horuru in the Ice Castle once Episode 19 is done (level 200+); Episode 21 from Voglinde at level 230. Needs the World Sync maps (Ragnarok Offline 1.6.6+).",
+  "description": "The Jormungandr saga, playable: Episode 20 (The Undying One: the Ancient Ice Canyon, the Lair of the Rgans, the Sacred Roots, the Serpent's Maze, the Frozen Zone, the Nest of Small Branches and the undying Rasgand) and Episode 21 (Age of Heroes: back in time to Lunaforma and Alberta of old, the Georborg resistance, the cult's temple Gimle and the last battle against the giant serpent). Full dialogue, the official quest steps, kill goals, rewards and memorial dungeons, plus the dailies, the ghost ship, and the Ice Castle and Lunaforma traders and enchanters. Starts from Horuru in the Ice Castle once Episode 19 is done (level 200+); Episode 21 from Voglinde at level 230. Needs the World Sync maps (Ragnarok Offline 1.6.6+).",
   "requires": {
     "app": ">=1.6.7",
     "era": "renewal"

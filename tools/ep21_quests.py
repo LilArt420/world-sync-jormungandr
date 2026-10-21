@@ -231,3 +231,118 @@ EP21 = {
             nav('Nyar', 'jor_crk', 105, 108) + ' and Nillem, closing the rift on Scale Island, say something strange has happened. Go to Scale Island.'),
     18361: ('Nyar\'s Primeval Pouch', 'Talk to Nyar', 'Nyar showed off her primeval pouch.'),
 }
+
+
+# ---- Episode 21: side stories and dailies (Korean-only in the client) ----
+def _d(ids, title, summ, desc):
+    for i in ids:
+        EP21[i] = (title, summ, desc)
+
+
+_d([17770], 'The Roegenburg Brothers', 'Talk to Reinhardt',
+   nav('Reinhardt', 'mbase_in', 118, 186) + ', staying in the central barracks, has a lot to say to his brother.')
+_d([17771], 'The Roegenburg Brothers', 'To Tris',
+   'Take Reinhardt\'s idea to ' + nav('Tris', 'jor_mbase', 140, 201) + ', who leads Lunaforma.')
+_d([17772], 'The Roegenburg Brothers', 'To Reinhardt',
+   'Tris will come to see ' + nav('Reinhardt', 'mbase_in', 118, 186) + ' soon. Go back to the central barracks first.')
+_d([17773], 'The Roegenburg Brothers', 'To the canteen',
+   'Tris suggests going with Reinhardt to see Wilhelm at the ' + nav('canteen', 'jor_mbase', 197, 277) + '.')
+_d([17774], 'The Roegenburg Brothers', 'Talk to Reinhardt',
+   'Believers crowd around ' + nav('Reinhardt', 'jor_mbase', 194, 279) + ' at the canteen. What is going on?')
+_d([17775], 'The Roegenburg Brothers', 'Talk to Wilhelm',
+   nav('Wilhelm', 'jor_mbase', 196, 280) + ', working at the canteen, comes over with a worried face.')
+_d([17776], 'The Roegenburg Brothers', 'Talk to Tris',
+   nav('Tris', 'jor_mbase', 197, 277) + ' is delighted to see the brothers talking. Ask Tris if there is more to do in Lunaforma.')
+_d([17777], 'A Safe Way Out 1', 'North of the Raised Land',
+   'Defeat 300 monsters of any kind in the north of the Raised Land and report to ' + nav('Tris', 'jor_mbase', 140, 201) + '.')
+_d([17778], 'A Safe Way Out 2', 'South of the Raised Land',
+   'Defeat 300 monsters of any kind in the south of the Raised Land and report to ' + nav('Tris', 'jor_mbase', 140, 201) + '.')
+_d([17779, 17780], '[Standby] A Safe Way Out', 'Reset at 04:00',
+   'Well done. Rest, and come back to ' + nav('Tris', 'jor_mbase', 140, 201) + ' after dawn.')
+_d([17781], 'Supply Plan', 'Supply plan explained', 'You heard Mandel explain how Lunaforma gets its supplies.')
+for _i, (_fam, _n, _src) in enumerate([('Geoborg', 'Jormungandr Catechism', 'Yormi Evangelists'),
+                                       ('Nerius', 'Ice Star Candy', 'Ice Seahorses'),
+                                       ('Heine', 'Flashy Accessory', 'Yortus Shamans'),
+                                       ('Roegenburg', 'Snake Shape Dagger Piece', 'Yordos Executors'),
+                                       ('Walter', 'Fluffy Core', 'Cliolimas'),
+                                       ('Wigner', 'Guano', 'Seawinds'),
+                                       ('Richard', 'Stiff Limb', 'Lettersters')]):
+    _d([17782 + _i], 'Supply Request: %s' % _fam, '10 %s' % _n,
+       'Bring 10 %s, from the %s, to %s in Lunaforma.' % (_n, _src, nav('Mandel', 'jor_mbase', 217, 172)))
+_d([17789], '[Standby] Supply Requests', 'Reset at 04:00',
+   'Good work. Rest, and after dawn see ' + nav('Mandel', 'jor_mbase', 217, 172) + ' for a new list.')
+_d([19184], 'Meeting Counselor Ulus', '', 'You met Counselor Ulus.')
+_d([19185], '[Standby] Those Haunted by Nightmares', 'Reset at 04:00',
+   nav('Counselor Ulus', 'jor_albe', 160, 137) + ' hopes you\'ll help again tomorrow.')
+for _i, (_n, _x, _y, _t) in enumerate([('Yukter Ppuppu', 89, 103, 'Left everything at home to escape the cult. Pretends not to, but misses home terribly. Listen well.'),
+                                       ('Totor Amber', 136, 196, 'Has nightmares since seeing the refugees brought to Alberta. Help ease the shock.'),
+                                       ('Gaerju Sansha', 49, 244, 'Rescued from the cult\'s prison by the resistance. Acts tough; probably isn\'t.'),
+                                       ('Mogaja Shield', 116, 214, 'Rescued from the cult at the last moment. Still stammers. Be patient.')]):
+    _d([19186 + _i], 'Counselling Request', 'Talk to %s' % _n,
+       'Request form. Name: %s. %s' % (nav(_n, 'jor_albe', _x, _y), _t))
+_d([19190], 'Counselling Done', 'Talk to Counselor Ulus',
+   'The session went well. Go to ' + nav('Counselor Ulus', 'jor_albe', 160, 137) + '.')
+for _i, _n in enumerate(['Yukter Ppuppu', 'Totor Amber', 'Gaerju Sansha', 'Mogaja Shield', 'Libra']):
+    _d([19191 + _i], 'Meeting %s' % _n, '', 'You met %s.' % _n)
+_d([19196], 'News by Scent', 'Deliver the paper',
+   'Libra wants a crumpled paper delivered to someone in the ' + nav('middle of the camp', 'jor_base', 131, 182) + '.')
+_d([19197], '[Standby] News by Scent', 'Reset at 04:00',
+   'You did what ' + nav('Libra', 'jor_base', 314, 138) + ' asked. There may be more tomorrow.')
+_d([19198], 'Volunteer Balun Wok', '', 'You met Balun Wok.')
+_d([19199], '[Standby] Never Enough Food', 'Reset at 04:00',
+   'You brought ' + nav('Balun Wok', 'jor_mbase', 213, 280) + ' today\'s food. Help again tomorrow?')
+_d([19200], 'Food Run (Fishing)', '10 of the same catch',
+   'Catch 10 of the same seafood and bring them to ' + nav('Balun Wok', 'jor_mbase', 213, 280) + '. Fishing spots: '
+   + nav('north-east', 'jor_mbase', 295, 288) + ', ' + nav('east', 'jor_mbase', 331, 194) + ', '
+   + nav('south', 'jor_mbase', 189, 26) + ', ' + nav('west', 'jor_mbase', 21, 93) + ', ' + nav('north-west', 'jor_mbase', 23, 151) + '.')
+_d([19201], 'Food Run (Grass)', '10 of the same grass',
+   'Gather 10 of the same kind of edible grass around Lunaforma and bring them to ' + nav('Balun Wok', 'jor_mbase', 213, 280) + '.')
+_d([19202], 'Food Run (Seasoning)', 'Scrape the salt',
+   'Balun Wok asks you to scrape the glittering natural seasoning off the rocks of the '
+   + nav('Lunaforma beach', 'jor_mbase', 340, 30) + '.')
+_d([19203], 'Food Run (Seasoning)', 'To Balun Wok',
+   'You have the seasoning. Take it to ' + nav('Balun Wok', 'jor_mbase', 213, 280) + '.')
+_d([23256], 'Never Credited', '3 Bright Eyes',
+   'Heine feels strange mana nearby and wants to measure it beyond Comodo: bring 3 Bright Eyes, from the Skipskippers, to '
+   + nav('Heine', 'mbase_in', 21, 168) + ' in the private room of the barracks.')
+_d([23257], '[Standby] Never Credited', 'Reset at 04:00',
+   'Heine will start measuring once there is enough data. Visit ' + nav('Heine', 'mbase_in', 21, 168) + ' again tomorrow.')
+_d([24019], 'Mercenaries, They Call It...', 'Talk to the mercenaries',
+   'Find out where Lunaforma needs help. Ask the ' + nav('mercenaries', 'jor_mbase', 300, 151) + ' around the base.')
+_d([24020], 'Mercenaries, They Call It...', 'Talk to the mercenaries',
+   'Lunaforma is short of people who can fix boats. Ask another ' + nav('mercenary', 'jor_mbase', 198, 251) + '.')
+_d([24021], 'Mercenaries, They Call It...', 'Talk to the mercenaries',
+   'People need fresh food. Ask another ' + nav('mercenary', 'jor_mbase', 133, 128) + '.')
+_d([24022], 'Mercenaries, They Call It...', 'Talk to the mercenaries',
+   'The healers need medicine. Ask another ' + nav('mercenary', 'jor_mbase', 248, 103) + '.')
+_d([24023], 'Mercenaries, They Call It...', 'Talk to Valdaris',
+   'Nobody sorts the supplies, so nobody can use them. Report to ' + nav('Valdaris', 'mbase_in', 302, 123) + ' in the office.')
+for _i in range(5):
+    _d([24024 + _i], 'Even a Cat\'s Paw Will Do!', 'Check the applicants',
+       '[Richard\'s Mercenaries] Find applicants around Lunaforma, read their forms and send the promising ones to the mercenaries. (%d left)' % (5 - _i))
+_d([24029], 'Even a Cat\'s Paw Will Do!', 'Report to Valdaris',
+   '[Richard\'s Mercenaries] You checked the applicants. Go back to ' + nav('Valdaris', 'mbase_in', 302, 123) + '.')
+_d([24031], 'Fresh Taste!', 'Gather ingredients',
+   '[Richard\'s Mercenaries] Bring 10 Skipskipper Fins and 10 Thick Flesh (Rockstrikers) to ' + nav('Valdaris', 'mbase_in', 302, 123) + '.')
+_d([24033], 'Shells for Wounds!', '50 Scallegs',
+   '[Richard\'s Mercenaries] Scallegs are tasty, and their shells make salve. Defeat 50 and report to ' + nav('Valdaris', 'mbase_in', 302, 123) + '.')
+_d([24035], 'For the Children', '50 Velellings',
+   '[Richard\'s Mercenaries] Velelling jelly for the children\'s snacks. Defeat 50 and report to ' + nav('Valdaris', 'mbase_in', 302, 123) + '.')
+_d([24037], 'A Clean Finish (1)', '100 on Gimle 1F',
+   '[Richard\'s Mercenaries] Clean up the 1st floor of Gimle, the cult\'s temple, and report to ' + nav('Valdaris', 'mbase_in', 302, 123) + '.')
+_d([24039], 'A Clean Finish (2)', '100 on Gimle 2F',
+   '[Richard\'s Mercenaries] Clean up the 2nd floor of Gimle and report to ' + nav('Valdaris', 'mbase_in', 302, 123) + '.')
+for _i in (24030, 24032, 24034, 24036, 24038, 24040):
+    _d([_i], '[Standby] Richard\'s Mercenaries', 'Reset at 04:00', 'You helped the mercenaries. Come back after 04:00.')
+_d([24041], 'Mercenaries, They Call It... (2)', 'Talk to Lee', 'Help Lee, in the mercenaries\' office, investigate Yorskalf.')
+_d([24042], '[240] Distraction on Yorskalf 1F (Daily)', 'Defeat 300',
+   'Defeat 300 monsters on Yorskalf\'s 1st floor and return to ' + nav('Lee', 'mbase_in', 298, 121) + '.')
+_d([24043], '[Standby] Yorskalf 1F (Daily)', 'Reset at 04:00', 'You defeated 300 monsters on Yorskalf\'s 1st floor. That\'s it for today.')
+_d([24044], '[240] Uproar on Yorskalf 1F (Weekly)', 'Defeat 1500',
+   'Defeat 1500 monsters on Yorskalf\'s 1st floor and return to ' + nav('Lee', 'mbase_in', 298, 121) + '.')
+_d([24045], '[Standby] Yorskalf 1F (Weekly)', 'Reset Friday 04:00', 'You defeated 1500 monsters on Yorskalf\'s 1st floor. That\'s it for this week.')
+_d([24046], '[250] Rampage on Yorskalf 2F (Daily)', 'Defeat 300',
+   'Defeat 300 monsters on Yorskalf\'s 2nd floor and return to ' + nav('Lee', 'mbase_in', 298, 121) + '.')
+_d([24047], '[Standby] Yorskalf 2F (Daily)', 'Reset at 04:00', 'You defeated 300 monsters on Yorskalf\'s 2nd floor. That\'s it for today.')
+_d([24048], '[250] Frenzy on Yorskalf 2F (Weekly)', 'Defeat 1500',
+   'Defeat 1500 monsters on Yorskalf\'s 2nd floor and return to ' + nav('Lee', 'mbase_in', 298, 121) + '.')

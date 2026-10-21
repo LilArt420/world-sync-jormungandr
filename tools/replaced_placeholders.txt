@@ -1,21 +1,52 @@
-18985	mbase_in,299,126	Stack of Documents#ws18985	Stack of Documents#wsj
-18986	mbase_in,302,123	Valdaris#ws18986	Valdaris#wsj
-19079	jor_crk,105,108	Nyar#ws19079	Nyar#wsj_crk2
-19085	jor_crk_p,105,108	Nyar#ws19085	Nyar#wsj_p
-19097	jor_mbase,189,249	Exhausted Soldier#ws19097	Exhausted Soldier#wsj
-19098	jor_mbase,218,298	Escaped Cultist#ws19098	Escaped Cultist#wsj
-19099	jor_mbase,60,196	Wounded Soldier#ws19099	Wounded Soldier#wsj
-19106	jor_raise1,128,326	Ornamental Door#ws19106	Ornamental Door#wsj
-19136	jor_twig,122,164	Nyar's Double#ws19136	Nyar's Double#wsj
-19153	jor_mbase,53,150	Freya Believer#ws19153	Freya Believer#wsj1
-19154	jor_mbase,52,148	Freya Believer#ws19154	Freya Believer#wsj1
-19155	jor_mbase,51,152	Freya Believer#ws19155	Freya Believer#wsj1
-19156	jor_mbase,51,150	Freya Believer#ws19156	Freya Believer#wsj1
-19157	jor_mbase,53,153	Freya Believer#ws19157	Freya Believer#wsj1
-19177	jor_albe,192,209	Nilem#ws19177	Nillem#wsj_albe
-19233	jor_mbase,214,316	Lehar#ws19233	Lehar#wsj_lf
-19282	jor_mbase,185,311	Lyric#ws19282	Lyric#wsj
-19290	jalbe_in,56,138	Lalaira Wigner#ws19290	Lalaira Wigner#wsj
-19354	jor_mbase,233,277	Ivan#ws19354	Ivan#wsj_lf2
-19355	jor_mbase,332,148	Ivan#ws19355	Ivan#wsj_end
-19359	jalbe_in,71,174	Lalaira Wigner#ws19359	Lalaira Wigner#wsj_off
+14438	jor_back5,71,204	Magical Object#ws14438	Magical Object#wsj01
+14439	jor_back5,365,187	Magical Object#ws14439	Magical Object#wsj02
+14440	jor_back5,203,256	Magical Object#ws14440	Magical Object#wsj03
+14441	jor_back5,245,38	Magical Object#ws14441	Magical Object#wsj04
+14442	jor_back5,94,281	Magical Object#ws14442	Magical Object#wsj05
+14443	jor_back5,170,362	Magical Object#ws14443	Magical Object#wsj06
+14444	jor_back5,230,349	Magical Object#ws14444	Magical Object#wsj07
+14445	jor_back6,214,80	Magical Object#ws14445	Magical Object#wsj08
+14446	jor_back6,51,47	Magical Object#ws14446	Magical Object#wsj09
+14447	jor_back6,122,180	Magical Object#ws14447	Magical Object#wsj10
+14448	jor_back6,310,304	Magical Object#ws14448	Magical Object#wsj11
+14449	jor_back6,45,38	Magical Object#ws14449	Magical Object#wsj12
+14450	jor_back6,190,201	Magical Object#ws14450	Magical Object#wsj13
+14451	jor_back6,330,22	Magical Object#ws14451	Magical Object#wsj14
+18790	jor_mbase,217,172	Mandel#ws18790	Mandel#wsj
+18933	jor_albe,160,137	Counselor Ulus#ws18933	Counselor Ulus#wsj
+18934	jor_albe,89,103	Yukter Ppuppu#ws18934	Yukter Ppuppu#wsj
+18935	jor_albe,136,196	Totor Amber#ws18935	Totor Amber#wsj
+18936	jor_albe,49,244	Gaerju Sansha#ws18936	Gaerju Sansha#wsj
+18937	jor_albe,116,214	Mogaja Shield#ws18937	Mogaja Shield#wsj
+18938	jor_base,314,138	Libra#ws18938	Libra#wsj
+18939	jor_base,131,182	Parex#ws18939	Parex#wsj
+18943	jor_mbase,213,280	Volunteer Balun Wok#ws18943	Volunteer Balun Wok#wsj
+19043	jor_mbase,300,151	Mercenary#ws19043	Mercenary#wsj_h1
+19044	jor_mbase,198,251	Mercenary#ws19044	Mercenary#wsj_h2
+19045	jor_mbase,133,128	Mercenary#ws19045	Mercenary#wsj_h3
+19046	jor_mbase,248,103	Mercenary#ws19046	Mercenary#wsj_h4
+19047	jor_mbase,306,140	Mercenary Applicant#ws19047	Mercenary Applicant#wsj19
+19048	jor_mbase,268,197	Mercenary Applicant#ws19048	Mercenary Applicant#wsj16
+19049	jor_mbase,274,237	Mercenary Applicant#ws19049	Mercenary Applicant#wsj17
+19050	jor_mbase,243,246	Mercenary Applicant#ws19050	Mercenary Applicant#wsj15
+19051	jor_mbase,211,232	Mercenary Applicant#ws19051	Mercenary Applicant#wsj11
+19052	jor_mbase,183,197	Mercenary Applicant#ws19052	Mercenary Applicant#wsj08
+19053	jor_mbase,128,186	Mercenary Applicant#ws19053	Mercenary Applicant#wsj02
+19054	jor_mbase,133,137	Mercenary Applicant#ws19054	Mercenary Applicant#wsj03
+19055	jor_mbase,100,114	Mercenary Applicant#ws19055	Mercenary Applicant#wsj01
+19056	jor_mbase,148,98	Mercenary Applicant#ws19056	Mercenary Applicant#wsj05
+19057	jor_mbase,159,129	Mercenary Applicant#ws19057	Mercenary Applicant#wsj06
+19058	jor_mbase,172,158	Mercenary Applicant#ws19058	Mercenary Applicant#wsj07
+19059	jor_mbase,217,133	Mercenary Applicant#ws19059	Mercenary Applicant#wsj12
+19060	jor_mbase,228,98	Mercenary Applicant#ws19060	Mercenary Applicant#wsj14
+19061	jor_mbase,202,70	Mercenary Applicant#ws19061	Mercenary Applicant#wsj10
+19062	jor_mbase,219,47	Mercenary Applicant#ws19062	Mercenary Applicant#wsj13
+19063	jor_mbase,278,52	Mercenary Applicant#ws19063	Mercenary Applicant#wsj18
+19064	jor_mbase,351,85	Mercenary Applicant#ws19064	Mercenary Applicant#wsj20
+19065	jor_mbase,185,125	Mercenary Applicant#ws19065	Mercenary Applicant#wsj09
+19066	jor_mbase,137,258	Mercenary Applicant#ws19066	Mercenary Applicant#wsj04
+19069	mbase_in,298,121	Lee#ws19069	Lee#wsj
+19143	mbase_in,220,127	Wigner Company Member Popo#ws19143	Wigner Company Member Popo#wsj
+19144	mbase_in,228,131	Mage Lobelia#ws19144	Mage Lobelia#wsj
+19350	mbase_in,232,125	Blacksmith Sansan#ws19350	Blacksmith Sansan#wsj
+19351	mbase_in,232,122	Wigner Company Exchanger#ws19351	Wigner Company Exchanger#wsj

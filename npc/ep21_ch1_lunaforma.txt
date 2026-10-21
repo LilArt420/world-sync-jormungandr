@@ -431,16 +431,18 @@ mbase_in,302,123,3	script	Valdaris#wsj	10580,{
 		callfunc "F_WSJ_Step21", 160, "24006", "24007";
 		close3;
 	}
+	if (wsj_ep21 >= 280) {
+		callfunc "F_WSJ_Valdaris";
+		end;
+	}
 	cutin "ep21_valdaris01.png",2;
 	mes "[Valdaris]";
-	if (wsj_ep21 >= 280)
-		mes "The mercenaries thank you. Richard won't, but he never thanks anyone.";
-	else
-		mes "I keep the books, the roster and Richard alive. Not always in that order.";
+	mes "I keep the books, the roster and Richard alive. Not always in that order.";
 	close3;
 
 OnInit:
 	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 150" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(24023) == 1 || isbegin_quest(24029) == 1" );
 	end;
 }
 
@@ -814,8 +816,16 @@ jor_albe,192,209,3	script(CLOAKED)	Nillem#wsj_albe	4_M_NILLEM,{
 		next;
 		mes "[Nillem]";
 		mes "Tell Heine I'm fine. And tell Tris that more people are talking about a ^FF0000giant serpent^000000 every week. I don't like it.";
-		mes "Go back to Lunaforma. I'll stay a little longer.";
-		callfunc "F_WSJ_Step21", 330, "23248", "23249";
+		next;
+		cutin "ep21_epesto01.png",2;
+		mes "[Epesto Walter Megas]";
+		mes "Nillem, is this the one? Good. You look like you can carry things.";
+		mes "Epesto Walter Megas. I run the Walter fleet's business in Alberta while the captain is at sea.";
+		next;
+		mes "[Epesto Walter Megas]";
+		mes "The port is drowning in refugees and cargo, and I'm short of honest hands. If Heine wants you here, you'll work while you wait.";
+		mes "Go to the <NAVI>[beach]<INFO>jor_albe,239,115,0,101,0</INFO></NAVI> and find John. He'll give you something to do.";
+		callfunc "F_WSJ_Step21", 321, "23248", "16820";
 		close3;
 	}
 	cutin "ep172_nillem01.png",2;
@@ -836,10 +846,10 @@ OnTouch:
 
 // The central barracks.
 mbase_in,92,123,3	script(CLOAKED)	Tris#wsj_bk	4_EP21_TRIS,{
-	if (wsj_ep21 == 330) {
+	if (wsj_ep21 == 684) {
 		cutin "ep21_tris01.png",2;
 		mes "[Tris]";
-		mes "Welcome back. Heine wanted a word, she's... hold on.";
+		mes "Welcome back. You found the ghost ship, I hear. Heine wanted a word, she's... hold on.";
 		next;
 		mes "^4d4dffThe tablet in Tris's hands flickers. Heine's face breaks into stripes, then into noise, then nothing.^000000";
 		next;
@@ -857,7 +867,7 @@ mbase_in,92,123,3	script(CLOAKED)	Tris#wsj_bk	4_EP21_TRIS,{
 		cutin "ep21_tris01.png",2;
 		mes "[Tris]";
 		mes "Use the <NAVI>[private room]<INFO>mbase_in,21,168,0,101,0</INFO></NAVI> at the end of the west hall. It's quiet there.";
-		callfunc "F_WSJ_Step21", 340, "23249", "23250";
+		callfunc "F_WSJ_Step21", 685, "16818,23249", "23250";
 		close3;
 	}
 	cutin "ep21_tris01.png",2;
@@ -865,22 +875,22 @@ mbase_in,92,123,3	script(CLOAKED)	Tris#wsj_bk	4_EP21_TRIS,{
 	mes "Heine's in the private room. Figuratively.";
 	close3;
 OnInit:
-	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 330" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 684" );
 	end;
 }
 
 mbase_in,21,168,3	script(CLOAKED)	Heine's Tablet#wsj	4_EP21_HEINE_TAB,{
 	cutin "ep21_ilse_heine01.png",1;
-	if (wsj_ep21 == 340) {
+	if (wsj_ep21 == 685) {
 		mes "[Ilse el Heine]";
 		mes "Quiet, no drafts, no Tris breathing down my neck. Perfect.";
 		next;
 		mes "[Ilse el Heine]";
 		mes "Remote repairs never work the first time, so bring spares. I need ^0000FF2 Vellelopy^000000, the jelly the Velellings carry on the Raised Land.";
-		callfunc "F_WSJ_Step21", 350, "23250", "23251";
+		callfunc "F_WSJ_Step21", 686, "23250", "23251";
 		close3;
 	}
-	if (wsj_ep21 == 350) {
+	if (wsj_ep21 == 686) {
 		if (countitem(1001643) < 2) {
 			mes "[Ilse el Heine]";
 			mes "Two Vellelopy. From the Velellings on the <NAVI>[Raised Land]<INFO>jor_raise1,301,10,0,101,0</INFO></NAVI>.";
@@ -889,7 +899,7 @@ mbase_in,21,168,3	script(CLOAKED)	Heine's Tablet#wsj	4_EP21_HEINE_TAB,{
 		delitem 1001643,2;
 		mes "[Ilse el Heine]";
 		mes "Good. Put one on the crystal, there, where it's cracked. Hold it steady while I pour mana through.";
-		callfunc "F_WSJ_Step21", 360, "23251", "23252";
+		callfunc "F_WSJ_Step21", 687, "23251", "23252";
 		next;
 		progressbar "ffffff", 5;
 		mes "^4d4dffThe jelly fizzes, glows, and turns to ash.^000000";
@@ -897,10 +907,10 @@ mbase_in,21,168,3	script(CLOAKED)	Heine's Tablet#wsj	4_EP21_HEINE_TAB,{
 		cutin "ep21_ilse_heine03.png",1;
 		mes "[Ilse el Heine]";
 		mes "...Told you. Never the first time. Again, with the other one.";
-		callfunc "F_WSJ_Step21", 370, "23252", "23253";
+		callfunc "F_WSJ_Step21", 688, "23252", "23253";
 		close3;
 	}
-	if (wsj_ep21 == 370) {
+	if (wsj_ep21 == 688) {
 		mes "[Ilse el Heine]";
 		mes "Steady... steady...";
 		next;
@@ -919,7 +929,7 @@ mbase_in,21,168,3	script(CLOAKED)	Heine's Tablet#wsj	4_EP21_HEINE_TAB,{
 		next;
 		mes "[Ilse el Heine]";
 		mes "From now on the tablet will do things it never did before. You'll see. Go tell Tris; the resistance needs to hear this.";
-		callfunc "F_WSJ_Step21", 380, "23253", "23254";
+		callfunc "F_WSJ_Step21", 689, "23253", "23254";
 		close3;
 	}
 	mes "[Ilse el Heine]";
@@ -927,13 +937,13 @@ mbase_in,21,168,3	script(CLOAKED)	Heine's Tablet#wsj	4_EP21_HEINE_TAB,{
 	close3;
 
 OnInit:
-	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 340 || wsj_ep21 == 370" );
-	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 350 && countitem(1001643) >= 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 685 || wsj_ep21 == 688" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 686 && countitem(1001643) >= 2" );
 	end;
 }
 
 mbase_in,92,121,3	script(CLOAKED)	Tris#wsj_bk2	4_EP21_TRIS,{
-	if (wsj_ep21 == 380) {
+	if (wsj_ep21 == 689) {
 		cutin "ep21_tris01.png",2;
 		mes "[Tris]";
 		mes "From the future. All right. That explains the clothes.";
@@ -947,17 +957,18 @@ mbase_in,92,121,3	script(CLOAKED)	Tris#wsj_bk2	4_EP21_TRIS,{
 		mes "Aurelie, Leon, a court mage, a cat, a time-lost adventurer. And a cult that grows stronger every day.";
 		mes "Then we stop waiting. Georborg prepares for ^FF0000all-out war^000000. We end this.";
 		next;
-		mes "^4d4dffShouts outside. Someone is yelling for help, and then laughing, and then yelling again.^000000";
+		mes "^4d4dffShouting outside. A new group of refugees has come in from the cult's lands, and they're all talking at once.^000000";
 		next;
 		mes "[Tris]";
-		mes "What now? Go and see what's going on <NAVI>[outside]<INFO>jor_mbase,201,192,0,101,0</INFO></NAVI>.";
-		callfunc "F_WSJ_Step21", 390, "23254", "23255";
+		mes "Go and see what's going on <NAVI>[outside]<INFO>jor_mbase,201,192,0,101,0</INFO></NAVI>. If it's about that serpent again, I want every word.";
+		callfunc "F_WSJ_Step21", 690, "23254", "23255,18338";
+		wsj_ep21b = 0;
 		callfunc "F_WSJ_Chapter21";
 		close3;
 	}
 	end;
 OnInit:
-	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 380" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 689" );
 	end;
 }
 

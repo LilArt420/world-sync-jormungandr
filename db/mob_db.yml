@@ -9,6 +9,10 @@
 # 22371 EP21_YOR_TAN (Eroded Tan), Episode 21's last battle: the client knows
 # it, rAthena has no entry. Stats follow the Yortus of Gimle, the episode's
 # strongest field monsters.
+#
+# 22369/22370, the drowned crew and captain of the ghost ship (1@wtgs): known to
+# the client, not to rAthena. Stats follow the ship's place in the story: a
+# crew below the Yortus, a captain a little below the Eroded Tan.
 Header:
   Type: MOB_DB
   Version: 5
@@ -91,3 +95,70 @@ Body:
         Rate: 3000
       - Item: aegis_1001638
         Rate: 500
+  - Id: 22369
+    AegisName: EP21_MD_SAILOR
+    Name: Drowned Sailor
+    Level: 238
+    Hp: 8000000
+    BaseExp: 250000
+    JobExp: 175000
+    Attack: 9800
+    Attack2: 2200
+    Defense: 280
+    MagicDefense: 120
+    Resistance: 180
+    MagicResistance: 130
+    Str: 95
+    Agi: 80
+    Vit: 85
+    Int: 70
+    Dex: 90
+    Luk: 60
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Undead
+    Element: Undead
+    ElementLevel: 2
+    WalkSpeed: 160
+    AttackDelay: 1000
+    AttackMotion: 1000
+    DamageMotion: 480
+    Ai: 04
+  - Id: 22370
+    AegisName: EP21_MD_CAPTAIN
+    Name: Ghost Ship Captain
+    Level: 245
+    Hp: 120000000
+    BaseExp: 550000
+    JobExp: 385000
+    Attack: 15000
+    Attack2: 4000
+    Defense: 330
+    MagicDefense: 180
+    Resistance: 250
+    MagicResistance: 190
+    Str: 115
+    Agi: 90
+    Vit: 105
+    Int: 100
+    Dex: 105
+    Luk: 90
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Undead
+    Element: Undead
+    ElementLevel: 3
+    WalkSpeed: 170
+    AttackDelay: 1000
+    AttackMotion: 1300
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Drops:
+      - Item: Cap_Of_G_Ship_Card
+        Rate: 1
+        StealProtected: true

@@ -487,6 +487,7 @@ OnRasgandDown:
 		next;
 		mes "^4d4dffNyar nudges a shard of dark ice toward you. It pulses, faintly, like a heartbeat.^000000";
 		getitem 1001254,1;	// Ep20_Ymir_Heart
+		getitem 102567,1;	// Lasgand_Antiquity
 		next;
 		cutin "ep20_nyar04.png",1;
 		mes "[Nyar]";
@@ -505,10 +506,16 @@ OnRasgandDown:
 	cutin "ep20_nyar01.png",1;
 	mes "[Nyar]";
 	mes "^0000FFIt is over, little one. Go home.^000000";
-	next;
+	// Repeat runs through the Branch of the World Tree (12591).
+	if (isbegin_quest(12591) == 1) {
+		completequest 12591;
+		erasequest 12591;
+		getitem 102567,1;	// Lasgand_Antiquity
+		getexp2 30000000,0;
+	}
 	close2;
 	cutin "",255;
-	warp "icecastle",158,204;
+	warp "jor_twig",113,143;
 	end;
 }
 

@@ -870,13 +870,13 @@ QuestInfoList = {
 	[8890] = {
 		Title = "Ivan's Errand",
 		IconName = "ico_ep.bmp",
-		Description = { "Meet <NAVI>[Lalira Wigner]<INFO>jalbe_in,56,138,0,101,0</INFO></NAVI> at the top of Wigner in Alberta." },
-		Summary = "Talk to Lalira Wigner"
+		Description = { "Meet <NAVI>[Lalaira Wigner]<INFO>jalbe_in,56,138,0,101,0</INFO></NAVI> at the top of Wigner in Alberta." },
+		Summary = "Talk to Lalaira Wigner"
 	},
 	[8891] = {
 		Title = "Ivan's Old Folly",
 		IconName = "ico_ep.bmp",
-		Description = { "At the top of Alberta's Wigner, Lara told Ivan <NAVI>[where]<INFO>jalbe_in,73,187,0,101,0</INFO></NAVI> the item he had requested was." },
+		Description = { "At the top of Alberta's Wigner, Lalaira told Ivan <NAVI>[where]<INFO>jalbe_in,73,187,0,101,0</INFO></NAVI> the item he had requested was." },
 		Summary = "Finding the Chest"
 	},
 	[8892] = {
@@ -894,7 +894,7 @@ QuestInfoList = {
 	[8894] = {
 		Title = "The recipient of the letter",
 		IconName = "ico_ep.bmp",
-		Description = { "Laraira Wigner, at the top of Wigner, asked you to deliver a letter to <NAVI>[Captain Walter]<INFO>jalbe_in,68,46,0,101,0</INFO></NAVI>. Could it be an important letter?" },
+		Description = { "Lalaira Wigner, at the top of Wigner, asked you to deliver a letter to <NAVI>[Captain Walter]<INFO>jalbe_in,68,46,0,101,0</INFO></NAVI>. Could it be an important letter?" },
 		Summary = "Talk with Maristella Walter"
 	},
 	[17752] = {
@@ -1152,14 +1152,14 @@ QuestInfoList = {
 	[8914] = {
 		Title = "An Unexpected Timeline",
 		IconName = "ico_ep.bmp",
-		Description = { "I thought nothing would change within a fixed timeline, but I received a new request. Nilem's comment that this meant the present would no longer change played a role. Let's deliver a letter to <NAVI>[Lalira Wigner]<INFO>jalbe_in,56,138,0,101,0</INFO></NAVI> in Alberta." },
-		Summary = "Talk to Lalira Wigner"
+		Description = { "I thought nothing would change within a fixed timeline, but I received a new request. Nillem's comment that this meant the present would no longer change played a role. Let's deliver a letter to <NAVI>[Lalaira Wigner]<INFO>jalbe_in,56,138,0,101,0</INFO></NAVI> in Alberta." },
+		Summary = "Talk to Lalaira Wigner"
 	},
 	[8915] = {
 		Title = "Nazar's Eye",
 		IconName = "ico_ep.bmp",
-		Description = { "Lalira looks genuinely surprised to receive the letter, but suggests we talk in her office. Speak with <NAVI>[Lalira Wigner]<INFO>jalbe_in,71,174,0,101,0</INFO></NAVI> in the office at the Wigner Headquarters in Alberta." },
-		Summary = "Talk to Lalira Wigner"
+		Description = { "Lalira looks genuinely surprised to receive the letter, but suggests we talk in her office. Speak with <NAVI>[Lalaira Wigner]<INFO>jalbe_in,71,174,0,101,0</INFO></NAVI> in the office at the Wigner Headquarters in Alberta." },
+		Summary = "Talk to Lalaira Wigner"
 	},
 	[8916] = {
 		Title = "Returning",
@@ -1178,5 +1178,617 @@ QuestInfoList = {
 		IconName = "ico_dq.bmp",
 		Description = { "We cannot even begin to imagine what battle awaits us beyond the gloomy, massive gate before us. Let us go and witness the battle for humanity's survival. Let's witness the final battle again in the cult's temple, in an unknown location hidden behind a <NAVI>[decorative door]<INFO>jor_raise1,128,326,0,101,0</INFO></NAVI>." },
 		Summary = "A Hand in the Flow of History"
+	},
+	[8852] = {
+		Title = "[Standby] I've come this far",
+		IconName = "ico_dq.bmp",
+		Description = { "This quest is a daily quest, and you can receive it again from <NAVI>[Nalsioramigand]<INFO>jor_sanct,271,156,0,101,0</INFO></NAVI> when the waiting time expires." },
+		Summary = "Reset at 04:00"
+	},
+	[8853] = {
+		Title = "I've come this far",
+		IconName = "ico_ep.bmp",
+		Description = { "Work is not assigned to intermediate Rgans who have followed their Sacred Roots. You have to give each one a task to do." },
+		Summary = "Intermediate Rgan Job Search"
+	},
+	[12588] = {
+		Title = "[Standby] The Immortal",
+		IconName = "ico_dq.bmp",
+		Description = { "After dawn, you can communicate with <NAVI>The Branch of the World Tree<INFO>jor_twig,113,146,0,101,0</INFO></NAVI> again." },
+		Summary = "Resets at 4 AM"
+	},
+	[12590] = {
+		Title = "The Story of the Immortal",
+		IconName = "ico_ep.bmp",
+		Description = { "Is it impossible to kill Rasgand? Then what should we do? Is there no way?" },
+		Summary = "EP20 MD"
+	},
+	[12591] = {
+		Title = "Neutralizing the Immortal",
+		IconName = "ico_ep.bmp",
+		Description = { "It's said that killing Rasgand is impossible, but it seems like we can somehow make him powerless for a while." },
+		Summary = "Neutralizing Rasgand"
+	},
+	[16802] = {
+		Title = "Transporting Small Luggage",
+		IconName = "ico_ep.bmp",
+		Description = { "You're responsible for returning luggage to its proper location at Alberta Port. Find Walter Fleetman in Alberta <NAVI>[near the market]<INFO>jor_albe.gat,148,235,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to Walter Fleetman"
+	},
+	[16803] = {
+		Title = "Transporting Small Luggage",
+		IconName = "ico_ep.bmp",
+		Description = { "You're responsible for returning the luggage at Alberta Port to its proper location. Find Walter Fleetman in Alberta Walter's <NAVI>[Upper Warehouse]<INFO>jalbe_in.gat,22,63,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to Walter Fleetman"
+	},
+	[16804] = {
+		Title = "Transporting Small Luggage",
+		IconName = "ico_ep.bmp",
+		Description = { "All of Alberta's luggage has been returned to its proper place. Return to <NAVI>[John]<INFO>jor_albe.gat,239,115,0,101,0</INFO></NAVI> at Alberta Beach and report your completion." },
+		Summary = "Talk to John"
+	},
+	[16805] = {
+		Title = "Refusing Chores",
+		IconName = "ico_ep.bmp",
+		Description = { "I complained to John in Alberta that I couldn't do such trivial things. He told me to get some rest, but is that okay? Should I talk to <NAVI>[John]<INFO>jor_albe.gat,239,115,0,101,0</INFO></NAVI> again?" },
+		Summary = "Talk to John"
+	},
+	[16806] = {
+		Title = "Thorough Port Cleaning",
+		IconName = "ico_ep.bmp",
+		Description = { "The dirt around the Port of Alberta needs to be cleaned. Keep your eyes peeled for <NAVI>[messy spots]<INFO>jor_albe.gat,151,210,0,101,0</INFO></NAVI>." },
+		Summary = "Cleaning the Dirt"
+	},
+	[16807] = {
+		Title = "Thorough Port Cleaning",
+		IconName = "ico_ep.bmp",
+		Description = { "The dirt around the Port of Alberta needs to be cleaned. Keep your eyes peeled for <NAVI>[messy spots]<INFO>jor_albe.gat,211,136,0,101,0</INFO></NAVI>." },
+		Summary = "Cleaning the Dirt"
+	},
+	[16808] = {
+		Title = "Thorough Port Cleaning",
+		IconName = "ico_ep.bmp",
+		Description = { "The dirt around the Port of Alberta needs to be cleaned. Keep your eyes peeled for <NAVI>[messy spots]<INFO>jor_albe.gat,167,139,0,101,0</INFO></NAVI>." },
+		Summary = "Cleaning the Dirt"
+	},
+	[16809] = {
+		Title = "Thorough Port Cleaning",
+		IconName = "ico_ep.bmp",
+		Description = { "The dirt around the Port of Alberta needs to be cleaned. Keep your eyes peeled for <NAVI>[messy spots]<INFO>jor_albe.gat,190,175,0,101,0</INFO></NAVI>." },
+		Summary = "Cleaning the Dirt"
+	},
+	[16810] = {
+		Title = "Thorough Port Cleaning",
+		IconName = "ico_ep.bmp",
+		Description = { "The area around Alberta Harbor now looks a bit cleaner. Return to <NAVI>[John]<INFO>jor_albe.gat,239,115,0,101,0</INFO></NAVI> at Alberta Beach and report the cleaning." },
+		Summary = "Talk to John"
+	},
+	[16811] = {
+		Title = "Visit Walter's Upper Building",
+		IconName = "ico_ep.bmp",
+		Description = { "The next task in Alberta appears to be found inside the Walter's Upper Building. Let's go to the <NAVI>[room opposite the warehouse]<INFO>jalbe_in.gat,67,95,0,101,0</INFO></NAVI> in the Upper Building." },
+		Summary = "Talk with Iana Operta"
+	},
+	[16812] = {
+		Title = "A Strange Letter",
+		IconName = "ico_ep.bmp",
+		Description = { "received an errand from Iana in the upper building of Walter to deliver letters to various parts of Alberta. Take the letters and visit <NAVI>[Pallieria Edel]<INFO>jalbe_in.gat,126,54,0,101,0</INFO></NAVI>." },
+		Summary = "Talk with Pallieria Edel"
+	},
+	[16813] = {
+		Title = "A Strange Letter",
+		IconName = "ico_ep.bmp",
+		Description = { "I received an errand from Iana in the upper building of Walter to deliver letters to various parts of Alberta. Take the letters and visit <NAVI>[Hunter Sanguin]<INFO>jalbe_in.gat,29,28,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to Hunter Sanguin"
+	},
+	[16814] = {
+		Title = "A Strange Letter",
+		IconName = "ico_ep.bmp",
+		Description = { "I've sent letters to two locations in Alberta and received responses. Return to <NAVI>[Iana Operta]<INFO>jalbe_in.gat,67,95,0,101,0</INFO></NAVI> in the upper building of Walter." },
+		Summary = "Talk with Iana Operta"
+	},
+	[16815] = {
+		Title = "News from Lunaforma",
+		IconName = "ico_ep.bmp",
+		Description = { "I've heard why you had to run errands in Alberta. It's time to return to Lunaforma, where you've been given a new mission and where the escapees from the cult have arrived. Let's go and hear <NAVI>[Ivan Wigner]<INFO>jor_mbase.gat,233,277,0,101,0</INFO></NAVI>'s story." },
+		Summary = "Talk to Ivan Wigner"
+	},
+	[16816] = {
+		Title = "Unidentified Ghost Ship",
+		IconName = "ico_ep.bmp",
+		Description = { "It seems we can finally uncover the identity of the mysterious ghost ship floating the sea. Join Maristella, who is waiting for you at Alberta <NAVI>[Port]<INFO>jor_albe.gat,191,186,0,101,0</INFO></NAVI>, and board the ghost ship." },
+		Summary = "Talk to Maristella Walter"
+	},
+	[16817] = {
+		Title = "The Ghost Ship's Identity",
+		IconName = "ico_ep.bmp",
+		Description = { "You've learned the identity of the drifting ghost ship. With the longing in your heart now buried, return to Alberta <NAVI>[Port]<INFO>jor_albe.gat,191,186,0,101,0</INFO></NAVI> with Maristella." },
+		Summary = "Talk to Maristella Walter"
+	},
+	[16818] = {
+		Title = "Return to Lunaforma",
+		IconName = "ico_ep.bmp",
+		Description = { "It seems we've pretty much finished what we can do in Alberta. Now, let's return to <NAVI>[Tris]<INFO>mbase_in.gat,92,123,0,101,0</INFO></NAVI> in Lunaforma." },
+		Summary = "Talk to Tris"
+	},
+	[16819] = {
+		Title = "Message from the Wizard",
+		IconName = "ico_ep.bmp",
+		Description = { "While talking to Maristella at Alberta Port, the <NAVI>[Wigner Merchant]<INFO>jor_albe.gat,192,189,0,101,0</INFO></NAVI> suddenly found himself waiting behind her." },
+		Summary = "Talk with the Wigner Merchant"
+	},
+	[16820] = {
+		Title = "Alberta's Honest Worker",
+		IconName = "ico_ep.bmp",
+		Description = { "Alberta's Epesto Walter Megas tells you to go to Alberta <NAVI>[Beach]<INFO>jor_albe.gat,239,115,0,101,0</INFO></NAVI> and look for work. Let's find someone who can give you work." },
+		Summary = "Talk to John"
+	},
+	[16821] = {
+		Title = "Remaining Questions",
+		IconName = "ico_ep.bmp",
+		Description = { "We've confirmed the last sighting of the old Walter, and it's said its magical power is still being detected. Let's try boarding it again with the help of <NAVI>[Nillem]<INFO>jor_albe.gat,195,179,0,101,0</INFO></NAVI>, who is staying in Alberta." },
+		Summary = "Talk with Nillem"
+	},
+	[16822] = {
+		Title = "Remaining Questions",
+		IconName = "ico_ep.bmp",
+		Description = { "Reboarding the Old Walter, the mystery remains. The captain's lost mind is also puzzling. Let's return to Alberta and speak with <NAVI>[Nillem]<INFO>jor_albe.gat,195,179,0,101,0</INFO></NAVI>." },
+		Summary = "Talk with Nillem"
+	},
+	[16823] = {
+		Title = "[Standby] Old Walter's Memory Fragment",
+		IconName = "ico_dq.bmp",
+		Description = { "Thanks to the adventurers and Maristella, there are currently no traces of the Old Walter. Let's take a short break until <NAVI>[Nillem]<INFO>jor_albe.gat,195,179,0,101,0</INFO></NAVI>, waiting in Alberta, can observe again." },
+		Summary = "Reset at 04:00"
+	},
+	[16824] = {
+		Title = "Old Walter's Memory Fragment",
+		IconName = "ico_ep.bmp",
+		Description = { "Let's scatter the Old Walter's Memory Fragment once more and return to <NAVI>[Nillem]<INFO>jor_albe.gat,195,179,0,101,0</INFO></NAVI>, who awaits us in Alberta." },
+		Summary = "Exploring Old Walter's Memory Fragment"
+	},
+	[16825] = {
+		Title = "Remaining Questions",
+		IconName = "ico_ep.bmp",
+		Description = { "Let's investigate the strangeness here and bring down the captain who lost his mind." },
+		Summary = ""
+	},
+	[16826] = {
+		Title = "Old Walter's Memory Fragment",
+		IconName = "ico_ep.bmp",
+		Description = { "Let's stop the ghost ship's captain and disperse the magic power trapped within this ship." },
+		Summary = ""
+	},
+	[17770] = {
+		Title = "The Roegenburg Brothers",
+		IconName = "ico_ep.bmp",
+		Description = { "<NAVI>[Reinhardt]<INFO>mbase_in,118,186,0,101,0</INFO></NAVI>, staying in the central barracks, has a lot to say to his brother." },
+		Summary = "Talk to Reinhardt"
+	},
+	[17771] = {
+		Title = "The Roegenburg Brothers",
+		IconName = "ico_ep.bmp",
+		Description = { "Take Reinhardt's idea to <NAVI>[Tris]<INFO>jor_mbase,140,201,0,101,0</INFO></NAVI>, who leads Lunaforma." },
+		Summary = "To Tris"
+	},
+	[17772] = {
+		Title = "The Roegenburg Brothers",
+		IconName = "ico_ep.bmp",
+		Description = { "Tris will come to see <NAVI>[Reinhardt]<INFO>mbase_in,118,186,0,101,0</INFO></NAVI> soon. Go back to the central barracks first." },
+		Summary = "To Reinhardt"
+	},
+	[17773] = {
+		Title = "The Roegenburg Brothers",
+		IconName = "ico_ep.bmp",
+		Description = { "Tris suggests going with Reinhardt to see Wilhelm at the <NAVI>[canteen]<INFO>jor_mbase,197,277,0,101,0</INFO></NAVI>." },
+		Summary = "To the canteen"
+	},
+	[17774] = {
+		Title = "The Roegenburg Brothers",
+		IconName = "ico_ep.bmp",
+		Description = { "Believers crowd around <NAVI>[Reinhardt]<INFO>jor_mbase,194,279,0,101,0</INFO></NAVI> at the canteen. What is going on?" },
+		Summary = "Talk to Reinhardt"
+	},
+	[17775] = {
+		Title = "The Roegenburg Brothers",
+		IconName = "ico_ep.bmp",
+		Description = { "<NAVI>[Wilhelm]<INFO>jor_mbase,196,280,0,101,0</INFO></NAVI>, working at the canteen, comes over with a worried face." },
+		Summary = "Talk to Wilhelm"
+	},
+	[17776] = {
+		Title = "The Roegenburg Brothers",
+		IconName = "ico_ep.bmp",
+		Description = { "<NAVI>[Tris]<INFO>jor_mbase,197,277,0,101,0</INFO></NAVI> is delighted to see the brothers talking. Ask Tris if there is more to do in Lunaforma." },
+		Summary = "Talk to Tris"
+	},
+	[17777] = {
+		Title = "A Safe Way Out 1",
+		IconName = "ico_ep.bmp",
+		Description = { "Defeat 300 monsters of any kind in the north of the Raised Land and report to <NAVI>[Tris]<INFO>jor_mbase,140,201,0,101,0</INFO></NAVI>." },
+		Summary = "North of the Raised Land"
+	},
+	[17778] = {
+		Title = "A Safe Way Out 2",
+		IconName = "ico_ep.bmp",
+		Description = { "Defeat 300 monsters of any kind in the south of the Raised Land and report to <NAVI>[Tris]<INFO>jor_mbase,140,201,0,101,0</INFO></NAVI>." },
+		Summary = "South of the Raised Land"
+	},
+	[17779] = {
+		Title = "[Standby] A Safe Way Out",
+		IconName = "ico_dq.bmp",
+		Description = { "Well done. Rest, and come back to <NAVI>[Tris]<INFO>jor_mbase,140,201,0,101,0</INFO></NAVI> after dawn." },
+		Summary = "Reset at 04:00"
+	},
+	[17780] = {
+		Title = "[Standby] A Safe Way Out",
+		IconName = "ico_dq.bmp",
+		Description = { "Well done. Rest, and come back to <NAVI>[Tris]<INFO>jor_mbase,140,201,0,101,0</INFO></NAVI> after dawn." },
+		Summary = "Reset at 04:00"
+	},
+	[17781] = {
+		Title = "Supply Plan",
+		IconName = "ico_ep.bmp",
+		Description = { "You heard Mandel explain how Lunaforma gets its supplies." },
+		Summary = "Supply plan explained"
+	},
+	[17782] = {
+		Title = "Supply Request: Geoborg",
+		IconName = "ico_ep.bmp",
+		Description = { "Bring 10 Jormungandr Catechism, from the Yormi Evangelists, to <NAVI>[Mandel]<INFO>jor_mbase,217,172,0,101,0</INFO></NAVI> in Lunaforma." },
+		Summary = "10 Jormungandr Catechism"
+	},
+	[17783] = {
+		Title = "Supply Request: Nerius",
+		IconName = "ico_ep.bmp",
+		Description = { "Bring 10 Ice Star Candy, from the Ice Seahorses, to <NAVI>[Mandel]<INFO>jor_mbase,217,172,0,101,0</INFO></NAVI> in Lunaforma." },
+		Summary = "10 Ice Star Candy"
+	},
+	[17784] = {
+		Title = "Supply Request: Heine",
+		IconName = "ico_ep.bmp",
+		Description = { "Bring 10 Flashy Accessory, from the Yortus Shamans, to <NAVI>[Mandel]<INFO>jor_mbase,217,172,0,101,0</INFO></NAVI> in Lunaforma." },
+		Summary = "10 Flashy Accessory"
+	},
+	[17785] = {
+		Title = "Supply Request: Roegenburg",
+		IconName = "ico_ep.bmp",
+		Description = { "Bring 10 Snake Shape Dagger Piece, from the Yordos Executors, to <NAVI>[Mandel]<INFO>jor_mbase,217,172,0,101,0</INFO></NAVI> in Lunaforma." },
+		Summary = "10 Snake Shape Dagger Piece"
+	},
+	[17786] = {
+		Title = "Supply Request: Walter",
+		IconName = "ico_ep.bmp",
+		Description = { "Bring 10 Fluffy Core, from the Cliolimas, to <NAVI>[Mandel]<INFO>jor_mbase,217,172,0,101,0</INFO></NAVI> in Lunaforma." },
+		Summary = "10 Fluffy Core"
+	},
+	[17787] = {
+		Title = "Supply Request: Wigner",
+		IconName = "ico_ep.bmp",
+		Description = { "Bring 10 Guano, from the Seawinds, to <NAVI>[Mandel]<INFO>jor_mbase,217,172,0,101,0</INFO></NAVI> in Lunaforma." },
+		Summary = "10 Guano"
+	},
+	[17788] = {
+		Title = "Supply Request: Richard",
+		IconName = "ico_ep.bmp",
+		Description = { "Bring 10 Stiff Limb, from the Lettersters, to <NAVI>[Mandel]<INFO>jor_mbase,217,172,0,101,0</INFO></NAVI> in Lunaforma." },
+		Summary = "10 Stiff Limb"
+	},
+	[17789] = {
+		Title = "[Standby] Supply Requests",
+		IconName = "ico_dq.bmp",
+		Description = { "Good work. Rest, and after dawn see <NAVI>[Mandel]<INFO>jor_mbase,217,172,0,101,0</INFO></NAVI> for a new list." },
+		Summary = "Reset at 04:00"
+	},
+	[19184] = {
+		Title = "Meeting Counselor Ulus",
+		IconName = "ico_ep.bmp",
+		Description = { "You met Counselor Ulus." },
+		Summary = ""
+	},
+	[19185] = {
+		Title = "[Standby] Those Haunted by Nightmares",
+		IconName = "ico_dq.bmp",
+		Description = { "<NAVI>[Counselor Ulus]<INFO>jor_albe,160,137,0,101,0</INFO></NAVI> hopes you'll help again tomorrow." },
+		Summary = "Reset at 04:00"
+	},
+	[19186] = {
+		Title = "Counselling Request",
+		IconName = "ico_ep.bmp",
+		Description = { "Request form. Name: <NAVI>[Yukter Ppuppu]<INFO>jor_albe,89,103,0,101,0</INFO></NAVI>. Left everything at home to escape the cult. Pretends not to, but misses home terribly. Listen well." },
+		Summary = "Talk to Yukter Ppuppu"
+	},
+	[19187] = {
+		Title = "Counselling Request",
+		IconName = "ico_ep.bmp",
+		Description = { "Request form. Name: <NAVI>[Totor Amber]<INFO>jor_albe,136,196,0,101,0</INFO></NAVI>. Has nightmares since seeing the refugees brought to Alberta. Help ease the shock." },
+		Summary = "Talk to Totor Amber"
+	},
+	[19188] = {
+		Title = "Counselling Request",
+		IconName = "ico_ep.bmp",
+		Description = { "Request form. Name: <NAVI>[Gaerju Sansha]<INFO>jor_albe,49,244,0,101,0</INFO></NAVI>. Rescued from the cult's prison by the resistance. Acts tough; probably isn't." },
+		Summary = "Talk to Gaerju Sansha"
+	},
+	[19189] = {
+		Title = "Counselling Request",
+		IconName = "ico_ep.bmp",
+		Description = { "Request form. Name: <NAVI>[Mogaja Shield]<INFO>jor_albe,116,214,0,101,0</INFO></NAVI>. Rescued from the cult at the last moment. Still stammers. Be patient." },
+		Summary = "Talk to Mogaja Shield"
+	},
+	[19190] = {
+		Title = "Counselling Done",
+		IconName = "ico_ep.bmp",
+		Description = { "The session went well. Go to <NAVI>[Counselor Ulus]<INFO>jor_albe,160,137,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to Counselor Ulus"
+	},
+	[19191] = {
+		Title = "Meeting Yukter Ppuppu",
+		IconName = "ico_ep.bmp",
+		Description = { "You met Yukter Ppuppu." },
+		Summary = ""
+	},
+	[19192] = {
+		Title = "Meeting Totor Amber",
+		IconName = "ico_ep.bmp",
+		Description = { "You met Totor Amber." },
+		Summary = ""
+	},
+	[19193] = {
+		Title = "Meeting Gaerju Sansha",
+		IconName = "ico_ep.bmp",
+		Description = { "You met Gaerju Sansha." },
+		Summary = ""
+	},
+	[19194] = {
+		Title = "Meeting Mogaja Shield",
+		IconName = "ico_ep.bmp",
+		Description = { "You met Mogaja Shield." },
+		Summary = ""
+	},
+	[19195] = {
+		Title = "Meeting Libra",
+		IconName = "ico_ep.bmp",
+		Description = { "You met Libra." },
+		Summary = ""
+	},
+	[19196] = {
+		Title = "News by Scent",
+		IconName = "ico_ep.bmp",
+		Description = { "Libra wants a crumpled paper delivered to someone in the <NAVI>[middle of the camp]<INFO>jor_base,131,182,0,101,0</INFO></NAVI>." },
+		Summary = "Deliver the paper"
+	},
+	[19197] = {
+		Title = "[Standby] News by Scent",
+		IconName = "ico_dq.bmp",
+		Description = { "You did what <NAVI>[Libra]<INFO>jor_base,314,138,0,101,0</INFO></NAVI> asked. There may be more tomorrow." },
+		Summary = "Reset at 04:00"
+	},
+	[19198] = {
+		Title = "Volunteer Balun Wok",
+		IconName = "ico_ep.bmp",
+		Description = { "You met Balun Wok." },
+		Summary = ""
+	},
+	[19199] = {
+		Title = "[Standby] Never Enough Food",
+		IconName = "ico_dq.bmp",
+		Description = { "You brought <NAVI>[Balun Wok]<INFO>jor_mbase,213,280,0,101,0</INFO></NAVI> today's food. Help again tomorrow?" },
+		Summary = "Reset at 04:00"
+	},
+	[19200] = {
+		Title = "Food Run (Fishing)",
+		IconName = "ico_ep.bmp",
+		Description = { "Catch 10 of the same seafood and bring them to <NAVI>[Balun Wok]<INFO>jor_mbase,213,280,0,101,0</INFO></NAVI>. Fishing spots: <NAVI>[north-east]<INFO>jor_mbase,295,288,0,101,0</INFO></NAVI>, <NAVI>[east]<INFO>jor_mbase,331,194,0,101,0</INFO></NAVI>, <NAVI>[south]<INFO>jor_mbase,189,26,0,101,0</INFO></NAVI>, <NAVI>[west]<INFO>jor_mbase,21,93,0,101,0</INFO></NAVI>, <NAVI>[north-west]<INFO>jor_mbase,23,151,0,101,0</INFO></NAVI>." },
+		Summary = "10 of the same catch"
+	},
+	[19201] = {
+		Title = "Food Run (Grass)",
+		IconName = "ico_ep.bmp",
+		Description = { "Gather 10 of the same kind of edible grass around Lunaforma and bring them to <NAVI>[Balun Wok]<INFO>jor_mbase,213,280,0,101,0</INFO></NAVI>." },
+		Summary = "10 of the same grass"
+	},
+	[19202] = {
+		Title = "Food Run (Seasoning)",
+		IconName = "ico_ep.bmp",
+		Description = { "Balun Wok asks you to scrape the glittering natural seasoning off the rocks of the <NAVI>[Lunaforma beach]<INFO>jor_mbase,340,30,0,101,0</INFO></NAVI>." },
+		Summary = "Scrape the salt"
+	},
+	[19203] = {
+		Title = "Food Run (Seasoning)",
+		IconName = "ico_ep.bmp",
+		Description = { "You have the seasoning. Take it to <NAVI>[Balun Wok]<INFO>jor_mbase,213,280,0,101,0</INFO></NAVI>." },
+		Summary = "To Balun Wok"
+	},
+	[23256] = {
+		Title = "Never Credited",
+		IconName = "ico_ep.bmp",
+		Description = { "Heine feels strange mana nearby and wants to measure it beyond Comodo: bring 3 Bright Eyes, from the Skipskippers, to <NAVI>[Heine]<INFO>mbase_in,21,168,0,101,0</INFO></NAVI> in the private room of the barracks." },
+		Summary = "3 Bright Eyes"
+	},
+	[23257] = {
+		Title = "[Standby] Never Credited",
+		IconName = "ico_dq.bmp",
+		Description = { "Heine will start measuring once there is enough data. Visit <NAVI>[Heine]<INFO>mbase_in,21,168,0,101,0</INFO></NAVI> again tomorrow." },
+		Summary = "Reset at 04:00"
+	},
+	[24019] = {
+		Title = "Mercenaries, They Call It...",
+		IconName = "ico_ep.bmp",
+		Description = { "Find out where Lunaforma needs help. Ask the <NAVI>[mercenaries]<INFO>jor_mbase,300,151,0,101,0</INFO></NAVI> around the base." },
+		Summary = "Talk to the mercenaries"
+	},
+	[24020] = {
+		Title = "Mercenaries, They Call It...",
+		IconName = "ico_ep.bmp",
+		Description = { "Lunaforma is short of people who can fix boats. Ask another <NAVI>[mercenary]<INFO>jor_mbase,198,251,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to the mercenaries"
+	},
+	[24021] = {
+		Title = "Mercenaries, They Call It...",
+		IconName = "ico_ep.bmp",
+		Description = { "People need fresh food. Ask another <NAVI>[mercenary]<INFO>jor_mbase,133,128,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to the mercenaries"
+	},
+	[24022] = {
+		Title = "Mercenaries, They Call It...",
+		IconName = "ico_ep.bmp",
+		Description = { "The healers need medicine. Ask another <NAVI>[mercenary]<INFO>jor_mbase,248,103,0,101,0</INFO></NAVI>." },
+		Summary = "Talk to the mercenaries"
+	},
+	[24023] = {
+		Title = "Mercenaries, They Call It...",
+		IconName = "ico_ep.bmp",
+		Description = { "Nobody sorts the supplies, so nobody can use them. Report to <NAVI>[Valdaris]<INFO>mbase_in,302,123,0,101,0</INFO></NAVI> in the office." },
+		Summary = "Talk to Valdaris"
+	},
+	[24024] = {
+		Title = "Even a Cat's Paw Will Do!",
+		IconName = "ico_ep.bmp",
+		Description = { "[Richard's Mercenaries] Find applicants around Lunaforma, read their forms and send the promising ones to the mercenaries. (5 left)" },
+		Summary = "Check the applicants"
+	},
+	[24025] = {
+		Title = "Even a Cat's Paw Will Do!",
+		IconName = "ico_ep.bmp",
+		Description = { "[Richard's Mercenaries] Find applicants around Lunaforma, read their forms and send the promising ones to the mercenaries. (4 left)" },
+		Summary = "Check the applicants"
+	},
+	[24026] = {
+		Title = "Even a Cat's Paw Will Do!",
+		IconName = "ico_ep.bmp",
+		Description = { "[Richard's Mercenaries] Find applicants around Lunaforma, read their forms and send the promising ones to the mercenaries. (3 left)" },
+		Summary = "Check the applicants"
+	},
+	[24027] = {
+		Title = "Even a Cat's Paw Will Do!",
+		IconName = "ico_ep.bmp",
+		Description = { "[Richard's Mercenaries] Find applicants around Lunaforma, read their forms and send the promising ones to the mercenaries. (2 left)" },
+		Summary = "Check the applicants"
+	},
+	[24028] = {
+		Title = "Even a Cat's Paw Will Do!",
+		IconName = "ico_ep.bmp",
+		Description = { "[Richard's Mercenaries] Find applicants around Lunaforma, read their forms and send the promising ones to the mercenaries. (1 left)" },
+		Summary = "Check the applicants"
+	},
+	[24029] = {
+		Title = "Even a Cat's Paw Will Do!",
+		IconName = "ico_ep.bmp",
+		Description = { "[Richard's Mercenaries] You checked the applicants. Go back to <NAVI>[Valdaris]<INFO>mbase_in,302,123,0,101,0</INFO></NAVI>." },
+		Summary = "Report to Valdaris"
+	},
+	[24030] = {
+		Title = "[Standby] Richard's Mercenaries",
+		IconName = "ico_dq.bmp",
+		Description = { "You helped the mercenaries. Come back after 04:00." },
+		Summary = "Reset at 04:00"
+	},
+	[24031] = {
+		Title = "Fresh Taste!",
+		IconName = "ico_ep.bmp",
+		Description = { "[Richard's Mercenaries] Bring 10 Skipskipper Fins and 10 Thick Flesh (Rockstrikers) to <NAVI>[Valdaris]<INFO>mbase_in,302,123,0,101,0</INFO></NAVI>." },
+		Summary = "Gather ingredients"
+	},
+	[24032] = {
+		Title = "[Standby] Richard's Mercenaries",
+		IconName = "ico_dq.bmp",
+		Description = { "You helped the mercenaries. Come back after 04:00." },
+		Summary = "Reset at 04:00"
+	},
+	[24033] = {
+		Title = "Shells for Wounds!",
+		IconName = "ico_ep.bmp",
+		Description = { "[Richard's Mercenaries] Scallegs are tasty, and their shells make salve. Defeat 50 and report to <NAVI>[Valdaris]<INFO>mbase_in,302,123,0,101,0</INFO></NAVI>." },
+		Summary = "50 Scallegs"
+	},
+	[24034] = {
+		Title = "[Standby] Richard's Mercenaries",
+		IconName = "ico_dq.bmp",
+		Description = { "You helped the mercenaries. Come back after 04:00." },
+		Summary = "Reset at 04:00"
+	},
+	[24035] = {
+		Title = "For the Children",
+		IconName = "ico_ep.bmp",
+		Description = { "[Richard's Mercenaries] Velelling jelly for the children's snacks. Defeat 50 and report to <NAVI>[Valdaris]<INFO>mbase_in,302,123,0,101,0</INFO></NAVI>." },
+		Summary = "50 Velellings"
+	},
+	[24036] = {
+		Title = "[Standby] Richard's Mercenaries",
+		IconName = "ico_dq.bmp",
+		Description = { "You helped the mercenaries. Come back after 04:00." },
+		Summary = "Reset at 04:00"
+	},
+	[24037] = {
+		Title = "A Clean Finish (1)",
+		IconName = "ico_ep.bmp",
+		Description = { "[Richard's Mercenaries] Clean up the 1st floor of Gimle, the cult's temple, and report to <NAVI>[Valdaris]<INFO>mbase_in,302,123,0,101,0</INFO></NAVI>." },
+		Summary = "100 on Gimle 1F"
+	},
+	[24038] = {
+		Title = "[Standby] Richard's Mercenaries",
+		IconName = "ico_dq.bmp",
+		Description = { "You helped the mercenaries. Come back after 04:00." },
+		Summary = "Reset at 04:00"
+	},
+	[24039] = {
+		Title = "A Clean Finish (2)",
+		IconName = "ico_ep.bmp",
+		Description = { "[Richard's Mercenaries] Clean up the 2nd floor of Gimle and report to <NAVI>[Valdaris]<INFO>mbase_in,302,123,0,101,0</INFO></NAVI>." },
+		Summary = "100 on Gimle 2F"
+	},
+	[24040] = {
+		Title = "[Standby] Richard's Mercenaries",
+		IconName = "ico_dq.bmp",
+		Description = { "You helped the mercenaries. Come back after 04:00." },
+		Summary = "Reset at 04:00"
+	},
+	[24041] = {
+		Title = "Mercenaries, They Call It... (2)",
+		IconName = "ico_ep.bmp",
+		Description = { "Help Lee, in the mercenaries' office, investigate Yorskalf." },
+		Summary = "Talk to Lee"
+	},
+	[24042] = {
+		Title = "[240] Distraction on Yorskalf 1F (Daily)",
+		IconName = "ico_ep.bmp",
+		Description = { "Defeat 300 monsters on Yorskalf's 1st floor and return to <NAVI>[Lee]<INFO>mbase_in,298,121,0,101,0</INFO></NAVI>." },
+		Summary = "Defeat 300"
+	},
+	[24043] = {
+		Title = "[Standby] Yorskalf 1F (Daily)",
+		IconName = "ico_dq.bmp",
+		Description = { "You defeated 300 monsters on Yorskalf's 1st floor. That's it for today." },
+		Summary = "Reset at 04:00"
+	},
+	[24044] = {
+		Title = "[240] Uproar on Yorskalf 1F (Weekly)",
+		IconName = "ico_ep.bmp",
+		Description = { "Defeat 1500 monsters on Yorskalf's 1st floor and return to <NAVI>[Lee]<INFO>mbase_in,298,121,0,101,0</INFO></NAVI>." },
+		Summary = "Defeat 1500"
+	},
+	[24045] = {
+		Title = "[Standby] Yorskalf 1F (Weekly)",
+		IconName = "ico_dq.bmp",
+		Description = { "You defeated 1500 monsters on Yorskalf's 1st floor. That's it for this week." },
+		Summary = "Reset Friday 04:00"
+	},
+	[24046] = {
+		Title = "[250] Rampage on Yorskalf 2F (Daily)",
+		IconName = "ico_ep.bmp",
+		Description = { "Defeat 300 monsters on Yorskalf's 2nd floor and return to <NAVI>[Lee]<INFO>mbase_in,298,121,0,101,0</INFO></NAVI>." },
+		Summary = "Defeat 300"
+	},
+	[24047] = {
+		Title = "[Standby] Yorskalf 2F (Daily)",
+		IconName = "ico_dq.bmp",
+		Description = { "You defeated 300 monsters on Yorskalf's 2nd floor. That's it for today." },
+		Summary = "Reset at 04:00"
+	},
+	[24048] = {
+		Title = "[250] Frenzy on Yorskalf 2F (Weekly)",
+		IconName = "ico_ep.bmp",
+		Description = { "Defeat 1500 monsters on Yorskalf's 2nd floor and return to <NAVI>[Lee]<INFO>mbase_in,298,121,0,101,0</INFO></NAVI>." },
+		Summary = "Defeat 1500"
 	},
 }
