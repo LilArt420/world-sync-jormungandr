@@ -17,7 +17,7 @@
   - Two infiltrations of Gimle, the cult's temple, and the rescue of Karmilgand and Reinhardt.
   - The giant serpent and the last battle, in the Snake's Resting Place (memorial dungeon), repeatable daily.
   - Gimle's Secret Altar (memorial dungeon) and the Serene Sanctuary, back in the present.
-- Starts from Voglinde in the Ice Castle's west wing once Episode 20 is done, at level 230.
+- Starts from Voglinde in the Ice Castle's west wing once Episode 20 is done, at level 230. Shupapa, at the Frozen Tail, swims you to Scale Island.
 - The Episode Valkyrie (standart-npc) can skip Episode 21 with an Eps 21 Clear Ticket: F_WSJ_Skip21 and F_WSJ_Done21.
 - Sprite names for Episode 21's characters and the Eroded Tan on iRO clients (System/jobname.lub).
 
@@ -33,3 +33,4 @@
 - Dailies (reset at 04:00): cleaning the Serpent's Maze, Nadyagand's snakeberries, Pamoshugand's feathers, Chichiring's Deep Roots Cave, Voglinde's two extermination operations and Kororo's cultists.
 - 119 of World Sync Extras' placeholder NPCs on these maps now have their part in the story.
 - Setting `skip_ep19`: start the episode without Episode 19.
+- Doors into the Ice Castle's west wing (Nadyagand, Voglinde), which the server only has as one of World Sync Extras' optional entrances; switched off when that setting is on.
