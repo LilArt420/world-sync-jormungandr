@@ -265,3 +265,44 @@ jor_sanct	mapflag	loadevent
 jor_maze	mapflag	loadevent
 jor_twice	mapflag	loadevent
 jor_twig	mapflag	loadevent
+
+// Episode 20 Clear Ticket: the Episode Valkyrie (standart-npc) calls this
+// to mark the main story finished, as the official ticket does. No
+// rewards; the dailies open. $@wsj_ep20_skip tells her it's available
+// (temporary, so it's gone when this mod is switched off).
+function	script	F_WSJ_Skip20	{
+	setarray .@q[0],
+		16691, 16692, 16693, 16694, 16695, 16696, 16697, 16698, 16699, 16700,
+		16701, 16702, 16703, 16704, 17690, 17691, 17692, 17693, 17694, 17695,
+		17696, 17697, 17698, 17699, 17700, 17701, 17702, 17703, 17704, 17705,
+		17706, 17707, 17708, 17709, 17712, 17713, 17714, 17715, 17716, 17719,
+		8839, 8840, 8841, 8842, 8843, 8846, 8854,
+		23100, 23101, 23102, 23103, 23104, 23105, 23106, 23107, 23108, 23109,
+		23112, 23113, 23114, 23115, 23116, 23117, 23118,
+		18220, 18221, 18222, 18223, 18224, 18225, 18226, 18227, 18228, 18229,
+		18230, 18231, 18232;
+	.@n = getarraysize(.@q);
+	for (.@i = 0; .@i < .@n; .@i++) {
+		if (isbegin_quest(.@q[.@i]) == 1)
+			erasequest .@q[.@i];
+	}
+	if (isbegin_quest(18233) == 0)
+		setquest 18233;
+	if (isbegin_quest(18233) == 1)
+		completequest 18233;
+	// The device from the canyon, taken back by the story.
+	if (countitem(1001218))
+		delitem 1001218, countitem(1001218);
+	wsj_ep20 = 700;
+	wsj_ep20b = 0;
+	wsj_ep20c = 0;
+	callfunc "F_WSJ_Scenes";
+	return;
+}
+
+-	script	WSJ_Skip20Flag	-1,{
+	end;
+OnInit:
+	$@wsj_ep20_skip = 1;
+	end;
+}
