@@ -29,12 +29,25 @@ function	script	F_WSJ_Ep21Start	{
 jor_tail,236,44,3	script	Shupapa#wsj	4_EP19_IWIN_DIVER,{
 	cutin "ep19_iwin_diver02.png",2;
 	mes "[Shupapa]";
-	if (wsj_ep21 == 10) {
+	if (wsj_ep21 == 10)
 		mes "Scale Island? Sure. The water's just right today: freezing.";
-		mes "Jump in over there and grab my tail. I'll take you across.";
-	} else
-		mes "Need to get to Scale Island? Step into the water over there and I'll pull you across.";
-	close3;
+	else
+		mes "Off to Scale Island? The current's with us today.";
+	next;
+	if (select("Swim to Scale Island.:Not now.") == 2) {
+		mes "[Shupapa]";
+		mes "Suit yourself. I'll be here, getting colder.";
+		close3;
+	}
+	mes "[Shupapa]";
+	mes "Grab my tail and don't let go!";
+	close2;
+	cutin "",255;
+	warp "jor_crk",137,137;
+	end;
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "wsj_ep21 == 10" );
+	end;
 }
 
 // ------------------------------------------------------------
