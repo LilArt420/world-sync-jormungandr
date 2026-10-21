@@ -19,11 +19,11 @@ icas_in,111,228,3	script(CLOAKED)	Leon#wsj_c5	4_EP19_LEON,{
 		next;
 		select("Lehar went to find Bagot's lab.");
 		mes "[Leon]";
-		mes "Of course she did. Alone, in the Roots, in a Rgan's skin.";
+		mes "Of course he did. Alone, in the Roots, in a Rgan's skin.";
 		mes "Miriam says she left marks to follow. The first one is near the <NAVI>[entrance of the Roots' 1st floor]<INFO>jor_root1,32,75,0,101,0</INFO></NAVI>.";
 		next;
 		mes "[Leon]";
-		mes "Aurelie and I have to stay and hold the barrier. Find her. Bring her back, and Bagot with her if you can.";
+		mes "Aurelie and I have to stay and hold the barrier. Find him. Bring him back, and Bagot with him if you can.";
 		callfunc "F_WSJ_Step", 540, "18220", "18221";
 		close3;
 	}
@@ -93,7 +93,7 @@ function	script	F_WSJ_Mark	{
 	if ((wsj_ep20b & 7) == 7) {
 		next;
 		mes "^4d4dffAll three tunnels, and no lab. Lehar won't be happy.";
-		mes "Time to meet her at the <NAVI>[Sacred Roots]<INFO>jor_sanct,133,86,0,101,0</INFO></NAVI>.^000000";
+		mes "Time to meet him at the <NAVI>[Sacred Roots]<INFO>jor_sanct,133,86,0,101,0</INFO></NAVI>.^000000";
 		callfunc "F_WSJ_Step", 560, "18222", "18226";
 	}
 	close;

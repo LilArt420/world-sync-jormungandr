@@ -210,7 +210,7 @@ icas_in,260,205,5	script(CLOAKED)	Vellgunde#wsj_l	4_EP19_VELLGUNDE,{
 		next;
 		mes "[Vellgunde]";
 		mes "Lehar is getting ready to go back to the canyon and see how many of these things are out there.";
-		mes "She's at the <NAVI>[front gate of the castle]<INFO>icecastle,201,171,0,101,0</INFO></NAVI>. Go with her.";
+		mes "He's at the <NAVI>[front gate of the castle]<INFO>icecastle,201,171,0,101,0</INFO></NAVI>. Go with him.";
 		callfunc "F_WSJ_Step", 90, "16700", "16701";
 		close3;
 	}
@@ -234,7 +234,7 @@ icas_in,259,200,5	script(CLOAKED)	Miriam#wsj_l	4_EP18_MIRIAM,{
 		select("We're fine. We ran.");
 		mes "[Miriam]";
 		mes "Thank goodness.";
-		mes "Lehar is already telling everyone about the fake soldiers, I can hear her from here.";
+		mes "Lehar is already telling everyone about the fake soldiers, I can hear him from here.";
 		next;
 		mes "[Miriam]";
 		mes "Lazy wanted to hear it from you too. He's at the <NAVI>[lodge table]<INFO>icas_in,263,200,0,101,0</INFO></NAVI>, pretending to read.";
@@ -256,7 +256,7 @@ icas_in,263,200,3	script(CLOAKED)	Lazy#wsj_l	4_EP19_LAZY,{
 		cutin "ep19_leizi01.png",2;
 		mes "[Lazy]";
 		mes "Ah, the survivor~";
-		mes "Lehar's version has the canyon collapsing three times and her saving you twice. What's yours?";
+		mes "Lehar's version has the canyon collapsing three times and him saving you twice. What's yours?";
 		next;
 		select("Fake Iwins, planting devices, guarding the canyon.");
 		mes "[Lazy]";
@@ -709,7 +709,7 @@ jor_nest,35,274,5	script(CLOAKED)	Lazy#wsj_door	4_EP19_LAZY,{
 	if (wsj_ep20 == 120) {
 		cutin "ep19_leizi01.png",2;
 		mes "[Lazy]";
-		mes "Right on time. Lehar is sulking because I told her she makes a terrible bishop.";
+		mes "Right on time. Lehar is sulking because I told him he makes a terrible bishop.";
 		next;
 		if (countitem(101162) < 1 && getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
 			mes "[Lazy]";

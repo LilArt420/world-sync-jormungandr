@@ -290,7 +290,7 @@ jor_twice,235,111,3	script	Kororo#wsj	4_EP19_IWIN,{
 		next;
 		mes "[Kororo]";
 		mes "I'm Kororo. I watch the drift ice for the castle. Somebody has to.";
-		mes "A white cat? Hmm... no. But a bunch of your friends came through here this morning. A loud girl with a big sword, a quiet lady, a man who wouldn't stop talking...";
+		mes "A white cat? Hmm... no. But a bunch of your friends came through here this morning. A loud one in a red coat, a quiet lady, a man who wouldn't stop talking...";
 		next;
 		mes "[Kororo]";
 		mes "They went north across the floes. Said they were following 'the magic'. Whatever that means.";
@@ -314,8 +314,8 @@ OnInit:
 jor_twice,247,163,3	script(CLOAKED)	Miriam#wsj_tw1	4_EP18_MIRIAM,{
 	cutin "ep18_miriam_01.png",2;
 	mes "[Miriam]";
-	mes "You made it across! Lehar ran ahead again. She said she could 'feel the magic in her teeth'.";
-	mes "She went <NAVI>[north, along the ridge]<INFO>jor_twice,232,249,0,101,0</INFO></NAVI>.";
+	mes "You made it across! Lehar ran ahead again. He said he could 'feel the magic in his teeth'.";
+	mes "He went <NAVI>[north, along the ridge]<INFO>jor_twice,232,249,0,101,0</INFO></NAVI>.";
 	close3;
 }
 
@@ -661,7 +661,7 @@ jor_maze,150,33,3	script(CLOAKED)	Miriam#wsj_mz	4_EP19_RGAN_R2,{
 		next;
 		select("Rasgand's furious, Bagot's lab is on the 1st floor, and they've found another way into the nest.");
 		mes "[Miriam]";
-		mes "Lehar heard about the lab too. She's gone to the Roots to look for it already. She left marks for us.";
+		mes "Lehar heard about the lab too. He's gone to the Roots to look for it already. He left marks for us.";
 		next;
 		mes "[Miriam]";
 		mes "But 'another way into the nest'... that worries me.";
