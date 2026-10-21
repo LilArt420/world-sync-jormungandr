@@ -245,7 +245,7 @@ OnInit:
 	end;
 }
 
-jor_raise1,128,329,0	script	#wsj_t_door	HIDDEN_WARP_NPC,9,9,{
+jor_raise1,128,329,0	script	#wsj_t_odoor	HIDDEN_WARP_NPC,9,9,{
 	end;
 OnTouch:
 	callfunc "F_WSJ_Scenes";
