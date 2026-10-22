@@ -1,3 +1,5 @@
+> 📦 **Archived.** This mod is now the `jormungandr` block of [World Sync Extras](https://github.com/LilArt420/world-sync-extras) (2.0.0 and later): Episodes 20 and 21, Koko's Secret Base and the dailies. Install World Sync Extras from Settings → Mods instead.
+
 # 🐍 World Sync: Jormungandr
 
 A [Ragnarok Offline](https://github.com/Flux159/ragnarokoffline.app) mod that makes the
